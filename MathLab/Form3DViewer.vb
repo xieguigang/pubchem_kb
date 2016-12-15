@@ -1,4 +1,5 @@
-﻿Imports Microsoft.VisualBasic.Imaging.Drawing3D
+﻿Imports System.Reflection
+Imports Microsoft.VisualBasic.Imaging.Drawing3D
 
 Public Class Form3DViewer
 

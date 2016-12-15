@@ -32,9 +32,10 @@ Partial Class Form3DViewer
         'Canvas1
         '
         Me.Canvas1.AutoRotation = False
-        Me.Canvas1.Location = New System.Drawing.Point(76, 70)
+        Me.Canvas1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Canvas1.Location = New System.Drawing.Point(0, 25)
         Me.Canvas1.Name = "Canvas1"
-        Me.Canvas1.Size = New System.Drawing.Size(150, 150)
+        Me.Canvas1.Size = New System.Drawing.Size(923, 567)
         Me.Canvas1.TabIndex = 0
         '
         'MenuStrip1
@@ -56,7 +57,7 @@ Partial Class Form3DViewer
         'LoadMatrixToolStripMenuItem
         '
         Me.LoadMatrixToolStripMenuItem.Name = "LoadMatrixToolStripMenuItem"
-        Me.LoadMatrixToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LoadMatrixToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.LoadMatrixToolStripMenuItem.Text = "Load Matrix"
         '
         'Form3DViewer
