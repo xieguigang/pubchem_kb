@@ -66,7 +66,7 @@ Public Class FormCorrealtions
     End Sub
 
     Private Sub DisplayNetwork()
-        canvas.Graph(False) = PopulateData(False) _
+        canvas.Graph = PopulateData(False) _
             .Data _
             .Values _
             .CorrelationMatrix _
