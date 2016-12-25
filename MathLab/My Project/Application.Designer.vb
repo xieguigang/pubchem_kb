@@ -14,10 +14,10 @@ Option Explicit On
 
 Namespace My
     
-    '注意: 此文件是自动生成的；请不要直接修改它。 若要进行更改，
-    ' 或者如果您在此文件中遇到生成错误，请转至项目设计器
-    ' (转至“项目属性”或在解决方案资源管理器中双击“我的项目”节点)，
-    ' 然后在“应用程序”选项卡中进行更改。
+    'NOTE: This file is auto-generated; do not modify it directly.  To make changes,
+    ' or if you encounter build errors in this file, go to the Project Designer
+    ' (go to Project Properties or double-click the My Project node in
+    ' Solution Explorer), and make changes on the Application tab.
     '
     Partial Friend Class MyApplication
         
@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.MathLab.Form3DViewer
+            Me.MainForm = Global.MathLab.FormMain
         End Sub
     End Class
 End Namespace

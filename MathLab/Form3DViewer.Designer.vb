@@ -22,7 +22,7 @@ Partial Class Form3DViewer
     '不要使用代码编辑器修改它。
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Canvas1 = New Microsoft.VisualBasic.Data.ChartPlots.Plot3D.Canvas()
+        Me.Canvas1 = New Microsoft.VisualBasic.Data.ChartPlots.Plot3D.Device.Canvas()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LoadMatrixToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -31,7 +31,7 @@ Partial Class Form3DViewer
         '
         'Canvas1
         '
-        Me.Canvas1.AutoRotation = False
+
         Me.Canvas1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Canvas1.Location = New System.Drawing.Point(0, 25)
         Me.Canvas1.Name = "Canvas1"
@@ -77,7 +77,7 @@ Partial Class Form3DViewer
 
     End Sub
 
-    Friend WithEvents Canvas1 As Microsoft.VisualBasic.Data.ChartPlots.Plot3D.Canvas
+    Friend WithEvents Canvas1 As Microsoft.VisualBasic.Data.ChartPlots.Plot3D.Device.Canvas
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents FileToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LoadMatrixToolStripMenuItem As ToolStripMenuItem
