@@ -116,6 +116,12 @@
     <Compile Include="FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\FormInteractive.Designer.vb">
+      <DependentUpon>FormInteractive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FormInteractive.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\FormCorrealtions.Designer.vb">
       <DependentUpon>FormCorrealtions.vb</DependentUpon>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\FormInteractive.resx">
+      <DependentUpon>FormInteractive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -219,6 +228,10 @@
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\mime\markups\markups.vbproj">
       <Project>{2dd4be80-ddc3-4767-94a7-10f1c3395716}</Project>
       <Name>markups</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shell\ConsoleControl.vbproj">
+      <Project>{b756f957-945d-41a1-89d5-3690b0927d0b}</Project>
+      <Name>ConsoleControl</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

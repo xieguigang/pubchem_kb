@@ -321,9 +321,9 @@ Public Class ConsoleControl
 
 	Protected Overrides Sub OnResize(e As EventArgs)
 		MyBase.OnResize(e)
-		Width = 646
-		Height = 377
-	End Sub
+        '	Width = 646
+        '       Height = 377
+    End Sub
 
 	Protected Overrides ReadOnly Property CreateParams() As CreateParams
 		Get
@@ -394,7 +394,7 @@ Public Class ConsoleControl
         Dim ascii% = Asc(c)
 
         If ascii = 7 Then
-            Console.Beep(1000, 500)
+            System.Console.Beep(1000, 500)
             Return
         End If
 

@@ -31,12 +31,14 @@ Partial Class FormMain
         Me.DataCorrelationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InterativeWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.AnalysisToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.AnalysisToolStripMenuItem, Me.WindowToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -89,6 +91,19 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem1.Text = "About"
         '
+        'WindowToolStripMenuItem
+        '
+        Me.WindowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.InterativeWindowsToolStripMenuItem})
+        Me.WindowToolStripMenuItem.Name = "WindowToolStripMenuItem"
+        Me.WindowToolStripMenuItem.Size = New System.Drawing.Size(63, 20)
+        Me.WindowToolStripMenuItem.Text = "Window"
+        '
+        'InterativeWindowsToolStripMenuItem
+        '
+        Me.InterativeWindowsToolStripMenuItem.Name = "InterativeWindowsToolStripMenuItem"
+        Me.InterativeWindowsToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.InterativeWindowsToolStripMenuItem.Text = "Interative Windows"
+        '
         'FormMain
         '
         Me.AllowDrop = True
@@ -121,4 +136,6 @@ Partial Class FormMain
     Friend WithEvents AboutToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AboutToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents WindowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents InterativeWindowsToolStripMenuItem As ToolStripMenuItem
 End Class
