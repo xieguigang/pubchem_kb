@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,26 +20,28 @@ Partial Class FormMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AnalysisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DataCorrelationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InterativeWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PreferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PasteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.PreferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AnalysisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DataCorrelationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ParameterEstimatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DynamicsAnalysisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InterativeWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,10 +62,16 @@ Partial Class FormMain
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
         '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.OpenToolStripMenuItem.Text = "Open"
+        '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'EditToolStripMenuItem
@@ -73,9 +81,38 @@ Partial Class FormMain
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(39, 20)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
+        'CopyToolStripMenuItem
+        '
+        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.CopyToolStripMenuItem.Text = "Copy"
+        '
+        'CutToolStripMenuItem
+        '
+        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.CutToolStripMenuItem.Text = "Cut"
+        '
+        'PasteToolStripMenuItem
+        '
+        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.PasteToolStripMenuItem.Text = "Paste"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(127, 6)
+        '
+        'PreferenceToolStripMenuItem
+        '
+        Me.PreferenceToolStripMenuItem.Name = "PreferenceToolStripMenuItem"
+        Me.PreferenceToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.PreferenceToolStripMenuItem.Text = "Preference"
+        '
         'AnalysisToolStripMenuItem
         '
-        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem})
+        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem, Me.ParameterEstimatesToolStripMenuItem, Me.DynamicsAnalysisToolStripMenuItem})
         Me.AnalysisToolStripMenuItem.Name = "AnalysisToolStripMenuItem"
         Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.AnalysisToolStripMenuItem.Text = "Analysis"
@@ -83,8 +120,20 @@ Partial Class FormMain
         'DataCorrelationsToolStripMenuItem
         '
         Me.DataCorrelationsToolStripMenuItem.Name = "DataCorrelationsToolStripMenuItem"
-        Me.DataCorrelationsToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.DataCorrelationsToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.DataCorrelationsToolStripMenuItem.Text = "Data Correlations"
+        '
+        'ParameterEstimatesToolStripMenuItem
+        '
+        Me.ParameterEstimatesToolStripMenuItem.Name = "ParameterEstimatesToolStripMenuItem"
+        Me.ParameterEstimatesToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ParameterEstimatesToolStripMenuItem.Text = "Parameter Estimates"
+        '
+        'DynamicsAnalysisToolStripMenuItem
+        '
+        Me.DynamicsAnalysisToolStripMenuItem.Name = "DynamicsAnalysisToolStripMenuItem"
+        Me.DynamicsAnalysisToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.DynamicsAnalysisToolStripMenuItem.Text = "Dynamics Analysis"
         '
         'WindowToolStripMenuItem
         '
@@ -106,52 +155,17 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.AboutToolStripMenuItem.Text = "Help"
         '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.AboutToolStripMenuItem1.Text = "About"
-        '
-        'PreferenceToolStripMenuItem
-        '
-        Me.PreferenceToolStripMenuItem.Name = "PreferenceToolStripMenuItem"
-        Me.PreferenceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PreferenceToolStripMenuItem.Text = "Preference"
-        '
-        'CopyToolStripMenuItem
-        '
-        Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CopyToolStripMenuItem.Text = "Copy"
-        '
-        'CutToolStripMenuItem
-        '
-        Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CutToolStripMenuItem.Text = "Cut"
-        '
-        'PasteToolStripMenuItem
-        '
-        Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PasteToolStripMenuItem.Text = "Paste"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
-        '
         'ManualToolStripMenuItem
         '
         Me.ManualToolStripMenuItem.Name = "ManualToolStripMenuItem"
-        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
         Me.ManualToolStripMenuItem.Text = "Manual"
         '
-        'OpenToolStripMenuItem
+        'AboutToolStripMenuItem1
         '
-        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OpenToolStripMenuItem.Text = "Open"
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(114, 22)
+        Me.AboutToolStripMenuItem1.Text = "About"
         '
         'FormMain
         '
@@ -194,4 +208,6 @@ Partial Class FormMain
     Friend WithEvents PreferenceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ManualToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ParameterEstimatesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DynamicsAnalysisToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -25,4 +25,10 @@
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Close()
     End Sub
+
+    Private Sub DynamicsAnalysisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DynamicsAnalysisToolStripMenuItem.Click
+        Call New FormRunModel() With {
+            .MdiParent = Me
+        }.Show()
+    End Sub
 End Class
