@@ -5,4 +5,8 @@
             .MdiParent = Me
         }.Show()
     End Sub
+
+    Private Sub AboutToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem1.Click
+        Call New FormAbout().ShowDialog()
+    End Sub
 End Class

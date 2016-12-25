@@ -8,7 +8,14 @@ Public Class FormCorrealtions
             .Filter = "Excel Data(*.csv)|*.csv"
         }
             If file.ShowDialog = DialogResult.OK Then
-                Dim dataset = LoadData(file.FileName)
+                Dim dataset = DataImports.GetData(url:=file.FileName)
+
+                If dataset Is Nothing Then
+                    Return
+                Else
+                    Call DataGridView1.Columns.Clear()
+                    Call DataGridView1.Rows.Clear()
+                End If
 
                 For Each col In dataset
                     Call DataGridView1.Columns.Add(col.Name, col.Name)

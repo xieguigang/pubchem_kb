@@ -80,16 +80,22 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataImports.Designer.vb">
+    <Compile Include="Modules\DataImports.Designer.vb">
       <DependentUpon>DataImports.vb</DependentUpon>
     </Compile>
-    <Compile Include="DataImports.vb">
+    <Compile Include="Modules\DataImports.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCorrealtions.Designer.vb">
+    <Compile Include="FormAbout.Designer.vb">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormAbout.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\FormCorrealtions.Designer.vb">
       <DependentUpon>FormCorrealtions.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormCorrealtions.vb">
+    <Compile Include="Modules\FormCorrealtions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.vb">
@@ -98,10 +104,10 @@
     <Compile Include="FormMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3DViewer.vb">
+    <Compile Include="Modules\Form3DViewer.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form3DViewer.Designer.vb">
+    <Compile Include="Modules\Form3DViewer.Designer.vb">
       <DependentUpon>Form3DViewer.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -122,10 +128,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form3DViewer.resx">
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\DataImports.resx">
+      <DependentUpon>DataImports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Form3DViewer.resx">
       <DependentUpon>Form3DViewer.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCorrealtions.resx">
+    <EmbeddedResource Include="Modules\FormCorrealtions.resx">
       <DependentUpon>FormCorrealtions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
