@@ -6,6 +6,9 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Imports Microsoft.VisualBasic.Mathematical.Correlations
 Imports Microsoft.VisualBasic.Data.ChartPlots
 Imports Microsoft.VisualBasic.Windows.Forms
+Imports Microsoft.VisualBasic.Data.csv.DocumentStream
+Imports Microsoft.VisualBasic.Data.visualize.Network
+Imports Microsoft.VisualBasic.Data.visualize.Network.FileStream
 
 Public Class FormCorrealtions
 
@@ -57,7 +60,21 @@ Public Class FormCorrealtions
             Call PlotHeatmap()
         ElseIf e.TabPage.Equals(tabCorrelationTable) Then
             Call DisplayMatrix()
+        ElseIf e.TabPage.Equals(tabTNetwork) Then
+            Call DisplayNetwork()
         End If
+    End Sub
+
+    Private Sub DisplayNetwork()
+        canvas.Graph(False) = PopulateData(False) _
+            .Data _
+            .Values _
+            .CorrelationMatrix _
+            .Select(Function(entity) New DataSet With {
+                .Identifier = entity.Name,
+                .Properties = entity.Value
+            }).FromCorrelations(trim:=True) _
+              .CreateGraph
     End Sub
 
     Private Sub DisplayMatrix()
@@ -130,5 +147,14 @@ Public Class FormCorrealtions
                 Call s.Points.AddXY(+X, serial.Value(X))
             Next
         Next
+    End Sub
+
+    Dim WithEvents canvas As Microsoft.VisualBasic.Data.visualize.Network.Canvas.Canvas
+
+    Private Sub FormCorrealtions_Load(sender As Object, e As EventArgs) Handles Me.Load
+        canvas = New Microsoft.VisualBasic.Data.visualize.Network.Canvas.Canvas With {
+            .Dock = DockStyle.Fill
+        }
+        tabTNetwork.Controls.Add(canvas)
     End Sub
 End Class
