@@ -23,25 +23,14 @@ Partial Class FormRunModel
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRunModel))
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TextBox1.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(1149, 645)
-        Me.TextBox1.TabIndex = 0
         '
         'TabControl1
         '
@@ -56,7 +45,6 @@ Partial Class FormRunModel
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.TextBox1)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -70,7 +58,7 @@ Partial Class FormRunModel
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(192, 74)
+        Me.TabPage2.Size = New System.Drawing.Size(1155, 651)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Plots"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -103,16 +91,12 @@ Partial Class FormRunModel
         Me.Name = "FormRunModel"
         Me.Text = "Run Dynamics Model"
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage

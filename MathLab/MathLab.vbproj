@@ -242,6 +242,10 @@
       <Project>{b756f957-945d-41a1-89d5-3690b0927d0b}</Project>
       <Name>ConsoleControl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TextEditor\TextEditor.csproj">
+      <Project>{6dd14a85-ccfc-4774-bd26-0f5772512319}</Project>
+      <Name>TextEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MathLab.ico" />
