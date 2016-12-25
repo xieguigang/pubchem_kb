@@ -246,6 +246,10 @@
       <Project>{6dd14a85-ccfc-4774-bd26-0f5772512319}</Project>
       <Name>TextEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MathLab.Scripting\MathLab.Scripting.vbproj">
+      <Project>{7644b38c-c581-49a2-af0e-2ab5bd5b7f9e}</Project>
+      <Name>MathLab.Scripting</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="MathLab.ico" />
