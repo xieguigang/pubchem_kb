@@ -25,11 +25,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Datavisualization.Network",
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "NetworkCanvas", "..\GCModeller\src\runtime\sciBASIC#\gr\Datavisualization.Network\NetworkCanvas\NetworkCanvas.vbproj", "{EF70BED6-8795-4523-A260-C1ABED9405AA}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsoleControl", "Shell\ConsoleControl.vbproj", "{B756F957-945D-41A1-89D5-3690B0927D0B}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Interactive", "components\InteractiveWindow\Interactive.vbproj", "{B756F957-945D-41A1-89D5-3690B0927D0B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{49673D99-AA96-44FF-9495-E8ECA9B26F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEditor", "TextEditor\TextEditor.csproj", "{6DD14A85-CCFC-4774-BD26-0F5772512319}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextEditor", "components\TextEditor\TextEditor.csproj", "{6DD14A85-CCFC-4774-BD26-0F5772512319}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

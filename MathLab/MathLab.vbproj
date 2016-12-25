@@ -238,11 +238,11 @@
       <Project>{2dd4be80-ddc3-4767-94a7-10f1c3395716}</Project>
       <Name>markups</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shell\ConsoleControl.vbproj">
+    <ProjectReference Include="..\components\InteractiveWindow\Interactive.vbproj">
       <Project>{b756f957-945d-41a1-89d5-3690b0927d0b}</Project>
-      <Name>ConsoleControl</Name>
+      <Name>Interactive</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TextEditor\TextEditor.csproj">
+    <ProjectReference Include="..\components\TextEditor\TextEditor.csproj">
       <Project>{6dd14a85-ccfc-4774-bd26-0f5772512319}</Project>
       <Name>TextEditor</Name>
     </ProjectReference>
