@@ -5,7 +5,7 @@ Public Class DataImports
 
     Dim url$
 
-    Public Shared Function GetData(url$) As NamedValue(Of Double())()
+    Public Shared Function GetData(url$, ByRef x#()) As NamedValue(Of Double())()
         Using dataImports As New DataImports With {
             .url = url
         }
@@ -15,7 +15,16 @@ Public Class DataImports
                 If .ShowDialog() = DialogResult.Cancel Then
                     Return Nothing
                 Else
-                    Return LoadData(url, .CheckBox1.Checked)
+                    Dim data As New List(Of NamedValue(Of Double()))(LoadData(url))
+
+                    If .CheckBox1.Checked Then
+                        x = data.First.Value
+                        data.RemoveAt(Scan0)
+                        Return data.ToArray
+                    Else
+                        x = data.First.Value.Sequence.Select(Function(n) CDbl(n)).ToArray
+                        Return data.ToArray
+                    End If
                 End If
             End With
         End Using
