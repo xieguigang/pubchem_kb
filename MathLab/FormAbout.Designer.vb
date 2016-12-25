@@ -34,7 +34,7 @@ Partial Class FormAbout
         '
         Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(37, 2)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(367, 365)
         Me.PictureBox1.TabIndex = 0
@@ -64,7 +64,7 @@ Partial Class FormAbout
         'LinkLabel1
         '
         Me.LinkLabel1.AutoSize = True
-        Me.LinkLabel1.Location = New System.Drawing.Point(376, 315)
+        Me.LinkLabel1.Location = New System.Drawing.Point(494, 336)
         Me.LinkLabel1.Name = "LinkLabel1"
         Me.LinkLabel1.Size = New System.Drawing.Size(140, 13)
         Me.LinkLabel1.TabIndex = 3
