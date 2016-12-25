@@ -8,12 +8,12 @@ Imports System.Runtime.InteropServices
 
 '查看程序集特性的值
 
-<Assembly: AssemblyTitle("MathLab")>
-<Assembly: AssemblyDescription("")>
+<Assembly: AssemblyTitle("sciBASIC# MathLab")>
+<Assembly: AssemblyDescription("sciBASIC# MathLab")>
 <Assembly: AssemblyCompany("")>
 <Assembly: AssemblyProduct("MathLab")>
-<Assembly: AssemblyCopyright("Copyright ©  2016")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyCopyright("Copyright © GPL3 2016")>
+<Assembly: AssemblyTrademark("sciBASIC#")>
 
 <Assembly: ComVisible(False)>
 
