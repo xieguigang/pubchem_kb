@@ -2,8 +2,10 @@
 Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Language
-Imports Microsoft.VisualBasic.Mathematical.Calculus
+Imports Microsoft.VisualBasic.Linq
+Imports Microsoft.VisualBasic.Scripting
 Imports Microsoft.VisualBasic.Scripting.TokenIcer
+Imports Microsoft.VisualBasic.Serialization.JSON
 Imports Microsoft.VisualBasic.Text
 
 ''' <summary>
@@ -23,9 +25,9 @@ Public Module Parser
             .Select(AddressOf Trim) _
             .ToArray
 
-        Dim vars As New List(Of var)
-        Dim y0 As New List(Of NamedValue(Of Double))
-        Dim params As New List(Of NamedValue(Of Double))
+        Dim vars As New List(Of NamedValue(Of String))
+        Dim y0 As New List(Of NamedValue(Of String))
+        Dim params As New List(Of NamedValue(Of String))
         Dim a#, b#, n%
         Dim c As New List(Of String)
         Dim comment As New Value(Of String)
@@ -40,16 +42,56 @@ Public Module Parser
 
             Else ' Is the definition of the dynamics system
                 Dim assign As (Prefix As String, var$, Value As String) = line.Assign
+                Dim x As New NamedValue(Of String) With {
+                    .Name = assign.var,
+                    .Value = assign.Value,
+                    .Description = c.JoinBy(ASCII.LF)
+                }
 
-                comment = c.JoinBy(ASCII.LF)
                 c *= 0
 
                 Select Case assign.Prefix.ToLower
                     Case "dim"
-                        vars += New var With {.Name = assign.var, .}
+                        vars += x
+                    Case "const"
+                        params += x
+                    Case "let"
+                        y0 += x
+                    Case "set"
+                        Select Case x.Name.ToLower
+                            Case "a"
+                                a = x.Value.ParseNumeric
+                            Case "b"
+                                b = x.Value.ParseNumeric
+                            Case "n"
+                                n = x.Value.ParseNumeric
+                            Case Else
+                                Call $"Ignore of this invalid token {x.GetJson}".Warning
+                        End Select
+                    Case Else
+                        Throw New SyntaxErrorException(line)
                 End Select
             End If
         Next
+
+        Return New Dynamics With {
+            .a = a,
+            .b = b,
+            .n = n,
+            .params = params,
+            .y0 = y0.ToArray(
+                Function(x) New NamedValue(Of Double)(
+                    x.Name,
+                    x.Value.ParseNumeric,
+                    x.Description)),
+            .vars = LinqAPI.Exec(Of var) <= From x As NamedValue(Of String)
+                                            In vars
+                                            Select New var With {
+                                                .Comments = x.Description,
+                                                .Expression = x.Value,
+                                                .Name = x.Name
+                                            }
+        }
     End Function
 
     <Extension>

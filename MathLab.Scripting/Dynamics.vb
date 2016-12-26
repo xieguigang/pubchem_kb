@@ -5,7 +5,7 @@ Imports Microsoft.VisualBasic.Serialization.JSON
 Public Class Dynamics
 
     Public Property vars As var()
-    Public Property params As NamedValue(Of Double)()
+    Public Property params As NamedValue(Of String)()
     Public Property y0 As NamedValue(Of Double)()
 
     Public Property a As Double
