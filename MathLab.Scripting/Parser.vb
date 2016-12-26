@@ -38,7 +38,8 @@ Public Module Parser
 
             ' Is code comment line
             If Not (comment = line.GetCodeComment) Is Nothing Then
-                c += comment.value
+
+                Call c.Add(comment)
 
             Else ' Is the definition of the dynamics system
                 Dim assign As (Prefix As String, var$, Value As String) = line.Assign
@@ -48,7 +49,7 @@ Public Module Parser
                     .Description = c.JoinBy(ASCII.LF)
                 }
 
-                c *= 0
+                Call c.Clear()
 
                 Select Case assign.Prefix.ToLower
                     Case "dim"
@@ -74,7 +75,7 @@ Public Module Parser
             End If
         Next
 
-        Return New Dynamics With {
+        Return New Dynamics With {  ' Returns the generated dynamics system model
             .a = a,
             .b = b,
             .n = n,
