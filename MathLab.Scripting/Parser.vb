@@ -13,6 +13,15 @@ Imports Microsoft.VisualBasic.Text
 ''' </summary>
 Public Module Parser
 
+    <Extension>
+    Private Function sourceProvider(res$) As String()
+        If res.FileExists Then
+            Return res.ReadAllLines
+        Else
+            Return res.lTokens
+        End If
+    End Function
+
     ''' <summary>
     ''' Mathematics dynamics system script parser
     ''' </summary>
@@ -20,7 +29,7 @@ Public Module Parser
     ''' <returns></returns>
     <Extension> Public Function LoadScript(path$) As Dynamics
         Dim lines$() = path _
-            .IterateAllLines _
+            .sourceProvider _
             .Where(Function(s) Not s.IsBlank) _
             .Select(AddressOf Trim) _
             .ToArray

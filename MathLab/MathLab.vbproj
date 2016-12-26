@@ -214,6 +214,10 @@
       <Project>{e3367b88-5d0c-495a-8273-331656d4b5aa}</Project>
       <Name>Microsoft.VisualBasic.Mathematical</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Mathematical\ODE\ODEsSolver.vbproj">
+      <Project>{14E0B048-3A0D-4FD6-AA79-9B815D6F1B30}</Project>
+      <Name>ODEsSolver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Mathematical\Plots\Plots.vbproj">
       <Project>{17f8e821-0a01-4975-9caa-ac95251226d5}</Project>
       <Name>Plots</Name>
