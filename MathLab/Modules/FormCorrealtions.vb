@@ -54,6 +54,8 @@ Public Class FormCorrealtions
     End Sub
 
     Private Sub TabControl1_Selecting(sender As Object, e As TabControlCancelEventArgs) Handles TabControl1.Selecting
+        Call canvas.Stop()
+
         If e.TabPage.Equals(tabScatterPlot) Then
             Call tabScatterPlot_GotFocus()
         ElseIf e.TabPage.Equals(tabHeatmap) Then
