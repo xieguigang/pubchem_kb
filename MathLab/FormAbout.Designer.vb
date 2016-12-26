@@ -42,7 +42,7 @@ Partial Class FormAbout
         '
         'PictureBox1
         '
-        Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
+        Me.PictureBox1.BackgroundImage = Global.MathLab.My.Resources.Resources.software_cover
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.PictureBox1.Location = New System.Drawing.Point(1, 1)
         Me.PictureBox1.Name = "PictureBox1"
@@ -64,6 +64,7 @@ Partial Class FormAbout
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(614, 345)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.PictureBox2)

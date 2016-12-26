@@ -22,9 +22,9 @@ Partial Class FormCorrealtions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCorrealtions))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabDataDesigner = New System.Windows.Forms.TabPage()
@@ -36,11 +36,11 @@ Partial Class FormCorrealtions
         Me.Label1 = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.tabHeatmap = New System.Windows.Forms.TabPage()
+        Me.pHeatMap = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.tabTNetwork = New System.Windows.Forms.TabPage()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.OpenFile = New System.Windows.Forms.ToolStripButton()
-        Me.pHeatMap = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.tabDataDesigner.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -49,9 +49,9 @@ Partial Class FormCorrealtions
         Me.tabScatterPlot.SuspendLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabHeatmap.SuspendLayout()
+        CType(Me.pHeatMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
-        CType(Me.pHeatMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -127,24 +127,24 @@ Partial Class FormCorrealtions
         Me.Chart1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
-        Me.Chart1.Location = New System.Drawing.Point(208, 59)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(114, 3)
         Me.Chart1.Name = "Chart1"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.Chart1.Series.Add(Series2)
-        Me.Chart1.Size = New System.Drawing.Size(825, 502)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Size = New System.Drawing.Size(946, 612)
         Me.Chart1.TabIndex = 3
         Me.Chart1.Text = "Chart1"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 21)
+        Me.Label1.Location = New System.Drawing.Point(10, 17)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(83, 13)
         Me.Label1.TabIndex = 2
@@ -154,9 +154,9 @@ Partial Class FormCorrealtions
         '
         Me.FlowLayoutPanel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(8, 59)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(13, 46)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(194, 515)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(95, 550)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
         'tabHeatmap
@@ -169,6 +169,18 @@ Partial Class FormCorrealtions
         Me.tabHeatmap.TabIndex = 2
         Me.tabHeatmap.Text = "Heatmap"
         Me.tabHeatmap.UseVisualStyleBackColor = True
+        '
+        'pHeatMap
+        '
+        Me.pHeatMap.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pHeatMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.pHeatMap.Location = New System.Drawing.Point(210, 3)
+        Me.pHeatMap.Name = "pHeatMap"
+        Me.pHeatMap.Size = New System.Drawing.Size(850, 612)
+        Me.pHeatMap.TabIndex = 1
+        Me.pHeatMap.TabStop = False
         '
         'PictureBox1
         '
@@ -207,18 +219,6 @@ Partial Class FormCorrealtions
         Me.OpenFile.Size = New System.Drawing.Size(23, 22)
         Me.OpenFile.Text = "Open File"
         '
-        'pHeatMap
-        '
-        Me.pHeatMap.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pHeatMap.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.pHeatMap.Location = New System.Drawing.Point(210, 3)
-        Me.pHeatMap.Name = "pHeatMap"
-        Me.pHeatMap.Size = New System.Drawing.Size(850, 612)
-        Me.pHeatMap.TabIndex = 1
-        Me.pHeatMap.TabStop = False
-        '
         'FormCorrealtions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -237,10 +237,10 @@ Partial Class FormCorrealtions
         Me.tabScatterPlot.PerformLayout()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabHeatmap.ResumeLayout(False)
+        CType(Me.pHeatMap, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
-        CType(Me.pHeatMap, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
