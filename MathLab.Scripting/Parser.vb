@@ -3,6 +3,7 @@ Imports System.Text.RegularExpressions
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Linq
+Imports Microsoft.VisualBasic.Mathematical
 Imports Microsoft.VisualBasic.Scripting
 Imports Microsoft.VisualBasic.Scripting.TokenIcer
 Imports Microsoft.VisualBasic.Serialization.JSON
@@ -42,11 +43,12 @@ Public Module Parser
         Dim comment As New Value(Of String)
 
         ' Static keywords$() = {"Dim", "Const", "Let", "Set"}
+        Dim commentPrefix$() = {"'", "#", "//"}
 
         For Each line As String In lines
 
             ' Is code comment line
-            If Not (comment = line.GetCodeComment) Is Nothing Then
+            If Not (comment = line.GetCodeComment(commentPrefix)) Is Nothing Then
 
                 Call c.Add(comment)
 
@@ -84,6 +86,8 @@ Public Module Parser
             End If
         Next
 
+        Dim expression As New Expression
+
         Return New Dynamics With {  ' Returns the generated dynamics system model
             .a = a,
             .b = b,
@@ -92,7 +96,7 @@ Public Module Parser
             .y0 = y0.ToArray(
                 Function(x) New NamedValue(Of Double)(
                     x.Name,
-                    x.Value.ParseNumeric,
+                    expression.Evaluation(x.Value),
                     x.Description)),
             .vars = LinqAPI.Exec(Of var) <= From x As NamedValue(Of String)
                                             In vars

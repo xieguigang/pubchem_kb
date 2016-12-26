@@ -34,6 +34,8 @@ Public Class FormRunModel
         Dim model As Dynamics = Parser.LoadScript(textEditor.Text)
         Dim result As ODEsOut = model.RunTest
 
+        disableTrigger = True
+
         Call CheckedListBox1.Items.Clear()
         Call names.Clear()
 
@@ -44,6 +46,7 @@ Public Class FormRunModel
         Next
 
         data = result
+        disableTrigger = False
 
         Call Plot()
     End Sub
@@ -55,6 +58,8 @@ Public Class FormRunModel
             vars.Add(data.y(names(CheckedListBox1.CheckedIndices(i))))
         Next
 
+        Call Chart1.Series.Clear()
+
         For Each y In vars
             Dim s = Chart1.Series.Add(y.Name)
             s.ChartType = SeriesChartType.Line
@@ -65,8 +70,12 @@ Public Class FormRunModel
         Next
     End Sub
 
+    Dim disableTrigger As Boolean
+
     Private Sub CheckedListBox1_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles CheckedListBox1.ItemCheck
-        Call Plot()
+        If Not disableTrigger Then
+            Call Plot()
+        End If
     End Sub
 
     'Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
