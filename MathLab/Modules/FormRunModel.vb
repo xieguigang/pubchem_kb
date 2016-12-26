@@ -1,5 +1,8 @@
-﻿Imports MathLab.Scripting
+﻿Imports System.Windows.Forms.DataVisualization.Charting
+Imports MathLab.Scripting
 Imports MathLab.TextEditor
+Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
+Imports Microsoft.VisualBasic.Linq
 Imports Microsoft.VisualBasic.Mathematical.Calculus
 
 Public Class FormRunModel
@@ -24,9 +27,52 @@ Public Class FormRunModel
         End Using
     End Sub
 
+    Dim data As ODEsOut
+    Dim names As New List(Of String)
+
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
         Dim model As Dynamics = Parser.LoadScript(textEditor.Text)
         Dim result As ODEsOut = model.RunTest
 
+        Call CheckedListBox1.Items.Clear()
+        Call names.Clear()
+
+        For Each y In result.y0.Keys.SeqIterator
+            Call CheckedListBox1.Items.Add(y.value)
+            Call CheckedListBox1.SetItemChecked(y.i, True)
+            Call names.Add(y.value)
+        Next
+
+        data = result
+
+        Call Plot()
     End Sub
+
+    Public Sub Plot()
+        Dim vars As New List(Of NamedValue(Of Double()))
+
+        For i As Integer = 0 To CheckedListBox1.CheckedIndices.Count - 1
+            vars.Add(data.y(names(CheckedListBox1.CheckedIndices(i))))
+        Next
+
+        For Each y In vars
+            Dim s = Chart1.Series.Add(y.Name)
+            s.ChartType = SeriesChartType.Line
+
+            For Each x In data.x.SeqIterator
+                Call s.Points.AddXY(x.value, y.Value(x))
+            Next
+        Next
+    End Sub
+
+    Private Sub CheckedListBox1_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles CheckedListBox1.ItemCheck
+        Call Plot()
+    End Sub
+
+    'Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
+    '    If e.TabPage.Equals(TabPage2) Then
+    '        Dim model As Dynamics = Parser.LoadScript(textEditor.Text)
+
+    '    End If
+    'End Sub
 End Class
