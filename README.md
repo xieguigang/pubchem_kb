@@ -9,6 +9,18 @@ sciBASIC# in winform
 ![](./images/interative-window.png)
 ![](./images/vblang-scripting.png)
 
+## Development Note
+
+This project is based on ``sciBASIC#`` runtime, required of reference to the package from nuget:
+
+```bash
+# https://github.com/xieguigang/sciBASIC
+# https://www.nuget.org/packages/sciBASIC#
+
+# For install latest stable release version:
+PM> Install-Package sciBASIC
+```
+
 ## Open Source Licenses
 
 + [sciBASIC#](https://github.com/xieguigang/sciBASIC): Microsoft VisualBasic for Scientific
