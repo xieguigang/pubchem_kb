@@ -17,12 +17,25 @@ Public Class FormRunModel
         TabPage1.Controls.Add(textEditor)
     End Sub
 
+    Dim _file$
+
+    Public Property file As String
+        Get
+            Return _file
+        End Get
+        Private Set(value As String)
+            _file = value
+            Text = value & " - Run Dynamics Model"
+        End Set
+    End Property
+
     Private Sub ToolStripButton2_Click(sender As Object, e As EventArgs) Handles ToolStripButton2.Click
         Using file As New OpenFileDialog With {
             .Filter = "sciBASIC# dynamics script(*.vb)|*.vb"
         }
             If file.ShowDialog = DialogResult.OK Then
                 textEditor.Text = file.FileName.ReadAllText
+                Me.file = file.FileName
             End If
         End Using
     End Sub
@@ -78,10 +91,22 @@ Public Class FormRunModel
         End If
     End Sub
 
-    'Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
-    '    If e.TabPage.Equals(TabPage2) Then
-    '        Dim model As Dynamics = Parser.LoadScript(textEditor.Text)
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        If String.IsNullOrEmpty(file) Then
+            Call SaveAs(Nothing, Nothing)
+        Else
+            Call textEditor.Text.SaveTo(file)
+        End If
+    End Sub
 
-    '    End If
-    'End Sub
+    Private Sub SaveAs(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+        Using file As New SaveFileDialog With {
+            .Filter = "sciBASIC# dynamics script(*.vb)|*.vb"
+        }
+            If file.ShowDialog = DialogResult.OK Then
+                Call textEditor.Text.SaveTo(file.FileName)
+                Me.file = file.FileName
+            End If
+        End Using
+    End Sub
 End Class
