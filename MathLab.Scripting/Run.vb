@@ -8,8 +8,7 @@ Imports y = Microsoft.VisualBasic.Mathematical.Calculus.var
 
 Public Module Run
 
-    <Extension>
-    Public Function RunTest(model As Dynamics) As ODEsOut
+    <Extension> Public Function RunTest(model As Dynamics) As ODEsOut
         Dim expression As New Expression
         Dim cal As New List(Of (x$, expr As SimpleExpression))
 
@@ -58,5 +57,15 @@ Public Module Run
                       ' Call experimentTrigger.Tick()
                   End Sub
         }.Solve(model.n, model.a, model.b)
+    End Function
+
+    ''' <summary>
+    ''' Compile the dynamics script into an assembly dll module.
+    ''' </summary>
+    ''' <param name="model"></param>
+    ''' <param name="dll$">The model ``*.dll`` output file path.</param>
+    ''' <returns></returns>
+    <Extension> Public Function Compile(model As Dynamics, dll$) As Boolean
+
     End Function
 End Module

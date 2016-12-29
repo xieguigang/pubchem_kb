@@ -42,6 +42,8 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ParameterHelperToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -112,7 +114,7 @@ Partial Class FormMain
         '
         'AnalysisToolStripMenuItem
         '
-        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem, Me.ParameterEstimatesToolStripMenuItem, Me.DynamicsAnalysisToolStripMenuItem})
+        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem, Me.ToolStripMenuItem2, Me.ParameterEstimatesToolStripMenuItem, Me.DynamicsAnalysisToolStripMenuItem, Me.ParameterHelperToolStripMenuItem})
         Me.AnalysisToolStripMenuItem.Name = "AnalysisToolStripMenuItem"
         Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.AnalysisToolStripMenuItem.Text = "Analysis"
@@ -167,6 +169,17 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(114, 22)
         Me.AboutToolStripMenuItem1.Text = "About"
         '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(178, 6)
+        '
+        'ParameterHelperToolStripMenuItem
+        '
+        Me.ParameterHelperToolStripMenuItem.Name = "ParameterHelperToolStripMenuItem"
+        Me.ParameterHelperToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ParameterHelperToolStripMenuItem.Text = "Parameter Helper"
+        '
         'FormMain
         '
         Me.AllowDrop = True
@@ -210,4 +223,6 @@ Partial Class FormMain
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ParameterEstimatesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DynamicsAnalysisToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents ParameterHelperToolStripMenuItem As ToolStripMenuItem
 End Class
