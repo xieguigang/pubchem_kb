@@ -14,6 +14,9 @@
         Call New FormInteractive() With {
             .MdiParent = Me
         }.Show()
+        Call New FormOutputLogs() With {
+            .MdiParent = Me
+        }.Show()
     End Sub
 
     Private Sub InterativeWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterativeWindowsToolStripMenuItem.Click
