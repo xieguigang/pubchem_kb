@@ -1,5 +1,6 @@
 ﻿Imports Microsoft.VisualBasic.Data.ChartPlots.Plot3D.Device
 Imports Microsoft.VisualBasic.Data.ChartPlots.Plot3D
+Imports System.ComponentModel
 
 Public Class FormSplashScreen
 
@@ -21,5 +22,10 @@ Public Class FormSplashScreen
         Canvas.Camera.angleX = 30
         Canvas.Camera.angleY = -30
         Canvas.AutoRotation = True
+    End Sub
+
+    Private Sub FormSplashScreen_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Canvas.AutoRotation = False
+        Canvas.Pause()
     End Sub
 End Class

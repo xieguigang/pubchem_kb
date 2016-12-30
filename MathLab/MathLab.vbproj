@@ -126,10 +126,16 @@
     <Compile Include="FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Modules\FormRunModel.Designer.vb">
+    <Compile Include="Modules\Dynamics\FormRunModelAssembly.Designer.vb">
+      <DependentUpon>FormRunModelAssembly.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dynamics\FormRunModelAssembly.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Dynamics\FormRunModel.Designer.vb">
       <DependentUpon>FormRunModel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Modules\FormRunModel.vb">
+    <Compile Include="Modules\Dynamics\FormRunModel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Modules\FormInteractive.Designer.vb">
@@ -195,7 +201,7 @@
     <EmbeddedResource Include="Modules\FormInteractive.resx">
       <DependentUpon>FormInteractive.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\FormRunModel.resx">
+    <EmbeddedResource Include="Modules\Dynamics\FormRunModel.resx">
       <DependentUpon>FormRunModel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -35,15 +35,15 @@ Partial Class FormMain
         Me.PreferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AnalysisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataCorrelationsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ParameterEstimatesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DynamicsAnalysisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ParameterHelperToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.InterativeWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ParameterHelperToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -125,6 +125,11 @@ Partial Class FormMain
         Me.DataCorrelationsToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.DataCorrelationsToolStripMenuItem.Text = "Data Correlations"
         '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(178, 6)
+        '
         'ParameterEstimatesToolStripMenuItem
         '
         Me.ParameterEstimatesToolStripMenuItem.Name = "ParameterEstimatesToolStripMenuItem"
@@ -136,6 +141,12 @@ Partial Class FormMain
         Me.DynamicsAnalysisToolStripMenuItem.Name = "DynamicsAnalysisToolStripMenuItem"
         Me.DynamicsAnalysisToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
         Me.DynamicsAnalysisToolStripMenuItem.Text = "Dynamics Analysis"
+        '
+        'ParameterHelperToolStripMenuItem
+        '
+        Me.ParameterHelperToolStripMenuItem.Name = "ParameterHelperToolStripMenuItem"
+        Me.ParameterHelperToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.ParameterHelperToolStripMenuItem.Text = "Parameter Helper"
         '
         'WindowToolStripMenuItem
         '
@@ -168,17 +179,6 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
         Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(114, 22)
         Me.AboutToolStripMenuItem1.Text = "About"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(178, 6)
-        '
-        'ParameterHelperToolStripMenuItem
-        '
-        Me.ParameterHelperToolStripMenuItem.Name = "ParameterHelperToolStripMenuItem"
-        Me.ParameterHelperToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
-        Me.ParameterHelperToolStripMenuItem.Text = "Parameter Helper"
         '
         'FormMain
         '

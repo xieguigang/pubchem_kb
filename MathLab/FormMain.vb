@@ -31,4 +31,10 @@
             .MdiParent = Me
         }.Show()
     End Sub
+
+    Private Sub ParameterHelperToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ParameterHelperToolStripMenuItem.Click
+        Call New FormRunModelAssembly With {
+            .MdiParent = Me
+        }.Show()
+    End Sub
 End Class
