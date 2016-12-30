@@ -126,6 +126,12 @@
     <Compile Include="FormAbout.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\Dynamics\FormLoadModel.designer.vb">
+      <DependentUpon>FormLoadModel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Dynamics\FormLoadModel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\Dynamics\FormRunModelAssembly.Designer.vb">
       <DependentUpon>FormRunModelAssembly.vb</DependentUpon>
     </Compile>
@@ -189,6 +195,9 @@
     <EmbeddedResource Include="Modules\DataImports.resx">
       <DependentUpon>DataImports.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Dynamics\FormLoadModel.resx">
+      <DependentUpon>FormLoadModel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Dynamics\FormRunModelAssembly.resx">
       <DependentUpon>FormRunModelAssembly.vb</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +241,10 @@
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data\DataFrame\+VB_DataFrame.vbproj">
       <Project>{7283c179-f852-4ead-8d8f-b82ef2cbd7db}</Project>
       <Name>+VB_DataFrame</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Bootstrapping\Bootstrapping.vbproj">
+      <Project>{B21B924A-D67F-4554-8946-A154563394B2}</Project>
+      <Name>Bootstrapping</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\GCModeller\src\runtime\sciBASIC#\Data_science\Mathematical\Math\Microsoft.VisualBasic.Mathematical.vbproj">
       <Project>{e3367b88-5d0c-495a-8273-331656d4b5aa}</Project>
