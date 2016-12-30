@@ -44,15 +44,13 @@ Partial Class FormRunModelAssembly
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.tb_b = New System.Windows.Forms.ToolStripTextBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
+        Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -186,7 +184,7 @@ Partial Class FormRunModelAssembly
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.FlowLayoutPanel1)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.ScatterPlot1)
         '
         'SplitContainer1.Panel2
         '
@@ -194,25 +192,6 @@ Partial Class FormRunModelAssembly
         Me.SplitContainer1.Size = New System.Drawing.Size(1221, 710)
         Me.SplitContainer1.SplitterDistance = 971
         Me.SplitContainer1.TabIndex = 1
-        '
-        'FlowLayoutPanel1
-        '
-        Me.FlowLayoutPanel1.AutoScroll = True
-        Me.FlowLayoutPanel1.Controls.Add(Me.ScatterPlot1)
-        Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(971, 710)
-        Me.FlowLayoutPanel1.TabIndex = 0
-        '
-        'ScatterPlot1
-        '
-        Me.ScatterPlot1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ScatterPlot1.Location = New System.Drawing.Point(3, 3)
-        Me.ScatterPlot1.Name = "ScatterPlot1"
-        Me.ScatterPlot1.Size = New System.Drawing.Size(0, 734)
-        Me.ScatterPlot1.TabIndex = 0
         '
         'PropertyGrid1
         '
@@ -222,6 +201,14 @@ Partial Class FormRunModelAssembly
         Me.PropertyGrid1.Name = "PropertyGrid1"
         Me.PropertyGrid1.Size = New System.Drawing.Size(246, 710)
         Me.PropertyGrid1.TabIndex = 0
+        '
+        'ScatterPlot1
+        '
+        Me.ScatterPlot1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ScatterPlot1.Location = New System.Drawing.Point(0, 0)
+        Me.ScatterPlot1.Name = "ScatterPlot1"
+        Me.ScatterPlot1.Size = New System.Drawing.Size(971, 710)
+        Me.ScatterPlot1.TabIndex = 0
         '
         'FormRunModelAssembly
         '
@@ -238,7 +225,6 @@ Partial Class FormRunModelAssembly
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,9 +249,8 @@ Partial Class FormRunModelAssembly
     Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents PropertyGrid1 As PropertyGrid
-    Friend WithEvents ScatterPlot1 As Microsoft.VisualBasic.Data.Charting.ScatterPlot
     Friend WithEvents OpenToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
+    Friend WithEvents ScatterPlot1 As Microsoft.VisualBasic.Data.Charting.ScatterPlot
 End Class

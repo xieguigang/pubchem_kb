@@ -30,12 +30,12 @@ Public Class FormRunModelAssembly
                 model = loader.Model
                 Text = path.ToFileURL & "!" & model.FullName
 
-                For Each ctrl As Control In FlowLayoutPanel1.Controls
-                    If ctrl.Equals(ToolStrip1) Then
-                        Continue For
-                    End If
-                    Call FlowLayoutPanel1.Controls.Remove(ctrl)
-                Next
+                'For Each ctrl As Control In FlowLayoutPanel1.Controls
+                '    If ctrl.Equals(ToolStrip1) Then
+                '        Continue For
+                '    End If
+                '    Call FlowLayoutPanel1.Controls.Remove(ctrl)
+                'Next
                 'For Each ctrl As Control In FlowLayoutPanel2.Controls
                 '    Call FlowLayoutPanel2.Controls.Remove(ctrl)
                 'Next
@@ -45,10 +45,12 @@ Public Class FormRunModelAssembly
                 '    Call x.Dispose()
                 'Next
 
-                Dim vars$() = MonteCarlo.Model.GetVariables(model).Join(MonteCarlo.Model.GetParameters(model)).ToArray
-                Dim proxy As ParameterProxy = ParameterProxy.Creates(vars)
+                Dim vars$() = MonteCarlo.Model.GetVariables(model).ToArray
+                Dim proxy As ParameterProxy
 
                 ScatterPlot1.SetVariables(vars)
+                vars = vars.Join(MonteCarlo.Model.GetParameters(model)).ToArray
+                proxy = ParameterProxy.Creates(vars)
                 PropertyGrid1.SelectedObject = proxy
                 parameters = proxy
 
@@ -108,5 +110,6 @@ Public Class FormRunModelAssembly
         'TextBox1.AppendText(defines.GetJson & vbCrLf)
         'Application.DoEvents()
         Dim out = MonteCarlo.Model.RunTest(model, defines, defines, n, a, b)
+        Call ScatterPlot1.Plot(out)
     End Sub
 End Class
