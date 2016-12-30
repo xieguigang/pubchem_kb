@@ -1,0 +1,1 @@
+![](../images/software-cover.png)
