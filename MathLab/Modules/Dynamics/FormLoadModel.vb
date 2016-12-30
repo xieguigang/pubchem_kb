@@ -59,4 +59,12 @@ Public Class FormLoadModel
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub ListBox1_DoubleClick(sender As Object, e As EventArgs) Handles ListBox1.DoubleClick
+        Call Button1_Click(Nothing, Nothing)
+    End Sub
 End Class
