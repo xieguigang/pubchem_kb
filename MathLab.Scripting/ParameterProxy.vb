@@ -1,4 +1,5 @@
-﻿Imports System.Reflection
+﻿Imports System.CodeDom.Compiler
+Imports System.Reflection
 Imports System.Text
 Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel
 Imports Microsoft.VisualBasic.Emit.CodeDOM_VBC
@@ -34,7 +35,7 @@ Public Class {NameOf(ParameterProxy)} : Inherits {GetType(ParameterProxy).FullNa
 
 End Class"
 
-        Dim args = VBC.CreateParameters(App.References)
+        Dim args As CompilerParameters = VBC.CreateParameters(references:=App.References)
         Dim assm As Assembly = VBC.CompileCode(code, args)
         Dim type As Type = assm.GetType(NameOf(ParameterProxy))
         Dim obj As Object = Activator.CreateInstance(type)

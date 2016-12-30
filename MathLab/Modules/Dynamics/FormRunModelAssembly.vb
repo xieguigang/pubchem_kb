@@ -45,7 +45,7 @@ Public Class FormRunModelAssembly
                 '    Call x.Dispose()
                 'Next
 
-                Dim vars$() = MonteCarlo.Model.GetVariables(model).ToArray
+                Dim vars$() = MonteCarlo.Model.GetVariables(model).Join(MonteCarlo.Model.GetParameters(model)).ToArray
                 Dim proxy As ParameterProxy = ParameterProxy.Creates(vars)
 
                 ScatterPlot1.SetVariables(vars)
