@@ -27,6 +27,8 @@ Partial Class FormRunModelAssembly
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripSplitButton()
         Me.OpenDynamicsScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.AddReferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -45,8 +47,6 @@ Partial Class FormRunModelAssembly
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
         Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
-        Me.OpenToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -87,6 +87,17 @@ Partial Class FormRunModelAssembly
         Me.OpenDLLToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
         Me.OpenDLLToolStripMenuItem.Text = "Open DLL"
         '
+        'OpenToolStripMenuItem1
+        '
+        Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
+        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(103, 22)
+        Me.OpenToolStripMenuItem1.Text = "Open"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(100, 6)
+        '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -102,13 +113,13 @@ Partial Class FormRunModelAssembly
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(100, 6)
         '
         'ToolStripSeparator2
         '
@@ -211,17 +222,6 @@ Partial Class FormRunModelAssembly
         Me.PropertyGrid1.Name = "PropertyGrid1"
         Me.PropertyGrid1.Size = New System.Drawing.Size(246, 710)
         Me.PropertyGrid1.TabIndex = 0
-        '
-        'OpenToolStripMenuItem1
-        '
-        Me.OpenToolStripMenuItem1.Name = "OpenToolStripMenuItem1"
-        Me.OpenToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.OpenToolStripMenuItem1.Text = "Open"
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
         '
         'FormRunModelAssembly
         '

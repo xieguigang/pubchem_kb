@@ -91,6 +91,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParameterProxy.vb" />
     <Compile Include="Kinetics_of_influenza_A_virus_infection_in_humans.vb" />
     <Compile Include="Run.vb" />
     <Compile Include="Parser.vb" />

@@ -1,6 +1,10 @@
-﻿Public Class FormRunModelAssembly
+﻿Imports MathLab.Scripting
+Imports Microsoft.VisualBasic.Data.Bootstrapping
+
+Public Class FormRunModelAssembly
 
     Dim model As Type
+    Dim parameters As ParameterProxy
 
     Private Sub OpenToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem1.Click
         Using file As New OpenFileDialog With {
@@ -20,8 +24,8 @@
 
     Public Function LoadModel(path$) As Boolean
         Using loader As New FormLoadModel() With {
-                  .DllFile = path
-              }
+            .DllFile = path
+        }
             If loader.ShowDialog = DialogResult.OK Then
                 model = loader.Model
                 Text = path.ToFileURL & "!" & model.FullName
@@ -40,6 +44,13 @@
                 '    Call Controls.Remove(x)
                 '    Call x.Dispose()
                 'Next
+
+                Dim vars$() = MonteCarlo.Model.GetVariables(model).ToArray
+                Dim proxy As ParameterProxy = ParameterProxy.Creates(vars)
+
+                ScatterPlot1.SetVariables(vars)
+                PropertyGrid1.SelectedObject = proxy
+                parameters = proxy
 
                 'For Each var$ In MonteCarlo.Model.GetVariables(model)
                 '    Dim pic As New PictureBox With {
@@ -85,4 +96,12 @@
 
         Return False
     End Function
+
+    Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        ToolStripProgressBar1.Value = 0
+        'TextBox1.AppendText($"a:={A}, b:={b}, n:={n}" & vbCrLf)
+        'TextBox1.AppendText(defines.GetJson & vbCrLf)
+        'Application.DoEvents()
+        Call Draw(MonteCarlo.Model.RunTest(model, defines, defines, n, A, b))
+    End Sub
 End Class
