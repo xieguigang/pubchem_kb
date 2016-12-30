@@ -189,6 +189,9 @@
     <EmbeddedResource Include="Modules\DataImports.resx">
       <DependentUpon>DataImports.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Dynamics\FormRunModelAssembly.resx">
+      <DependentUpon>FormRunModelAssembly.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Form3DViewer.resx">
       <DependentUpon>Form3DViewer.vb</DependentUpon>
     </EmbeddedResource>
