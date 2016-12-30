@@ -1,4 +1,5 @@
 ﻿Imports System.Collections.ObjectModel
+Imports Microsoft.VisualBasic.Windows.Forms
 
 Namespace My
     ' The following events are available for MyApplication:
@@ -10,6 +11,7 @@ Namespace My
     Partial Friend Class MyApplication
 
         Protected Overrides Function OnInitialize(ByVal commandLineArgs As ReadOnlyCollection(Of String)) As Boolean
+            ToolStripManager.Renderer = New ChromeUIRender
             Me.MinimumSplashScreenDisplayTime = 3000
             Return MyBase.OnInitialize(commandLineArgs)
         End Function

@@ -115,6 +115,12 @@
     <Compile Include="FormSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\FormColorBrewerViewer.Designer.vb">
+      <DependentUpon>FormColorBrewerViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FormColorBrewerViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="this.vb" />
     <Compile Include="Modules\DataImports.Designer.vb">
       <DependentUpon>DataImports.vb</DependentUpon>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Form3DViewer.resx">
       <DependentUpon>Form3DViewer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\FormColorBrewerViewer.resx">
+      <DependentUpon>FormColorBrewerViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\FormCorrealtions.resx">
       <DependentUpon>FormCorrealtions.vb</DependentUpon>

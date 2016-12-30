@@ -44,6 +44,8 @@ Partial Class FormMain
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ColorBrewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -52,7 +54,6 @@ Partial Class FormMain
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.AnalysisToolStripMenuItem, Me.WindowToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.MenuStrip1.Size = New System.Drawing.Size(1116, 24)
         Me.MenuStrip1.TabIndex = 1
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -163,7 +164,7 @@ Partial Class FormMain
         '
         'AboutToolStripMenuItem
         '
-        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualToolStripMenuItem, Me.AboutToolStripMenuItem1})
+        Me.AboutToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ManualToolStripMenuItem, Me.ColorBrewerToolStripMenuItem, Me.ToolStripMenuItem3, Me.AboutToolStripMenuItem1})
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.AboutToolStripMenuItem.Text = "Help"
@@ -171,14 +172,25 @@ Partial Class FormMain
         'ManualToolStripMenuItem
         '
         Me.ManualToolStripMenuItem.Name = "ManualToolStripMenuItem"
-        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(114, 22)
+        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ManualToolStripMenuItem.Text = "Manual"
         '
         'AboutToolStripMenuItem1
         '
         Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(114, 22)
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem1.Text = "About"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
+        '
+        'ColorBrewerToolStripMenuItem
+        '
+        Me.ColorBrewerToolStripMenuItem.Name = "ColorBrewerToolStripMenuItem"
+        Me.ColorBrewerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ColorBrewerToolStripMenuItem.Text = "Color Brewer"
         '
         'FormMain
         '
@@ -225,4 +237,6 @@ Partial Class FormMain
     Friend WithEvents DynamicsAnalysisToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents ParameterHelperToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ColorBrewerToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
 End Class
