@@ -98,10 +98,15 @@ Public Class FormRunModelAssembly
     End Function
 
     Private Sub ToolStripButton1_Click(sender As Object, e As EventArgs) Handles ToolStripButton1.Click
+        Dim defines As Dictionary(Of String, Double) = parameters.GetParameters
+        Dim n = Val(tb_n.Text)
+        Dim a = Val(tb_a.Text)
+        Dim b = Val(tb_b.Text)
+
         ToolStripProgressBar1.Value = 0
         'TextBox1.AppendText($"a:={A}, b:={b}, n:={n}" & vbCrLf)
         'TextBox1.AppendText(defines.GetJson & vbCrLf)
         'Application.DoEvents()
-        Call Draw(MonteCarlo.Model.RunTest(model, defines, defines, n, A, b))
+        Dim out = MonteCarlo.Model.RunTest(model, defines, defines, n, a, b)
     End Sub
 End Class

@@ -38,11 +38,11 @@ Partial Class FormRunModelAssembly
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.tb_n = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
+        Me.tb_a = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
+        Me.tb_b = New System.Windows.Forms.ToolStripTextBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
@@ -57,7 +57,7 @@ Partial Class FormRunModelAssembly
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripProgressBar1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.ToolStripTextBox1, Me.ToolStripLabel2, Me.ToolStripTextBox2, Me.ToolStripLabel3, Me.ToolStripTextBox3})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripProgressBar1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.tb_n, Me.ToolStripLabel2, Me.tb_a, Me.ToolStripLabel3, Me.tb_b})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1221, 25)
@@ -151,10 +151,10 @@ Partial Class FormRunModelAssembly
         Me.ToolStripLabel1.Size = New System.Drawing.Size(25, 22)
         Me.ToolStripLabel1.Text = "n:="
         '
-        'ToolStripTextBox1
+        'tb_n
         '
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 25)
+        Me.tb_n.Name = "tb_n"
+        Me.tb_n.Size = New System.Drawing.Size(100, 25)
         '
         'ToolStripLabel2
         '
@@ -162,10 +162,10 @@ Partial Class FormRunModelAssembly
         Me.ToolStripLabel2.Size = New System.Drawing.Size(30, 22)
         Me.ToolStripLabel2.Text = ", a:="
         '
-        'ToolStripTextBox2
+        'tb_a
         '
-        Me.ToolStripTextBox2.Name = "ToolStripTextBox2"
-        Me.ToolStripTextBox2.Size = New System.Drawing.Size(100, 25)
+        Me.tb_a.Name = "tb_a"
+        Me.tb_a.Size = New System.Drawing.Size(100, 25)
         '
         'ToolStripLabel3
         '
@@ -173,10 +173,10 @@ Partial Class FormRunModelAssembly
         Me.ToolStripLabel3.Size = New System.Drawing.Size(31, 22)
         Me.ToolStripLabel3.Text = ", b:="
         '
-        'ToolStripTextBox3
+        'tb_b
         '
-        Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
-        Me.ToolStripTextBox3.Size = New System.Drawing.Size(100, 25)
+        Me.tb_b.Name = "tb_b"
+        Me.tb_b.Size = New System.Drawing.Size(100, 25)
         '
         'SplitContainer1
         '
@@ -248,11 +248,11 @@ Partial Class FormRunModelAssembly
     Friend WithEvents ToolStripButton1 As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
-    Friend WithEvents ToolStripTextBox1 As ToolStripTextBox
+    Friend WithEvents tb_n As ToolStripTextBox
     Friend WithEvents ToolStripLabel2 As ToolStripLabel
-    Friend WithEvents ToolStripTextBox2 As ToolStripTextBox
+    Friend WithEvents tb_a As ToolStripTextBox
     Friend WithEvents ToolStripLabel3 As ToolStripLabel
-    Friend WithEvents ToolStripTextBox3 As ToolStripTextBox
+    Friend WithEvents tb_b As ToolStripTextBox
     Friend WithEvents ToolStripProgressBar1 As ToolStripProgressBar
     Friend WithEvents ToolStripButton2 As ToolStripSplitButton
     Friend WithEvents OpenDynamicsScriptToolStripMenuItem As ToolStripMenuItem
