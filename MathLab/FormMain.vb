@@ -15,15 +15,14 @@ Public Class FormMain
     End Sub
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Call New FormInteractive() With {
-            .MdiParent = Me
-        }.Show()
-
         this.Logger = New FormOutputLogs() With {
             .MdiParent = Me
         }
         Call this.Logger.Show()
         Call this.Logging(App.GetAppVariables.GetJson)
+        Call New FormInteractive() With {
+            .MdiParent = Me
+        }.Show()
     End Sub
 
     Private Sub InterativeWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterativeWindowsToolStripMenuItem.Click

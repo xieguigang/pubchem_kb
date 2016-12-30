@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Threading
 Imports MathLab.TextEditor
 Imports Microsoft.VisualBasic.Logging
 
@@ -146,6 +147,8 @@ Partial Class FormOutputLogs
     End Sub
 
     Private Sub FormOutputLogs_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Call Thread.Sleep(200)
+
         If Not this.Closing Then
             WindowState = FormWindowState.Minimized
             e.Cancel = True
