@@ -43,9 +43,11 @@ Partial Class FormMain
         Me.InterativeWindowsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ManualToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
         Me.ColorBrewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.AboutToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.NetworkVisualizeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -87,38 +89,38 @@ Partial Class FormMain
         'CopyToolStripMenuItem
         '
         Me.CopyToolStripMenuItem.Name = "CopyToolStripMenuItem"
-        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.CopyToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CopyToolStripMenuItem.Text = "Copy"
         '
         'CutToolStripMenuItem
         '
         Me.CutToolStripMenuItem.Name = "CutToolStripMenuItem"
-        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.CutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.CutToolStripMenuItem.Text = "Cut"
         '
         'PasteToolStripMenuItem
         '
         Me.PasteToolStripMenuItem.Name = "PasteToolStripMenuItem"
-        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.PasteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PasteToolStripMenuItem.Text = "Paste"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(127, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(149, 6)
         '
         'PreferenceToolStripMenuItem
         '
         Me.PreferenceToolStripMenuItem.Name = "PreferenceToolStripMenuItem"
-        Me.PreferenceToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.PreferenceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PreferenceToolStripMenuItem.Text = "Preference"
         '
         'AnalysisToolStripMenuItem
         '
-        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem, Me.ToolStripMenuItem2, Me.ParameterEstimatesToolStripMenuItem, Me.DynamicsAnalysisToolStripMenuItem, Me.ParameterHelperToolStripMenuItem})
+        Me.AnalysisToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DataCorrelationsToolStripMenuItem, Me.ToolStripMenuItem2, Me.ParameterEstimatesToolStripMenuItem, Me.DynamicsAnalysisToolStripMenuItem, Me.ParameterHelperToolStripMenuItem, Me.ToolStripMenuItem4, Me.NetworkVisualizeToolStripMenuItem})
         Me.AnalysisToolStripMenuItem.Name = "AnalysisToolStripMenuItem"
-        Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
-        Me.AnalysisToolStripMenuItem.Text = "Analysis"
+        Me.AnalysisToolStripMenuItem.Size = New System.Drawing.Size(118, 20)
+        Me.AnalysisToolStripMenuItem.Text = "Analysis And Tools"
         '
         'DataCorrelationsToolStripMenuItem
         '
@@ -172,25 +174,36 @@ Partial Class FormMain
         'ManualToolStripMenuItem
         '
         Me.ManualToolStripMenuItem.Name = "ManualToolStripMenuItem"
-        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ManualToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.ManualToolStripMenuItem.Text = "Manual"
-        '
-        'AboutToolStripMenuItem1
-        '
-        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
-        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.AboutToolStripMenuItem1.Text = "About"
-        '
-        'ToolStripMenuItem3
-        '
-        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(149, 6)
         '
         'ColorBrewerToolStripMenuItem
         '
         Me.ColorBrewerToolStripMenuItem.Name = "ColorBrewerToolStripMenuItem"
-        Me.ColorBrewerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ColorBrewerToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.ColorBrewerToolStripMenuItem.Text = "Color Brewer"
+        '
+        'ToolStripMenuItem3
+        '
+        Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(139, 6)
+        '
+        'AboutToolStripMenuItem1
+        '
+        Me.AboutToolStripMenuItem1.Name = "AboutToolStripMenuItem1"
+        Me.AboutToolStripMenuItem1.Size = New System.Drawing.Size(142, 22)
+        Me.AboutToolStripMenuItem1.Text = "About"
+        '
+        'ToolStripMenuItem4
+        '
+        Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+        Me.ToolStripMenuItem4.Size = New System.Drawing.Size(178, 6)
+        '
+        'NetworkVisualizeToolStripMenuItem
+        '
+        Me.NetworkVisualizeToolStripMenuItem.Name = "NetworkVisualizeToolStripMenuItem"
+        Me.NetworkVisualizeToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.NetworkVisualizeToolStripMenuItem.Text = "Network Visualize"
         '
         'FormMain
         '
@@ -239,4 +252,6 @@ Partial Class FormMain
     Friend WithEvents ParameterHelperToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ColorBrewerToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
+    Friend WithEvents NetworkVisualizeToolStripMenuItem As ToolStripMenuItem
 End Class

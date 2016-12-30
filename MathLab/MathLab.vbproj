@@ -115,6 +115,12 @@
     <Compile Include="FormSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Modules\FormNetworkCanvas.Designer.vb">
+      <DependentUpon>FormNetworkCanvas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\FormNetworkCanvas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Modules\FormColorBrewerViewer.Designer.vb">
       <DependentUpon>FormColorBrewerViewer.vb</DependentUpon>
     </Compile>
@@ -232,6 +238,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Dynamics\FormRunModel.resx">
       <DependentUpon>FormRunModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\FormNetworkCanvas.resx">
+      <DependentUpon>FormNetworkCanvas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\FormOutputLogs.resx">
       <DependentUpon>FormOutputLogs.vb</DependentUpon>

@@ -51,4 +51,10 @@ Public Class FormMain
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         this.Closing = True
     End Sub
+
+    Private Sub NetworkVisualizeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NetworkVisualizeToolStripMenuItem.Click
+        Call New FormNetworkCanvas With {
+            .MdiParent = Me
+        }.Show()
+    End Sub
 End Class
