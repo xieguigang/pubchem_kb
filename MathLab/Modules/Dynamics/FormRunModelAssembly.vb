@@ -128,13 +128,18 @@ Public Class FormRunModelAssembly
             .Filter = "ODEs Excel Output(*.csv)|*.csv"
         }
             If file.ShowDialog = DialogResult.OK Then
-                Dim defines = ODEsOut.LoadFromDataFrame(file.FileName).params
+                Dim data = ODEsOut.LoadFromDataFrame(file.FileName)
 
-                For Each x As KeyValuePair(Of String, Double) In defines
+                For Each x As KeyValuePair(Of String, Double) In data.params
                     Call parameters.SetValue(x.Key, x.Value)
                     Call App.JoinVariable(x.Key, x.Value)
                 Next
 
+                tb_n.Text = data.x.Length
+                tb_a.Text = data.x(Scan0)
+                tb_b.Text = data.x.Last
+
+                Call PropertyGrid1.Refresh()
                 Call this.Logging("Load parameter data from file: " & file.FileName)
             End If
         End Using
