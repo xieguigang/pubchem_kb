@@ -23,20 +23,7 @@ Partial Class FormRunModelAssembly
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormRunModelAssembly))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripSplitButton()
         Me.OpenDynamicsScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDLLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -44,16 +31,26 @@ Partial Class FormRunModelAssembly
         Me.AddReferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripLabel2 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripTextBox2 = New System.Windows.Forms.ToolStripTextBox()
+        Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
+        Me.ToolStripTextBox3 = New System.Windows.Forms.ToolStripTextBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
+        Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FlowLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
@@ -65,6 +62,56 @@ Partial Class FormRunModelAssembly
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenDynamicsScriptToolStripMenuItem, Me.OpenDLLToolStripMenuItem, Me.ToolStripMenuItem1, Me.AddReferenceToolStripMenuItem})
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(32, 22)
+        Me.ToolStripButton2.Text = "Open"
+        '
+        'OpenDynamicsScriptToolStripMenuItem
+        '
+        Me.OpenDynamicsScriptToolStripMenuItem.Name = "OpenDynamicsScriptToolStripMenuItem"
+        Me.OpenDynamicsScriptToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.OpenDynamicsScriptToolStripMenuItem.Text = "Open Dynamics Script"
+        '
+        'OpenDLLToolStripMenuItem
+        '
+        Me.OpenDLLToolStripMenuItem.Name = "OpenDLLToolStripMenuItem"
+        Me.OpenDLLToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.OpenDLLToolStripMenuItem.Text = "Open DLL"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(188, 6)
+        '
+        'AddReferenceToolStripMenuItem
+        '
+        Me.AddReferenceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.ToolStripMenuItem2})
+        Me.AddReferenceToolStripMenuItem.Name = "AddReferenceToolStripMenuItem"
+        Me.AddReferenceToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
+        Me.AddReferenceToolStripMenuItem.Text = "Add Reference"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.OpenToolStripMenuItem.Text = "Open"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(100, 6)
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
         'ToolStripButton1
         '
         Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
@@ -73,6 +120,11 @@ Partial Class FormRunModelAssembly
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(23, 22)
         Me.ToolStripButton1.Text = "Run"
+        '
+        'ToolStripProgressBar1
+        '
+        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
+        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 22)
         '
         'ToolStripSeparator1
         '
@@ -112,61 +164,6 @@ Partial Class FormRunModelAssembly
         Me.ToolStripTextBox3.Name = "ToolStripTextBox3"
         Me.ToolStripTextBox3.Size = New System.Drawing.Size(100, 25)
         '
-        'ToolStripProgressBar1
-        '
-        Me.ToolStripProgressBar1.Name = "ToolStripProgressBar1"
-        Me.ToolStripProgressBar1.Size = New System.Drawing.Size(100, 22)
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenDynamicsScriptToolStripMenuItem, Me.OpenDLLToolStripMenuItem, Me.ToolStripMenuItem1, Me.AddReferenceToolStripMenuItem})
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(32, 22)
-        Me.ToolStripButton2.Text = "Open"
-        '
-        'OpenDynamicsScriptToolStripMenuItem
-        '
-        Me.OpenDynamicsScriptToolStripMenuItem.Name = "OpenDynamicsScriptToolStripMenuItem"
-        Me.OpenDynamicsScriptToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
-        Me.OpenDynamicsScriptToolStripMenuItem.Text = "Open Dynamics Script"
-        '
-        'OpenDLLToolStripMenuItem
-        '
-        Me.OpenDLLToolStripMenuItem.Name = "OpenDLLToolStripMenuItem"
-        Me.OpenDLLToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
-        Me.OpenDLLToolStripMenuItem.Text = "Open DLL"
-        '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(188, 6)
-        '
-        'AddReferenceToolStripMenuItem
-        '
-        Me.AddReferenceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.ToolStripMenuItem2})
-        Me.AddReferenceToolStripMenuItem.Name = "AddReferenceToolStripMenuItem"
-        Me.AddReferenceToolStripMenuItem.Size = New System.Drawing.Size(191, 22)
-        Me.AddReferenceToolStripMenuItem.Text = "Add Reference"
-        '
-        'OpenToolStripMenuItem
-        '
-        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.OpenToolStripMenuItem.Text = "Open"
-        '
-        'ToolStripMenuItem2
-        '
-        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(149, 6)
-        '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -179,47 +176,38 @@ Partial Class FormRunModelAssembly
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.Chart1)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.TextBox1)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.PropertyGrid1)
         Me.SplitContainer1.Size = New System.Drawing.Size(1221, 710)
-        Me.SplitContainer1.SplitterDistance = 256
+        Me.SplitContainer1.SplitterDistance = 971
         Me.SplitContainer1.TabIndex = 1
         '
         'FlowLayoutPanel1
         '
         Me.FlowLayoutPanel1.AutoScroll = True
+        Me.FlowLayoutPanel1.Controls.Add(Me.ScatterPlot1)
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(256, 710)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(971, 710)
         Me.FlowLayoutPanel1.TabIndex = 0
         '
-        'Chart1
+        'PropertyGrid1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
-        Me.Chart1.Dock = System.Windows.Forms.DockStyle.Fill
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
-        Me.Chart1.Location = New System.Drawing.Point(0, 0)
-        Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Size = New System.Drawing.Size(961, 582)
-        Me.Chart1.TabIndex = 0
-        Me.Chart1.Text = "Chart1"
+        Me.PropertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PropertyGrid1.LineColor = System.Drawing.SystemColors.ControlDark
+        Me.PropertyGrid1.Location = New System.Drawing.Point(0, 0)
+        Me.PropertyGrid1.Name = "PropertyGrid1"
+        Me.PropertyGrid1.Size = New System.Drawing.Size(246, 710)
+        Me.PropertyGrid1.TabIndex = 0
         '
-        'TextBox1
+        'ScatterPlot1
         '
-        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.TextBox1.Location = New System.Drawing.Point(0, 582)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(961, 128)
-        Me.TextBox1.TabIndex = 1
+        Me.ScatterPlot1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ScatterPlot1.Location = New System.Drawing.Point(3, 3)
+        Me.ScatterPlot1.Name = "ScatterPlot1"
+        Me.ScatterPlot1.Size = New System.Drawing.Size(0, 734)
+        Me.ScatterPlot1.TabIndex = 0
         '
         'FormRunModelAssembly
         '
@@ -234,10 +222,9 @@ Partial Class FormRunModelAssembly
         Me.ToolStrip1.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -263,6 +250,6 @@ Partial Class FormRunModelAssembly
     Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
-    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents PropertyGrid1 As PropertyGrid
+    Friend WithEvents ScatterPlot1 As Microsoft.VisualBasic.Data.Charting.ScatterPlot
 End Class
