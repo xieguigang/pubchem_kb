@@ -1,4 +1,8 @@
-﻿Public Class FormMain
+﻿Imports System.ComponentModel
+Imports Microsoft.VisualBasic.Serialization.JSON
+
+Public Class FormMain
+    Implements IDisposable
 
     Private Sub DataCorrelationsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DataCorrelationsToolStripMenuItem.Click
         Call New FormCorrealtions With {
@@ -14,9 +18,12 @@
         Call New FormInteractive() With {
             .MdiParent = Me
         }.Show()
-        Call New FormOutputLogs() With {
+
+        this.Logger = New FormOutputLogs() With {
             .MdiParent = Me
-        }.Show()
+        }
+        Call this.Logger.Show()
+        Call this.Logging(App.GetAppVariables.GetJson)
     End Sub
 
     Private Sub InterativeWindowsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InterativeWindowsToolStripMenuItem.Click
@@ -26,6 +33,7 @@
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        this.Closing = True
         Close()
     End Sub
 
@@ -39,5 +47,9 @@
         Call New FormRunModelAssembly With {
             .MdiParent = Me
         }.Show()
+    End Sub
+
+    Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        this.Closing = True
     End Sub
 End Class

@@ -6,18 +6,24 @@ Imports Microsoft.VisualBasic.Emit.CodeDOM_VBC
 
 Public MustInherit Class ParameterProxy
 
-    Public Function GetParameters() As Dictionary(Of String, Double)
-        Dim proxy As Type = MyClass.GetType
-        Dim properties As PropertyInfo() = proxy _
-            .GetProperties(PublicProperty) _
-            .Where(Function(p) p.PropertyType.Equals(GetType(Double))) _
-            .ToArray
-        Dim out As Dictionary(Of String, Double) = properties _
-            .ToDictionary(Function(name) name.Name,
-                          Function(value) DirectCast(value.GetValue(Me), Double))
+    Dim proxy As Type = MyClass.GetType
+    Dim properties As Dictionary(Of String, PropertyInfo) =
+        proxy _
+        .GetProperties(PublicProperty) _
+        .Where(Function(p) p.PropertyType.Equals(GetType(Double))) _
+        .ToDictionary(Function(name) name.Name)
 
+    Public Function GetParameters() As Dictionary(Of String, Double)
+        Dim out As Dictionary(Of String, Double) =
+            properties _
+            .ToDictionary(Function(name) name.Key,
+                          Function(value) DirectCast(value.Value.GetValue(Me), Double))
         Return out
     End Function
+
+    Public Sub SetValue(name$, value#)
+        properties(name).SetValue(Me, value)
+    End Sub
 
     Public Shared Function Creates(vars$()) As ParameterProxy
         Dim [class] As New StringBuilder()

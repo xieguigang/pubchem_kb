@@ -114,6 +114,7 @@
     <Compile Include="FormSplashScreen.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="this.vb" />
     <Compile Include="Modules\DataImports.Designer.vb">
       <DependentUpon>DataImports.vb</DependentUpon>
     </Compile>

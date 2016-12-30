@@ -112,4 +112,12 @@ Public Class FormRunModelAssembly
         Dim out = MonteCarlo.Model.RunTest(model, defines, defines, n, a, b)
         Call ScatterPlot1.Plot(out)
     End Sub
+
+    Private Sub ScatterPlot1_LocationChanged(sender As Object, e As EventArgs) Handles ScatterPlot1.LocationChanged
+
+    End Sub
+
+    Private Sub ScatterPlot1_Load(sender As Object, e As EventArgs) Handles ScatterPlot1.Load
+        ScatterPlot1.Logger = AddressOf this.Logging
+    End Sub
 End Class
