@@ -21,8 +21,15 @@ Public MustInherit Class ParameterProxy
         Return out
     End Function
 
+    ''' <summary>
+    ''' Set property value
+    ''' </summary>
+    ''' <param name="name$"></param>
+    ''' <param name="value#"></param>
     Public Sub SetValue(name$, value#)
-        properties(name).SetValue(Me, value)
+        If properties.ContainsKey(name) Then
+            Call properties(name).SetValue(Me, value)
+        End If
     End Sub
 
     Public Shared Function Creates(vars$()) As ParameterProxy

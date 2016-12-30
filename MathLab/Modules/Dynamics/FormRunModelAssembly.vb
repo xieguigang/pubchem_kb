@@ -1,5 +1,7 @@
 ﻿Imports MathLab.Scripting
 Imports Microsoft.VisualBasic.Data.Bootstrapping
+Imports Microsoft.VisualBasic.Mathematical.Calculus
+Imports Microsoft.VisualBasic.Text
 
 Public Class FormRunModelAssembly
 
@@ -119,5 +121,38 @@ Public Class FormRunModelAssembly
 
     Private Sub ScatterPlot1_Load(sender As Object, e As EventArgs) Handles ScatterPlot1.Load
         ScatterPlot1.Logger = AddressOf this.Logging
+    End Sub
+
+    Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+        Using file As New OpenFileDialog With {
+            .Filter = "ODEs Excel Output(*.csv)|*.csv"
+        }
+            If file.ShowDialog = DialogResult.OK Then
+                Dim defines = ODEsOut.LoadFromDataFrame(file.FileName).params
+
+                For Each x As KeyValuePair(Of String, Double) In defines
+                    Call parameters.SetValue(x.Key, x.Value)
+                    Call App.JoinVariable(x.Key, x.Value)
+                Next
+
+                Call this.Logging("Load parameter data from file: " & file.FileName)
+            End If
+        End Using
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Using saveFile As New SaveFileDialog With {
+            .Filter = "Excel tsv file(*.tsv)|*.tsv",
+            .FileName = "estimates-parms.tsv"
+        }
+            If saveFile.ShowDialog = DialogResult.OK Then
+                Dim params As String() = parameters.GetParameters _
+                    .Select(Function(x) x.Key & "=" & x.Value) _
+                    .ToArray
+                Dim out As String = {"0", "0", params.JoinBy(",")}.JoinBy(vbTab)
+
+                Call out.SaveTo(saveFile.FileName, Encodings.ASCII.GetEncodings)
+            End If
+        End Using
     End Sub
 End Class

@@ -33,7 +33,10 @@ Partial Class FormRunModelAssembly
         Me.AddReferenceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton4 = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButton5 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripProgressBar1 = New System.Windows.Forms.ToolStripProgressBar()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -44,8 +47,8 @@ Partial Class FormRunModelAssembly
         Me.ToolStripLabel3 = New System.Windows.Forms.ToolStripLabel()
         Me.tb_b = New System.Windows.Forms.ToolStripTextBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
         Me.ScatterPlot1 = New Microsoft.VisualBasic.Data.Charting.ScatterPlot()
+        Me.PropertyGrid1 = New System.Windows.Forms.PropertyGrid()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
@@ -55,7 +58,7 @@ Partial Class FormRunModelAssembly
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripSeparator2, Me.ToolStripButton1, Me.ToolStripProgressBar1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.tb_n, Me.ToolStripLabel2, Me.tb_a, Me.ToolStripLabel3, Me.tb_b})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.ToolStripButton4, Me.ToolStripButton3, Me.ToolStripSeparator2, Me.ToolStripButton5, Me.ToolStripButton1, Me.ToolStripProgressBar1, Me.ToolStripSeparator1, Me.ToolStripLabel1, Me.tb_n, Me.ToolStripLabel2, Me.tb_a, Me.ToolStripLabel3, Me.tb_b})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(1221, 25)
@@ -119,10 +122,37 @@ Partial Class FormRunModelAssembly
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(100, 6)
         '
+        'ToolStripButton4
+        '
+        Me.ToolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton4.Image = CType(resources.GetObject("ToolStripButton4.Image"), System.Drawing.Image)
+        Me.ToolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton4.Name = "ToolStripButton4"
+        Me.ToolStripButton4.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton4.Text = "Save Result As Excel"
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Black
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton3.Text = "Save As GA inputs"
+        '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
         Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 25)
+        '
+        'ToolStripButton5
+        '
+        Me.ToolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton5.Image = CType(resources.GetObject("ToolStripButton5.Image"), System.Drawing.Image)
+        Me.ToolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton5.Name = "ToolStripButton5"
+        Me.ToolStripButton5.Size = New System.Drawing.Size(23, 22)
+        Me.ToolStripButton5.Text = "Load From ODEs output"
         '
         'ToolStripButton1
         '
@@ -193,6 +223,15 @@ Partial Class FormRunModelAssembly
         Me.SplitContainer1.SplitterDistance = 971
         Me.SplitContainer1.TabIndex = 1
         '
+        'ScatterPlot1
+        '
+        Me.ScatterPlot1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ScatterPlot1.Location = New System.Drawing.Point(0, 0)
+        Me.ScatterPlot1.Logger = Nothing
+        Me.ScatterPlot1.Name = "ScatterPlot1"
+        Me.ScatterPlot1.Size = New System.Drawing.Size(971, 710)
+        Me.ScatterPlot1.TabIndex = 0
+        '
         'PropertyGrid1
         '
         Me.PropertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -201,14 +240,6 @@ Partial Class FormRunModelAssembly
         Me.PropertyGrid1.Name = "PropertyGrid1"
         Me.PropertyGrid1.Size = New System.Drawing.Size(246, 710)
         Me.PropertyGrid1.TabIndex = 0
-        '
-        'ScatterPlot1
-        '
-        Me.ScatterPlot1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ScatterPlot1.Location = New System.Drawing.Point(0, 0)
-        Me.ScatterPlot1.Name = "ScatterPlot1"
-        Me.ScatterPlot1.Size = New System.Drawing.Size(971, 710)
-        Me.ScatterPlot1.TabIndex = 0
         '
         'FormRunModelAssembly
         '
@@ -253,4 +284,7 @@ Partial Class FormRunModelAssembly
     Friend WithEvents OpenToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem3 As ToolStripSeparator
     Friend WithEvents ScatterPlot1 As Microsoft.VisualBasic.Data.Charting.ScatterPlot
+    Friend WithEvents ToolStripButton4 As ToolStripButton
+    Friend WithEvents ToolStripButton3 As ToolStripButton
+    Friend WithEvents ToolStripButton5 As ToolStripButton
 End Class
