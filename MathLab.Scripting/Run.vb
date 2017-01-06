@@ -4,6 +4,8 @@ Imports Microsoft.VisualBasic.Language
 Imports Microsoft.VisualBasic.Mathematical
 Imports Microsoft.VisualBasic.Mathematical.Calculus
 Imports Microsoft.VisualBasic.Mathematical.Types
+Imports Microsoft.VisualBasic.Scripting
+Imports Microsoft.VisualBasic.Scripting.TokenIcer
 Imports y = Microsoft.VisualBasic.Mathematical.Calculus.var
 
 Public Module Run
@@ -13,7 +15,11 @@ Public Module Run
         Dim cal As New List(Of (x$, expr As SimpleExpression))
 
         For Each x As NamedValue(Of String) In model.params
-            cal += (x.Name, expression.Compile(x.Value))
+            If x.Value.IsScientificNotation Then
+                Call expression.SetVariable(x.Name, x.Value.ParseNumeric)
+            Else
+                cal += (x.Name, expression.Compile(x.Value))
+            End If
         Next
 
         For Each x In cal.OrderBy(Function(exp) exp.expr.ReferenceDepth)

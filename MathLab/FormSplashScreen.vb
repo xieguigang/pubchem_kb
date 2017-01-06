@@ -16,12 +16,14 @@ Public Class FormSplashScreen
         }
         Call Controls.Add(Canvas)
 
-        Canvas.Plot = New Func(Of Double, Double, (Z#, Color As Double))(AddressOf Model).GetPlotFunction("-3,3", "-3,3", showLegend:=False)
+        '   Canvas.RefreshInterval = 20
+        Canvas.Plot = New Func(Of Double, Double, (Z#, Color As Double))(AddressOf Model).GetPlotFunction("-3,3", "-3,3", xn:=200, yn:=200, showLegend:=False)
         Canvas.Camera.ViewDistance = -6
         Canvas.Camera.angleZ = 30
         Canvas.Camera.angleX = 30
         Canvas.Camera.angleY = -30
         Canvas.AutoRotation = True
+        Canvas.Camera.offset = New Point(200, 200)
     End Sub
 
     Private Sub FormSplashScreen_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
