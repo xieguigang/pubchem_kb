@@ -1,0 +1,3 @@
+[submodule "modules/php-net"]
+	path = modules/php-net
+	url = https://github.com/biocad-cloud/php-dotnet.git
