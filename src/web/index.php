@@ -4,4 +4,7 @@ include dirname(__DIR__) . "/framework/bootstrap.php";
 
 class App {
 
+	public function phpinfo() {
+		phpinfo();		
+	}
 }
