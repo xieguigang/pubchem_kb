@@ -1,5 +1,5 @@
 RewriteEngine On
 
-#RewriteRule ^(.+)$ /index.php?app=$1
-
 RewriteRule ^assets/(.+)$ /proxy.php?app=assets&file=$1
+
+RewriteRule ^login$ /index.php?app=login
