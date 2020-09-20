@@ -12,7 +12,8 @@ declare namespace pages {
         /**
          * 商品入库
         */
-        save(): IHTMLElement;
+        save(): void;
+        private showAlert;
     }
 }
 declare namespace pages {

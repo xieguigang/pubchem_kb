@@ -59,15 +59,16 @@ var pages;
             var item_id = $ts.value("#item_id");
             var batch_id = $ts.value("#batch_id");
             if (Strings.Empty(item_id, true)) {
-                return $ts("#message").show().display("商品编号不可以为空！");
+                return this.showAlert("商品编号不可以为空！");
             }
             if (Strings.Empty(batch_id, true)) {
                 batch_id = "";
             }
             var count = $ts.value("#count");
             if (!Strings.isIntegerPattern(count)) {
-                return $ts("#message").show().display("商品件数错误，商品件数应该是一个大于零的整数！");
+                return this.showAlert("商品件数错误，商品件数应该是一个大于零的整数！");
             }
+            var vm = this;
             var note = $ts.value("#note");
             var post = {
                 item_id: item_id,
@@ -80,9 +81,13 @@ var pages;
                     location.reload();
                 }
                 else {
-                    $ts("#message").show().display(result.info);
+                    vm.showAlert(result.info);
                 }
             });
+        };
+        inventories.prototype.showAlert = function (message) {
+            $ts("#alert").show();
+            $ts("#message").show().display(message);
         };
         return inventories;
     }(Bootstrap));
