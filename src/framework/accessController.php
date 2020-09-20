@@ -10,7 +10,12 @@ class accessController extends controller {
 
         if ($this->AccessByEveryOne()) {
             return true;
-        } else if (empty($access)) {
+        } else if ($_SESSION["lockscreen"]) {
+            redirect("/lockscreen");
+            exit(0);
+        }
+        
+        if (empty($access)) {
             // 什么也没有填写的时候，默认为登录用户才可以访问
             return web::login_userId() > 0;
         } else {

@@ -15,6 +15,10 @@ class App {
 		View::Display();
 	}
 
+	public function lockscreen() {
+		View::Display();
+	}
+
 	public function phpinfo() {
 		phpinfo();		
 	}
