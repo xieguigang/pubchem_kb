@@ -11,6 +11,7 @@
     ${includes/head.html}
     ${2includes/chart.html}
     ${includes/datatable.html}
+    ${includes/components.html}
 </head>
 
 <!--TIPS-->
@@ -87,7 +88,7 @@
                                                         &nbsp; &nbsp;
                                                         <button id="addrow" data-target="#add-modal" data-toggle="modal"
                                                             class="btn btn-primary btn-lg"><i class="demo-pli-plus"></i>
-                                                            商品入库 </button>
+                                                            新增商品信息 </button>
 
                                                     </div>
 
@@ -165,13 +166,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><i
                             class="pci-cross pci-circle"></i></button>
-                    <h4 class="modal-title">商品批次入库</h4>
+                    <h4 class="modal-title">添加商品售卖信息</h4>
                 </div>
 
                 <!--Modal body-->
                 <div class="modal-body">
                     <p class="text-semibold text-main">操作说明</p>
-                    <p>请拿起您的扫码枪，扫描当前入库批次商品中的一件商品的条形码获取商品信息；完成扫码后，填写入库的商品件数点击【商品入库】按钮即可。</p>
+                    <p>请拿起您的扫码枪，扫描一件商品的条形码获取商品条形码；完成扫码后，填写所新增的商品关联信息，再点击【新增商品信息】按钮即可。</p>
                     <br>
                     <p class="text-semibold text-main">数据填写</p>
                     <p>
@@ -189,22 +190,41 @@
 
                         <!--Email Input-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="batch_id">批次号（可选）</label>
+                            <label class="col-md-3 control-label" for="batch_id">商品名称</label>
                             <div class="col-md-9">
-                                <input type="text" id="batch_id" class="form-control" placeholder="批次号">
-                                <small class="help-block">填写自定义的批次号或者由系统自动生成</small>
+                                <input type="text" id="batch_id" class="form-control" placeholder="商品名称">
+                                <small class="help-block">填写商品名称</small>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="vendor">商品供应商</label>
+
+                            <select data-placeholder="选择一个供货商" id="vendor" tabindex="2">
+                                <option value="-1">自产商品（无供应商）</option>
+                            </select>
                         </div>
 
                         <!--Password-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="count">件数</label>
+                            <label class="col-md-3 control-label" for="count">零售单价</label>
                             <div class="col-md-9">
-                                <input type="text" id="count" class="form-control" placeholder="件数">
-                                <small class="help-block">输入当前本商品的入库的件数</small>
+                                <input type="text" id="count" class="form-control" placeholder="零售单价">
+                                <small class="help-block">输入当前本商品的零售单价</small>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="count">适用性别：</label>
+
+                            <!-- Bootstrap Select : primary -->
+                            <!--===================================================-->
+                            <select class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
+                                <option>无限定</option>
+                                <option>男装</option>
+                                <option>女装</option>
+                            </select>
+                        </div>
 
                         <!--Textarea-->
                         <div class="form-group">
@@ -233,7 +253,7 @@
                 <!--Modal footer-->
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-                    <button id="save" class="btn btn-primary">商品入库</button>
+                    <button id="save" class="btn btn-primary">新增商品信息</button>
                 </div>
             </div>
         </div>
