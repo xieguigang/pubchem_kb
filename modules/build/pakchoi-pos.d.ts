@@ -9,3 +9,6 @@ declare namespace pages {
 declare namespace app {
     function start(): void;
 }
+declare namespace nifty {
+    function errorMsg(msg: string): void;
+}

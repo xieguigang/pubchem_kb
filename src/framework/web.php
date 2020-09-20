@@ -11,7 +11,7 @@ class web {
 	}
 
 	public static function login_userRole() {
-		return self::session("role", "未登录");
+		return self::session("role", "普通收银员");
 	}
 
 	public static function session($name, $default = null) {

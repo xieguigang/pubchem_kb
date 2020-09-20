@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 define("APP_SRC_ROOT", dirname(__DIR__));
 define("APP_DOC_ROOT", dirname(APP_SRC_ROOT));
 

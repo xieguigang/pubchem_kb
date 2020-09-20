@@ -1,4 +1,4 @@
-namespace pages {
+﻿namespace pages {
 
     export class login extends Bootstrap {
 
@@ -7,7 +7,12 @@ namespace pages {
         }
 
         protected init(): void {
+            let user: string = localStorage.getItem("user");
 
+            if (!Strings.Empty(user, true)) {
+                $ts.value("#user", user);
+                $input("#remember_user").checked = true;
+            }
         }
 
         public login() {
@@ -15,9 +20,20 @@ namespace pages {
             let passwd: string = md5($ts.value("#passwd"));
             let post = { user: user, passwd: passwd }
 
-            $ts.post("@login", post, function (result) {
-                console.log(result);
-            });
+            if (Strings.Empty(user, true)) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的账号不可以为空！")
+            } else if (Strings.Empty($ts.value("#passwd"))) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的密码不可以为空！")
+            } else {
+                $ts.post("@login", post, function (result) {
+                    if (result.code == 0) {
+                        localStorage.setItem("user", user);
+                        $goto("/");
+                    } else {
+                        nifty.errorMsg(<string>result.info);
+                    }
+                });
+            }
         }
     }
 }

@@ -26,14 +26,33 @@ var pages;
             configurable: true
         });
         login.prototype.init = function () {
+            var user = localStorage.getItem("user");
+            if (!Strings.Empty(user, true)) {
+                $ts.value("#user", user);
+                $input("#remember_user").checked = true;
+            }
         };
         login.prototype.login = function () {
             var user = $ts.value("#user");
             var passwd = md5($ts.value("#passwd"));
             var post = { user: user, passwd: passwd };
-            $ts.post("@login", post, function (result) {
-                console.log(result);
-            });
+            if (Strings.Empty(user, true)) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的账号不可以为空！");
+            }
+            else if (Strings.Empty($ts.value("#passwd"))) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的密码不可以为空！");
+            }
+            else {
+                $ts.post("@login", post, function (result) {
+                    if (result.code == 0) {
+                        localStorage.setItem("user", user);
+                        $goto("/");
+                    }
+                    else {
+                        nifty.errorMsg(result.info);
+                    }
+                });
+            }
         };
         return login;
     }(Bootstrap));
@@ -51,4 +70,16 @@ var app;
 })(app || (app = {}));
 $ts.mode = Modes.debug;
 $ts(app.start);
+var nifty;
+(function (nifty) {
+    function errorMsg(msg) {
+        $.niftyNoty({
+            type: 'danger',
+            message: msg,
+            container: 'floating',
+            timer: 5000
+        });
+    }
+    nifty.errorMsg = errorMsg;
+})(nifty || (nifty = {}));
 //# sourceMappingURL=pakchoi-pos.js.map

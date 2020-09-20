@@ -7,6 +7,7 @@ class App {
     /**
      * @access *
      * @uses api
+     * @method POST
     */
     public function login($user, $passwd) {
         $check = (new Table("admin"))
