@@ -17,14 +17,15 @@
 		<!-- CONTENT -->
 		<!--===================================================-->
 		<div class="cls-content">
-		    <h1 class="error-code text-info">403</h1>
-		    <p class="text-main text-semibold text-lg text-uppercase">您没有访问权限</p>
+		    <h1 class="error-code text-info">405</h1>
+		    <p class="text-main text-semibold text-lg text-uppercase">405 Method not allowed!</p>
 		    <div class="pad-btm text-muted">
-                对不起，根据您目前的身份凭证您无权限访问当前页面！更换一个具有访问权限的账号重新登录系统或许可以解决问题。
+		        {$message}
 		    </div>
 
 		    <hr class="new-section-sm bord-no">
-		    <div class="pad-top"><a class="btn-link" href="/login">登录系统</a></div>
+			<div class="pad-top"><a class="btn-link" href="javascript:void(0);" onclick="history.back(-1);">返回上一页</a>
+			</div>
 		</div>
 		
 		
