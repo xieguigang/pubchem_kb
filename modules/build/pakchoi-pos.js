@@ -307,6 +307,7 @@ var pages;
             }
         };
         vendor.prototype.change_vendorStatus = function (id, name) {
+            var post = { id: id };
             bootbox.dialog({
                 title: "更改合作状态",
                 message: "\u5C06\u8981\u66F4\u6539\u4F9B\u5E94\u5546<code>" + name + "</code>\u7684\u5408\u4F5C\u72B6\u6001",
@@ -319,7 +320,14 @@ var pages;
                         label: "确认",
                         className: "btn-primary",
                         callback: function () {
-                            console.log(name);
+                            $ts.post("@switch", post, function (result) {
+                                if (result.code == 0) {
+                                    location.reload();
+                                }
+                                else {
+                                    nifty.errorMsg(result.info);
+                                }
+                            });
                         }
                     }
                 }

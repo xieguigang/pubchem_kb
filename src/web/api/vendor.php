@@ -50,4 +50,23 @@ class App {
             controller::success($result);
         }
     }
+
+    /**
+     * @method POST
+     * @uses api
+    */
+    public function change_status($id) {
+        $vendor = (new Table("vendor"))->where(["id" => $id])->find();
+
+        if (empty($vendor) || $vendor == false) {
+            controller::error("对不起，目标供应商不存在");
+        } else {
+            $status = $vendor["status"] == 0 ? 1 : 0;
+
+            (new Table("vendor"))
+                ->where(["id" => $id])
+                ->save(["status" => $status]);
+            controller::success("1");
+        }
+    }
 }

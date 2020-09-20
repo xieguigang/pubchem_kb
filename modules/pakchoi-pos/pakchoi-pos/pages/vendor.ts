@@ -57,6 +57,8 @@ namespace pages {
         }
 
         private change_vendorStatus(id: string, name: string) {
+            let post = { id: id }
+
             bootbox.dialog({
                 title: "更改合作状态",
                 message: `将要更改供应商<code>${name}</code>的合作状态`,
@@ -69,7 +71,13 @@ namespace pages {
                         label: "确认",
                         className: "btn-primary",
                         callback: function () {
-                            console.log(name);
+                            $ts.post("@switch", post, function (result) {
+                                if (result.code == 0) {
+                                    location.reload();
+                                } else {
+                                    nifty.errorMsg(<string>result.info);
+                                }
+                            });
                         }
                     }
                 }
