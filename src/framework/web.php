@@ -14,6 +14,10 @@ class web {
 		return self::session("role", "普通收银员");
 	}
 
+	public static function login_userMail() {
+		return self::session("email", "未登录");
+	}
+
 	public static function session($name, $default = null) {
 		if (array_key_exists($name, $_SESSION)) {
 			return $_SESSION[$name];
