@@ -56,6 +56,11 @@ var pages;
          * 商品入库
         */
         inventories.prototype.save = function () {
+            var item_id = $ts.value("#item_id");
+            var batch_id = $ts.value("#batch_id");
+            if (Strings.Empty(item_id, true)) {
+                return nifty.errorMsg("对不起，商品编号不可以为空！");
+            }
         };
         return inventories;
     }(Bootstrap));

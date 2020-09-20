@@ -920,6 +920,46 @@
                     <p class="text-semibold text-main">数据填写</p>
                     <p>
 
+                    <form class="panel-body form-horizontal form-padding">
+
+                        <!--Text Input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="item_id">商品编号</label>
+                            <div class="col-md-9">
+                                <input type="text" id="item_id" class="form-control" placeholder="商品编号">
+                                <small class="help-block">使用扫码枪扫码或者在这里手动输入商品编号</small>
+                            </div>
+                        </div>
+
+                        <!--Email Input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="batch_id">批次号（可选）</label>
+                            <div class="col-md-9">
+                                <input type="text" id="batch_id" class="form-control" placeholder="批次号">
+                                <small class="help-block">填写自定义的批次号或者由系统自动生成</small>
+                            </div>
+                        </div>
+
+                        <!--Password-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="count">件数</label>
+                            <div class="col-md-9">
+                                <input type="text" id="count" class="form-control" placeholder="件数">
+                                <small class="help-block">输入当前本商品的入库的件数</small>
+                            </div>
+                        </div>
+
+
+                        <!--Textarea-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="note">描述（可选）</label>
+                            <div class="col-md-9">
+                                <textarea id="note" rows="9" class="form-control"
+                                    placeholder="输入一些简要的信息帮助后续查看"></textarea>
+                            </div>
+                        </div>
+
+                    </form>
 
                     </p>
 
