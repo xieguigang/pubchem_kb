@@ -19,6 +19,8 @@ var app;
         Router.AddAppHandler(new pages.password_reminder());
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.inventories());
+        Router.AddAppHandler(new pages.goods());
+        Router.AddAppHandler(new pages.vendor());
         Router.RunApp();
     }
     app.start = start;
@@ -36,6 +38,11 @@ var nifty;
         });
     }
     nifty.errorMsg = errorMsg;
+    function showAlert(message) {
+        $ts("#alert").show();
+        $ts("#message").show().display(message);
+    }
+    nifty.showAlert = showAlert;
 })(nifty || (nifty = {}));
 var pages;
 (function (pages) {
@@ -81,16 +88,15 @@ var pages;
             var item_id = $ts.value("#item_id");
             var batch_id = $ts.value("#batch_id");
             if (Strings.Empty(item_id, true)) {
-                return this.showAlert("商品编号不可以为空！");
+                return nifty.showAlert("商品编号不可以为空！");
             }
             if (Strings.Empty(batch_id, true)) {
                 batch_id = "";
             }
             var count = $ts.value("#count");
             if (!Strings.isIntegerPattern(count)) {
-                return this.showAlert("商品件数错误，商品件数应该是一个大于零的整数！");
+                return nifty.showAlert("商品件数错误，商品件数应该是一个大于零的整数！");
             }
-            var vm = this;
             var note = $ts.value("#note");
             var post = {
                 item_id: item_id,
@@ -103,13 +109,9 @@ var pages;
                     location.reload();
                 }
                 else {
-                    vm.showAlert(result.info);
+                    nifty.showAlert(result.info);
                 }
             });
-        };
-        inventories.prototype.showAlert = function (message) {
-            $ts("#alert").show();
-            $ts("#message").show().display(message);
         };
         return inventories;
     }(Bootstrap));
@@ -243,5 +245,46 @@ var pages;
         return password_reminder;
     }(Bootstrap));
     pages.password_reminder = password_reminder;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var vendor = /** @class */ (function (_super) {
+        __extends(vendor, _super);
+        function vendor() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(vendor.prototype, "appName", {
+            get: function () {
+                return "vendor";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        vendor.prototype.init = function () {
+        };
+        vendor.prototype.save = function () {
+            var name = $ts.value("#name");
+            if (Strings.Empty(name, true)) {
+                return nifty.showAlert("请输入供应商名称！");
+            }
+            var post = {
+                name: name,
+                tel: $ts.value("#tel"),
+                url: $ts.value("#url"),
+                address: $ts.value("#address"),
+                note: $ts.value("#note")
+            };
+            $ts.post("@save", post, function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                }
+                else {
+                    nifty.showAlert(result.info);
+                }
+            });
+        };
+        return vendor;
+    }(Bootstrap));
+    pages.vendor = vendor;
 })(pages || (pages = {}));
 //# sourceMappingURL=pakchoi-pos.js.map

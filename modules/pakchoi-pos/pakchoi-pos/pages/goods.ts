@@ -7,7 +7,7 @@ namespace pages {
         };
 
         protected init(): void {
-            
+
         }
 
 

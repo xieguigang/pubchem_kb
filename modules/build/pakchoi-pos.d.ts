@@ -2,8 +2,19 @@
 declare namespace app {
     function start(): void;
 }
+declare namespace models {
+    interface vendor {
+        id?: string;
+        name: string;
+        tel: string;
+        url: string;
+        address: string;
+        note: string;
+    }
+}
 declare namespace nifty {
     function errorMsg(msg: string): void;
+    function showAlert(message: string): void;
 }
 declare namespace pages {
     class goods extends Bootstrap {
@@ -19,7 +30,6 @@ declare namespace pages {
          * 商品入库
         */
         save(): void;
-        private showAlert;
     }
 }
 declare namespace pages {
@@ -41,5 +51,12 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         send(): void;
+    }
+}
+declare namespace pages {
+    class vendor extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        save(): void;
     }
 }

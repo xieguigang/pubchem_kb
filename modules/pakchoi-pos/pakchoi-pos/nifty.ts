@@ -8,4 +8,9 @@ namespace nifty {
             timer: 5000
         });
     }
+
+    export function showAlert(message: string) {
+        $ts("#alert").show();
+        $ts("#message").show().display(message);
+    }
 }

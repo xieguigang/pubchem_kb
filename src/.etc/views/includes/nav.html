@@ -28,16 +28,16 @@
                         </div>
                         <div id="profile-nav" class="collapse list-group bg-trans">
                             <a href="#" class="list-group-item">
-                                <i class="demo-pli-male icon-lg icon-fw"></i> View Profile
+                                <i class="demo-pli-male icon-lg icon-fw"></i> 查看操作员信息
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="demo-pli-gear icon-lg icon-fw"></i> Settings
+                                <i class="demo-pli-gear icon-lg icon-fw"></i> 系统设置
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="demo-pli-information icon-lg icon-fw"></i> Help
+                                <i class="demo-pli-information icon-lg icon-fw"></i> 帮助
                             </a>
                             <a href="#" class="list-group-item">
-                                <i class="demo-pli-unlock icon-lg icon-fw"></i> Logout
+                                <i class="demo-pli-unlock icon-lg icon-fw"></i> 退出登录
                             </a>
                         </div>
                     </div>
@@ -72,7 +72,6 @@
                     <!--================================-->
                     <!--End shortcut buttons-->
 
-
                     <ul id="mainnav-menu" class="list-group">
 
                         <!--Category name-->
@@ -94,12 +93,19 @@
                         <li class="list-header">商品管理</li>
 
                         <li>
-                            <a href="/goods">
+                            <a href="#">
                                 <i class="demo-psi-gear-2"></i>
                                 <span class="menu-title">
                                     <strong>商品信息管理</strong>
                                 </span>
+                                <i class="arrow"></i>
                             </a>
+
+                            <!--Submenu-->
+                            <ul class="collapse">
+                                <li><a href="/goods">商品信息管理</a></li>
+                                <li><a href="/vendor">上游供应商管理</a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -132,7 +138,6 @@
                         </li>
 
                     </ul>
-
 
                 </div>
             </div>

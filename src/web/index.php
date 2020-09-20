@@ -60,6 +60,15 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 供应商信息管理
+	 * 
+	 * @uses view
+	*/
+	public function vendor() {
+		View::Display();
+	}
+
 	public function phpinfo() {
 		phpinfo();		
 	}

@@ -3,10 +3,10 @@
 
 <head>
 
-    <meta name="app" content="goods" />
+    <meta name="app" content="vendor" />
 
-    <meta name="load" content="/inventories/load" />
-    <meta name="save" content="/inventories/add" />
+    <meta name="load" content="/vendor/load" />
+    <meta name="save" content="/vendor/add" />
 
     ${includes/head.html}
     ${2includes/chart.html}
@@ -55,7 +55,7 @@
 
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">商品信息表</h3>
+                                    <h3 class="panel-title">供应商信息表</h3>
                                 </div>
 
                                 <!-- Foo Table - Filtering -->
@@ -88,7 +88,7 @@
                                                         &nbsp; &nbsp;
                                                         <button id="addrow" data-target="#add-modal" data-toggle="modal"
                                                             class="btn btn-primary btn-lg"><i class="demo-pli-plus"></i>
-                                                            新增商品信息 </button>
+                                                            新增供应商信息 </button>
 
                                                     </div>
 
@@ -166,13 +166,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><i
                             class="pci-cross pci-circle"></i></button>
-                    <h4 class="modal-title">添加商品售卖信息</h4>
+                    <h4 class="modal-title">添加商品供应商信息</h4>
                 </div>
 
                 <!--Modal body-->
                 <div class="modal-body">
                     <p class="text-semibold text-main">操作说明</p>
-                    <p>请拿起您的扫码枪，扫描一件商品的条形码获取商品条形码；完成扫码后，填写所新增的商品关联信息，再点击【新增商品信息】按钮即可。</p>
+                    <p>填写供应商相关信息，再点击【新增供应商信息】按钮即可。</p>
                     <br>
                     <p class="text-semibold text-main">数据填写</p>
                     <p>
@@ -181,49 +181,37 @@
 
                         <!--Text Input-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="item_id">商品编号</label>
+                            <label class="col-md-3 control-label" for="name">供应商名称</label>
                             <div class="col-md-9">
-                                <input type="text" id="item_id" class="form-control" placeholder="商品编号">
-                                <small class="help-block">使用扫码枪扫码或者在这里手动输入商品编号</small>
+                                <input type="text" id="name" class="form-control" placeholder="供应商名称">
+                                <small class="help-block">填写商品名称</small>
                             </div>
                         </div>
 
                         <!--Email Input-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="batch_id">商品名称</label>
+                            <label class="col-md-3 control-label" for="tel">电话号码（可选）</label>
                             <div class="col-md-9">
-                                <input type="text" id="batch_id" class="form-control" placeholder="商品名称">
-                                <small class="help-block">填写商品名称</small>
+                                <input type="text" id="tel" class="form-control" placeholder="电话号码">
+                                <small class="help-block">填写供应商的联系电话</small>
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="vendor">商品供应商</label>
-                            &nbsp;&nbsp;
-                            <select class="selectpicker" data-live-search="true" data-placeholder="选择一个当前本商品的上游供应商" id="vendor">
-                                <option value="-1">自产商品（无供应商）</option>
-                            </select>                          
                         </div>
 
                         <!--Password-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="count">零售单价</label>
+                            <label class="col-md-3 control-label" for="url">网站主页（可选）</label>
                             <div class="col-md-9">
-                                <input type="text" id="count" class="form-control" placeholder="零售单价">
-                                <small class="help-block">输入当前本商品的零售单价</small>
+                                <input type="text" id="url" class="form-control" placeholder="网站主页">
+                                <small class="help-block">填写供应商的网站主页或者淘宝链接</small>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="count">适用性别：</label>
-
-                            <!-- Bootstrap Select : primary -->
-                            <!--===================================================-->
-                            <select class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
-                                <option>无限定</option>
-                                <option>男装</option>
-                                <option>女装</option>
-                            </select>
+                            <label class="col-md-3 control-label" for="url">供应商地址（可选）</label>
+                            <div class="col-md-9">
+                                <input type="text" id="url" class="form-control" placeholder="供应商地址">
+                                <small class="help-block">填写供应商的公司地址</small>
+                            </div>
                         </div>
 
                         <!--Textarea-->
@@ -253,7 +241,7 @@
                 <!--Modal footer-->
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
-                    <button id="save" class="btn btn-primary">新增商品信息</button>
+                    <button id="save" class="btn btn-primary">新增供应商信息</button>
                 </div>
             </div>
         </div>
