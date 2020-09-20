@@ -17,6 +17,7 @@ var app;
     function start() {
         Router.AddAppHandler(new pages.login());
         Router.AddAppHandler(new pages.lockscreen());
+        Router.AddAppHandler(new pages.inventories());
         Router.RunApp();
     }
     app.start = start;
@@ -35,6 +36,31 @@ var nifty;
     }
     nifty.errorMsg = errorMsg;
 })(nifty || (nifty = {}));
+var pages;
+(function (pages) {
+    var inventories = /** @class */ (function (_super) {
+        __extends(inventories, _super);
+        function inventories() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(inventories.prototype, "appName", {
+            get: function () {
+                return "inventories";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        inventories.prototype.init = function () {
+        };
+        /**
+         * 商品入库
+        */
+        inventories.prototype.addrow = function () {
+        };
+        return inventories;
+    }(Bootstrap));
+    pages.inventories = inventories;
+})(pages || (pages = {}));
 var pages;
 (function (pages) {
     var lockscreen = /** @class */ (function (_super) {

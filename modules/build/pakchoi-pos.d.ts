@@ -6,6 +6,16 @@ declare namespace nifty {
     function errorMsg(msg: string): void;
 }
 declare namespace pages {
+    class inventories extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        /**
+         * 商品入库
+        */
+        addrow(): void;
+    }
+}
+declare namespace pages {
     class lockscreen extends Bootstrap {
         readonly appName: string;
         protected init(): void;

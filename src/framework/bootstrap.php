@@ -9,5 +9,9 @@ include APP_SRC_ROOT . "/../modules/php-net/package.php";
 include APP_SRC_ROOT . "/framework/accessController.php";
 include APP_SRC_ROOT . "/framework/web.php";
 
+imports("php.export");
+
+define("YEAR", year());
+
 dotnet::AutoLoad(APP_SRC_ROOT . "/.etc/config.ini.php");
 dotnet::HandleRequest(new App(), new accessController());
