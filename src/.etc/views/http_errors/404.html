@@ -12,24 +12,18 @@
 <body>
 	<div id="container" class="cls-container">
 		
-		<!-- HEADER -->
-		<!--===================================================-->
-		<div class="cls-header">
-		    <div class="cls-brand">
-		        <a class="box-inline" href="index.html">
-		            <!-- <img alt="Nifty Admin" src="images/logo.png" class="brand-icon"> -->
-		            <span class="brand-title">Nifty<span class="text-thin">Admin</span></span>
-		        </a>
-		    </div>
-		</div>
+${header.html}
 		
 		<!-- CONTENT -->
 		<!--===================================================-->
 		<div class="cls-content">
 		    <h1 class="error-code text-info">404</h1>
-		    <p class="text-main text-semibold text-lg text-uppercase">Page Not Found!</p>
+            <p class="text-main text-semibold text-lg text-uppercase">Page Not Found!</p>
+            <blockquote>
+                <span style="color:gray;">{$url}</span>
+            </blockquote>
 		    <div class="pad-btm text-muted">
-		        Sorry, but the page you are looking for has not been found on our server.
+		        {$message}
 		    </div>
 		    <div class="row mar-ver">
 		        <form class="col-xs-12 col-sm-10 col-sm-offset-1" method="post" action="pages-search-results.html">
@@ -37,7 +31,7 @@
 		        </form>
 		    </div>
 		    <hr class="new-section-sm bord-no">
-		    <div class="pad-top"><a class="btn-link" href="index.html">Back to Homepage</a></div>
+		    <div class="pad-top"><a class="btn-link" href="/">返回首页</a></div>
 		</div>
 		
 		

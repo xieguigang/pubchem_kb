@@ -1,6 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^assets/(.+)$ /proxy.php?app=assets&file=$1
+RewriteRule ^app/(.+)$ /proxy.php?app=script&file=$1
 
 RewriteRule ^api/([a-zA-Z\_0-9]+)$ /api.php?app=$1
 
