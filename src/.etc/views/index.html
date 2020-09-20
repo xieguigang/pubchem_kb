@@ -12,7 +12,7 @@
 <body>
     <div id="container" class="effect aside-float aside-bright mainnav-lg">
 
-     ${includes/top-nav.html}
+        ${includes/top-nav.html}
 
         <div class="boxed">
 
@@ -23,7 +23,7 @@
                 <!--Page Title-->
                 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
                 <div id="page-title">
-                    <h1 class="page-header text-overflow">Dashboard</h1>
+                    <h1 class="page-header text-overflow">系统主页</h1>
 
                     <!--Searchbox-->
                     <div class="searchbox">
@@ -65,7 +65,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <h3 class="panel-title">Network</h3>
+                                    <h3 class="panel-title">销售趋势</h3>
                                 </div>
 
                                 <!--Morris line chart placeholder-->
@@ -78,7 +78,7 @@
                                             <div class="media">
                                                 <div class="media-left">
                                                     <div class="media">
-                                                        <p class="text-semibold text-main">Temperature</p>
+                                                        <p class="text-semibold text-main">最热销商品</p>
                                                         <div class="media-left pad-no">
                                                             <span class="text-2x text-semibold text-nowrap text-main">
                                                                 <i class="demo-pli-temperature"></i> 43.7
@@ -91,40 +91,11 @@
                                                 </div>
                                                 <div class="media-body pad-lft">
                                                     <div class="pad-btm">
-                                                        <p class="text-semibold text-main mar-no">Today Tips</p>
-                                                        <small>A wonderful serenity has taken possession of my entire
-                                                            soul, like these sweet mornings of spring which I enjoy with
-                                                            my whole heart.</small>
+                                                        <p class="text-semibold text-main mar-no">{$hot.name}</p>
+                                                        <small>{$hot.note}</small>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-lg-4">
-                                            <p class="text-semibold text-main">Bandwidth Usage</p>
-                                            <ul class="list-unstyled">
-                                                <li>
-                                                    <div class="media">
-                                                        <div class="media-left">
-                                                            <span class="text-2x text-semibold text-main">75.9</span>
-                                                        </div>
-                                                        <div class="media-body">
-                                                            <p class="mar-no">Mbps</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="pull-left mar-no">Outcome</p>
-                                                        <p class="pull-right mar-no">75%</p>
-                                                    </div>
-                                                    <div class="progress progress-xs">
-                                                        <div class="progress-bar progress-bar-info" style="width: 75%;">
-                                                            <span class="sr-only">75%</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -143,14 +114,14 @@
                                     <div class="panel panel-success panel-colorful">
                                         <div class="pad-all">
                                             <p class="text-lg text-semibold"><i
-                                                    class="demo-pli-data-storage icon-fw"></i> HDD Usage</p>
+                                                    class="demo-pli-data-storage icon-fw"></i> 商品库存变化</p>
                                             <p class="mar-no">
-                                                <span class="pull-right text-bold">132Gb</span>
-                                                Free Space
+                                                <span class="pull-right text-bold">132</span>
+                                                已售出
                                             </p>
                                             <p class="mar-no">
-                                                <span class="pull-right text-bold">1,45Gb</span>
-                                                Used space
+                                                <span class="pull-right text-bold">145</span>
+                                                总库存
                                             </p>
                                         </div>
                                         <div class="pad-all text-center">
@@ -165,14 +136,14 @@
                                     <div class="panel panel-info panel-colorful">
                                         <div class="pad-all">
                                             <p class="text-lg text-semibold"><i class="demo-pli-wallet-2 icon-fw"></i>
-                                                Earning</p>
+                                                销售收入趋势图</p>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold">$764</span>
-                                                Today
+                                                今日收入
                                             </p>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold">$1,332</span>
-                                                Last 7 Day
+                                                过去一周
                                             </p>
                                         </div>
                                         <div class="pad-all text-center">
@@ -191,14 +162,14 @@
                                     <div class="panel panel-purple panel-colorful">
                                         <div class="pad-all">
                                             <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i>
-                                                Sales</p>
+                                                销售数量直方图</p>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold">$764</span>
-                                                Today
+                                                今日售出
                                             </p>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold">$1,332</span>
-                                                Last 7 Day
+                                                过去一周
                                             </p>
                                         </div>
                                         <div class="pad-all text-center">
@@ -214,8 +185,7 @@
                                     <!--Sparkline pie chart -->
                                     <div class="panel panel-warning panel-colorful">
                                         <div class="pad-all">
-                                            <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> Task
-                                                Progress</p>
+                                            <p class="text-lg text-semibold"><i class="demo-pli-check icon-fw"></i> 季度销售目标</p>
                                             <p class="mar-no">
                                                 <span class="pull-right text-bold">34</span>
                                                 Completed
@@ -229,7 +199,7 @@
                                             <ul class="list-group list-unstyled">
                                                 <li class="mar-btm">
                                                     <span class="label label-warning pull-right">15%</span>
-                                                    <p>Progress</p>
+                                                    <p>季度销售目标</p>
                                                     <div class="progress progress-md">
                                                         <div style="width: 15%;"
                                                             class="progress-bar progress-bar-light">
@@ -249,7 +219,7 @@
                         <div class="col-xs-12">
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Order Status</h3>
+                                    <h3 class="panel-title">最近销售订单</h3>
                                 </div>
 
                                 <!--Data Table-->
@@ -258,8 +228,6 @@
                                     <div class="pad-btm form-inline">
                                         <div class="row">
                                             <div class="col-sm-6 table-toolbar-left">
-                                                <button class="btn btn-purple"><i
-                                                        class="demo-pli-add icon-fw"></i>Add</button>
                                                 <button class="btn btn-default"><i
                                                         class="demo-pli-printer"></i></button>
                                                 <div class="btn-group">
@@ -454,7 +422,7 @@
 
 
 
-   ${disable/includes/customization.html}
+    ${disable/includes/customization.html}
 
 
 </body>
