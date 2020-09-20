@@ -41,6 +41,14 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 商品信息管理
+	 * 
+	 * @uses view
+	*/
+	public function goods() {
+		View::Display();
+	}
 
 	public function phpinfo() {
 		phpinfo();		
