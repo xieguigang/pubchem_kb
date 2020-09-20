@@ -42,6 +42,15 @@ class App {
 	}
 
 	/**
+	 * 重置密码
+	 * 
+	 * @uses view
+	*/
+	public function password_reminder() {
+		View::Display();
+	}
+
+	/**
 	 * 商品信息管理
 	 * 
 	 * @uses view
