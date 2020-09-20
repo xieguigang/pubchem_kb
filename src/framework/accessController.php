@@ -18,7 +18,7 @@ class accessController extends controller {
 
         if ($this->AccessByEveryOne()) {
             return true;
-        } else if ($_SESSION["lockscreen"] && $_SERVER["REDIRECT_URL"] != "/lockscreen") {            
+        } else if ($_SESSION["lockscreen"] && $_SERVER["REDIRECT_URL"] != "/lockscreen" && $_SERVER["REDIRECT_URL"] != "/api/unlock") {            
             redirect("/lockscreen");
             exit(0);
         }

@@ -11,6 +11,66 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+/// <reference path="../../build/linq.d.ts" />
+var app;
+(function (app) {
+    function start() {
+        Router.AddAppHandler(new pages.login());
+        Router.AddAppHandler(new pages.lockscreen());
+        Router.RunApp();
+    }
+    app.start = start;
+})(app || (app = {}));
+$ts.mode = Modes.debug;
+$ts(app.start);
+var nifty;
+(function (nifty) {
+    function errorMsg(msg) {
+        $.niftyNoty({
+            type: 'danger',
+            message: msg,
+            container: 'floating',
+            timer: 5000
+        });
+    }
+    nifty.errorMsg = errorMsg;
+})(nifty || (nifty = {}));
+var pages;
+(function (pages) {
+    var lockscreen = /** @class */ (function (_super) {
+        __extends(lockscreen, _super);
+        function lockscreen() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(lockscreen.prototype, "appName", {
+            get: function () {
+                return "lockscreen";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        lockscreen.prototype.init = function () {
+        };
+        lockscreen.prototype.unlock = function () {
+            var passwd = $ts.value("#passwd");
+            if (Strings.Empty(passwd)) {
+                nifty.errorMsg("<strong>对不起，</strong>密码不可以为空！");
+            }
+            else {
+                $ts.post("@unlock", { passwd: md5(passwd) }, function (result) {
+                    if (result.code == 0) {
+                        $goto("/");
+                    }
+                    else {
+                        nifty.errorMsg(result.info);
+                    }
+                });
+            }
+        };
+        return lockscreen;
+    }(Bootstrap));
+    pages.lockscreen = lockscreen;
+})(pages || (pages = {}));
 var pages;
 (function (pages) {
     var login = /** @class */ (function (_super) {
@@ -58,28 +118,4 @@ var pages;
     }(Bootstrap));
     pages.login = login;
 })(pages || (pages = {}));
-/// <reference path="../../build/linq.d.ts" />
-/// <reference path="pages/login.ts" />
-var app;
-(function (app) {
-    function start() {
-        Router.AddAppHandler(new pages.login());
-        Router.RunApp();
-    }
-    app.start = start;
-})(app || (app = {}));
-$ts.mode = Modes.debug;
-$ts(app.start);
-var nifty;
-(function (nifty) {
-    function errorMsg(msg) {
-        $.niftyNoty({
-            type: 'danger',
-            message: msg,
-            container: 'floating',
-            timer: 5000
-        });
-    }
-    nifty.errorMsg = errorMsg;
-})(nifty || (nifty = {}));
 //# sourceMappingURL=pakchoi-pos.js.map

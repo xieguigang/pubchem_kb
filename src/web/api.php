@@ -37,4 +37,19 @@ class App {
         $_SESSION["lockscreen"] = true;
         redirect("/lockscreen");
     }
+
+    /**
+     * 解锁屏幕
+     * 
+     * @method POST
+     * @uses api
+    */
+    public function unlock($passwd) {
+        if (strtolower($_SESSION["password"]) != strtolower($passwd)) {
+            controller::error("对不起，请输入正确的当前用户登录密码！");
+        } else {
+            $_SESSION["lockscreen"] = false;
+            controller::success("欢迎回来！");
+        }
+    }
 }

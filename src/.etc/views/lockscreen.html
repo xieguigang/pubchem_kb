@@ -3,8 +3,10 @@
 
 <head>
 
-	${includes/head.html}
+	<meta name="app" content="lockscreen" />
+	<meta name="unlock" content="/api/unlock" />
 
+	${includes/head.html}
 
 </head>
 
@@ -32,14 +34,14 @@
 							src="/assets/img/profile-photos/1.png">
 					</div>
 					<p>请输入密码来解锁</p>
-					<form action="/">
+					<div class="form">
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="输入密码">
+							<input id="passwd" type="password" class="form-control" placeholder="输入密码" autocomplete="off">
 						</div>
 						<div class="form-group text-right">
-							<button class="btn btn-block btn-success" type="submit">解锁</button>
+							<button id="unlock" class="btn btn-block btn-success" type="submit">解锁</button>
 						</div>
-					</form>
+					</div>
 					<div class="pad-ver">
 						<a href="/login" class="btn-link mar-rgt">登录另一个账号</a>
 					</div>
