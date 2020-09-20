@@ -31,6 +31,14 @@ class App {
     }
 
     /**
+     * 
+    */
+    public function logout() {
+        unset($_SESSION["id"]);
+        redirect("/login"); 
+    }
+
+    /**
      * 锁屏
     */
     public function lockscreen() {

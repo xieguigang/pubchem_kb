@@ -1,5 +1,7 @@
 RewriteEngine On
 
+RewriteRule ^logout$ /api.php?app=logout
+
 RewriteRule ^assets/(.+)$ /proxy.php?app=assets&file=$1
 RewriteRule ^app/(.+)$ /proxy.php?app=script&file=$1
 

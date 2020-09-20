@@ -19,7 +19,7 @@ class web {
 	}
 
 	public static function session($name, $default = null) {
-		if (array_key_exists($name, $_SESSION)) {
+		if (array_key_exists($name, $_SESSION) && !empty($_SESSION[$name])) {
 			return $_SESSION[$name];
 		} else {
 			return $default;
