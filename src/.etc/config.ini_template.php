@@ -17,7 +17,7 @@ return [
     "show.stacktrace" => false,
 	"CACHE" => false,
     "APP_NAME" => "pakchoi-pos",
-    "APP_TITLE" => "pakchoi-pos",
+    "APP_TITLE" => "小白菜收银系统",
     "APP_VERSION" => "0.0.0.1-alpha",
 	"MVC_VIEW_ROOT" => [		
 		"index" => AppViews
