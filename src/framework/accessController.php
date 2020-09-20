@@ -64,4 +64,22 @@ class accessController extends controller {
             "admin" => 999
         ];
     }
+
+    /**
+     * 假若没有权限的话，会执行这个函数进行重定向
+     * 这个函数默认是返回403错误页面
+    */
+    public function Redirect($code) {
+        if ($code == 403) {
+            if (empty($_SERVER["REDIRECT_URL"])) {
+                redirect("/login");
+            } else {
+                dotnet::AccessDenied("Invalid credentials!");
+            }
+        } else if ($code == 429) {
+            dotnet::TooManyRequests("Too many request!");
+        } else {
+            dotnet::ThrowException("Unknown server error...");
+        }
+    }
 }
