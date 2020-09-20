@@ -12,7 +12,7 @@ declare namespace pages {
         /**
          * 商品入库
         */
-        addrow(): void;
+        save(): void;
     }
 }
 declare namespace pages {

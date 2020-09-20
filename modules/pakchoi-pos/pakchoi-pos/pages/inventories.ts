@@ -13,9 +13,8 @@
         /**
          * 商品入库
         */
-        public addrow() {
+        public save() {
 
         }
-
     }
 }

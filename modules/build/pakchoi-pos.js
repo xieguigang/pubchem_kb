@@ -55,7 +55,7 @@ var pages;
         /**
          * 商品入库
         */
-        inventories.prototype.addrow = function () {
+        inventories.prototype.save = function () {
         };
         return inventories;
     }(Bootstrap));
