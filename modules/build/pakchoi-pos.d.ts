@@ -6,6 +6,12 @@ declare namespace nifty {
     function errorMsg(msg: string): void;
 }
 declare namespace pages {
+    class goods extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}
+declare namespace pages {
     class inventories extends Bootstrap {
         readonly appName: string;
         protected init(): void;
@@ -28,5 +34,12 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         login(): void;
+    }
+}
+declare namespace pages {
+    class password_reminder extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        send(): void;
     }
 }

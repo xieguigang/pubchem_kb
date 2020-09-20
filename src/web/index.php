@@ -45,6 +45,7 @@ class App {
 	 * 重置密码
 	 * 
 	 * @uses view
+	 * @access *
 	*/
 	public function password_reminder() {
 		View::Display();

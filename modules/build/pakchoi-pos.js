@@ -16,6 +16,7 @@ var app;
 (function (app) {
     function start() {
         Router.AddAppHandler(new pages.login());
+        Router.AddAppHandler(new pages.password_reminder());
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.inventories());
         Router.RunApp();
@@ -36,6 +37,27 @@ var nifty;
     }
     nifty.errorMsg = errorMsg;
 })(nifty || (nifty = {}));
+var pages;
+(function (pages) {
+    var goods = /** @class */ (function (_super) {
+        __extends(goods, _super);
+        function goods() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(goods.prototype, "appName", {
+            get: function () {
+                return "goods";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        goods.prototype.init = function () {
+        };
+        return goods;
+    }(Bootstrap));
+    pages.goods = goods;
+})(pages || (pages = {}));
 var pages;
 (function (pages) {
     var inventories = /** @class */ (function (_super) {
@@ -175,5 +197,51 @@ var pages;
         return login;
     }(Bootstrap));
     pages.login = login;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var password_reminder = /** @class */ (function (_super) {
+        __extends(password_reminder, _super);
+        function password_reminder() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(password_reminder.prototype, "appName", {
+            get: function () {
+                return "password_reminder";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        password_reminder.prototype.init = function () {
+        };
+        password_reminder.prototype.send = function () {
+            var email = Strings.Trim($ts.value("#email"));
+            var tokens = email.split("@");
+            if (tokens.length == 0) {
+                return nifty.errorMsg("电子邮件地址不可以为空！");
+            }
+            else if (tokens.length == 1) {
+                return nifty.errorMsg("您所输入的电子邮件地址格式不正确！");
+            }
+            else {
+                // BOOTBOX - CUSTOM HTML CONTENTS
+                // =================================================================
+                // Require Bootbox
+                // http://bootboxjs.com/
+                // =================================================================
+                bootbox.dialog({
+                    title: "密码重置",
+                    message: "\n<div class=\"media\">\n    <div class=\"media-left\">\n        <img class=\"media-object img-lg img-circle\" src=\"/assets/img/email-marketing-subject-line-icons.jpg\" alt=\"Profile picture\">\n    </div>\n    <div class=\"media-body\">\n        <p class=\"text-semibold text-main\">\n            \u6211\u4EEC\u5DF2\u7ECF\u5411" + email + "\u53D1\u9001\u4E86\u4E00\u5C01\u5BC6\u7801\u91CD\u7F6E\u6240\u9700\u8981\u7684\u7535\u5B50\u90AE\u4EF6\uFF0C\u60A8\u9700\u8981\u767B\u5F55\u8BE5\u7535\u5B50\u90AE\u7BB1\uFF0C\u6309\u7167\u90AE\u4EF6\u4E2D\u7684\u63D0\u793A\u5B8C\u6210\u5BC6\u7801\u91CD\u7F6E\u64CD\u4F5C\u3002\n        </p>\n    </div>\n</div>",
+                    buttons: {
+                        confirm: {
+                            label: "确定"
+                        }
+                    }
+                });
+            }
+        };
+        return password_reminder;
+    }(Bootstrap));
+    pages.password_reminder = password_reminder;
 })(pages || (pages = {}));
 //# sourceMappingURL=pakchoi-pos.js.map

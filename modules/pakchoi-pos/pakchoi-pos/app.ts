@@ -4,6 +4,7 @@ namespace app {
 
     export function start() {
         Router.AddAppHandler(new pages.login());
+        Router.AddAppHandler(new pages.password_reminder());
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.inventories());
 
