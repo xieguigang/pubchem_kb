@@ -32,6 +32,16 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 管理商品库存
+	 * 
+	 * @uses view
+	*/
+	public function inventories() {
+		View::Display();
+	}
+
+
 	public function phpinfo() {
 		phpinfo();		
 	}
