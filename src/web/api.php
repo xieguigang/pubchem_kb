@@ -9,6 +9,6 @@ class App {
     */
     public function lockscreen() {
         $_SESSION["lockscreen"] = true;
-        controller::success("/lockscreen");
+        redirect("/lockscreen");
     }
 }

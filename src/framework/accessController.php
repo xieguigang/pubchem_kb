@@ -4,7 +4,15 @@ imports("MVC.controller");
 imports("MVC.restrictions");
 
 class accessController extends controller {
-	
+    
+    public function __construct() {
+        # 将用户名显示在导航栏的右上角
+        View::Push("user.name", web::login_userName());
+        View::Push("user.role", web::login_userRole());
+        //View::Push("user.islogin", BioDeep::IsUserLogin());
+        View::Push("appTitle", DotNetRegistry::Read("APP_TITLE", null));
+    }
+
     public function accessControl() {
         $access = $this->getAccessLevel();        
 
