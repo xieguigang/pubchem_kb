@@ -3,7 +3,7 @@
 class web {
 	
 	public static function login_userId() {
-		return self::session("id", 9999);
+		return self::session("id", -1);
 	}
 
 	public static function login_userName() {
