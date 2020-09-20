@@ -10,5 +10,14 @@ namespace pages {
 
         }
 
+        public login() {
+            let user: string = $ts.value("#user");
+            let passwd: string = md5($ts.value("#passwd"));
+            let post = { user: user, passwd: passwd }
+
+            $ts.post("@login", post, function (result) {
+                console.log(result);
+            });
+        }
     }
 }

@@ -3,6 +3,7 @@ declare namespace pages {
     class login extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        login(): void;
     }
 }
 declare namespace app {

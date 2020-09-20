@@ -27,6 +27,14 @@ var pages;
         });
         login.prototype.init = function () {
         };
+        login.prototype.login = function () {
+            var user = $ts.value("#user");
+            var passwd = md5($ts.value("#passwd"));
+            var post = { user: user, passwd: passwd };
+            $ts.post("@login", post, function (result) {
+                console.log(result);
+            });
+        };
         return login;
     }(Bootstrap));
     pages.login = login;

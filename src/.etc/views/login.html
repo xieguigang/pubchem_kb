@@ -2,6 +2,11 @@
 <html lang="en">
 
 <head>
+
+    <meta name="app" content="login" />
+
+    <meta name="login" content="/api/login" />
+
     ${includes/head.html}
 
 
@@ -27,18 +32,18 @@
                         <h3 class="h4 mar-no">登录</h3>
                         <p class="text-muted">登录您的后台账号</p>
                     </div>
-                    <form action="index.html">
+                    <form action="/">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="用户名" autofocus>
+                            <input type="text" id="user" class="form-control" placeholder="用户名" autofocus>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="密码">
+                            <input type="password" id="passwd" class="form-control" placeholder="密码">
                         </div>
                         <div class="checkbox pad-btm text-left">
-                            <input id="demo-form-checkbox" class="magic-checkbox" type="checkbox">
+                            <input id="remember_user" class="magic-checkbox" type="checkbox">
                             <label for="demo-form-checkbox">记住我的账号</label>
                         </div>
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
+                        <button class="btn btn-primary btn-lg btn-block" id="login" type="submit">登录</button>
                     </form>
                 </div>
 
