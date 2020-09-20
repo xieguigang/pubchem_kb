@@ -288,7 +288,7 @@ var pages;
                 status_1 = $ts("<a>", {
                     href: executeJavaScript,
                     onclick: function () {
-                        vm.change_vendorStatus(vendor_1.id);
+                        vm.change_vendorStatus(vendor_1.id, vendor_1.name);
                     }
                 }).display(status_1);
                 list.appendElement($ts("<tr>")
@@ -306,7 +306,24 @@ var pages;
                 _loop_1(vendor_1);
             }
         };
-        vendor.prototype.change_vendorStatus = function (id) {
+        vendor.prototype.change_vendorStatus = function (id, name) {
+            bootbox.dialog({
+                title: "更改合作状态",
+                message: "\u5C06\u8981\u66F4\u6539\u4F9B\u5E94\u5546<code>" + name + "</code>\u7684\u5408\u4F5C\u72B6\u6001",
+                buttons: {
+                    cancel: {
+                        label: "取消",
+                        className: "btn-default",
+                    },
+                    confirm: {
+                        label: "确认",
+                        className: "btn-primary",
+                        callback: function () {
+                            console.log(name);
+                        }
+                    }
+                }
+            });
         };
         vendor.prototype.save = function () {
             var name = $ts.value("#name");

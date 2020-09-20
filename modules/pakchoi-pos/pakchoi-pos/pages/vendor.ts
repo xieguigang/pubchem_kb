@@ -38,7 +38,7 @@ namespace pages {
                 status = $ts("<a>", {
                     href: executeJavaScript,
                     onclick: function () {
-                        vm.change_vendorStatus(vendor.id);
+                        vm.change_vendorStatus(vendor.id, vendor.name);
                     }
                 }).display(status);
 
@@ -56,8 +56,24 @@ namespace pages {
             }
         }
 
-        private change_vendorStatus(id: string) {
-
+        private change_vendorStatus(id: string, name: string) {
+            bootbox.dialog({
+                title: "更改合作状态",
+                message: `将要更改供应商<code>${name}</code>的合作状态`,
+                buttons: {
+                    cancel: {
+                        label: "取消",
+                        className: "btn-default",
+                    },
+                    confirm: {
+                        label: "确认",
+                        className: "btn-primary",
+                        callback: function () {
+                            console.log(name);
+                        }
+                    }
+                }
+            });
         }
 
         public save() {
