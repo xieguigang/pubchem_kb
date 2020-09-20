@@ -61,6 +61,8 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private load;
+        private show_vendorList;
+        private change_vendorStatus;
         save(): void;
     }
 }
