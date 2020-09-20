@@ -7,5 +7,8 @@ namespace models {
         url: string;
         address: string;
         note: string;
+        operator: string;
+        status: string;
+        add_time: string;
     }
 }

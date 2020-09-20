@@ -10,6 +10,9 @@ declare namespace models {
         url: string;
         address: string;
         note: string;
+        operator: string;
+        status: string;
+        add_time: string;
     }
 }
 declare namespace nifty {
@@ -57,6 +60,7 @@ declare namespace pages {
     class vendor extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private load;
         save(): void;
     }
 }

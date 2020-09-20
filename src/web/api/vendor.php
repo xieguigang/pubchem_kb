@@ -4,6 +4,22 @@ include dirname(__DIR__) . "/../framework/bootstrap.php";
 
 class App {
 
+    public function load($page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $list  = (new Table("vendor"))
+            ->left_join("admin")
+            ->on(["vendor" => "operator", "admin" => "id"])
+            ->limit($start, $page_size)
+            ->order_by("id desc")
+            ->select(["vendor.*", "admin.realname"]); 
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据");
+        } else {
+            controller::success($list);
+        }
+    }
+
     /**
      * @uses api
      * @method POST
@@ -22,7 +38,10 @@ class App {
             "tel" => $tel,
             "url" => $url,
             "address" => $address,
-            "note" => $note
+            "note" => $note,
+            "add_time" => Utils::Now(),
+            "operator" => web::login_userId(),
+            "status" => 0
         ]);
 
         if ($result == false) {

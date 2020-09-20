@@ -7,7 +7,39 @@ namespace pages {
         }
 
         protected init(): void {
+            this.load();
+        }
 
+        private load() {
+            $ts.get("@load?page=1", function (result: IMsg<models.vendor[]>) {
+                if (result.code == 0) {
+                    let list = $ts("#content-list").clear();
+
+                    for (let vendor of <models.vendor[]>result.info) {
+                        let status: HTMLElement;
+
+                        if (vendor.status == "0") {
+                            status = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
+                        } else {
+                            status = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止");
+                        }
+
+                        list.appendElement(
+                            $ts("<tr>")
+                                .appendElement($ts("<td>").display(vendor.name))
+                                .appendElement($ts("<td>").display(vendor.tel))
+                                .appendElement($ts("<td>").display(vendor.url))
+                                .appendElement($ts("<td>").display(vendor.address))
+                                .appendElement($ts("<td>").display(vendor.add_time))
+                                .appendElement($ts("<td>").display((<any>vendor).realname))
+                                .appendElement($ts("<td>").display(status))
+                                .appendElement($ts("<td>").display(vendor.note))
+                        );
+                    }
+                } else {
+                    nifty.errorMsg(<string>result.info);
+                }
+            });
         }
 
         public save() {

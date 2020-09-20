@@ -65,11 +65,14 @@
                                         class="table table-bordered table-hover toggle-circle" data-page-size="7">
                                         <thead>
                                             <tr>
-                                                <th data-toggle="true">商品名称</th>
-                                                <th>入库批次号</th>
-                                                <th data-hide="phone, tablet">入库时间</th>
-                                                <th data-hide="phone, tablet">现有库存(入库数量)</th>
+                                                <th data-toggle="true">上游供应商</th>
+                                                <th>联系电话</th>
+                                                <th data-hide="phone, tablet">主页网址</th>
+                                                <th data-hide="phone, tablet">联系地址</th>
+                                                <th data-hide="phone, tablet">添加事件</th>
                                                 <th data-hide="phone, tablet">操作员</th>
+                                                <th data-hide="phone, tablet">状态</th>
+                                                <th data-hide="phone, tablet">注释信息</th>
                                             </tr>
                                         </thead>
                                         <div class="pad-btm form-inline">
@@ -78,12 +81,11 @@
                                                     <div class="form-group">
 
 
-                                                        <label class="control-label">Status</label>
-                                                        <select id="demo-foo-filter-status" class="form-control">
-                                                            <option value="">Show all</option>
-                                                            <option value="active">Active</option>
-                                                            <option value="disabled">Disabled</option>
-                                                            <option value="suspended">Suspended</option>
+                                                        <label class="control-label">供应商合作状态</label>
+                                                        <select id="demo-foo-filter-status" class="form-control" data-style="btn-primary"">
+                                                            <option value="">显示全部</option>
+                                                            <option value="合作中">合作中</option>
+                                                            <option value="已终止">已终止</option>                                               
                                                         </select>
                                                         &nbsp; &nbsp;
                                                         <button id="addrow" data-target="#add-modal" data-toggle="modal"
@@ -103,18 +105,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <tbody>
-                                            <tr>
-                                                <td>Isidra</td>
-                                                <td>Boudreaux</td>
-                                                <td>Traffic Court Referee</td>
-                                                <td>22 Jun 1972</td>
-                                                <td><span class="label label-table label-success">Active</span></td>
-                                            </tr>
+                                        <tbody id="content-list">
+                                            
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="5">
+                                                <td colspan="8">
                                                     <div class="text-right">
                                                         <ul class="pagination"></ul>
                                                     </div>
@@ -207,9 +203,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="url">供应商地址（可选）</label>
+                            <label class="col-md-3 control-label" for="address">供应商地址（可选）</label>
                             <div class="col-md-9">
-                                <input type="text" id="url" class="form-control" placeholder="供应商地址">
+                                <input type="text" id="address" class="form-control" placeholder="供应商地址">
                                 <small class="help-block">填写供应商的公司地址</small>
                             </div>
                         </div>

@@ -261,6 +261,36 @@ var pages;
             configurable: true
         });
         vendor.prototype.init = function () {
+            this.load();
+        };
+        vendor.prototype.load = function () {
+            $ts.get("@load?page=1", function (result) {
+                if (result.code == 0) {
+                    var list = $ts("#content-list").clear();
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var vendor_1 = _a[_i];
+                        var status_1 = void 0;
+                        if (vendor_1.status == "0") {
+                            status_1 = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
+                        }
+                        else {
+                            status_1 = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止");
+                        }
+                        list.appendElement($ts("<tr>")
+                            .appendElement($ts("<td>").display(vendor_1.name))
+                            .appendElement($ts("<td>").display(vendor_1.tel))
+                            .appendElement($ts("<td>").display(vendor_1.url))
+                            .appendElement($ts("<td>").display(vendor_1.address))
+                            .appendElement($ts("<td>").display(vendor_1.add_time))
+                            .appendElement($ts("<td>").display(vendor_1.realname))
+                            .appendElement($ts("<td>").display(status_1))
+                            .appendElement($ts("<td>").display(vendor_1.note)));
+                    }
+                }
+                else {
+                    nifty.errorMsg(result.info);
+                }
+            });
         };
         vendor.prototype.save = function () {
             var name = $ts.value("#name");
