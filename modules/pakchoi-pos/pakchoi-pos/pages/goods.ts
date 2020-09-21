@@ -51,7 +51,7 @@
                         tr.appendElement($ts("<td>").display("0"));
                         tr.appendElement($ts("<td>").display(<any>goods.price));
                         tr.appendElement($ts("<td>").display(goods.note));
-                        tr.appendElement($ts("<td>").display(goods.operator));
+                        tr.appendElement($ts("<td>").display((<any>goods).realname));
 
                         list.appendElement(tr);
                     }

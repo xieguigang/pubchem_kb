@@ -32,7 +32,7 @@ namespace pages {
                 if (vendor.status == "0") {
                     status = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
                 } else {
-                    status = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止");
+                    status = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止合作");
                 }
 
                 status = $ts("<a>", {

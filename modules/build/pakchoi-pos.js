@@ -102,7 +102,7 @@ var pages;
                         tr.appendElement($ts("<td>").display("0"));
                         tr.appendElement($ts("<td>").display(goods_1.price));
                         tr.appendElement($ts("<td>").display(goods_1.note));
-                        tr.appendElement($ts("<td>").display(goods_1.operator));
+                        tr.appendElement($ts("<td>").display(goods_1.realname));
                         list.appendElement(tr);
                     }
                 }
@@ -363,7 +363,7 @@ var pages;
                     status_1 = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
                 }
                 else {
-                    status_1 = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止");
+                    status_1 = $ts("<span>", { class: ["label", "label-table", "label-warning"] }).display("已终止合作");
                 }
                 status_1 = $ts("<a>", {
                     href: executeJavaScript,
