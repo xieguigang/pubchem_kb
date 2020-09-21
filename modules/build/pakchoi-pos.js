@@ -60,6 +60,18 @@ var pages;
         });
         ;
         goods.prototype.init = function () {
+            $ts.get("@vendors", function (result) {
+                if (result.code == 0) {
+                    nifty.errorMsg("对不起，加载供应商信息失败，请刷新页面重试。。。");
+                }
+                else {
+                    var selects = $ts("#vendor");
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var vendor_1 = _a[_i];
+                        selects.appendElement($ts("<option>", { value: vendor_1.id }).display(vendor_1.name));
+                    }
+                }
+            });
         };
         return goods;
     }(Bootstrap));
@@ -277,9 +289,9 @@ var pages;
         vendor.prototype.show_vendorList = function (vendors) {
             var list = $ts("#content-list").clear();
             var vm = this;
-            var _loop_1 = function (vendor_1) {
+            var _loop_1 = function (vendor_2) {
                 var status_1 = void 0;
-                if (vendor_1.status == "0") {
+                if (vendor_2.status == "0") {
                     status_1 = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
                 }
                 else {
@@ -288,22 +300,22 @@ var pages;
                 status_1 = $ts("<a>", {
                     href: executeJavaScript,
                     onclick: function () {
-                        vm.change_vendorStatus(vendor_1.id, vendor_1.name);
+                        vm.change_vendorStatus(vendor_2.id, vendor_2.name);
                     }
                 }).display(status_1);
                 list.appendElement($ts("<tr>")
-                    .appendElement($ts("<td>").display(vendor_1.name))
-                    .appendElement($ts("<td>").display(vendor_1.tel))
-                    .appendElement($ts("<td>").display(vendor_1.url))
-                    .appendElement($ts("<td>").display(vendor_1.address))
-                    .appendElement($ts("<td>").display(vendor_1.add_time))
-                    .appendElement($ts("<td>").display(vendor_1.realname))
+                    .appendElement($ts("<td>").display(vendor_2.name))
+                    .appendElement($ts("<td>").display(vendor_2.tel))
+                    .appendElement($ts("<td>").display(vendor_2.url))
+                    .appendElement($ts("<td>").display(vendor_2.address))
+                    .appendElement($ts("<td>").display(vendor_2.add_time))
+                    .appendElement($ts("<td>").display(vendor_2.realname))
                     .appendElement($ts("<td>").display(status_1))
-                    .appendElement($ts("<td>").display(vendor_1.note)));
+                    .appendElement($ts("<td>").display(vendor_2.note)));
             };
             for (var _i = 0, vendors_1 = vendors; _i < vendors_1.length; _i++) {
-                var vendor_1 = vendors_1[_i];
-                _loop_1(vendor_1);
+                var vendor_2 = vendors_1[_i];
+                _loop_1(vendor_2);
             }
         };
         vendor.prototype.change_vendorStatus = function (id, name) {
