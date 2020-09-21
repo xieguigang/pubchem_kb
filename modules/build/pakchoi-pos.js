@@ -61,7 +61,7 @@ var pages;
         ;
         goods.prototype.init = function () {
             $ts.get("@vendors", function (result) {
-                if (result.code == 0) {
+                if (result.code != 0) {
                     nifty.errorMsg("对不起，加载供应商信息失败，请刷新页面重试。。。");
                 }
                 else {

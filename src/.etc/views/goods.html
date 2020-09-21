@@ -7,7 +7,7 @@
 
     <meta name="load" content="/inventories/load" />
     <meta name="save" content="/inventories/add" />
-    <meta name="vendors" content="/vendor/load" />
+    <meta name="vendors" content="/vendor/load?entry=true" />
 
     ${includes/head.html}
     ${2includes/chart.html}
@@ -191,9 +191,9 @@
 
                         <!--Email Input-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="batch_id">商品名称</label>
+                            <label class="col-md-3 control-label" for="name">商品名称</label>
                             <div class="col-md-9">
-                                <input type="text" id="batch_id" class="form-control" placeholder="商品名称">
+                                <input type="text" id="name" class="form-control" placeholder="商品名称">
                                 <small class="help-block">填写商品名称</small>
                             </div>
                         </div>
@@ -208,19 +208,19 @@
 
                         <!--Password-->
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="count">零售单价</label>
+                            <label class="col-md-3 control-label" for="price">零售单价</label>
                             <div class="col-md-9">
-                                <input type="text" id="count" class="form-control" placeholder="零售单价">
+                                <input type="text" id="price" class="form-control" placeholder="零售单价">
                                 <small class="help-block">输入当前本商品的零售单价</small>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 control-label" for="count">适用性别：</label>
+                            <label class="col-md-3 control-label" for="gender">适用性别：</label>
 
                             <!-- Bootstrap Select : primary -->
                             <!--===================================================-->
-                            <select class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
+                            <select id="gender" class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
                                 <option>无限定</option>
                                 <option>男装</option>
                                 <option>女装</option>
