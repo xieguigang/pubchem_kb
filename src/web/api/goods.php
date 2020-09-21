@@ -38,17 +38,18 @@ class App {
 
     public static function load($page = 1, $page_size = 100) {
         $start = ($page - 1) * $page_size;
-        $list  = (new Table("goods"))
+        $goods = new Table("goods");
+        $list  = $goods
             ->left_join("admin")
             ->on(["goods" => "operator", "admin" => "id"])
             ->left_join("vendor")
             ->on(["goods" => "vendor_id", "vendor" => "id"])
             ->limit($start, $page_size)
             ->order_by("id desc")
-            ->select(["goods.*", "admin.realname", "vendor as vendor.name"]);         
+            ->select(["goods.*", "admin.realname", "`vendor`.`name` as vendor"]);         
 
         if (empty($list) || $list == false || count($list) == 0) {
-            controller::error("对不起，无查询结果数据");
+            controller::error("对不起，无查询结果数据", 1, $goods->getLastMySql());
         } else {
             controller::success($list);
         }

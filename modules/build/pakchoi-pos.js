@@ -92,8 +92,12 @@ var pages;
                         else {
                             str = goods_1.name;
                         }
-                        tr.appendElement($ts("<td>").display(goods_1.name));
-                        tr.appendElement($ts("<td>").display(goods_1.vendor));
+                        tr.appendElement($ts("<td>").display(str));
+                        str = goods_1.vendor;
+                        if (Strings.Empty(str, true)) {
+                            str = "自产商品（无供货商）";
+                        }
+                        tr.appendElement($ts("<td>").display(str));
                         tr.appendElement($ts("<td>").display(goods_1.add_time));
                         tr.appendElement($ts("<td>").display("0"));
                         tr.appendElement($ts("<td>").display(goods_1.price));

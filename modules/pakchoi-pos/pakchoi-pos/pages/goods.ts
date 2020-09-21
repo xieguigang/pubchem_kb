@@ -28,7 +28,7 @@
                     let str: string;
 
                     for (let goods of <models.goods[]>result.info) {
-                        tr = $ts("<tr>")
+                        tr = $ts("<tr>");
 
                         if (goods.gender == 0) {
                             str = `${goods.name}（女装）`;
@@ -38,8 +38,15 @@
                             str = goods.name;
                         }
 
-                        tr.appendElement($ts("<td>").display(goods.name));
-                        tr.appendElement($ts("<td>").display((<any>goods).vendor));
+                        tr.appendElement($ts("<td>").display(str));
+
+                        str = (<any>goods).vendor;
+
+                        if (Strings.Empty(str, true)) {
+                            str = "自产商品（无供货商）";
+                        }
+
+                        tr.appendElement($ts("<td>").display(str));
                         tr.appendElement($ts("<td>").display(goods.add_time));
                         tr.appendElement($ts("<td>").display("0"));
                         tr.appendElement($ts("<td>").display(<any>goods.price));
