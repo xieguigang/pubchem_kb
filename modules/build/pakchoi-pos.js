@@ -46,6 +46,135 @@ var nifty;
 })(nifty || (nifty = {}));
 var pages;
 (function (pages) {
+    var lockscreen = /** @class */ (function (_super) {
+        __extends(lockscreen, _super);
+        function lockscreen() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(lockscreen.prototype, "appName", {
+            get: function () {
+                return "lockscreen";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        lockscreen.prototype.init = function () {
+        };
+        lockscreen.prototype.unlock = function () {
+            var passwd = $ts.value("#passwd");
+            if (Strings.Empty(passwd)) {
+                nifty.errorMsg("<strong>对不起，</strong>密码不可以为空！");
+            }
+            else {
+                $ts.post("@unlock", { passwd: md5(passwd) }, function (result) {
+                    if (result.code == 0) {
+                        $goto("/");
+                    }
+                    else {
+                        nifty.errorMsg(result.info);
+                    }
+                });
+            }
+        };
+        return lockscreen;
+    }(Bootstrap));
+    pages.lockscreen = lockscreen;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var login = /** @class */ (function (_super) {
+        __extends(login, _super);
+        function login() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(login.prototype, "appName", {
+            get: function () {
+                return "login";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        login.prototype.init = function () {
+            var user = localStorage.getItem("user");
+            if (!Strings.Empty(user, true)) {
+                $ts.value("#user", user);
+                $input("#remember_user").checked = true;
+            }
+        };
+        login.prototype.login = function () {
+            var user = $ts.value("#user");
+            var passwd = md5($ts.value("#passwd"));
+            var post = { user: user, passwd: passwd };
+            if (Strings.Empty(user, true)) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的账号不可以为空！");
+            }
+            else if (Strings.Empty($ts.value("#passwd"))) {
+                nifty.errorMsg("<strong>对不起，</strong>输入的密码不可以为空！");
+            }
+            else {
+                $ts.post("@login", post, function (result) {
+                    if (result.code == 0) {
+                        localStorage.setItem("user", user);
+                        $goto("/");
+                    }
+                    else {
+                        nifty.errorMsg(result.info);
+                    }
+                });
+            }
+        };
+        return login;
+    }(Bootstrap));
+    pages.login = login;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var password_reminder = /** @class */ (function (_super) {
+        __extends(password_reminder, _super);
+        function password_reminder() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(password_reminder.prototype, "appName", {
+            get: function () {
+                return "password_reminder";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        password_reminder.prototype.init = function () {
+        };
+        password_reminder.prototype.send = function () {
+            var email = Strings.Trim($ts.value("#email"));
+            var tokens = email.split("@");
+            if (tokens.length == 0) {
+                return nifty.errorMsg("电子邮件地址不可以为空！");
+            }
+            else if (tokens.length == 1) {
+                return nifty.errorMsg("您所输入的电子邮件地址格式不正确！");
+            }
+            else {
+                // BOOTBOX - CUSTOM HTML CONTENTS
+                // =================================================================
+                // Require Bootbox
+                // http://bootboxjs.com/
+                // =================================================================
+                bootbox.dialog({
+                    title: "密码重置",
+                    message: "\n<div class=\"media\">\n    <div class=\"media-left\">\n        <img class=\"media-object img-lg img-circle\" src=\"/assets/img/email-marketing-subject-line-icons.jpg\" alt=\"Profile picture\">\n    </div>\n    <div class=\"media-body\">\n        <p class=\"text-semibold text-main\">\n            \u6211\u4EEC\u5DF2\u7ECF\u5411" + email + "\u53D1\u9001\u4E86\u4E00\u5C01\u5BC6\u7801\u91CD\u7F6E\u6240\u9700\u8981\u7684\u7535\u5B50\u90AE\u4EF6\uFF0C\u60A8\u9700\u8981\u767B\u5F55\u8BE5\u7535\u5B50\u90AE\u7BB1\uFF0C\u6309\u7167\u90AE\u4EF6\u4E2D\u7684\u63D0\u793A\u5B8C\u6210\u5BC6\u7801\u91CD\u7F6E\u64CD\u4F5C\u3002\n        </p>\n    </div>\n</div>",
+                    buttons: {
+                        confirm: {
+                            label: "确定"
+                        }
+                    }
+                });
+            }
+        };
+        return password_reminder;
+    }(Bootstrap));
+    pages.password_reminder = password_reminder;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
     var goods = /** @class */ (function (_super) {
         __extends(goods, _super);
         function goods() {
@@ -196,135 +325,6 @@ var pages;
         return inventories;
     }(Bootstrap));
     pages.inventories = inventories;
-})(pages || (pages = {}));
-var pages;
-(function (pages) {
-    var lockscreen = /** @class */ (function (_super) {
-        __extends(lockscreen, _super);
-        function lockscreen() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        Object.defineProperty(lockscreen.prototype, "appName", {
-            get: function () {
-                return "lockscreen";
-            },
-            enumerable: true,
-            configurable: true
-        });
-        lockscreen.prototype.init = function () {
-        };
-        lockscreen.prototype.unlock = function () {
-            var passwd = $ts.value("#passwd");
-            if (Strings.Empty(passwd)) {
-                nifty.errorMsg("<strong>对不起，</strong>密码不可以为空！");
-            }
-            else {
-                $ts.post("@unlock", { passwd: md5(passwd) }, function (result) {
-                    if (result.code == 0) {
-                        $goto("/");
-                    }
-                    else {
-                        nifty.errorMsg(result.info);
-                    }
-                });
-            }
-        };
-        return lockscreen;
-    }(Bootstrap));
-    pages.lockscreen = lockscreen;
-})(pages || (pages = {}));
-var pages;
-(function (pages) {
-    var login = /** @class */ (function (_super) {
-        __extends(login, _super);
-        function login() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        Object.defineProperty(login.prototype, "appName", {
-            get: function () {
-                return "login";
-            },
-            enumerable: true,
-            configurable: true
-        });
-        login.prototype.init = function () {
-            var user = localStorage.getItem("user");
-            if (!Strings.Empty(user, true)) {
-                $ts.value("#user", user);
-                $input("#remember_user").checked = true;
-            }
-        };
-        login.prototype.login = function () {
-            var user = $ts.value("#user");
-            var passwd = md5($ts.value("#passwd"));
-            var post = { user: user, passwd: passwd };
-            if (Strings.Empty(user, true)) {
-                nifty.errorMsg("<strong>对不起，</strong>输入的账号不可以为空！");
-            }
-            else if (Strings.Empty($ts.value("#passwd"))) {
-                nifty.errorMsg("<strong>对不起，</strong>输入的密码不可以为空！");
-            }
-            else {
-                $ts.post("@login", post, function (result) {
-                    if (result.code == 0) {
-                        localStorage.setItem("user", user);
-                        $goto("/");
-                    }
-                    else {
-                        nifty.errorMsg(result.info);
-                    }
-                });
-            }
-        };
-        return login;
-    }(Bootstrap));
-    pages.login = login;
-})(pages || (pages = {}));
-var pages;
-(function (pages) {
-    var password_reminder = /** @class */ (function (_super) {
-        __extends(password_reminder, _super);
-        function password_reminder() {
-            return _super !== null && _super.apply(this, arguments) || this;
-        }
-        Object.defineProperty(password_reminder.prototype, "appName", {
-            get: function () {
-                return "password_reminder";
-            },
-            enumerable: true,
-            configurable: true
-        });
-        password_reminder.prototype.init = function () {
-        };
-        password_reminder.prototype.send = function () {
-            var email = Strings.Trim($ts.value("#email"));
-            var tokens = email.split("@");
-            if (tokens.length == 0) {
-                return nifty.errorMsg("电子邮件地址不可以为空！");
-            }
-            else if (tokens.length == 1) {
-                return nifty.errorMsg("您所输入的电子邮件地址格式不正确！");
-            }
-            else {
-                // BOOTBOX - CUSTOM HTML CONTENTS
-                // =================================================================
-                // Require Bootbox
-                // http://bootboxjs.com/
-                // =================================================================
-                bootbox.dialog({
-                    title: "密码重置",
-                    message: "\n<div class=\"media\">\n    <div class=\"media-left\">\n        <img class=\"media-object img-lg img-circle\" src=\"/assets/img/email-marketing-subject-line-icons.jpg\" alt=\"Profile picture\">\n    </div>\n    <div class=\"media-body\">\n        <p class=\"text-semibold text-main\">\n            \u6211\u4EEC\u5DF2\u7ECF\u5411" + email + "\u53D1\u9001\u4E86\u4E00\u5C01\u5BC6\u7801\u91CD\u7F6E\u6240\u9700\u8981\u7684\u7535\u5B50\u90AE\u4EF6\uFF0C\u60A8\u9700\u8981\u767B\u5F55\u8BE5\u7535\u5B50\u90AE\u7BB1\uFF0C\u6309\u7167\u90AE\u4EF6\u4E2D\u7684\u63D0\u793A\u5B8C\u6210\u5BC6\u7801\u91CD\u7F6E\u64CD\u4F5C\u3002\n        </p>\n    </div>\n</div>",
-                    buttons: {
-                        confirm: {
-                            label: "确定"
-                        }
-                    }
-                });
-            }
-        };
-        return password_reminder;
-    }(Bootstrap));
-    pages.password_reminder = password_reminder;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {

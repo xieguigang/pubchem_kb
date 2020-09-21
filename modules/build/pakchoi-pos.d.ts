@@ -29,27 +29,19 @@ declare namespace models {
         note: string;
         operator?: string;
     }
+    interface inventories {
+        id?: string;
+        batch_id: string;
+        inbound_time?: string;
+        item_id: number;
+        count: number;
+        note: string;
+        operator?: string;
+    }
 }
 declare namespace nifty {
     function errorMsg(msg: string): void;
     function showAlert(message: string): void;
-}
-declare namespace pages {
-    class goods extends Bootstrap {
-        readonly appName: string;
-        protected init(): void;
-        save(): void;
-    }
-}
-declare namespace pages {
-    class inventories extends Bootstrap {
-        readonly appName: string;
-        protected init(): void;
-        /**
-         * 商品入库
-        */
-        save(): void;
-    }
 }
 declare namespace pages {
     class lockscreen extends Bootstrap {
@@ -70,6 +62,23 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         send(): void;
+    }
+}
+declare namespace pages {
+    class goods extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        save(): void;
+    }
+}
+declare namespace pages {
+    class inventories extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        /**
+         * 商品入库
+        */
+        save(): void;
     }
 }
 declare namespace pages {
