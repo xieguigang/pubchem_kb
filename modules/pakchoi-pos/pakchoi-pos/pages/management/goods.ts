@@ -39,6 +39,7 @@
                         }
 
                         tr.appendElement($ts("<td>").display(str));
+                        tr.appendElement($ts("<td>").display(goods.item_id));
 
                         str = (<any>goods).vendor;
 

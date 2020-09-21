@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="pages\" />
+    <Folder Include="pages\management\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="pages\login.ts">
@@ -47,16 +48,16 @@
     <TypeScriptCompile Include="pages\lockscreen.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="pages\inventories.ts">
+    <TypeScriptCompile Include="pages\management\inventories.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="pages\goods.ts">
+    <TypeScriptCompile Include="pages\management\goods.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="pages\password_reminder.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="pages\vendor.ts">
+    <TypeScriptCompile Include="pages\management\vendor.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="models.ts">
