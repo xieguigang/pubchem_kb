@@ -5,8 +5,8 @@
 
     <meta name="app" content="goods" />
 
-    <meta name="load" content="/inventories/load" />
-    <meta name="save" content="/inventories/add" />
+    <meta name="load" content="/goods/load" />
+    <meta name="save" content="/goods/add" />
     <meta name="vendors" content="/vendor/load?entry=true" />
 
     ${includes/head.html}
@@ -221,9 +221,9 @@
                             <!-- Bootstrap Select : primary -->
                             <!--===================================================-->
                             <select id="gender" class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
-                                <option>无限定</option>
-                                <option>男装</option>
-                                <option>女装</option>
+                                <option value="-1">无限定</option>
+                                <option value="1">男装</option>
+                                <option value="0">女装</option>
                             </select>
                         </div>
 

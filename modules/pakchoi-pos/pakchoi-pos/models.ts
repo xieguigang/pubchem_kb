@@ -13,12 +13,12 @@ namespace models {
     }
 
     export interface goods {
-        id: string;
+        id?: string;
         name: string;
-        add_time: string;
+        add_time?: string;
         price: number;
         gender: number;
-        display: string;
+        display?: string;
         /**
          * the vendor item id
         */
