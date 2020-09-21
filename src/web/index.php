@@ -69,6 +69,15 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 销售流水记录
+	 * 
+	 * @uses view
+	*/
+	public function waterflow() {
+		View::Display();
+	}
+
 	public function phpinfo() {
 		phpinfo();		
 	}
