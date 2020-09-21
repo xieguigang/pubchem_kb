@@ -14,6 +14,21 @@ declare namespace models {
         status: string;
         add_time: string;
     }
+    interface goods {
+        id?: string;
+        name: string;
+        add_time?: string;
+        price: number;
+        gender: number;
+        display?: string;
+        /**
+         * the vendor item id
+        */
+        item_id: string;
+        vendor_id: string;
+        note: string;
+        operator?: string;
+    }
 }
 declare namespace nifty {
     function errorMsg(msg: string): void;
@@ -23,6 +38,7 @@ declare namespace pages {
     class goods extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        save(): void;
     }
 }
 declare namespace pages {

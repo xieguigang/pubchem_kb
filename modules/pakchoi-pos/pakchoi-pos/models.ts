@@ -25,5 +25,6 @@ namespace models {
         item_id: string;
         vendor_id: string;
         note: string;
+        operator?: string;
     }
 }

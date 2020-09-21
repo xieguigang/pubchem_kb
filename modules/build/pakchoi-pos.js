@@ -72,6 +72,70 @@ var pages;
                     }
                 }
             });
+            $ts.get("@load", function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg("对不起，商品信息加载失败，请刷新页面重试。。。");
+                }
+                else {
+                    var list = $ts("#list").clear();
+                    var tr = void 0;
+                    var str = void 0;
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var goods_1 = _a[_i];
+                        tr = $ts("<tr>");
+                        if (goods_1.gender == 0) {
+                            str = goods_1.name + "\uFF08\u5973\u88C5\uFF09";
+                        }
+                        else if (goods_1.gender == 1) {
+                            str = goods_1.name + "\uFF08\u7537\u88C5\uFF09";
+                        }
+                        else {
+                            str = goods_1.name;
+                        }
+                        tr.appendElement($ts("<td>").display(goods_1.name));
+                        tr.appendElement($ts("<td>").display(goods_1.vendor));
+                        tr.appendElement($ts("<td>").display(goods_1.add_time));
+                        tr.appendElement($ts("<td>").display("0"));
+                        tr.appendElement($ts("<td>").display(goods_1.price));
+                        tr.appendElement($ts("<td>").display(goods_1.note));
+                        tr.appendElement($ts("<td>").display(goods_1.operator));
+                        list.appendElement(tr);
+                    }
+                }
+            });
+        };
+        goods.prototype.save = function () {
+            var item_id = $ts.value("#item_id");
+            var name = $ts.value("#name");
+            var price = $ts.value("#price");
+            if (Strings.Empty(item_id, true)) {
+                return nifty.showAlert("商品编号不可以为空！");
+            }
+            else if (Strings.Empty(name, true)) {
+                return nifty.showAlert("请填写商品名称。");
+            }
+            else if (Strings.Empty(price, true)) {
+                return nifty.showAlert("请填写商品价格！");
+            }
+            else if (!Strings.isNumericPattern(price)) {
+                return nifty.showAlert("商品价格的格式不正确！");
+            }
+            var data = {
+                item_id: item_id,
+                name: name,
+                vendor_id: $ts.select.getOption("#vendor"),
+                price: parseFloat(price),
+                note: $ts.value("#note"),
+                gender: parseInt($ts.select.getOption("#gender"))
+            };
+            $ts.post("@save", data, function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                }
+                else {
+                    nifty.showAlert(result.info);
+                }
+            });
         };
         return goods;
     }(Bootstrap));

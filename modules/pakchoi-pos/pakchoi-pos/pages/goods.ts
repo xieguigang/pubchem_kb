@@ -9,12 +9,44 @@
         protected init(): void {
             $ts.get("@vendors", function (result) {
                 if (result.code != 0) {
-                    nifty.errorMsg("对不起，加载供应商信息失败，请刷新页面重试。。。")
+                    nifty.errorMsg("对不起，加载供应商信息失败，请刷新页面重试。。。");
                 } else {
                     let selects = $ts("#vendor");
 
                     for (let vendor of <models.vendor[]>result.info) {
                         selects.appendElement($ts("<option>", { value: vendor.id }).display(vendor.name));
+                    }
+                }
+            });
+
+            $ts.get("@load", function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg("对不起，商品信息加载失败，请刷新页面重试。。。");
+                } else {
+                    let list = $ts("#list").clear();
+                    let tr: IHTMLElement;
+                    let str: string;
+
+                    for (let goods of <models.goods[]>result.info) {
+                        tr = $ts("<tr>")
+
+                        if (goods.gender == 0) {
+                            str = `${goods.name}（女装）`;
+                        } else if (goods.gender == 1) {
+                            str = `${goods.name}（男装）`;
+                        } else {
+                            str = goods.name;
+                        }
+
+                        tr.appendElement($ts("<td>").display(goods.name));
+                        tr.appendElement($ts("<td>").display((<any>goods).vendor));
+                        tr.appendElement($ts("<td>").display(goods.add_time));
+                        tr.appendElement($ts("<td>").display("0"));
+                        tr.appendElement($ts("<td>").display(<any>goods.price));
+                        tr.appendElement($ts("<td>").display(goods.note));
+                        tr.appendElement($ts("<td>").display(goods.operator));
+
+                        list.appendElement(tr);
                     }
                 }
             });

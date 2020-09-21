@@ -6,7 +6,7 @@ class App {
 
     /**
      * @uses api
-     * 
+     * @method POST
     */
     public function add($item_id, $name, $vendor_id, $price, $note, $gender) {
         $check = (new Table("goods"))
@@ -33,6 +33,24 @@ class App {
             }
         } else {
             controller::error("已经存在商品编号【{$item_id}】了。");
+        }
+    }
+
+    public static function load($page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $list  = (new Table("goods"))
+            ->left_join("admin")
+            ->on(["goods" => "operator", "admin" => "id"])
+            ->left_join("vendor")
+            ->on(["goods" => "vendor_id", "vendor" => "id"])
+            ->limit($start, $page_size)
+            ->order_by("id desc")
+            ->select(["goods.*", "admin.realname", "vendor as vendor.name"]);         
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据");
+        } else {
+            controller::success($list);
         }
     }
 }
