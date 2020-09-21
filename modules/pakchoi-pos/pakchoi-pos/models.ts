@@ -27,4 +27,14 @@ namespace models {
         note: string;
         operator?: string;
     }
+
+    export interface inventories {
+        id?: string;
+        batch_id: string;
+        inbound_time?: string;
+        item_id: number;
+        count: number;
+        note: string;
+        operator?: string;
+    }
 }
