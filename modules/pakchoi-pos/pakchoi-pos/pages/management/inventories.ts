@@ -7,7 +7,30 @@
         }
 
         protected init(): void {
+            this.showInventories(1);
+        }
 
+        private showInventories(page: number) {
+            $ts.get(`@load?page=${page}`, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(<string>result.info);
+                } else {
+                    let list = $ts("#list").clear();
+                    let tr: IHTMLElement;
+
+                    for (let record of <models.inventories[]>result.info) {
+                        tr = $ts("<tr>");
+
+                        tr.appendElement($ts("<td>").display((<any>record).name));
+                        tr.appendElement($ts("<td>").display(record.batch_id));
+                        tr.appendElement($ts("<td>").display(record.inbound_time));
+                        tr.appendElement($ts("<td>").display(<any>record.count));
+                        tr.appendElement($ts("<td>").display((<any>record).admin));
+
+                        list.appendElement(tr);
+                    }
+                }
+            });
         }
 
         /**

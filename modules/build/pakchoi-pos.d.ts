@@ -75,6 +75,7 @@ declare namespace pages {
     class inventories extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private showInventories;
         /**
          * 商品入库
         */

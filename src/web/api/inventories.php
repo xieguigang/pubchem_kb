@@ -46,4 +46,23 @@ class App {
             controller::success("入库成功！");
         }
     }
+
+    public function load($page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $inventories = new Table("inventories");
+        $list = $inventories 
+            ->left_join("goods")
+            ->on(["inventories" => "item_id", "goods" => "id"])
+            ->left_join("admin")
+            ->on(["inventories" => "operator", "admin" => "id"])
+            ->limit($start, $page_size)
+            ->order_by("id desc")
+            ->select(["inventories.*", "`goods`.`name`", "admin.realname as admin"]);
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据", 1, $inventories->getLastMySql());
+        } else {
+            controller::success($list);
+        }
+    }
 }

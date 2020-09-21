@@ -290,6 +290,28 @@ var pages;
             configurable: true
         });
         inventories.prototype.init = function () {
+            this.showInventories(1);
+        };
+        inventories.prototype.showInventories = function (page) {
+            $ts.get("@load?page=" + page, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                }
+                else {
+                    var list = $ts("#list").clear();
+                    var tr = void 0;
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var record = _a[_i];
+                        tr = $ts("<tr>");
+                        tr.appendElement($ts("<td>").display(record.name));
+                        tr.appendElement($ts("<td>").display(record.batch_id));
+                        tr.appendElement($ts("<td>").display(record.inbound_time));
+                        tr.appendElement($ts("<td>").display(record.count));
+                        tr.appendElement($ts("<td>").display(record.admin));
+                        list.appendElement(tr);
+                    }
+                }
+            });
         };
         /**
          * 商品入库
