@@ -78,6 +78,24 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 账单结算
+	 * 
+	 * @uses view
+	*/
+	public function billing() {
+		View::Display();
+	}
+
+	/**
+	 * 商品销售前台
+	 * 
+	 * @uses view
+	*/
+	public function POS() {
+		View::Display();
+	}
+
 	public function phpinfo() {
 		phpinfo();		
 	}
