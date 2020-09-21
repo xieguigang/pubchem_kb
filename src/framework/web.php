@@ -1,5 +1,7 @@
 <?php
 
+define("ERR_MYSQL_INSERT_FAILURE", "对不起，数据库服务器繁忙或者数据库已离线，请稍后重试。。。");
+
 class web {
 	
 	public static function login_userId() {

@@ -39,7 +39,7 @@ class App {
         ]);
 
         if ($result == false) {
-            controller::error("对不起，数据库繁忙或者数据离线，请稍后重试。。。");
+            controller::error(ERR_MYSQL_INSERT_FAILURE);
         } else {
             controller::success("入库成功！");
         }
