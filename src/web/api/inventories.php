@@ -13,7 +13,7 @@ class App {
     public function add($item_id, $batch_id, $count, $note = "") {
         $inventories = new Table("inventories");
         $item = (new Table("goods"))
-            ->where(["vendor_item_id" => $item_id])
+            ->where(["item_id" => $item_id])
             ->find();
 
         if (empty($item) || $item == false) {
@@ -21,12 +21,12 @@ class App {
         }
 
         if (Strings::Empty($batch_id, true)) {
-            $batch_id = $item_id . year() . month() . str_pad($inventories->where(["item_id" => $item["id"]])->count(), 6, "0", STR_PAD_LEFT);
+            $batch_id = $item_id . "-" . year() . month() . str_pad($inventories->where(["item_id" => $item["id"]])->count(), 6, "0", STR_PAD_LEFT);
         }
 
         $check = (new Table("inventories"))->where(["batch_id" => $batch_id])->find();
 
-        if ((!empty($check)) || $check !== false) {
+        if (!(empty($check) || $check == false)) {
             controller::error("对不起，当前的库存批次编号【{$batch_id}】已经重复，请输入一个新的库存批次编号。");
         }
 
@@ -35,11 +35,13 @@ class App {
             "inbound_time" => Utils::Now(),
             "item_id" => $item["id"],
             "count" => $count,
-            "note" => $note
+            "note" => $note,
+            "operator" => web::login_userId(),
+            "remnant" => $count
         ]);
 
         if ($result == false) {
-            controller::error(ERR_MYSQL_INSERT_FAILURE);
+            controller::error(ERR_MYSQL_INSERT_FAILURE, 1, $inventories->getLastMySql());
         } else {
             controller::success("入库成功！");
         }
