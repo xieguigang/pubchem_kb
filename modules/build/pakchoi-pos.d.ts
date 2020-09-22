@@ -5,7 +5,7 @@ declare class Scanner {
     private nextTime;
     private code;
     /**
-     * ?????????
+     * 注册扫码枪输入事件
     */
     constructor(scanInput: (codeInput: string) => void);
     private scanCode;

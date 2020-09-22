@@ -1,11 +1,11 @@
-class Scanner {
+﻿class Scanner {
 
     private lastTime: number = null;
     private nextTime: number = null;
     private code: string = '';
 
     /**
-     * ?????????
+     * 注册扫码枪输入事件
     */
     constructor(private scanInput: (codeInput: string) => void) {
         let vm = this;
@@ -19,11 +19,11 @@ class Scanner {
     private scanCode(keycode: number, e: KeyboardEvent) {
         if (keycode === 13) {
             if (this.lastTime && (this.nextTime - this.lastTime < 30)) {
-                // ???
+                // 扫码枪输入
                 // do something
                 this.scanInput(this.code);
             } else {
-                // ??
+                // 键盘输入
                 // do nothing
             }
 

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Scanner = /** @class */ (function () {
     /**
-     * ?????????
+     * 注册扫码枪输入事件
     */
     function Scanner(scanInput) {
         this.scanInput = scanInput;
@@ -29,12 +29,12 @@ var Scanner = /** @class */ (function () {
     Scanner.prototype.scanCode = function (keycode, e) {
         if (keycode === 13) {
             if (this.lastTime && (this.nextTime - this.lastTime < 30)) {
-                // ???
+                // 扫码枪输入
                 // do something
                 this.scanInput(this.code);
             }
             else {
-                // ??
+                // 键盘输入
                 // do nothing
             }
             this.code = '';
