@@ -8,6 +8,7 @@ class App {
      * 添加会员信息
      * 
      * @uses api
+     * @method POST
     */
     public function add($name, $phone, $address, $gender, $note) {
         $check = (new Table("VIP_members"))->where(["name" => $name])->find();

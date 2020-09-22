@@ -68,6 +68,7 @@ var app;
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
+        Router.AddAppHandler(new pages.VIP_members());
         Router.RunApp();
     }
     app.start = start;
@@ -244,7 +245,7 @@ var pages;
             var phone = $ts.value("#phone");
             var address = $ts.value("#address");
             var gender = $ts.select.getOption("#gender");
-            var note = $ts.value("note");
+            var note = $ts.value("#note");
             var data = {
                 name: name,
                 phone: phone,

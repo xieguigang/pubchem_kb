@@ -10,6 +10,7 @@ namespace app {
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
+        Router.AddAppHandler(new pages.VIP_members());
 
         Router.RunApp();
     }

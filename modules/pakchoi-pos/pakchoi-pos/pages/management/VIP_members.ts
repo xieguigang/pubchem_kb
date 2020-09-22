@@ -20,7 +20,7 @@
             let phone: string = $ts.value("#phone");
             let address: string = $ts.value("#address");
             let gender: string = $ts.select.getOption("#gender");
-            let note: string = $ts.value("note");
+            let note: string = $ts.value("#note");
 
             let data: models.VIP_members = <models.VIP_members>{
                 name: name,
