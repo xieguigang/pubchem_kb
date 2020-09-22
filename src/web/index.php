@@ -88,6 +88,15 @@ class App {
 	}
 
 	/**
+	 * 会员信息管理
+	 * 
+	 * @uses view
+	*/
+	public function VIP() {
+		View::Display();
+	}
+
+	/**
 	 * 商品销售前台
 	 * 
 	 * @uses view

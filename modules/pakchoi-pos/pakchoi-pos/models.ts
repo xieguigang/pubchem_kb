@@ -37,4 +37,15 @@ namespace models {
         note: string;
         operator?: string;
     }
+
+    export interface VIP_members {
+        id?: string;
+        name: string;
+        gender: string;
+        phone: string;
+        address: string;
+        join_time?: string;
+        operator?: string;
+        note: string;
+    }
 }
