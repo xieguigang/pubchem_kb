@@ -22,6 +22,21 @@
             let gender: string = $ts.select.getOption("#gender");
             let note: string = $ts.value("note");
 
+            let data: models.VIP_members = <models.VIP_members>{
+                name: name,
+                phone: phone,
+                address: address,
+                gender: gender,
+                note: note
+            };
+
+            $ts.post("@save", data, function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                } else {
+                    nifty.showAlert(<string>result.info);
+                }
+            });
         }
     }
 }

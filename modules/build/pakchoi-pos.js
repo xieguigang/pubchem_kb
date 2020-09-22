@@ -11,6 +11,53 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var Scanner = /** @class */ (function () {
+    /**
+     * ?????????
+    */
+    function Scanner(scanInput) {
+        this.scanInput = scanInput;
+        this.lastTime = null;
+        this.nextTime = null;
+        this.code = '';
+        var vm = this;
+        document.onkeydown = function (e) {
+            vm.nextTime = new Date().getTime();
+            vm.scanCode(e.keyCode || e.which || e.charCode, e);
+        };
+    }
+    Scanner.prototype.scanCode = function (keycode, e) {
+        if (keycode === 13) {
+            if (this.lastTime && (this.nextTime - this.lastTime < 30)) {
+                // ???
+                // do something
+                this.scanInput(this.code);
+            }
+            else {
+                // ??
+                // do nothing
+            }
+            this.code = '';
+            this.lastTime = null;
+            e.preventDefault();
+        }
+        else {
+            if (!this.lastTime) {
+                this.code = String.fromCharCode(keycode);
+            }
+            else {
+                if (this.nextTime - this.lastTime < 30) {
+                    this.code += String.fromCharCode(keycode);
+                }
+                else {
+                    this.code = '';
+                }
+            }
+            this.lastTime = this.nextTime;
+        }
+    };
+    return Scanner;
+}());
 /// <reference path="../../build/linq.d.ts" />
 var app;
 (function (app) {
@@ -172,6 +219,51 @@ var pages;
         return password_reminder;
     }(Bootstrap));
     pages.password_reminder = password_reminder;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var VIP_members = /** @class */ (function (_super) {
+        __extends(VIP_members, _super);
+        function VIP_members() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(VIP_members.prototype, "appName", {
+            get: function () {
+                return "VIP_members";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        VIP_members.prototype.init = function () {
+        };
+        VIP_members.prototype.save = function () {
+            var name = $ts.value("#name");
+            if (Strings.Empty(name, true)) {
+                return nifty.showAlert("对不起，会员姓名不可以为空！");
+            }
+            var phone = $ts.value("#phone");
+            var address = $ts.value("#address");
+            var gender = $ts.select.getOption("#gender");
+            var note = $ts.value("note");
+            var data = {
+                name: name,
+                phone: phone,
+                address: address,
+                gender: gender,
+                note: note
+            };
+            $ts.post("@save", data, function (result) {
+                if (result.code == 0) {
+                    location.reload();
+                }
+                else {
+                    nifty.showAlert(result.info);
+                }
+            });
+        };
+        return VIP_members;
+    }(Bootstrap));
+    pages.VIP_members = VIP_members;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {

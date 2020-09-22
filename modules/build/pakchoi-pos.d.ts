@@ -1,4 +1,15 @@
 /// <reference path="linq.d.ts" />
+declare class Scanner {
+    private scanInput;
+    private lastTime;
+    private nextTime;
+    private code;
+    /**
+     * ?????????
+    */
+    constructor(scanInput: (codeInput: string) => void);
+    private scanCode;
+}
 declare namespace app {
     function start(): void;
 }
@@ -38,6 +49,16 @@ declare namespace models {
         note: string;
         operator?: string;
     }
+    interface VIP_members {
+        id?: string;
+        name: string;
+        gender: string;
+        phone: string;
+        address: string;
+        join_time?: string;
+        operator?: string;
+        note: string;
+    }
 }
 declare namespace nifty {
     function errorMsg(msg: string): void;
@@ -62,6 +83,13 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         send(): void;
+    }
+}
+declare namespace pages {
+    class VIP_members extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        save(): void;
     }
 }
 declare namespace pages {

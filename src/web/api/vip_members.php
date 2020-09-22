@@ -9,7 +9,27 @@ class App {
      * 
      * @uses api
     */
-    public function add() {
+    public function add($name, $phone, $address, $gender, $note) {
+        $check = (new Table("VIP_members"))->where(["name" => $name])->find();
 
+        if (!(empty($check) || $check == false)) {
+            controller::error("对不起，会员名已经重复了。");
+        }
+
+        $result = (new Table("VIP_members"))->add([
+            "name" => $name,
+            "gender" => $gender,
+            "phone" => $phone,
+            "address" => $address,
+            "join_time" => Utils::Now(),
+            "operator" => web::login_userId(),
+            "note" => $note
+        ]);
+
+        if ($result == false) {
+            controller::error(ERR_MYSQL_INSERT_FAILURE);
+        } else {
+            controller::success($result);
+        }
     }
 }
