@@ -33,4 +33,21 @@ class App {
             controller::success($result);
         }
     }
+
+    public function load($page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $VIP_members = new Table("VIP_members");
+        $list = $VIP_members 
+            ->left_join("admin")
+            ->on(["VIP_members" => "operator", "admin" => "id"])
+            ->limit($start, $page_size)
+            ->order_by("id desc")
+            ->select(["VIP_members.*", "admin.realname as admin"]);
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据", 1, $VIP_members->getLastMySql());
+        } else {
+            controller::success($list);
+        }
+    }
 }

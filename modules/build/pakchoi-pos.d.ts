@@ -89,6 +89,7 @@ declare namespace pages {
     class VIP_members extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private loadList;
         save(): void;
     }
 }

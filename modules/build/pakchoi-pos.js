@@ -236,6 +236,42 @@ var pages;
             configurable: true
         });
         VIP_members.prototype.init = function () {
+            this.loadList();
+        };
+        VIP_members.prototype.loadList = function (page) {
+            if (page === void 0) { page = 1; }
+            $ts.get("@load?page=" + page, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                }
+                else {
+                    var list = $ts("#list").clear();
+                    var tr = void 0;
+                    var str = void 0;
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var vip = _a[_i];
+                        tr = $ts("<tr>");
+                        tr.appendElement($ts("<td>").display(vip.name));
+                        if (vip.gender == "1") {
+                            str = "男";
+                        }
+                        else if (vip.gender == "0") {
+                            str = "女";
+                        }
+                        else {
+                            str = "未记录";
+                        }
+                        tr
+                            .appendElement($ts("<td>").display(str))
+                            .appendElement($ts("<td>").display(vip.phone))
+                            .appendElement($ts("<td>").display(vip.address))
+                            .appendElement($ts("<td>").display(vip.join_time))
+                            .appendElement($ts("<td>").display(vip.note))
+                            .appendElement($ts("<td>").display(vip.admin));
+                        list.appendElement(tr);
+                    }
+                }
+            });
         };
         VIP_members.prototype.save = function () {
             var name = $ts.value("#name");
