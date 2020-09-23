@@ -4,8 +4,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
+    <meta name="app" content="billing" />
     <meta name="transaction" content="{$transaction.no}" />
+
     ${includes/head.html}
+
     <link href="/assets/plugins/transactional-email-templates/templates/styles.css" media="all" rel="stylesheet"
         type="text/css" />
 </head>
@@ -60,7 +63,7 @@
                                     </tr>
                                     <tr>
                                         <td class="content-block aligncenter">
-                                            <button id="demo-state-btn" class="btn btn-lg btn-info"
+                                            <button id="settlement" class="btn btn-lg btn-info"
                                                 data-loading-text="结算中..." type="button">
                                                 账单结算
                                             </button>
