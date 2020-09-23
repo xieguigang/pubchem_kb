@@ -7,10 +7,10 @@ namespace pages {
         }
 
         protected init(): void {
-            window.setInterval(() => POS.clock, 1);
+            window.setInterval(() => this.clock(), 1000);
         }
 
-        private static clock() {
+        private clock() {
             let time = new Date();
             let hh = Strings.PadLeft(time.getHours().toString(), 2, "0");
             let mm = Strings.PadLeft(time.getMinutes().toString(), 2, "0");
