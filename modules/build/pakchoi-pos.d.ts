@@ -121,3 +121,15 @@ declare namespace pages {
         save(): void;
     }
 }
+declare namespace pages {
+    class POS extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}
+declare namespace pages {
+    class billing extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+    }
+}

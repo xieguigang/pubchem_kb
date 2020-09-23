@@ -69,6 +69,8 @@ var app;
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
         Router.AddAppHandler(new pages.VIP_members());
+        Router.AddAppHandler(new pages.billing());
+        Router.AddAppHandler(new pages.POS());
         Router.RunApp();
     }
     app.start = start;
@@ -589,5 +591,45 @@ var pages;
         return vendor;
     }(Bootstrap));
     pages.vendor = vendor;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var POS = /** @class */ (function (_super) {
+        __extends(POS, _super);
+        function POS() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(POS.prototype, "appName", {
+            get: function () {
+                return "POS";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        POS.prototype.init = function () {
+        };
+        return POS;
+    }(Bootstrap));
+    pages.POS = POS;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var billing = /** @class */ (function (_super) {
+        __extends(billing, _super);
+        function billing() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(billing.prototype, "appName", {
+            get: function () {
+                return "billing";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        billing.prototype.init = function () {
+        };
+        return billing;
+    }(Bootstrap));
+    pages.billing = billing;
 })(pages || (pages = {}));
 //# sourceMappingURL=pakchoi-pos.js.map

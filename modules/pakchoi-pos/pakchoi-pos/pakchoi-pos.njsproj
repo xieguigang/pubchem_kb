@@ -37,6 +37,7 @@
   <ItemGroup>
     <Folder Include="pages\" />
     <Folder Include="pages\management\" />
+    <Folder Include="pages\pos\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="pages\login.ts">
@@ -64,6 +65,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="models.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="pages\pos\billing.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="pages\pos\POS.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Scanner.ts">
