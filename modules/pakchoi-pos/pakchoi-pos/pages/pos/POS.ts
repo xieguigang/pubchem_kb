@@ -14,10 +14,10 @@ namespace pages {
             let time = new Date();
             let hh = Strings.PadLeft(time.getHours().toString(), 2, "0");
             let mm = Strings.PadLeft(time.getMinutes().toString(), 2, "0");
+            let ss = Strings.PadLeft(time.getSeconds().toString(), 2, "0");
 
-            console.log(time.toString());
-
-            $ts("#clock").display(`${hh}:${mm}`);
+            $ts("#clock").display(`${hh}:${mm}:${ss}`);
+            $ts("#date").display(time.toDateString());
         }
 
     }
