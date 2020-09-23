@@ -17,7 +17,8 @@ namespace pages {
         }
 
         private static startBilling(item_id: string) {
-            console.error(item_id);
+            localStorage.setItem("first-item", item_id);
+            $goto("/billing");
         }
 
         private clock() {

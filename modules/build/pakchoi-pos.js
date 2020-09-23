@@ -627,7 +627,8 @@ var pages;
             window.setInterval(function () { return _this.clock(); }, 1000);
         };
         POS.startBilling = function (item_id) {
-            console.error(item_id);
+            localStorage.setItem("first-item", item_id);
+            $goto("/billing");
         };
         POS.prototype.clock = function () {
             var time = new Date();
