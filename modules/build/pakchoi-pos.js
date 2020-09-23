@@ -607,6 +607,14 @@ var pages;
             configurable: true
         });
         POS.prototype.init = function () {
+            window.setInterval(function () { return POS.clock; }, 1);
+        };
+        POS.clock = function () {
+            var time = new Date();
+            var hh = Strings.PadLeft(time.getHours().toString(), 2, "0");
+            var mm = Strings.PadLeft(time.getMinutes().toString(), 2, "0");
+            console.log(time.toString());
+            $ts("#clock").display(hh + ":" + mm);
         };
         return POS;
     }(Bootstrap));

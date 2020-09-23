@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	${includes/head.html}
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+	<div id="container" class="cls-container">
+
+		${includes/header1.html}
+
+		<!-- CONTENT -->
+		<!--===================================================-->
+		<div class="cls-content">
+			<h1 id="clock" class="error-code text-info"></h1>
+			<p class="text-main text-semibold text-lg text-uppercase">400 Bad Request!</p>
+			<div class="pad-btm text-muted">
+				{$message}
+			</div>
+
+			<hr class="new-section-sm bord-no">
+			<div class="pad-top"><a class="btn-link" href="javascript:void(0);" onclick="history.back(-1);">返回上一页</a>
+			</div>
+		</div>
+
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+
+</body>
+
+</html>

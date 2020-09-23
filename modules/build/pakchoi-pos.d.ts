@@ -125,6 +125,7 @@ declare namespace pages {
     class POS extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private static clock;
     }
 }
 declare namespace pages {
