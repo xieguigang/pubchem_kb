@@ -124,6 +124,7 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    const firstItemKey: string;
     class POS extends Bootstrap {
         private scanner;
         readonly appName: string;

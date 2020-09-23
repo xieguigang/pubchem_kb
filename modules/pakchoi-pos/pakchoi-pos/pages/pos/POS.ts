@@ -1,5 +1,7 @@
 namespace pages {
 
+    export const firstItemKey: string = "first-item";
+
     export class POS extends Bootstrap {
 
         private scanner: Scanner;
@@ -17,7 +19,7 @@ namespace pages {
         }
 
         private static startBilling(item_id: string) {
-            localStorage.setItem("first-item", item_id);
+            localStorage.setItem(firstItemKey, item_id);
             $goto("/billing");
         }
 

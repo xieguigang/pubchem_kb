@@ -607,6 +607,7 @@ var pages;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
+    pages.firstItemKey = "first-item";
     var POS = /** @class */ (function (_super) {
         __extends(POS, _super);
         function POS() {
@@ -627,7 +628,7 @@ var pages;
             window.setInterval(function () { return _this.clock(); }, 1000);
         };
         POS.startBilling = function (item_id) {
-            localStorage.setItem("first-item", item_id);
+            localStorage.setItem(pages.firstItemKey, item_id);
             $goto("/billing");
         };
         POS.prototype.clock = function () {
@@ -658,6 +659,7 @@ var pages;
         });
         billing.prototype.init = function () {
             var vm = this;
+            var firstItem = localStorage.getItem(pages.firstItemKey);
             // STATE BUTTON
             // =================================================================
             // Require Bootstrap Button
@@ -671,6 +673,12 @@ var pages;
                 // business logic...
                 vm.settlement();
             });
+            if (Strings.Empty(firstItem, true)) {
+                $goto("/POS");
+            }
+            else {
+                localStorage.setItem(pages.firstItemKey, null);
+            }
         };
         /**
          * 点击账单结算按钮进行支付结算

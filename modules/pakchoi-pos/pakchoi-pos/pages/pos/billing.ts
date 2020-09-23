@@ -8,6 +8,7 @@
 
         protected init(): void {
             let vm = this;
+            let firstItem: string = localStorage.getItem(firstItemKey);
 
             // STATE BUTTON
             // =================================================================
@@ -22,6 +23,12 @@
                 // business logic...
                 vm.settlement();
             });
+
+            if (Strings.Empty(firstItem, true)) {
+                $goto("/POS");
+            } else {
+                localStorage.setItem(firstItemKey, null);
+            }
         }
 
         /**
