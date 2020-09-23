@@ -137,6 +137,7 @@ declare namespace pages {
     class billing extends Bootstrap {
         readonly appName: string;
         protected init(): void;
+        private loadItem;
         /**
          * 点击账单结算按钮进行支付结算
         */

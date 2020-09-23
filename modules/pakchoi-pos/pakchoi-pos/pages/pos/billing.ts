@@ -7,8 +7,14 @@
         }
 
         protected init(): void {
-            let vm = this;
             let firstItem: string = localStorage.getItem(firstItemKey);
+            let vm = this;
+
+            if (Strings.Empty(firstItem, true)) {
+                $goto("/POS");
+            } else {
+                localStorage.setItem(firstItemKey, null);
+            }
 
             // STATE BUTTON
             // =================================================================
@@ -24,11 +30,11 @@
                 vm.settlement();
             });
 
-            if (Strings.Empty(firstItem, true)) {
-                $goto("/POS");
-            } else {
-                localStorage.setItem(firstItemKey, null);
-            }
+            this.loadItem(firstItem);
+        }
+
+        private loadItem(item_id: string) {
+
         }
 
         /**
