@@ -20,18 +20,24 @@ var Scanner = /** @class */ (function () {
         this.lastTime = null;
         this.nextTime = null;
         this.code = '';
+        this.keyboardInput = "";
         var vm = this;
         document.onkeydown = function (e) {
             vm.nextTime = new Date().getTime();
             vm.scanCode(e.keyCode || e.which || e.charCode, e);
         };
     }
+    Scanner.prototype.triggerEvt = function () {
+        this.scanInput(this.code || this.keyboardInput);
+        this.code = "";
+        this.keyboardInput = "";
+    };
     Scanner.prototype.scanCode = function (keycode, e) {
         if (keycode === 13) {
             if (this.lastTime && (this.nextTime - this.lastTime < 30)) {
                 // 扫码枪输入
                 // do something
-                this.scanInput(this.code);
+                this.triggerEvt();
             }
             else {
                 // 键盘输入
@@ -42,15 +48,22 @@ var Scanner = /** @class */ (function () {
             e.preventDefault();
         }
         else {
+            var c = String.fromCharCode(keycode);
             if (!this.lastTime) {
-                this.code = String.fromCharCode(keycode);
+                this.code = c;
+                this.keyboardInput = c;
             }
             else {
                 if (this.nextTime - this.lastTime < 30) {
-                    this.code += String.fromCharCode(keycode);
+                    this.code += c;
                 }
                 else {
                     this.code = '';
+                    this.keyboardInput += c;
+                    // 上上下下左右左右BA进入测试模式
+                    if (this.keyboardInput.toUpperCase() == "&&((%'%'BA") {
+                        this.triggerEvt();
+                    }
                 }
             }
             this.lastTime = this.nextTime;
@@ -608,7 +621,13 @@ var pages;
         });
         POS.prototype.init = function () {
             var _this = this;
+            var vm = this;
+            vm.scanner = new Scanner(POS.startBilling);
+            // idle events
             window.setInterval(function () { return _this.clock(); }, 1000);
+        };
+        POS.startBilling = function (item_id) {
+            console.error(item_id);
         };
         POS.prototype.clock = function () {
             var time = new Date();

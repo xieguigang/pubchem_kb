@@ -2,12 +2,22 @@ namespace pages {
 
     export class POS extends Bootstrap {
 
+        private scanner: Scanner;
+
         public get appName(): string {
             return "POS";
         }
 
         protected init(): void {
+            let vm = this;
+
+            vm.scanner = new Scanner(POS.startBilling);
+            // idle events
             window.setInterval(() => this.clock(), 1000);
+        }
+
+        private static startBilling(item_id: string) {
+            console.error(item_id);
         }
 
         private clock() {

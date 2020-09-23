@@ -4,10 +4,12 @@ declare class Scanner {
     private lastTime;
     private nextTime;
     private code;
+    private keyboardInput;
     /**
      * 注册扫码枪输入事件
     */
     constructor(scanInput: (codeInput: string) => void);
+    private triggerEvt;
     private scanCode;
 }
 declare namespace app {
@@ -123,8 +125,10 @@ declare namespace pages {
 }
 declare namespace pages {
     class POS extends Bootstrap {
+        private scanner;
         readonly appName: string;
         protected init(): void;
+        private static startBilling;
         private clock;
     }
 }
