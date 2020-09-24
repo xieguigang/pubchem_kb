@@ -36,7 +36,7 @@ class App {
         }
     }
 
-    public static function load($page = 1, $page_size = 100) {
+    public function load($page = 1, $page_size = 100) {
         $start = ($page - 1) * $page_size;
         $goods = new Table("goods");
         $list  = $goods
@@ -52,6 +52,16 @@ class App {
             controller::error("对不起，无查询结果数据", 1, $goods->getLastMySql());
         } else {
             controller::success($list);
+        }
+    }
+
+    public function get($item_id) {
+        $goods = (new Table("goods"))->where(["item_id" => $item_id])->find();
+
+        if (empty($goods) || $goods == false) {
+            controller::error("对不起，没有查询到本商品，请先进行<a href='/goods'>商品录入</a>");
+        } else {
+            controller::success($goods);
         }
     }
 }

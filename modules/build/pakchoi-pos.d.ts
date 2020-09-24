@@ -97,8 +97,11 @@ declare namespace pages {
 }
 declare namespace pages {
     class goods extends Bootstrap {
+        private scanner;
         readonly appName: string;
         protected init(): void;
+        private load;
+        private showList;
         save(): void;
     }
 }
@@ -136,8 +139,12 @@ declare namespace pages {
 declare namespace pages {
     class billing extends Bootstrap {
         readonly appName: string;
+        private goods;
         protected init(): void;
         private loadItem;
+        private refresh;
+        private addGoodsItem;
+        private total;
         /**
          * 点击账单结算按钮进行支付结算
         */

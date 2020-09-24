@@ -345,42 +345,53 @@ var pages;
                     }
                 }
             });
-            $ts.get("@load", function (result) {
+            this.load();
+            this.scanner = new Scanner(function (item_id) {
+                $ts.value("#item_id", item_id);
+            });
+        };
+        goods.prototype.load = function (page) {
+            if (page === void 0) { page = 1; }
+            var vm = this;
+            $ts.get("@load?page=" + page, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg("对不起，商品信息加载失败，请刷新页面重试。。。");
                 }
                 else {
-                    var list = $ts("#list").clear();
-                    var tr = void 0;
-                    var str = void 0;
-                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var goods_1 = _a[_i];
-                        tr = $ts("<tr>");
-                        if (goods_1.gender == 0) {
-                            str = goods_1.name + "\uFF08\u5973\u88C5\uFF09";
-                        }
-                        else if (goods_1.gender == 1) {
-                            str = goods_1.name + "\uFF08\u7537\u88C5\uFF09";
-                        }
-                        else {
-                            str = goods_1.name;
-                        }
-                        tr.appendElement($ts("<td>").display(str));
-                        tr.appendElement($ts("<td>").display(goods_1.item_id));
-                        str = goods_1.vendor;
-                        if (Strings.Empty(str, true)) {
-                            str = "自产商品（无供货商）";
-                        }
-                        tr.appendElement($ts("<td>").display(str));
-                        tr.appendElement($ts("<td>").display(goods_1.add_time));
-                        tr.appendElement($ts("<td>").display("0"));
-                        tr.appendElement($ts("<td>").display(goods_1.price));
-                        tr.appendElement($ts("<td>").display(goods_1.note));
-                        tr.appendElement($ts("<td>").display(goods_1.realname));
-                        list.appendElement(tr);
-                    }
+                    vm.showList(result.info);
                 }
             });
+        };
+        goods.prototype.showList = function (result) {
+            var list = $ts("#list").clear();
+            var tr;
+            var str;
+            for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
+                var goods_1 = result_1[_i];
+                tr = $ts("<tr>");
+                if (goods_1.gender == 0) {
+                    str = goods_1.name + "\uFF08\u5973\u88C5\uFF09";
+                }
+                else if (goods_1.gender == 1) {
+                    str = goods_1.name + "\uFF08\u7537\u88C5\uFF09";
+                }
+                else {
+                    str = goods_1.name;
+                }
+                tr.appendElement($ts("<td>").display(str));
+                tr.appendElement($ts("<td>").display(goods_1.item_id));
+                str = goods_1.vendor;
+                if (Strings.Empty(str, true)) {
+                    str = "自产商品（无供货商）";
+                }
+                tr.appendElement($ts("<td>").display(str));
+                tr.appendElement($ts("<td>").display(goods_1.add_time));
+                tr.appendElement($ts("<td>").display("0"));
+                tr.appendElement($ts("<td>").display(goods_1.price));
+                tr.appendElement($ts("<td>").display(goods_1.note));
+                tr.appendElement($ts("<td>").display(goods_1.realname));
+                list.appendElement(tr);
+            }
         };
         goods.prototype.save = function () {
             var item_id = $ts.value("#item_id");
@@ -648,7 +659,9 @@ var pages;
     var billing = /** @class */ (function (_super) {
         __extends(billing, _super);
         function billing() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.goods = [];
+            return _this;
         }
         Object.defineProperty(billing.prototype, "appName", {
             get: function () {
@@ -682,6 +695,38 @@ var pages;
             this.loadItem(firstItem);
         };
         billing.prototype.loadItem = function (item_id) {
+            var vm = this;
+            $ts.get("@get?item_id=" + item_id, function (result) {
+                if (result.code == 0) {
+                    vm.goods.push(result.info);
+                    vm.refresh();
+                }
+                else {
+                    nifty.errorMsg(result.info);
+                }
+            });
+        };
+        billing.prototype.refresh = function () {
+            var table = $ts("#invoice-table").clear();
+            var total = 0;
+            for (var _i = 0, _a = this.goods; _i < _a.length; _i++) {
+                var item = _a[_i];
+                table.appendElement(this.addGoodsItem(item));
+                total += item.price;
+            }
+            table.appendElement(this.total(total));
+        };
+        billing.prototype.addGoodsItem = function (item) {
+            var tr = $ts("<tr>");
+            tr.appendElement($ts("<td>").display(item.name));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price));
+            return tr;
+        };
+        billing.prototype.total = function (cost) {
+            var tr = $ts("<tr>", { class: "total" });
+            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("总金额"));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + Strings.round(cost, 2).toString()));
+            return tr;
         };
         /**
          * 点击账单结算按钮进行支付结算

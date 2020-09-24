@@ -6,6 +6,8 @@
             return "billing";
         }
 
+        private goods: models.goods[] = [];
+
         protected init(): void {
             let firstItem: string = localStorage.getItem(firstItemKey);
             let vm = this;
@@ -34,7 +36,46 @@
         }
 
         private loadItem(item_id: string) {
+            let vm = this;
 
+            $ts.get(`@get?item_id=${item_id}`, function (result) {
+                if (result.code == 0) {
+                    vm.goods.push(<models.goods>result.info);
+                    vm.refresh();
+                } else {
+                    nifty.errorMsg(<string>result.info);
+                }
+            });
+        }
+
+        private refresh() {
+            let table = $ts("#invoice-table").clear();
+            let total: number = 0;
+
+            for (let item of this.goods) {
+                table.appendElement(this.addGoodsItem(item));
+                total += item.price;
+            }
+
+            table.appendElement(this.total(total));
+        }
+
+        private addGoodsItem(item: models.goods) {
+            let tr = $ts("<tr>");
+
+            tr.appendElement($ts("<td>").display(item.name));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${item.price}`));
+
+            return tr;
+        }
+
+        private total(cost: number): HTMLElement {
+            let tr = $ts("<tr>", { class: "total" });
+
+            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("总金额"))
+            tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${Strings.round(cost, 2).toString()}`))
+
+            return tr;
         }
 
         /**
