@@ -76,11 +76,11 @@
             if (count == 1) {
                 displayText = item.name;
             } else {
-                displayText = `${item.name} x${count}`;
+                displayText = `${item.name} &nbsp; x${count}`;
             }
 
             tr.appendElement($ts("<td>").display(displayText));
-            tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${item.price}`));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${item.price * count}`));
 
             return tr;
         }
@@ -98,7 +98,17 @@
          * 点击账单结算按钮进行支付结算
         */
         private settlement() {
+            let data = {
+                goods: {}
+            };
 
+            for (let item of this.goods.Values.ToArray()) {
+                data.goods[item.item.item_id] = item.count;
+            }
+
+            $ts.post('@trade', data, function (result) {
+
+            });
         }
     }
 }

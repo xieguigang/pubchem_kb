@@ -7,6 +7,7 @@
     <meta name="app" content="billing" />
     <meta name="transaction" content="{$transaction.no}" />
     <meta name="get" content="/goods/get" />
+    <meta name="trade" content="/trade/settlement" />
 
     ${includes/head.html}
 
@@ -39,23 +40,9 @@
                                                 </tr>
                                                 <tr>
                                                     <td>
-                                                        <table id="invoice-table" class="invoice-items" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td>Service 1</td>
-                                                                <td class="alignright">$ 19.99</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Service 2</td>
-                                                                <td class="alignright">$ 9.99</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Service 3</td>
-                                                                <td class="alignright">$ 4.00</td>
-                                                            </tr>
-                                                            <tr class="total">
-                                                                <td class="alignright" width="80%">总金额</td>
-                                                                <td class="alignright">$ 33.98</td>
-                                                            </tr>
+                                                        <table id="invoice-table" class="invoice-items" cellpadding="0"
+                                                            cellspacing="0">
+
                                                         </table>
                                                     </td>
                                                 </tr>

@@ -729,10 +729,10 @@ var pages;
                 displayText = item.name;
             }
             else {
-                displayText = item.name + " x" + count;
+                displayText = item.name + " &nbsp; x" + count;
             }
             tr.appendElement($ts("<td>").display(displayText));
-            tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price * count));
             return tr;
         };
         billing.prototype.total = function (cost) {
@@ -745,6 +745,15 @@ var pages;
          * 点击账单结算按钮进行支付结算
         */
         billing.prototype.settlement = function () {
+            var data = {
+                goods: {}
+            };
+            for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
+                var item = _a[_i];
+                data.goods[item.item.item_id] = item.count;
+            }
+            $ts.post('@trade', data, function (result) {
+            });
         };
         return billing;
     }(Bootstrap));
