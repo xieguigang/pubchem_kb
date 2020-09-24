@@ -10,13 +10,13 @@ class App {
      * @method POST
      * @uses api
     */
-    public function settlement($goods) {
+    public function settlement($goods, $discount) {
         $item_ids = array_keys($goods);
         $items = (new Table("goods"))
-            ->where(["item_id" => in($item_ids)])
+            ->where(["id" => in($item_ids)])
             ->limit(count($item_ids))
             ->select();
 
-        
+        controller::error($items);
     }
 }

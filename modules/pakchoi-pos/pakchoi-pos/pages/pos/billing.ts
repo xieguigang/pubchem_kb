@@ -30,9 +30,15 @@
             $('#settlement').on('click', function () {
                 // 这个状态变化必须要通过jQuery来进行触发
                 // 否则会出现丢失文档碎片的错误？
-                $(this).button('loading');
+                let btn = $(this).button('loading');
+
                 // business logic...
                 vm.settlement();
+
+                let test = setTimeout(function () {
+                    clearTimeout(test);
+                    btn.button('reset')
+                }, 3000);
             });
 
             this.loadItem(firstItem);
@@ -99,15 +105,18 @@
         */
         private settlement() {
             let data = {
-                goods: {}
+                goods: {},
+                discount: 1
             };
 
             for (let item of this.goods.Values.ToArray()) {
-                data.goods[item.item.item_id] = item.count;
+                data.goods[item.item.id] = item.count;
             }
 
             $ts.post('@trade', data, function (result) {
-
+                if (result.code != 0) {
+                    nifty.errorMsg(JSON.stringify(result))
+                }
             });
         }
     }

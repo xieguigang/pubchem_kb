@@ -6,8 +6,11 @@
             return "inventories";
         }
 
+        private scanner: Scanner;
+
         protected init(): void {
             this.showInventories(1);
+            this.scanner = new Scanner(item_id => $ts.value("#item_id", item_id));
         }
 
         private showInventories(page: number) {

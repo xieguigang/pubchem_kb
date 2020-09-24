@@ -108,6 +108,7 @@ declare namespace pages {
 declare namespace pages {
     class inventories extends Bootstrap {
         readonly appName: string;
+        private scanner;
         protected init(): void;
         private showInventories;
         /**

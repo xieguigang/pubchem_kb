@@ -446,6 +446,7 @@ var pages;
         });
         inventories.prototype.init = function () {
             this.showInventories(1);
+            this.scanner = new Scanner(function (item_id) { return $ts.value("#item_id", item_id); });
         };
         inventories.prototype.showInventories = function (page) {
             $ts.get("@load?page=" + page, function (result) {
@@ -687,9 +688,13 @@ var pages;
             $('#settlement').on('click', function () {
                 // 这个状态变化必须要通过jQuery来进行触发
                 // 否则会出现丢失文档碎片的错误？
-                $(this).button('loading');
+                var btn = $(this).button('loading');
                 // business logic...
                 vm.settlement();
+                var test = setTimeout(function () {
+                    clearTimeout(test);
+                    btn.button('reset');
+                }, 3000);
             });
             this.loadItem(firstItem);
             this.scanner = new Scanner(function (item_id) { return vm.loadItem(item_id); });
@@ -746,13 +751,17 @@ var pages;
         */
         billing.prototype.settlement = function () {
             var data = {
-                goods: {}
+                goods: {},
+                discount: 1
             };
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
                 var item = _a[_i];
-                data.goods[item.item.item_id] = item.count;
+                data.goods[item.item.id] = item.count;
             }
             $ts.post('@trade', data, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(JSON.stringify(result));
+                }
             });
         };
         return billing;
