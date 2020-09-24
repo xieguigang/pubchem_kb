@@ -140,6 +140,7 @@ declare namespace pages {
     class billing extends Bootstrap {
         readonly appName: string;
         private goods;
+        private scanner;
         protected init(): void;
         private loadItem;
         private refresh;

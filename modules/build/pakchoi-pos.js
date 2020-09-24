@@ -659,9 +659,7 @@ var pages;
     var billing = /** @class */ (function (_super) {
         __extends(billing, _super);
         function billing() {
-            var _this = _super !== null && _super.apply(this, arguments) || this;
-            _this.goods = [];
-            return _this;
+            return _super !== null && _super.apply(this, arguments) || this;
         }
         Object.defineProperty(billing.prototype, "appName", {
             get: function () {
@@ -679,6 +677,7 @@ var pages;
             else {
                 localStorage.setItem(pages.firstItemKey, null);
             }
+            this.goods = new Dictionary({});
             // STATE BUTTON
             // =================================================================
             // Require Bootstrap Button
@@ -693,32 +692,46 @@ var pages;
                 vm.settlement();
             });
             this.loadItem(firstItem);
+            this.scanner = new Scanner(function (item_id) { return vm.loadItem(item_id); });
         };
         billing.prototype.loadItem = function (item_id) {
             var vm = this;
-            $ts.get("@get?item_id=" + item_id, function (result) {
-                if (result.code == 0) {
-                    vm.goods.push(result.info);
-                    vm.refresh();
-                }
-                else {
-                    nifty.errorMsg(result.info);
-                }
-            });
+            if (this.goods.ContainsKey(item_id)) {
+                this.goods.Item(item_id).count += 1;
+                this.refresh();
+            }
+            else {
+                $ts.get("@get?item_id=" + item_id, function (result) {
+                    if (result.code == 0) {
+                        vm.goods.Add(item_id, { item: result.info, count: 1 });
+                        vm.refresh();
+                    }
+                    else {
+                        nifty.errorMsg(result.info);
+                    }
+                });
+            }
         };
         billing.prototype.refresh = function () {
             var table = $ts("#invoice-table").clear();
             var total = 0;
-            for (var _i = 0, _a = this.goods; _i < _a.length; _i++) {
+            for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
                 var item = _a[_i];
-                table.appendElement(this.addGoodsItem(item));
-                total += item.price;
+                table.appendElement(this.addGoodsItem(item.item, item.count));
+                total += item.item.price * item.count;
             }
             table.appendElement(this.total(total));
         };
-        billing.prototype.addGoodsItem = function (item) {
+        billing.prototype.addGoodsItem = function (item, count) {
             var tr = $ts("<tr>");
-            tr.appendElement($ts("<td>").display(item.name));
+            var displayText;
+            if (count == 1) {
+                displayText = item.name;
+            }
+            else {
+                displayText = item.name + " x" + count;
+            }
+            tr.appendElement($ts("<td>").display(displayText));
             tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price));
             return tr;
         };
