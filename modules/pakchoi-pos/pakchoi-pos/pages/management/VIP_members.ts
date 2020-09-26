@@ -29,7 +29,9 @@
 
             for (let vip of members) {
                 tr = $ts("<tr>");
+                tr.appendElement($ts("<td>").display(vip.card_id));
                 tr.appendElement($ts("<td>").display(vip.name));
+                tr.appendElement($ts("<td>").display(vip.balance.toString()));
 
                 if (vip.gender == "1") {
                     str = "男";

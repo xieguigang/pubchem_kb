@@ -53,7 +53,9 @@ declare namespace models {
     }
     interface VIP_members {
         id?: string;
+        card_id: string;
         name: string;
+        balance?: number;
         gender: string;
         phone: string;
         address: string;

@@ -272,7 +272,9 @@ var pages;
             for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
                 var vip = members_1[_i];
                 tr = $ts("<tr>");
+                tr.appendElement($ts("<td>").display(vip.card_id));
                 tr.appendElement($ts("<td>").display(vip.name));
+                tr.appendElement($ts("<td>").display(vip.balance.toString()));
                 if (vip.gender == "1") {
                     str = "男";
                 }
