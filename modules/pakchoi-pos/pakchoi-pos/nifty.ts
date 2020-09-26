@@ -1,11 +1,12 @@
 namespace nifty {
 
-    export function errorMsg(msg: string) {
+    export function errorMsg(msg: string, callback: Delegate.Action = null) {
         (<any>$).niftyNoty({
             type: 'danger',
             message: msg,
             container: 'floating',
-            timer: 5000
+            timer: 5000,
+            onHidden: callback
         });
     }
 

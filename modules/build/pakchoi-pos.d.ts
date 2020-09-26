@@ -65,7 +65,7 @@ declare namespace models {
     }
 }
 declare namespace nifty {
-    function errorMsg(msg: string): void;
+    function errorMsg(msg: string, callback?: Delegate.Action): void;
     function showAlert(message: string): void;
 }
 declare namespace pages {
@@ -87,6 +87,13 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         send(): void;
+    }
+}
+declare namespace pages {
+    class VIP_member extends Bootstrap {
+        readonly appName: string;
+        private card_id;
+        protected init(): void;
     }
 }
 declare namespace pages {

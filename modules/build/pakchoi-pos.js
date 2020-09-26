@@ -82,6 +82,7 @@ var app;
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
         Router.AddAppHandler(new pages.VIP_members());
+        Router.AddAppHandler(new pages.VIP_member());
         Router.AddAppHandler(new pages.billing());
         Router.AddAppHandler(new pages.POS());
         Router.RunApp();
@@ -92,12 +93,14 @@ $ts.mode = Modes.debug;
 $ts(app.start);
 var nifty;
 (function (nifty) {
-    function errorMsg(msg) {
+    function errorMsg(msg, callback) {
+        if (callback === void 0) { callback = null; }
         $.niftyNoty({
             type: 'danger',
             message: msg,
             container: 'floating',
-            timer: 5000
+            timer: 5000,
+            onHidden: callback
         });
     }
     nifty.errorMsg = errorMsg;
@@ -235,6 +238,33 @@ var pages;
         return password_reminder;
     }(Bootstrap));
     pages.password_reminder = password_reminder;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var VIP_member = /** @class */ (function (_super) {
+        __extends(VIP_member, _super);
+        function VIP_member() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.card_id = $ts.location("card_id");
+            return _this;
+        }
+        Object.defineProperty(VIP_member.prototype, "appName", {
+            get: function () {
+                return "VIP_member";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        VIP_member.prototype.init = function () {
+            if (Strings.Empty(this.card_id, true)) {
+                nifty.errorMsg("对不起，会员卡号不可以为空！", function () {
+                    $goto("/");
+                });
+            }
+        };
+        return VIP_member;
+    }(Bootstrap));
+    pages.VIP_member = VIP_member;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
