@@ -270,8 +270,8 @@ var pages;
             var list = $ts("#list").clear();
             var tr;
             var str;
-            for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
-                var vip = members_1[_i];
+            var vm = this;
+            var _loop_1 = function (vip) {
                 tr = $ts("<tr>");
                 tr.appendElement($ts("<td>").display(vip.card_id));
                 tr.appendElement($ts("<td>").display(vip.name));
@@ -290,10 +290,47 @@ var pages;
                     .appendElement($ts("<td>").display(vip.phone))
                     .appendElement($ts("<td>").display(vip.address))
                     .appendElement($ts("<td>").display(vip.join_time))
-                    .appendElement($ts("<td>").display(vip.note))
+                    // .appendElement($ts("<td>").display(vip.note))
                     .appendElement($ts("<td>").display(vip.admin));
+                var opBtns = $ts("<td>");
+                opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-default", "btn-rounded"],
+                    onclick: function () {
+                        $goto("/VIP?card_id=" + vip.card_id);
+                    }
+                }).display("查看消费记录"));
+                opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-danger", "btn-rounded"],
+                    onclick: function () {
+                        vm.deleteVIP(vip.id);
+                    }
+                }).display("删除"));
+                tr.appendElement(opBtns);
                 list.appendElement(tr);
+            };
+            for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
+                var vip = members_1[_i];
+                _loop_1(vip);
             }
+        };
+        VIP_members.prototype.deleteVIP = function (id) {
+            bootbox.prompt("【危险操作】请输入会员名来确认删除", function (input) {
+                if (!Strings.Empty(input, true)) {
+                    // 确认删除
+                    $ts.post("@delete", { id: id, name: input }, function (result) {
+                        if (result.code == 0) {
+                            location.reload();
+                        }
+                        else {
+                            nifty.errorMsg(result.info);
+                        }
+                    });
+                }
+                else {
+                    // 取消
+                }
+                ;
+            });
         };
         VIP_members.prototype.save = function () {
             var name = $ts.value("#name");
@@ -548,7 +585,7 @@ var pages;
         vendor.prototype.show_vendorList = function (vendors) {
             var list = $ts("#content-list").clear();
             var vm = this;
-            var _loop_1 = function (vendor_2) {
+            var _loop_2 = function (vendor_2) {
                 var status_1 = void 0;
                 if (vendor_2.status == "0") {
                     status_1 = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
@@ -574,7 +611,7 @@ var pages;
             };
             for (var _i = 0, vendors_1 = vendors; _i < vendors_1.length; _i++) {
                 var vendor_2 = vendors_1[_i];
-                _loop_1(vendor_2);
+                _loop_2(vendor_2);
             }
         };
         vendor.prototype.change_vendorStatus = function (id, name) {

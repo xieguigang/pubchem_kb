@@ -96,6 +96,7 @@ declare namespace pages {
         protected init(): void;
         private loadList;
         private showVIPListTable;
+        private deleteVIP;
         save(): void;
     }
 }

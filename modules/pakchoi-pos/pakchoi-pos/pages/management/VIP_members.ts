@@ -29,6 +29,7 @@
             let list = $ts("#list").clear();
             let tr: IHTMLElement;
             let str: string;
+            let vm = this;
 
             for (let vip of members) {
                 tr = $ts("<tr>");
@@ -49,11 +50,45 @@
                     .appendElement($ts("<td>").display(vip.phone))
                     .appendElement($ts("<td>").display(vip.address))
                     .appendElement($ts("<td>").display(vip.join_time))
-                    .appendElement($ts("<td>").display(vip.note))
+                    // .appendElement($ts("<td>").display(vip.note))
                     .appendElement($ts("<td>").display((<any>vip).admin));
+
+                let opBtns = $ts("<td>");
+
+                opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-default", "btn-rounded"],
+                    onclick: function () {
+                        $goto("/VIP?card_id=" + vip.card_id);
+                    }
+                }).display("查看消费记录"));
+                opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-danger", "btn-rounded"],
+                    onclick: function () {
+                        vm.deleteVIP(vip.id);
+                    }
+                }).display("删除"))
+
+                tr.appendElement(opBtns);
 
                 list.appendElement(tr);
             }
+        }
+
+        private deleteVIP(id: string) {
+            bootbox.prompt("【危险操作】请输入会员名来确认删除", function (input) {
+                if (!Strings.Empty(input, true)) {
+                    // 确认删除
+                    $ts.post("@delete", { id: id, name: input }, function (result) {
+                        if (result.code == 0) {
+                            location.reload();
+                        } else {
+                            nifty.errorMsg(<string>result.info);
+                        }
+                    })
+                } else {
+                    // 取消
+                };
+            });
         }
 
         public save() {
