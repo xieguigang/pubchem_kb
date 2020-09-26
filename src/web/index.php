@@ -92,8 +92,12 @@ class App {
 	 * 
 	 * @uses view
 	*/
-	public function VIP() {
-		View::Display();
+	public function VIP($card_id = null) {
+		if (empty($card_id)) {
+			View::Display();
+		} else {
+			View::Show(APP_DOC_ROOT . "/src/.etc/views/VIP_details.html");
+		}
 	}
 
 	/**
