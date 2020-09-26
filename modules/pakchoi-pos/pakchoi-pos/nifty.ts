@@ -14,4 +14,9 @@ namespace nifty {
         $ts("#alert").show();
         $ts("#message").show().display(message);
     }
+
+    export function clearAlert() {
+        $ts("#alert").hide();
+        $ts("#message").hide().clear();
+    }
 }

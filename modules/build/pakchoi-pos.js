@@ -109,6 +109,11 @@ var nifty;
         $ts("#message").show().display(message);
     }
     nifty.showAlert = showAlert;
+    function clearAlert() {
+        $ts("#alert").hide();
+        $ts("#message").hide().clear();
+    }
+    nifty.clearAlert = clearAlert;
 })(nifty || (nifty = {}));
 var pages;
 (function (pages) {
@@ -334,7 +339,8 @@ var pages;
             var tr;
             var str;
             var vm = this;
-            var _loop_1 = function (vip) {
+            for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
+                var vip = members_1[_i];
                 tr = $ts("<tr>");
                 tr.appendElement($ts("<td>").display(vip.card_id));
                 tr.appendElement($ts("<td>").display(vip.name));
@@ -354,33 +360,38 @@ var pages;
                     .appendElement($ts("<td>").display(vip.address))
                     .appendElement($ts("<td>").display(vip.join_time))
                     // .appendElement($ts("<td>").display(vip.note))
-                    .appendElement($ts("<td>").display(vip.admin));
-                var opBtns = $ts("<td>");
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-default", "btn-rounded"],
-                    onclick: function () {
-                        $goto("/VIP?card_id=" + vip.card_id);
-                    }
-                }).display("查看消费记录"));
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-primary", "btn-rounded"],
-                    onclick: function () {
-                        vm.editRow(vip);
-                    }
-                }).display("编辑会员信息"));
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-danger", "btn-rounded"],
-                    onclick: function () {
-                        vm.deleteVIP(vip.id);
-                    }
-                }).display("删除"));
-                tr.appendElement(opBtns);
+                    .appendElement($ts("<td>").display(vip.admin))
+                    .appendElement(vm.operatorButtons(vip));
                 list.appendElement(tr);
-            };
-            for (var _i = 0, members_1 = members; _i < members_1.length; _i++) {
-                var vip = members_1[_i];
-                _loop_1(vip);
             }
+        };
+        VIP_members.prototype.operatorButtons = function (vip) {
+            var vm = this;
+            var view = $ts("<button>", {
+                class: ["btn", "btn-default", "btn-rounded"], onclick: function () {
+                    $goto("/VIP?card_id=" + vip.card_id);
+                }
+            }).display("查看消费记录");
+            var edit = $ts("<button>", {
+                class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
+                    vm.editRow(vip);
+                }
+            }).display("编辑会员信息");
+            var charge = $ts("<button>", {
+                class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
+                    vm.editRow(vip);
+                }
+            }).display("会员充值");
+            var _delete = $ts("<button>", {
+                class: ["btn", "btn-danger", "btn-rounded"], onclick: function () {
+                    vm.deleteVIP(vip.id);
+                }
+            }).display("删除");
+            return $ts("<td>")
+                .appendElement(view)
+                .appendElement(edit)
+                .appendElement(charge)
+                .appendElement(_delete);
         };
         VIP_members.prototype.editRow = function (vip) {
             this.editMode = true;
@@ -390,6 +401,7 @@ var pages;
             $ts.value("#address", vip.address);
             $ts.value("#gender", vip.gender);
             $ts.value("#note", vip.note);
+            nifty.clearAlert();
             $ts("#save").display("保存会员信息");
             $('#add-modal').modal('show');
         };
@@ -401,6 +413,7 @@ var pages;
             $ts.value("#address", "");
             $ts.value("#gender", "-1");
             $ts.value("#note", "");
+            nifty.clearAlert();
             $ts("#save").display("新增会员信息");
             $('#add-modal').modal('show');
         };
@@ -676,7 +689,7 @@ var pages;
         vendor.prototype.show_vendorList = function (vendors) {
             var list = $ts("#content-list").clear();
             var vm = this;
-            var _loop_2 = function (vendor_2) {
+            var _loop_1 = function (vendor_2) {
                 var status_1 = void 0;
                 if (vendor_2.status == "0") {
                     status_1 = $ts("<span>", { class: ["label", "label-table", "label-primary"] }).display("合作中");
@@ -702,7 +715,7 @@ var pages;
             };
             for (var _i = 0, vendors_1 = vendors; _i < vendors_1.length; _i++) {
                 var vendor_2 = vendors_1[_i];
-                _loop_2(vendor_2);
+                _loop_1(vendor_2);
             }
         };
         vendor.prototype.change_vendorStatus = function (id, name) {

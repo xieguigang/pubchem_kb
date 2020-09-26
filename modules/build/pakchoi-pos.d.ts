@@ -67,6 +67,7 @@ declare namespace models {
 declare namespace nifty {
     function errorMsg(msg: string, callback?: Delegate.Action): void;
     function showAlert(message: string): void;
+    function clearAlert(): void;
 }
 declare namespace pages {
     class lockscreen extends Bootstrap {
@@ -106,6 +107,7 @@ declare namespace pages {
         private inputScanner;
         private loadList;
         private showVIPListTable;
+        private operatorButtons;
         private editRow;
         addrow(): void;
         private deleteVIP;

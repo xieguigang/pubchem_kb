@@ -60,33 +60,42 @@
                     .appendElement($ts("<td>").display(vip.address))
                     .appendElement($ts("<td>").display(vip.join_time))
                     // .appendElement($ts("<td>").display(vip.note))
-                    .appendElement($ts("<td>").display((<any>vip).admin));
-
-                let opBtns = $ts("<td>");
-
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-default", "btn-rounded"],
-                    onclick: function () {
-                        $goto("/VIP?card_id=" + vip.card_id);
-                    }
-                }).display("查看消费记录"));
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-primary", "btn-rounded"],
-                    onclick: function () {
-                        vm.editRow(vip);
-                    }
-                }).display("编辑会员信息"))
-                opBtns.appendElement($ts("<button>", {
-                    class: ["btn", "btn-danger", "btn-rounded"],
-                    onclick: function () {
-                        vm.deleteVIP(vip.id);
-                    }
-                }).display("删除"))
-
-                tr.appendElement(opBtns);
+                    .appendElement($ts("<td>").display((<any>vip).admin))
+                    .appendElement(vm.operatorButtons(vip));
 
                 list.appendElement(tr);
             }
+        }
+
+        private operatorButtons(vip: models.VIP_members) {
+            let vm = this;
+            let view = $ts("<button>", {
+                class: ["btn", "btn-default", "btn-rounded"], onclick: function () {
+                    $goto("/VIP?card_id=" + vip.card_id);
+                }
+            }).display("查看消费记录");
+            let edit = $ts("<button>", {
+                class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
+                    vm.editRow(vip);
+                }
+            }).display("编辑会员信息");
+            let charge = $ts("<button>", {
+                class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
+                    vm.editRow(vip);
+                }
+            }).display("会员充值");
+            let _delete = $ts("<button>", {
+                class: ["btn", "btn-danger", "btn-rounded"], onclick: function () {
+                    vm.deleteVIP(vip.id);
+                }
+            }).display("删除");
+
+            return $ts("<td>")
+                .appendElement(view)
+                .appendElement(edit)
+                .appendElement(charge)
+                .appendElement(_delete)
+                ;
         }
 
         private editRow(vip: models.VIP_members) {
@@ -98,6 +107,8 @@
             $ts.value("#address", vip.address);
             $ts.value("#gender", vip.gender);
             $ts.value("#note", vip.note);
+
+            nifty.clearAlert();
 
             $ts("#save").display("保存会员信息");
             $('#add-modal').modal('show');
@@ -112,6 +123,8 @@
             $ts.value("#address", "");
             $ts.value("#gender", "-1");
             $ts.value("#note", "");
+
+            nifty.clearAlert();
 
             $ts("#save").display("新增会员信息");
             $('#add-modal').modal('show');
