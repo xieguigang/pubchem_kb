@@ -252,6 +252,7 @@ var pages;
         });
         VIP_members.prototype.init = function () {
             this.loadList();
+            this.scanner = new Scanner(function (card_id) { return $ts.value("#card_id", card_id); });
         };
         VIP_members.prototype.loadList = function (page) {
             if (page === void 0) { page = 1; }
@@ -296,8 +297,12 @@ var pages;
         };
         VIP_members.prototype.save = function () {
             var name = $ts.value("#name");
+            var card_id = $ts.value("#card_id");
             if (Strings.Empty(name, true)) {
                 return nifty.showAlert("对不起，会员姓名不可以为空！");
+            }
+            else if (Strings.Empty(card_id, true)) {
+                return nifty.showAlert("对不起，请刷一次会员卡获取卡号信息！");
             }
             var phone = $ts.value("#phone");
             var address = $ts.value("#address");
@@ -308,7 +313,8 @@ var pages;
                 phone: phone,
                 address: address,
                 gender: gender,
-                note: note
+                note: note,
+                card_id: card_id
             };
             $ts.post("@save", data, function (result) {
                 if (result.code == 0) {

@@ -71,7 +71,7 @@
                                                 <th>电话号码</th>
                                                 <th>联系地址</th>
                                                 <th>添加时间</th>
-                                                <th>信息</th>                                           
+                                                <th>信息</th>
                                                 <th>操作员</th>
                                             </tr>
                                         </thead>
@@ -85,7 +85,7 @@
                                                         <select id="demo-foo-filter-status" class="form-control">
                                                             <option value="">显示全部会员</option>
                                                             <option value="男">男</option>
-                                                            <option value="女">女</option>                                        
+                                                            <option value="女">女</option>
                                                         </select>
                                                         &nbsp; &nbsp;
                                                         <button id="addrow" data-target="#add-modal" data-toggle="modal"
@@ -106,7 +106,7 @@
                                             </div>
                                         </div>
                                         <tbody id="list">
-                                    
+
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -168,12 +168,21 @@
                 <!--Modal body-->
                 <div class="modal-body">
                     <p class="text-semibold text-main">操作说明</p>
-                    <p>填写所需要添加的会员信息，再点击【新增会员信息】按钮即可。会员信息仅需要填写一次即可。</p>
+                    <p>请首先使用扫码枪扫描新会员卡上面的条形码或者将会员卡放置于读卡器上，获取卡号信息之后，再填写所需要添加的会员信息。最后点击【新增会员信息】按钮即可。</p>
                     <br>
                     <p class="text-semibold text-main">数据填写</p>
                     <p>
 
                     <form class="panel-body form-horizontal form-padding">
+
+                        <!--Email Input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="card_id">卡号</label>
+                            <div class="col-md-9">
+                                <input type="text" id="card_id" readonly class="form-control" placeholder="会员卡号">
+                                <small class="help-block">使用扫码枪扫描会员卡或者读卡器读取会员卡卡号信息</small>
+                            </div>
+                        </div>
 
                         <!--Email Input-->
                         <div class="form-group">
@@ -189,7 +198,7 @@
                             <div class="col-md-9">
                                 <input type="text" id="phone" class="form-control" placeholder="联系电话">
                                 <small class="help-block">填写会员的联系电话</small>
-                            </div>                       
+                            </div>
                         </div>
 
                         <!--Password-->
@@ -206,7 +215,8 @@
 
                             <!-- Bootstrap Select : primary -->
                             <!--===================================================-->
-                            <select id="gender" class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4" data-style="btn-primary">
+                            <select id="gender" class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                                data-style="btn-primary">
                                 <option value="-1">不记录</option>
                                 <option value="1">男</option>
                                 <option value="0">女</option>

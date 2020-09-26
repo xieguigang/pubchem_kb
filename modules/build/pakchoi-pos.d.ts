@@ -92,6 +92,7 @@ declare namespace pages {
 declare namespace pages {
     class VIP_members extends Bootstrap {
         readonly appName: string;
+        private scanner;
         protected init(): void;
         private loadList;
         private showVIPListTable;

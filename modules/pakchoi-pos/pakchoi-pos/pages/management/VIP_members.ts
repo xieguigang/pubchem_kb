@@ -6,8 +6,11 @@
             return "VIP_members";
         }
 
+        private scanner: Scanner;
+
         protected init(): void {
             this.loadList();
+            this.scanner = new Scanner(card_id => $ts.value("#card_id", card_id));
         }
 
         private loadList(page: number = 1) {
@@ -55,9 +58,12 @@
 
         public save() {
             let name: string = $ts.value("#name");
+            let card_id: string = $ts.value("#card_id");
 
             if (Strings.Empty(name, true)) {
                 return nifty.showAlert("对不起，会员姓名不可以为空！");
+            } else if (Strings.Empty(card_id, true)) {
+                return nifty.showAlert("对不起，请刷一次会员卡获取卡号信息！");
             }
 
             let phone: string = $ts.value("#phone");
@@ -70,7 +76,8 @@
                 phone: phone,
                 address: address,
                 gender: gender,
-                note: note
+                note: note,
+                card_id: card_id
             };
 
             $ts.post("@save", data, function (result) {
