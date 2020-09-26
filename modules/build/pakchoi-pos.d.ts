@@ -92,6 +92,7 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private loadList;
+        private showVIPListTable;
         save(): void;
     }
 }

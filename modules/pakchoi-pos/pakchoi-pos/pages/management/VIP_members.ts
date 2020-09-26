@@ -11,38 +11,44 @@
         }
 
         private loadList(page: number = 1) {
+            let vm = this;
+
             $ts.get(`@load?page=${page}`, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(<string>result.info);
                 } else {
-                    let list = $ts("#list").clear();
-                    let tr: IHTMLElement;
-                    let str: string;
-
-                    for (let vip of <models.VIP_members[]>result.info) {
-                        tr = $ts("<tr>");
-                        tr.appendElement($ts("<td>").display(vip.name));
-
-                        if (vip.gender == "1") {
-                            str = "男";
-                        } else if (vip.gender == "0") {
-                            str = "女";
-                        } else {
-                            str = "未记录";
-                        }
-
-                        tr
-                            .appendElement($ts("<td>").display(str))
-                            .appendElement($ts("<td>").display(vip.phone))
-                            .appendElement($ts("<td>").display(vip.address))
-                            .appendElement($ts("<td>").display(vip.join_time))
-                            .appendElement($ts("<td>").display(vip.note))
-                            .appendElement($ts("<td>").display((<any>vip).admin));
-
-                        list.appendElement(tr);
-                    }
+                    vm.showVIPListTable(<models.VIP_members[]>result.info);
                 }
             });
+        }
+
+        private showVIPListTable(members: models.VIP_members[]) {
+            let list = $ts("#list").clear();
+            let tr: IHTMLElement;
+            let str: string;
+
+            for (let vip of members) {
+                tr = $ts("<tr>");
+                tr.appendElement($ts("<td>").display(vip.name));
+
+                if (vip.gender == "1") {
+                    str = "男";
+                } else if (vip.gender == "0") {
+                    str = "女";
+                } else {
+                    str = "未记录";
+                }
+
+                tr
+                    .appendElement($ts("<td>").display(str))
+                    .appendElement($ts("<td>").display(vip.phone))
+                    .appendElement($ts("<td>").display(vip.address))
+                    .appendElement($ts("<td>").display(vip.join_time))
+                    .appendElement($ts("<td>").display(vip.note))
+                    .appendElement($ts("<td>").display((<any>vip).admin));
+
+                list.appendElement(tr);
+            }
         }
 
         public save() {
