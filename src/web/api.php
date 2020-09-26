@@ -10,7 +10,8 @@ class App {
      * @method POST
     */
     public function login($user, $passwd) {
-        $check = (new Table("admin"))
+        $admin = new Table("admin");
+        $check = $admin
             ->where([
                 "flag" => 0,
                 "lower(`realname`)|lower(`email`)" => strtolower($user),
@@ -18,8 +19,8 @@ class App {
             ])
             ->find();
 
-        if (empty($check) || $check == false) {
-            controller::error("用户账号未找到或者密码错误！");
+        if (Utils::isDbNull($check)) {
+            controller::error("用户账号未找到或者密码错误！", -1, $admin->getLastMySql());
         } else {
             foreach($check as $item => $val) {
                 $_SESSION[$item] = $val;
