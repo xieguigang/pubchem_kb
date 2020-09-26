@@ -26,7 +26,9 @@ class accessController extends controller {
         
         if (empty($access)) {
             // 什么也没有填写的时候，默认为登录用户才可以访问
-            return web::login_userId() > 0;
+            return (web::login_userId() > 0) && self::checkOperator();
+        } else if (!self::checkOperator()) {
+            return false;
         } else {
             // access现在不为空的了
             $access = explode("|", $access);
@@ -53,6 +55,20 @@ class accessController extends controller {
         
         // 当前的用户任何权限条件都不满足，则禁止访问当前的这个控制器
         return false;
+    }
+
+    private static function checkOperator() {
+        $check = (new Table("admin"))->where(["id" => web::login_userId()])->find();
+
+        if (Utils::isDbNull($check)) {
+            return false;
+        } else if ($check["flag"] == 1) {
+            unset($_SESSION["id"]);
+            session_destroy();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private static function isRole($roleId) {

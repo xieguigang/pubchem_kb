@@ -12,8 +12,7 @@ class App {
     public function login($user, $passwd) {
         $admin = new Table("admin");
         $check = $admin
-            ->where([
-                "flag" => 0,
+            ->where([                
                 "lower(`realname`)|lower(`email`)" => strtolower($user),
                 "lower(`password`)" => strtolower($passwd)
             ])
@@ -21,6 +20,8 @@ class App {
 
         if (Utils::isDbNull($check)) {
             controller::error("用户账号未找到或者密码错误！", -1, $admin->getLastMySql());
+        } else if ($check["flag"] == 1) {
+            controller::error("对不起，本账号已经被管理员禁用！");        
         } else {
             foreach($check as $item => $val) {
                 $_SESSION[$item] = $val;
