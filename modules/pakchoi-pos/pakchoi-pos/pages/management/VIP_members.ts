@@ -81,7 +81,7 @@
             }).display("编辑会员信息");
             let charge = $ts("<button>", {
                 class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
-                    vm.editRow(vip);
+                    vm.charge(vip);
                 }
             }).display("会员充值");
             let _delete = $ts("<button>", {
@@ -96,6 +96,27 @@
                 .appendElement(charge)
                 .appendElement(_delete)
                 ;
+        }
+
+        private charge(vip: models.VIP_members) {
+            bootbox.prompt("请输入所需要充值的金额：", function (input) {
+                if (!Strings.Empty(input, true)) {
+                    // 确认
+                    if (!Strings.isNumericPattern(input)) {
+                        return nifty.errorMsg("请输入正确格式的金额数字！");
+                    } else {
+                        $ts.post(`@charge`, { id: vip.id, add: parseFloat(input) }, function (result) {
+                            if (result.code == 0) {
+                                location.reload();
+                            } else {
+                                nifty.errorMsg(<string>result.info);
+                            }
+                        });
+                    }
+                } else {
+                    // 取消
+                };
+            });
         }
 
         private editRow(vip: models.VIP_members) {

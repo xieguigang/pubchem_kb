@@ -42,7 +42,7 @@ class App {
         $list = $VIP_members 
             ->left_join("admin")
             ->on(["VIP_members" => "operator", "admin" => "id"])
-            ->where(["flag" => 0])
+            ->where(["`VIP_members`.`flag`" => 0])
             ->limit($start, $page_size)
             ->order_by("id desc")
             ->select(["VIP_members.*", "admin.realname as admin"]);
@@ -88,5 +88,13 @@ class App {
 
             controller::success($vip);
         }
+    }
+
+    /**
+     * @uses api
+     * @method POST
+    */
+    public function charge($id, $add) {
+
     }
 }

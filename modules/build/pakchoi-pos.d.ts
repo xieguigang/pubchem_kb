@@ -108,6 +108,7 @@ declare namespace pages {
         private loadList;
         private showVIPListTable;
         private operatorButtons;
+        private charge;
         private editRow;
         addrow(): void;
         private deleteVIP;

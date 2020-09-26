@@ -379,7 +379,7 @@ var pages;
             }).display("编辑会员信息");
             var charge = $ts("<button>", {
                 class: ["btn", "btn-primary", "btn-rounded"], onclick: function () {
-                    vm.editRow(vip);
+                    vm.charge(vip);
                 }
             }).display("会员充值");
             var _delete = $ts("<button>", {
@@ -392,6 +392,30 @@ var pages;
                 .appendElement(edit)
                 .appendElement(charge)
                 .appendElement(_delete);
+        };
+        VIP_members.prototype.charge = function (vip) {
+            bootbox.prompt("请输入所需要充值的金额：", function (input) {
+                if (!Strings.Empty(input, true)) {
+                    // 确认
+                    if (!Strings.isNumericPattern(input)) {
+                        return nifty.errorMsg("请输入正确格式的金额数字！");
+                    }
+                    else {
+                        $ts.post("@charge", { id: vip.id, add: parseFloat(input) }, function (result) {
+                            if (result.code == 0) {
+                                location.reload();
+                            }
+                            else {
+                                nifty.errorMsg(result.info);
+                            }
+                        });
+                    }
+                }
+                else {
+                    // 取消
+                }
+                ;
+            });
         };
         VIP_members.prototype.editRow = function (vip) {
             this.editMode = true;
