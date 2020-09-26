@@ -96,7 +96,7 @@ class App {
 		if (empty($card_id)) {
 			View::Display();
 		} else {
-			View::Show(APP_DOC_ROOT . "/src/.etc/views/VIP_details.html");
+			View::Show(APP_DOC_ROOT . "/src/.etc/views/VIP_details.html", ["title" => "会员信息详情"]);
 		}
 	}
 

@@ -53,7 +53,71 @@
 
                             <div class="panel">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">会员信息表</h3>
+                                    <h3 class="panel-title">会员信息详细</h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <form class="panel-body form-horizontal form-padding">
+
+                                        <!--Email Input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="card_id">卡号：</label>
+                                            <div class="col-md-6">
+                                                <p id="card_id" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <!--Email Input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">会员姓名：</label>
+                                            <div class="col-md-6">
+                                                <p id="name" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="balance">充值余额：</label>
+                                            <div class="col-md-6">
+                                                <p id="balance" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="phone">联系电话：</label>
+                                            <div class="col-md-6">
+                                                <p id="phone" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <!--Password-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="address">联系地址：</label>
+                                            <div class="col-md-6">
+                                                <p id="address" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="gender">性别：</label>
+
+                                            <!-- Bootstrap Select : primary -->
+                                            <!--===================================================-->
+                                            <div class="col-md-6">
+                                                <p id="gender" class="form-control"></p>
+                                            </div>
+                                        </div>
+
+                                        <!--Textarea-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="note">描述：</label>
+                                            <div class="col-md-6">
+
+                                                <p id="note" class="form-control"></p>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
                                 </div>
 
                                 <!-- Foo Table - Filtering -->
@@ -63,15 +127,12 @@
                                         class="table table-bordered table-hover toggle-circle" data-page-size="7">
                                         <thead>
                                             <tr>
-                                                <th data-toggle="true">会员卡号</th>
-                                                <th>会员姓名</th>
-                                                <th>充值余额</th>
-                                                <th>性别</th>
-                                                <th>电话号码</th>
-                                                <th>联系地址</th>
-                                                <th>添加时间</th>                                              
-                                                <th>操作员</th>
-                                                <th>操作</th>
+                                                <th data-toggle="true">交易号</th>
+                                                <th>金额</th>
+                                                <th>订单号</th>
+                                                <th>交易时间</th>
+                                                <th>交易类型</th>
+                                                <th>备注</th>
                                             </tr>
                                         </thead>
                                         <div class="pad-btm form-inline">
@@ -80,16 +141,12 @@
                                                     <div class="form-group">
 
 
-                                                        <label class="control-label">显示商品</label>
+                                                        <label class="control-label">显示交易记录</label>
                                                         <select id="demo-foo-filter-status" class="form-control">
-                                                            <option value="">显示全部会员</option>
-                                                            <option value="男">男</option>
-                                                            <option value="女">女</option>
-                                                        </select>
-                                                        &nbsp; &nbsp;
-                                                        <button id="addrow" data-target="#add-modal" data-toggle="modal"
-                                                            class="btn btn-primary btn-lg"><i class="demo-pli-plus"></i>
-                                                            新增会员信息 </button>
+                                                            <option value="">显示全部交易</option>
+                                                            <option value="充值">充值</option>
+                                                            <option value="消费">消费</option>
+                                                        </select>                                                     
 
                                                     </div>
 
@@ -109,7 +166,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="10">
+                                                <td colspan="6">
                                                     <div class="text-right">
                                                         <ul class="pagination"></ul>
                                                     </div>

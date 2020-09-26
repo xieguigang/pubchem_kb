@@ -257,10 +257,32 @@ var pages;
         });
         VIP_member.prototype.init = function () {
             if (Strings.Empty(this.card_id, true)) {
-                nifty.errorMsg("对不起，会员卡号不可以为空！", function () {
+                return nifty.errorMsg("对不起，会员卡号不可以为空！", function () {
                     $goto("/");
                 });
             }
+            else {
+                this.loadVIP();
+            }
+        };
+        VIP_member.prototype.loadVIP = function () {
+            $ts.get("@load?card_id=" + this.card_id, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info, function () {
+                        $goto("/");
+                    });
+                }
+                else {
+                    var vip = result.info;
+                    $ts("#card_id").display(vip.card_id);
+                    $ts("#name").display(vip.name);
+                    $ts("#balance").display("\uFFE5" + Strings.round(vip.balance, 2));
+                    $ts("#phone").display(vip.phone);
+                    $ts("#address").display(vip.address);
+                    $ts("#gender").display(vip.gender == "0" ? "女" : (vip.gender == "1" ? "男" : "未记录"));
+                    $ts("#note").display(vip.note);
+                }
+            });
         };
         return VIP_member;
     }(Bootstrap));
@@ -271,7 +293,9 @@ var pages;
     var VIP_members = /** @class */ (function (_super) {
         __extends(VIP_members, _super);
         function VIP_members() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.editMode = false;
+            return _this;
         }
         Object.defineProperty(VIP_members.prototype, "appName", {
             get: function () {
@@ -281,8 +305,17 @@ var pages;
             configurable: true
         });
         VIP_members.prototype.init = function () {
+            var _this = this;
             this.loadList();
-            this.scanner = new Scanner(function (card_id) { return $ts.value("#card_id", card_id); });
+            this.scanner = new Scanner(function (card_id) { return _this.inputScanner(card_id); });
+        };
+        VIP_members.prototype.inputScanner = function (card_id) {
+            if (this.editMode) {
+                nifty.showAlert("目前正在编辑会员信息，请完成编辑后再扫码新增会员信息");
+            }
+            else {
+                $ts.value("#card_id", card_id);
+            }
         };
         VIP_members.prototype.loadList = function (page) {
             if (page === void 0) { page = 1; }
@@ -330,6 +363,13 @@ var pages;
                     }
                 }).display("查看消费记录"));
                 opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-primary", "btn-rounded"],
+                    onclick: function () {
+                        vm.editMode = true;
+                        $('#add-modal').modal('show');
+                    }
+                }).display("编辑会员信息"));
+                opBtns.appendElement($ts("<button>", {
                     class: ["btn", "btn-danger", "btn-rounded"],
                     onclick: function () {
                         vm.deleteVIP(vip.id);
@@ -342,6 +382,10 @@ var pages;
                 var vip = members_1[_i];
                 _loop_1(vip);
             }
+        };
+        VIP_members.prototype.addrow = function () {
+            this.editMode = false;
+            $('#add-modal').modal('show');
         };
         VIP_members.prototype.deleteVIP = function (id) {
             bootbox.prompt("【危险操作】请输入会员名来确认删除", function (input) {

@@ -94,15 +94,19 @@ declare namespace pages {
         readonly appName: string;
         private card_id;
         protected init(): void;
+        private loadVIP;
     }
 }
 declare namespace pages {
     class VIP_members extends Bootstrap {
         readonly appName: string;
         private scanner;
+        private editMode;
         protected init(): void;
+        private inputScanner;
         private loadList;
         private showVIPListTable;
+        addrow(): void;
         private deleteVIP;
         save(): void;
     }

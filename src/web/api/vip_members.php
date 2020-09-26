@@ -70,4 +70,23 @@ class App {
 
         controller::success("1");
     }
+
+    /**
+     * @uses api
+    */
+    public function get($card_id) {
+        $vip = (new Table("VIP_members"))->where(["card_id" => $card_id, "flag" => 0])->find();
+
+        if (Utils::isDbNull($vip)){
+            controller::error("对不起，没有找到卡号为{$card_id}的会员记录");
+        } else {
+            foreach(array_keys($vip) as $field) {
+                if (Utils::isDbNull($vip[$field]) && $field != "balance") {
+                    $vip[$field] = "没有填写";
+                }
+            }
+
+            controller::success($vip);
+        }
+    }
 }

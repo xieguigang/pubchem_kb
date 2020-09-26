@@ -7,10 +7,19 @@
         }
 
         private scanner: Scanner;
+        private editMode: boolean = false;
 
         protected init(): void {
             this.loadList();
-            this.scanner = new Scanner(card_id => $ts.value("#card_id", card_id));
+            this.scanner = new Scanner(card_id => this.inputScanner(card_id));
+        }
+
+        private inputScanner(card_id: string) {
+            if (this.editMode) {
+                nifty.showAlert("目前正在编辑会员信息，请完成编辑后再扫码新增会员信息");
+            } else {
+                $ts.value("#card_id", card_id)
+            }
         }
 
         private loadList(page: number = 1) {
@@ -62,6 +71,13 @@
                     }
                 }).display("查看消费记录"));
                 opBtns.appendElement($ts("<button>", {
+                    class: ["btn", "btn-primary", "btn-rounded"],
+                    onclick: function () {
+                        vm.editMode = true;
+                        $('#add-modal').modal('show');
+                    }
+                }).display("编辑会员信息"))
+                opBtns.appendElement($ts("<button>", {
                     class: ["btn", "btn-danger", "btn-rounded"],
                     onclick: function () {
                         vm.deleteVIP(vip.id);
@@ -72,6 +88,12 @@
 
                 list.appendElement(tr);
             }
+        }
+
+        public addrow() {
+            this.editMode = false;
+
+            $('#add-modal').modal('show');
         }
 
         private deleteVIP(id: string) {
