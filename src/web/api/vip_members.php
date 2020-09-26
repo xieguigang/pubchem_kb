@@ -42,6 +42,7 @@ class App {
         $list = $VIP_members 
             ->left_join("admin")
             ->on(["VIP_members" => "operator", "admin" => "id"])
+            ->where(["flag" => 0])
             ->limit($start, $page_size)
             ->order_by("id desc")
             ->select(["VIP_members.*", "admin.realname as admin"]);
@@ -51,5 +52,22 @@ class App {
         } else {
             controller::success($list);
         }
+    }
+
+    /**
+     * @uses api
+     * @method POST
+    */
+    public function delete($id, $name) {
+        $check = (new Table("VIP_members"))->where(["id" => $id])->find();
+
+        if (Utils::isDbNull($check) || $check["name"] != $name) {
+            controller::error("对不起，没有找到这个会员或者输入的会员名确认信息不正确！");
+        }
+
+        // 为了保持记录完整性，这里不进行物理删除
+        (new Table("VIP_members"))->where(["id" => $id])->save(["flag" => 1]);
+
+        controller::success("1");
     }
 }

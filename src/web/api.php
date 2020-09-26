@@ -12,6 +12,7 @@ class App {
     public function login($user, $passwd) {
         $check = (new Table("admin"))
             ->where([
+                "flag" => 0,
                 "lower(`realname`)|lower(`email`)" => strtolower($user),
                 "lower(`password`)" => strtolower($passwd)
             ])
