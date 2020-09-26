@@ -79,15 +79,15 @@ class App {
 
         if (Utils::isDbNull($vip)){
             controller::error("对不起，没有找到卡号为{$card_id}的会员记录");
-        } else {
-            foreach(array_keys($vip) as $field) {
-                if (Utils::isDbNull($vip[$field]) && $field != "balance") {
-                    $vip[$field] = "没有填写";
-                }
-            }
+        } 
 
-            controller::success($vip);
+        foreach(array_keys($vip) as $field) {
+            if (Utils::isDbNull($vip[$field]) && $field != "balance") {
+                $vip[$field] = "没有填写";
+            }
         }
+
+        controller::success($vip);        
     }
 
     /**
@@ -95,6 +95,23 @@ class App {
      * @method POST
     */
     public function charge($id, $add) {
+        $check = (new Table("VIP_members"))->where(["id" => $id, "flag" => 0])->find();
 
+        if (Utils::isDbNull($check)) {
+            controller::error("对不起，没有找到会员信息");
+        }
+
+        (new Table("VIP_waterflow"))->add([
+            "vip" => $id,
+            "money" => $add,
+            "waterflow_id" => -1,
+            "time" => Utils::Now(),
+            "note" => "会员充值$add元",
+            "operator" => web::login_userId()
+        ]);
+
+        (new Table("VIP_members"))->where(["id" => $id])->save(["balance" => "~`balance` + $add"]);
+
+        controller::success(1);
     }
 }
