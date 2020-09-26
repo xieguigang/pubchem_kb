@@ -73,8 +73,7 @@
                 opBtns.appendElement($ts("<button>", {
                     class: ["btn", "btn-primary", "btn-rounded"],
                     onclick: function () {
-                        vm.editMode = true;
-                        $('#add-modal').modal('show');
+                        vm.editRow(vip);
                     }
                 }).display("编辑会员信息"))
                 opBtns.appendElement($ts("<button>", {
@@ -90,9 +89,31 @@
             }
         }
 
+        private editRow(vip: models.VIP_members) {
+            this.editMode = true;
+
+            $ts.value("#name", vip.name);
+            $ts.value("#card_id", vip.card_id);
+            $ts.value("#phone", vip.phone);
+            $ts.value("#address", vip.address);
+            $ts.value("#gender", vip.gender);
+            $ts.value("#note", vip.note);
+
+            $ts("#save").display("保存会员信息");
+            $('#add-modal').modal('show');
+        }
+
         public addrow() {
             this.editMode = false;
 
+            $ts.value("#name", "");
+            $ts.value("#card_id", "");
+            $ts.value("#phone", "");
+            $ts.value("#address", "");
+            $ts.value("#gender", "-1");
+            $ts.value("#note", "");
+
+            $ts("#save").display("新增会员信息");
             $('#add-modal').modal('show');
         }
 

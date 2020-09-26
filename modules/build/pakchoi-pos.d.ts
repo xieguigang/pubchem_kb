@@ -106,6 +106,7 @@ declare namespace pages {
         private inputScanner;
         private loadList;
         private showVIPListTable;
+        private editRow;
         addrow(): void;
         private deleteVIP;
         save(): void;
