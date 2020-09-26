@@ -10,11 +10,11 @@ class App {
      * @uses api
      * @method POST
     */
-    public function add($name, $phone, $address, $gender, $note) {
-        $check = (new Table("VIP_members"))->where(["name" => $name])->find();
+    public function add($card_id, $name, $phone, $address, $gender, $note) {
+        $check = (new Table("VIP_members"))->where(["card_id" => $card_id])->find();
 
         if (!(empty($check) || $check == false)) {
-            controller::error("对不起，会员名已经重复了。");
+            controller::error("对不起，当前输入的会员卡已经被使用了。");
         }
 
         $result = (new Table("VIP_members"))->add([
@@ -24,7 +24,9 @@ class App {
             "address" => $address,
             "join_time" => Utils::Now(),
             "operator" => web::login_userId(),
-            "note" => $note
+            "note" => $note,
+            "card_id" => $card_id,
+            "balance" => 0
         ]);
 
         if ($result == false) {
