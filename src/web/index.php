@@ -109,6 +109,11 @@ class App {
 		View::Display();
 	}
 
+	/**
+	 * 查看服务器信息
+	 * 
+	 * @uses view
+	*/
 	public function phpinfo() {
 		phpinfo();		
 	}

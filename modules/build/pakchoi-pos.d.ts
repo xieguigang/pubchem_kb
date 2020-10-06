@@ -12,6 +12,22 @@ declare class Scanner {
     private triggerEvt;
     private scanCode;
 }
+declare class bootbox {
+    static prompt(message: string, handle: (input: string) => void): any;
+    static dialog(config: {
+        title: string;
+        message: string;
+        buttons: {
+            cancel?: bootboxButton;
+            confirm: bootboxButton;
+        };
+    }): any;
+}
+interface bootboxButton {
+    label: string;
+    className?: string;
+    callback?: Delegate.Action;
+}
 declare namespace app {
     function start(): void;
 }
