@@ -197,6 +197,7 @@ declare namespace pages {
         private showVIP;
         private refresh;
         private addGoodsItem;
+        private vip_balance;
         private total;
         /**
          * 点击账单结算按钮进行支付结算

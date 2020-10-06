@@ -82,6 +82,8 @@
             $ts.get(`@get_vip?card_id=${card_id}`, function (result) {
                 if (result.code == 0) {
                     vm.vip_info = <models.VIP_members>result.info;
+                    vm.refresh();
+
                     $ts("#vip_name").display(`${vm.vip_info.name} ${card_id}`);
                 } else {
                     // 没有找到会员信息
@@ -99,6 +101,10 @@
             }
 
             table.appendElement(this.total(total));
+
+            if (!isNullOrUndefined(this.vip_info)) {
+                table.appendElement(this.vip_balance(total));
+            }
         }
 
         private addGoodsItem(item: models.goods, count: number) {
@@ -113,6 +119,20 @@
 
             tr.appendElement($ts("<td>").display(displayText));
             tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${item.price * count}`));
+
+            return tr;
+        }
+
+        private vip_balance(cost: number): HTMLElement {
+            let tr = $ts("<tr>", { class: "total" });
+
+            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("会员余额结算"))
+
+            if (this.vip_info.balance >= cost) {
+                tr.appendElement($ts("<td>", { class: "alignright" }).display("可以使用余额全额支付"))
+            } else {
+                tr.appendElement($ts("<td>", { class: "alignright" }).display(`余额不足，还需要支付 ￥${cost - this.vip_info.balance}`))
+            }
 
             return tr;
         }

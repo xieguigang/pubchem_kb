@@ -959,6 +959,7 @@ var pages;
             $ts.get("@get_vip?card_id=" + card_id, function (result) {
                 if (result.code == 0) {
                     vm.vip_info = result.info;
+                    vm.refresh();
                     $ts("#vip_name").display(vm.vip_info.name + " " + card_id);
                 }
                 else {
@@ -975,6 +976,9 @@ var pages;
                 total += item.item.price * item.count;
             }
             table.appendElement(this.total(total));
+            if (!isNullOrUndefined(this.vip_info)) {
+                table.appendElement(this.vip_balance(total));
+            }
         };
         billing.prototype.addGoodsItem = function (item, count) {
             var tr = $ts("<tr>");
@@ -987,6 +991,17 @@ var pages;
             }
             tr.appendElement($ts("<td>").display(displayText));
             tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price * count));
+            return tr;
+        };
+        billing.prototype.vip_balance = function (cost) {
+            var tr = $ts("<tr>", { class: "total" });
+            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("会员余额结算"));
+            if (this.vip_info.balance >= cost) {
+                tr.appendElement($ts("<td>", { class: "alignright" }).display("可以使用余额全额支付"));
+            }
+            else {
+                tr.appendElement($ts("<td>", { class: "alignright" }).display("\u4F59\u989D\u4E0D\u8DB3\uFF0C\u8FD8\u9700\u8981\u652F\u4ED8 \uFFE5" + (cost - this.vip_info.balance)));
+            }
             return tr;
         };
         billing.prototype.total = function (cost) {
