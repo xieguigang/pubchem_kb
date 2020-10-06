@@ -11,6 +11,7 @@ class App {
      * @uses api
     */
     public function settlement($goods, $discount, $vip = -1) {
+        # 获取商品信息
         $item_ids = array_keys($goods);
         $items = (new Table("goods"))
             ->where(["id" => in($item_ids)])
@@ -25,6 +26,7 @@ class App {
             $counts = $counts + $goods[$goodItem["id"]];
         }
 
+        # 添加商品交易信息
         $money = $money * $discount;
         $trade = (new Table("waterflow"))
             ->add([
@@ -43,6 +45,7 @@ class App {
         } else {
             $details = new Table("trade_items");
 
+            # 添加详细售卖信息
             foreach($items as $goodItem) {
                 $counts = $goods[$goodItem["id"]];
                 $details->add([

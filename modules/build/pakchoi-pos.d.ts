@@ -202,6 +202,6 @@ declare namespace pages {
          * 点击账单结算按钮进行支付结算
          *
         */
-        private settlement;
+        private trade_settlement;
     }
 }

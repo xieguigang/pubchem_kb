@@ -917,13 +917,14 @@ var pages;
                 // 否则会出现丢失文档碎片的错误？
                 var btn = $(this).button('loading');
                 // business logic...
-                vm.settlement();
+                vm.trade_settlement();
                 //let test = setTimeout(function () {
                 //    clearTimeout(test);
                 //    btn.button('reset')
                 //}, 3000);
                 vm.resetButton = function () {
                     btn.button('reset');
+                    console.log("按钮复位");
                 };
             });
             $ts("#vip_name").display("非会员");
@@ -998,7 +999,7 @@ var pages;
          * 点击账单结算按钮进行支付结算
          *
         */
-        billing.prototype.settlement = function () {
+        billing.prototype.trade_settlement = function () {
             var vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             var data = {
                 goods: {},
@@ -1011,13 +1012,12 @@ var pages;
                 data.goods[item.item.id] = item.count;
             }
             $ts.post('@trade', data, function (result) {
+                vm.resetButton();
                 if (result.code != 0) {
                     $ts("#settlement").display("系统错误");
-                    vm.resetButton();
                 }
                 else {
                     $ts("#settlement").display("交易成功！");
-                    vm.resetButton();
                     setTimeout(function () { return $goto("/POS"); }, 1000);
                 }
             });

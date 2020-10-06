@@ -36,7 +36,7 @@
                 let btn = $(this).button(<any>'loading');
 
                 // business logic...
-                vm.settlement();
+                vm.trade_settlement();
 
                 //let test = setTimeout(function () {
                 //    clearTimeout(test);
@@ -44,6 +44,7 @@
                 //}, 3000);
                 vm.resetButton = function () {
                     btn.button(<any>'reset');
+                    console.log("按钮复位");
                 }
             });
             $ts("#vip_name").display("非会员");
@@ -129,7 +130,7 @@
          * 点击账单结算按钮进行支付结算
          * 
         */
-        private settlement() {
+        private trade_settlement() {
             let vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             let data = {
                 goods: {},
@@ -143,12 +144,12 @@
             }
 
             $ts.post('@trade', data, function (result) {
-                if (result.code != 0) {                
+                vm.resetButton();
+
+                if (result.code != 0) {
                     $ts("#settlement").display("系统错误");
-                    vm.resetButton();
                 } else {
                     $ts("#settlement").display("交易成功！");
-                    vm.resetButton();
                     setTimeout(() => $goto("/POS"), 1000);
                 }
             });
