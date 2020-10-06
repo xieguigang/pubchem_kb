@@ -84,7 +84,9 @@ class App {
 	 * @uses view
 	*/
 	public function billing() {
-		View::Display();
+		View::Display([
+			"card_prefix" => "619"
+		]);
 	}
 
 	/**

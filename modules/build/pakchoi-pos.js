@@ -88,6 +88,28 @@ var app;
         Router.RunApp();
     }
     app.start = start;
+    function print() {
+        $("#print").print({
+            //Use Global styles
+            globalStyles: false,
+            //Add link with attrbute media=print
+            mediaPrint: false,
+            //Custom stylesheet
+            stylesheet: "",
+            //Print in a hidden iframe
+            iframe: true,
+            //Don't print this
+            noPrintSelector: "",
+            //Add this at top
+            prepend: "",
+            //Add this on bottom
+            append: "===============<br/>" + new Date().toString(),
+            deferred: $.Deferred().done(function () {
+                alert("????");
+            })
+        });
+    }
+    app.print = print;
 })(app || (app = {}));
 $ts.mode = Modes.debug;
 $ts(app.start);
@@ -863,7 +885,9 @@ var pages;
     var billing = /** @class */ (function (_super) {
         __extends(billing, _super);
         function billing() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.card_prefix = $ts("@card_prefix");
+            return _this;
         }
         Object.defineProperty(billing.prototype, "appName", {
             get: function () {
@@ -894,17 +918,26 @@ var pages;
                 var btn = $(this).button('loading');
                 // business logic...
                 vm.settlement();
-                var test = setTimeout(function () {
-                    clearTimeout(test);
+                //let test = setTimeout(function () {
+                //    clearTimeout(test);
+                //    btn.button('reset')
+                //}, 3000);
+                vm.resetButton = function () {
                     btn.button('reset');
-                }, 3000);
+                };
             });
+            $ts("#vip_name").display("非会员");
+            console.log("the prefix of the vip card number is: " + this.card_prefix);
             this.loadItem(firstItem);
             this.scanner = new Scanner(function (item_id) { return vm.loadItem(item_id); });
         };
         billing.prototype.loadItem = function (item_id) {
             var vm = this;
-            if (this.goods.ContainsKey(item_id)) {
+            if (item_id.startsWith(this.card_prefix)) {
+                // 是vip卡
+                vm.showVIP(item_id);
+            }
+            else if (this.goods.ContainsKey(item_id)) {
                 this.goods.Item(item_id).count += 1;
                 this.refresh();
             }
@@ -919,6 +952,18 @@ var pages;
                     }
                 });
             }
+        };
+        billing.prototype.showVIP = function (card_id) {
+            var vm = this;
+            $ts.get("@get_vip?card_id=" + card_id, function (result) {
+                if (result.code == 0) {
+                    vm.vip_info = result.info;
+                    $ts("#vip_name").display(vm.vip_info.name + " " + card_id);
+                }
+                else {
+                    // 没有找到会员信息
+                }
+            });
         };
         billing.prototype.refresh = function () {
             var table = $ts("#invoice-table").clear();
@@ -951,12 +996,16 @@ var pages;
         };
         /**
          * 点击账单结算按钮进行支付结算
+         *
         */
         billing.prototype.settlement = function () {
+            var vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             var data = {
                 goods: {},
-                discount: 1
+                discount: 1,
+                vip: vip_id
             };
+            var vm = this;
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
                 var item = _a[_i];
                 data.goods[item.item.id] = item.count;
@@ -964,6 +1013,13 @@ var pages;
             $ts.post('@trade', data, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(JSON.stringify(result));
+                    $ts("#settlement").display("系统错误");
+                    vm.resetButton();
+                }
+                else {
+                    $ts("#settlement").display("交易成功！");
+                    vm.resetButton();
+                    setTimeout(function () { return $goto("/POS"); }, 1000);
                 }
             });
         };

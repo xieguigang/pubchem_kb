@@ -8,6 +8,9 @@
     <meta name="transaction" content="{$transaction.no}" />
     <meta name="get" content="/goods/get" />
     <meta name="trade" content="/trade/settlement" />
+    <meta name="get_vip" content="/vip_members/get" />
+
+    <meta name="card_prefix" content="{$card_prefix}" />
 
     ${includes/head.html}
 
@@ -35,7 +38,7 @@
                                         <td class="content-block aligncenter">
                                             <table class="invoice">
                                                 <tr>
-                                                    <td><strong>{$vip.name}</strong><br>订单编号
+                                                    <td><strong id="vip_name">{$vip.name}</strong><br>订单编号
                                                         #{$transaction.no}<br>{$transaction.time}</td>
                                                 </tr>
                                                 <tr>

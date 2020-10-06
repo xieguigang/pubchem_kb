@@ -30,6 +30,7 @@ interface bootboxButton {
 }
 declare namespace app {
     function start(): void;
+    function print(): void;
 }
 declare namespace models {
     interface vendor {
@@ -188,13 +189,18 @@ declare namespace pages {
         readonly appName: string;
         private goods;
         private scanner;
+        private card_prefix;
+        private vip_info;
+        private resetButton;
         protected init(): void;
         private loadItem;
+        private showVIP;
         private refresh;
         private addGoodsItem;
         private total;
         /**
          * 点击账单结算按钮进行支付结算
+         *
         */
         private settlement;
     }

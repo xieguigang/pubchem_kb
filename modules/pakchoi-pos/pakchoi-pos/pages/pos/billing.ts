@@ -8,6 +8,9 @@
 
         private goods: Dictionary<{ item: models.goods, count: number }>;
         private scanner: Scanner;
+        private card_prefix: string = <any>$ts("@card_prefix");
+        private vip_info: models.VIP_members;
+        private resetButton: Delegate.Action;
 
         protected init(): void {
             let firstItem: string = localStorage.getItem(firstItemKey);
@@ -30,16 +33,22 @@
             $('#settlement').on('click', function () {
                 // 这个状态变化必须要通过jQuery来进行触发
                 // 否则会出现丢失文档碎片的错误？
-                let btn = $(this).button('loading');
+                let btn = $(this).button(<any>'loading');
 
                 // business logic...
                 vm.settlement();
 
-                let test = setTimeout(function () {
-                    clearTimeout(test);
-                    btn.button('reset')
-                }, 3000);
+                //let test = setTimeout(function () {
+                //    clearTimeout(test);
+                //    btn.button('reset')
+                //}, 3000);
+                vm.resetButton = function () {
+                    btn.button(<any>'reset');
+                }
             });
+            $ts("#vip_name").display("非会员");
+
+            console.log(`the prefix of the vip card number is: ${this.card_prefix}`);
 
             this.loadItem(firstItem);
             this.scanner = new Scanner(item_id => vm.loadItem(item_id));
@@ -48,7 +57,10 @@
         private loadItem(item_id: string) {
             let vm = this;
 
-            if (this.goods.ContainsKey(item_id)) {
+            if (item_id.startsWith(this.card_prefix)) {
+                // 是vip卡
+                vm.showVIP(item_id);
+            } else if (this.goods.ContainsKey(item_id)) {
                 this.goods.Item(item_id).count += 1;
                 this.refresh();
             } else {
@@ -61,6 +73,19 @@
                     }
                 });
             }
+        }
+
+        private showVIP(card_id: string) {
+            let vm = this;
+
+            $ts.get(`@get_vip?card_id=${card_id}`, function (result) {
+                if (result.code == 0) {
+                    vm.vip_info = <models.VIP_members>result.info;
+                    $ts("#vip_name").display(`${vm.vip_info.name} ${card_id}`);
+                } else {
+                    // 没有找到会员信息
+                }
+            });
         }
 
         private refresh() {
@@ -102,12 +127,16 @@
 
         /**
          * 点击账单结算按钮进行支付结算
+         * 
         */
         private settlement() {
+            let vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             let data = {
                 goods: {},
-                discount: 1
+                discount: 1,
+                vip: vip_id
             };
+            let vm = this;
 
             for (let item of this.goods.Values.ToArray()) {
                 data.goods[item.item.id] = item.count;
@@ -116,6 +145,13 @@
             $ts.post('@trade', data, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(JSON.stringify(result))
+
+                    $ts("#settlement").display("系统错误");
+                    vm.resetButton();
+                } else {
+                    $ts("#settlement").display("交易成功！");
+                    vm.resetButton();
+                    setTimeout(() => $goto("/POS"), 1000);
                 }
             });
         }

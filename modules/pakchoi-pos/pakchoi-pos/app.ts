@@ -18,6 +18,28 @@ namespace app {
 
         Router.RunApp();
     }
+
+    export function print() {
+        (<any>$("#print")).print({
+            //Use Global styles
+            globalStyles: false,
+            //Add link with attrbute media=print
+            mediaPrint: false,
+            //Custom stylesheet
+            stylesheet: "",
+            //Print in a hidden iframe
+            iframe: true,
+            //Don't print this
+            noPrintSelector: "",
+            //Add this at top
+            prepend: "",
+            //Add this on bottom
+            append: "===============<br/>" + new Date().toString(),
+            deferred: $.Deferred().done(function () {
+                alert("????");
+            })
+        });
+    }
 }
 
 $ts.mode = Modes.debug;
