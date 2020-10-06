@@ -1012,7 +1012,6 @@ var pages;
             }
             $ts.post('@trade', data, function (result) {
                 if (result.code != 0) {
-                    nifty.errorMsg(JSON.stringify(result));
                     $ts("#settlement").display("系统错误");
                     vm.resetButton();
                 }

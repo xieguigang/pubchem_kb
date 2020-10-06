@@ -10,7 +10,7 @@ class App {
      * @method POST
      * @uses api
     */
-    public function settlement($goods, $discount, $buyer = -1) {
+    public function settlement($goods, $discount, $vip = -1) {
         $item_ids = array_keys($goods);
         $items = (new Table("goods"))
             ->where(["id" => in($item_ids)])
@@ -31,7 +31,7 @@ class App {
                 "goods" => json_encode($goods),
                 "time" => Utils::Now(),
                 "money" => $money,
-                "buyer" => $buyer,
+                "buyer" => $vip,
                 "operator" => web::login_userId(),
                 "count" => $counts,
                 "discount" => $discount,
