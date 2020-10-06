@@ -36,6 +36,11 @@ class App {
         }
     }
 
+    /**
+     * 加载会员信息
+     * 
+     * @uses api
+    */
     public function load($page = 1, $page_size = 100) {
         $start = ($page - 1) * $page_size;
         $VIP_members = new Table("VIP_members");
@@ -55,6 +60,8 @@ class App {
     }
 
     /**
+     * 删除会员信息
+     * 
      * @uses api
      * @method POST
     */
@@ -72,6 +79,8 @@ class App {
     }
 
     /**
+     * 获取会员信息
+     * 
      * @uses api
     */
     public function get($card_id) {
@@ -91,6 +100,8 @@ class App {
     }
 
     /**
+     * 进行会员充值
+     * 
      * @uses api
      * @method POST
     */
@@ -113,5 +124,28 @@ class App {
         (new Table("VIP_members"))->where(["id" => $id])->save(["balance" => "~`balance` + $add"]);
 
         controller::success(1);
+    }
+
+    /**
+     * 获取会员流水信息
+     * 
+     * @uses api
+     * @method GET
+    */
+    public function get_waterflow($card_id, $page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $waterflows = new Table("VIP_waterflow");
+        $list = $waterflows
+            ->left_join("admin")
+            ->on(["VIP_waterflow" => "operator", "admin" => "id"])
+            ->where(["vip" => $card_id])
+            ->limit($start, $page_size)
+            ->select(["admin.realname as admin", "VIP_waterflow.*"]);
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据", 1, $waterflows->getLastMySql());
+        } else {
+            controller::success($list);
+        }
     }
 }

@@ -271,6 +271,7 @@ var pages;
             }
         };
         VIP_member.prototype.loadVIP = function () {
+            var vm = this;
             $ts.get("@load?card_id=" + this.card_id, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(result.info, function () {
@@ -286,7 +287,14 @@ var pages;
                     $ts("#address").display(vip.address);
                     $ts("#gender").display(vip.gender == "0" ? "女" : (vip.gender == "1" ? "男" : "未记录"));
                     $ts("#note").display(vip.note);
+                    vm.vip_id = vip.id;
+                    vm.loadWaterflow();
                 }
+            });
+        };
+        VIP_member.prototype.loadWaterflow = function (page) {
+            if (page === void 0) { page = 1; }
+            $ts.get("@waterflow?card_id=" + this.vip_id + "&page=" + page, function (result) {
             });
         };
         return VIP_member;

@@ -110,8 +110,10 @@ declare namespace pages {
     class VIP_member extends Bootstrap {
         readonly appName: string;
         private card_id;
+        private vip_id;
         protected init(): void;
         private loadVIP;
+        private loadWaterflow;
     }
 }
 declare namespace pages {

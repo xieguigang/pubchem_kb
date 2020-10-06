@@ -7,6 +7,7 @@
         }
 
         private card_id: string = $ts.location("card_id")
+        private vip_id: string;
 
         protected init(): void {
             if (Strings.Empty(this.card_id, true)) {
@@ -19,6 +20,8 @@
         }
 
         private loadVIP() {
+            let vm = this;
+
             $ts.get(`@load?card_id=${this.card_id}`, function (result: IMsg<models.VIP_members>) {
                 if (result.code != 0) {
                     nifty.errorMsg(<string>result.info, function () {
@@ -34,8 +37,18 @@
                     $ts("#address").display(vip.address);
                     $ts("#gender").display(vip.gender == "0" ? "女" : (vip.gender == "1" ? "男" : "未记录"));
                     $ts("#note").display(vip.note);
+
+                    vm.vip_id = vip.id;
+                    vm.loadWaterflow();
                 }
             });
+        }
+
+        private loadWaterflow(page: number = 1) {
+            $ts.get(`@waterflow?card_id=${this.vip_id}&page=${page}`, function (result) {
+
+
+            })
         }
     }
 }
