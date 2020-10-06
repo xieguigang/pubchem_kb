@@ -127,7 +127,6 @@
                 vip: vip_id,
                 transaction: $ts("@transaction")
             };
-            let vm = this;
 
             for (let item of this.goods.Values.ToArray()) {
                 data.goods[item.item.id] = item.count;
@@ -135,7 +134,9 @@
 
             $ts("#settlement").display("结算中").classList.add("disabled");
             $ts.post('@trade', data, function (result) {
-                if (result.code != 0) {
+                if (result.code == 400) {
+                    $ts("#settlement").display(`还需要支付剩余￥${result.info}`);
+                } else if (result.code != 0) {
                     $ts("#settlement").display("系统错误").classList.remove("disabled");
                 } else {
                     $ts("#settlement").display("交易成功！").classList.remove("disabled");

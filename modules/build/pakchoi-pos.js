@@ -999,14 +999,16 @@ var pages;
                 vip: vip_id,
                 transaction: $ts("@transaction")
             };
-            var vm = this;
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
                 var item = _a[_i];
                 data.goods[item.item.id] = item.count;
             }
             $ts("#settlement").display("结算中").classList.add("disabled");
             $ts.post('@trade', data, function (result) {
-                if (result.code != 0) {
+                if (result.code == 400) {
+                    $ts("#settlement").display("\u8FD8\u9700\u8981\u652F\u4ED8\u5269\u4F59\uFFE5" + result.info);
+                }
+                else if (result.code != 0) {
                     $ts("#settlement").display("系统错误").classList.remove("disabled");
                 }
                 else {

@@ -86,7 +86,7 @@ class App {
 	public function billing() {
 		View::Display([
 			"card_prefix" => "619",
-			"transaction.no" => Utils::UnixTimeStamp() . "-" . web::login_userId(),
+			"transaction.no" => Utils::UnixTimeStamp() . "-" . str_pad(web::login_userId(), 4, "0", STR_PAD_LEFT),
 			"transaction.time" => Utils::Now()
 		]);
 	}
