@@ -50,4 +50,13 @@ namespace models {
         operator?: string;
         note: string;
     }
+
+    export interface VIP_waterflow {
+        admin: string;
+        id: string;
+        money: number;
+        waterflow_id: string;
+        time: string;
+        note: string;
+    }
 }

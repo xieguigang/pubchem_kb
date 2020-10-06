@@ -79,6 +79,14 @@ declare namespace models {
         operator?: string;
         note: string;
     }
+    interface VIP_waterflow {
+        admin: string;
+        id: string;
+        money: number;
+        waterflow_id: string;
+        time: string;
+        note: string;
+    }
 }
 declare namespace nifty {
     function errorMsg(msg: string, callback?: Delegate.Action): void;

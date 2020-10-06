@@ -295,6 +295,24 @@ var pages;
         VIP_member.prototype.loadWaterflow = function (page) {
             if (page === void 0) { page = 1; }
             $ts.get("@waterflow?card_id=" + this.vip_id + "&page=" + page, function (result) {
+                if (result.code == 0) {
+                    var table = $ts("#list").clear();
+                    var tr = void 0;
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var waterflow = _a[_i];
+                        tr = $ts("<tr>");
+                        tr.appendElement($ts("<td>").display(waterflow.id));
+                        tr.appendElement($ts("<td>").display(Math.abs(waterflow.money)));
+                        tr.appendElement($ts("<td>").display(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.waterflow_id));
+                        tr.appendElement($ts("<td>").display(waterflow.time));
+                        tr.appendElement($ts("<td>").display(waterflow.money > 0 ? "充值" : "消费"));
+                        tr.appendElement($ts("<td>").display(waterflow.note));
+                        table.appendElement(tr);
+                    }
+                }
+                else {
+                    nifty.errorMsg(result.info);
+                }
             });
         };
         return VIP_member;

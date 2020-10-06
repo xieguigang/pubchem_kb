@@ -46,8 +46,24 @@
 
         private loadWaterflow(page: number = 1) {
             $ts.get(`@waterflow?card_id=${this.vip_id}&page=${page}`, function (result) {
+                if (result.code == 0) {
+                    let table = $ts("#list").clear();
+                    let tr: IHTMLElement;
 
+                    for (let waterflow of <models.VIP_waterflow[]>result.info) {
+                        tr = $ts("<tr>");
+                        tr.appendElement($ts("<td>").display(waterflow.id));
+                        tr.appendElement($ts("<td>").display(<any>Math.abs(waterflow.money)));
+                        tr.appendElement($ts("<td>").display(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.waterflow_id));
+                        tr.appendElement($ts("<td>").display(waterflow.time));
+                        tr.appendElement($ts("<td>").display(waterflow.money > 0 ? "充值" : "消费"));
+                        tr.appendElement($ts("<td>").display(waterflow.note));
 
+                        table.appendElement(tr);
+                    }
+                } else {
+                    nifty.errorMsg(<string>result.info);
+                }
             })
         }
     }
