@@ -10,7 +10,6 @@
         private scanner: Scanner;
         private card_prefix: string = <any>$ts("@card_prefix");
         private vip_info: models.VIP_members;
-        private resetButton: Delegate.Action;
 
         protected init(): void {
             let firstItem: string = localStorage.getItem(firstItemKey);
@@ -22,35 +21,9 @@
                 localStorage.setItem(firstItemKey, null);
             }
 
-            this.goods = new Dictionary({});
-
-            // STATE BUTTON
-            // =================================================================
-            // Require Bootstrap Button
-            // -----------------------------------------------------------------
-            // http://getbootstrap.com/javascript/#buttons
-            // =================================================================
-            $('#settlement').on('click', function () {
-                // 这个状态变化必须要通过jQuery来进行触发
-                // 否则会出现丢失文档碎片的错误？
-                let btn = $(this).button(<any>'loading');
-
-                // business logic...
-                vm.trade_settlement();
-
-                //let test = setTimeout(function () {
-                //    clearTimeout(test);
-                //    btn.button('reset')
-                //}, 3000);
-                vm.resetButton = function () {
-                    btn.button(<any>'reset');
-                    console.log("按钮复位");
-                }
-            });
             $ts("#vip_name").display("非会员");
 
-            console.log(`the prefix of the vip card number is: ${this.card_prefix}`);
-
+            this.goods = new Dictionary({});
             this.loadItem(firstItem);
             this.scanner = new Scanner(item_id => vm.loadItem(item_id));
         }
@@ -84,7 +57,7 @@
                     vm.vip_info = <models.VIP_members>result.info;
                     vm.refresh();
 
-                    $ts("#vip_name").display(`${vm.vip_info.name} ${card_id}`);
+                    $ts("#vip_name").display(`${vm.vip_info.name} 卡号：${card_id} 充值余额：￥${vm.vip_info.balance}`);
                 } else {
                     // 没有找到会员信息
                 }
@@ -101,10 +74,6 @@
             }
 
             table.appendElement(this.total(total));
-
-            if (!isNullOrUndefined(this.vip_info)) {
-                table.appendElement(this.vip_balance(total));
-            }
         }
 
         private addGoodsItem(item: models.goods, count: number) {
@@ -123,25 +92,25 @@
             return tr;
         }
 
-        private vip_balance(cost: number): HTMLElement {
-            let tr = $ts("<tr>", { class: "total" });
-
-            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("会员余额结算"))
-
-            if (this.vip_info.balance >= cost) {
-                tr.appendElement($ts("<td>", { class: "alignright" }).display("可以使用余额全额支付"))
-            } else {
-                tr.appendElement($ts("<td>", { class: "alignright" }).display(`余额不足，还需要支付 ￥${cost - this.vip_info.balance}`))
-            }
-
-            return tr;
-        }
-
         private total(cost: number): HTMLElement {
             let tr = $ts("<tr>", { class: "total" });
+            let item: string = "总金额";
+            let pay: string = `￥ ${Strings.round(cost, 2).toString()}`;
+            let width: string = "80%";
 
-            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("总金额"))
-            tr.appendElement($ts("<td>", { class: "alignright" }).display(`￥ ${Strings.round(cost, 2).toString()}`))
+            if (!isNullOrUndefined(this.vip_info)) {
+                item = item + "<br />" + "会员余额结算";
+                width = "60%";
+
+                if (this.vip_info.balance >= cost) {
+                    pay = pay + "<br />" + "可以使用余额全额支付";
+                } else {
+                    pay = pay + "<br />" + `<span style="color: darkred; font-size: 0.95em;">余额不足，还需要支付</span> ￥${cost - this.vip_info.balance}`;
+                }
+            }
+
+            tr.appendElement($ts("<td>", { class: "alignright", style: `width:${width};` }).display(item))
+            tr.appendElement($ts("<td>", { class: "alignright" }).display(pay));
 
             return tr;
         }
@@ -150,12 +119,13 @@
          * 点击账单结算按钮进行支付结算
          * 
         */
-        private trade_settlement() {
+        public settlement() {
             let vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             let data = {
                 goods: {},
                 discount: 1,
-                vip: vip_id
+                vip: vip_id,
+                transaction: $ts("@transaction")
             };
             let vm = this;
 
@@ -163,13 +133,12 @@
                 data.goods[item.item.id] = item.count;
             }
 
+            $ts("#settlement").display("结算中").classList.add("disabled");
             $ts.post('@trade', data, function (result) {
-                vm.resetButton();
-
                 if (result.code != 0) {
-                    $ts("#settlement").display("系统错误");
+                    $ts("#settlement").display("系统错误").classList.remove("disabled");
                 } else {
-                    $ts("#settlement").display("交易成功！");
+                    $ts("#settlement").display("交易成功！").classList.remove("disabled");
                     setTimeout(() => $goto("/POS"), 1000);
                 }
             });

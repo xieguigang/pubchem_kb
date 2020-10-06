@@ -905,30 +905,8 @@ var pages;
             else {
                 localStorage.setItem(pages.firstItemKey, null);
             }
-            this.goods = new Dictionary({});
-            // STATE BUTTON
-            // =================================================================
-            // Require Bootstrap Button
-            // -----------------------------------------------------------------
-            // http://getbootstrap.com/javascript/#buttons
-            // =================================================================
-            $('#settlement').on('click', function () {
-                // 这个状态变化必须要通过jQuery来进行触发
-                // 否则会出现丢失文档碎片的错误？
-                var btn = $(this).button('loading');
-                // business logic...
-                vm.trade_settlement();
-                //let test = setTimeout(function () {
-                //    clearTimeout(test);
-                //    btn.button('reset')
-                //}, 3000);
-                vm.resetButton = function () {
-                    btn.button('reset');
-                    console.log("按钮复位");
-                };
-            });
             $ts("#vip_name").display("非会员");
-            console.log("the prefix of the vip card number is: " + this.card_prefix);
+            this.goods = new Dictionary({});
             this.loadItem(firstItem);
             this.scanner = new Scanner(function (item_id) { return vm.loadItem(item_id); });
         };
@@ -960,7 +938,7 @@ var pages;
                 if (result.code == 0) {
                     vm.vip_info = result.info;
                     vm.refresh();
-                    $ts("#vip_name").display(vm.vip_info.name + " " + card_id);
+                    $ts("#vip_name").display(vm.vip_info.name + " \u5361\u53F7\uFF1A" + card_id + " \u5145\u503C\u4F59\u989D\uFF1A\uFFE5" + vm.vip_info.balance);
                 }
                 else {
                     // 没有找到会员信息
@@ -976,9 +954,6 @@ var pages;
                 total += item.item.price * item.count;
             }
             table.appendElement(this.total(total));
-            if (!isNullOrUndefined(this.vip_info)) {
-                table.appendElement(this.vip_balance(total));
-            }
         };
         billing.prototype.addGoodsItem = function (item, count) {
             var tr = $ts("<tr>");
@@ -993,46 +968,49 @@ var pages;
             tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + item.price * count));
             return tr;
         };
-        billing.prototype.vip_balance = function (cost) {
-            var tr = $ts("<tr>", { class: "total" });
-            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("会员余额结算"));
-            if (this.vip_info.balance >= cost) {
-                tr.appendElement($ts("<td>", { class: "alignright" }).display("可以使用余额全额支付"));
-            }
-            else {
-                tr.appendElement($ts("<td>", { class: "alignright" }).display("\u4F59\u989D\u4E0D\u8DB3\uFF0C\u8FD8\u9700\u8981\u652F\u4ED8 \uFFE5" + (cost - this.vip_info.balance)));
-            }
-            return tr;
-        };
         billing.prototype.total = function (cost) {
             var tr = $ts("<tr>", { class: "total" });
-            tr.appendElement($ts("<td>", { class: "alignright", style: "width:80%;" }).display("总金额"));
-            tr.appendElement($ts("<td>", { class: "alignright" }).display("\uFFE5 " + Strings.round(cost, 2).toString()));
+            var item = "总金额";
+            var pay = "\uFFE5 " + Strings.round(cost, 2).toString();
+            var width = "80%";
+            if (!isNullOrUndefined(this.vip_info)) {
+                item = item + "<br />" + "会员余额结算";
+                width = "60%";
+                if (this.vip_info.balance >= cost) {
+                    pay = pay + "<br />" + "可以使用余额全额支付";
+                }
+                else {
+                    pay = pay + "<br />" + ("<span style=\"color: darkred; font-size: 0.95em;\">\u4F59\u989D\u4E0D\u8DB3\uFF0C\u8FD8\u9700\u8981\u652F\u4ED8</span> \uFFE5" + (cost - this.vip_info.balance));
+                }
+            }
+            tr.appendElement($ts("<td>", { class: "alignright", style: "width:" + width + ";" }).display(item));
+            tr.appendElement($ts("<td>", { class: "alignright" }).display(pay));
             return tr;
         };
         /**
          * 点击账单结算按钮进行支付结算
          *
         */
-        billing.prototype.trade_settlement = function () {
+        billing.prototype.settlement = function () {
             var vip_id = isNullOrUndefined(this.vip_info) ? -1 : this.vip_info.id;
             var data = {
                 goods: {},
                 discount: 1,
-                vip: vip_id
+                vip: vip_id,
+                transaction: $ts("@transaction")
             };
             var vm = this;
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
                 var item = _a[_i];
                 data.goods[item.item.id] = item.count;
             }
+            $ts("#settlement").display("结算中").classList.add("disabled");
             $ts.post('@trade', data, function (result) {
-                vm.resetButton();
                 if (result.code != 0) {
-                    $ts("#settlement").display("系统错误");
+                    $ts("#settlement").display("系统错误").classList.remove("disabled");
                 }
                 else {
-                    $ts("#settlement").display("交易成功！");
+                    $ts("#settlement").display("交易成功！").classList.remove("disabled");
                     setTimeout(function () { return $goto("/POS"); }, 1000);
                 }
             });
