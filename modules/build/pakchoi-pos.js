@@ -215,7 +215,7 @@ var pages;
             var barEl = $("#inventories-sparkline-bar");
             var barValues = data.sparkline;
             var barValueCount = barValues.length;
-            var barSpacing = 1;
+            var barSpacing = 5;
             barEl.sparkline(barValues, {
                 type: 'bar',
                 height: 55,

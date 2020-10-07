@@ -74,10 +74,10 @@
             $ts("#inventories-today").display(<any>data.today);
             $ts("#inventories-aweek").display(<any>data.total);
 
-            var barEl = $("#inventories-sparkline-bar");
-            var barValues = data.sparkline;
-            var barValueCount = barValues.length;
-            var barSpacing = 1;
+            let barEl = $("#inventories-sparkline-bar");
+            let barValues = data.sparkline;
+            let barValueCount = barValues.length;
+            let barSpacing = 5;
 
             (<any>barEl).sparkline(barValues, {
                 type: 'bar',
