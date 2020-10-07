@@ -76,7 +76,7 @@ class App {
                 # 添加流水记录
                 (new Table("VIP_waterflow"))->add([
                     "vip" => $vip,
-                    "money" => $balance_pay,
+                    "balance" => $balance_pay,
                     "waterflow_id" => $trade,
                     "time" => Utils::Now(),
                     "note" => "会员消费",

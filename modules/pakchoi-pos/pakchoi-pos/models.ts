@@ -1,4 +1,4 @@
-namespace models {
+﻿namespace models {
 
     export interface vendor {
         id?: string;
@@ -54,10 +54,17 @@ namespace models {
     export interface VIP_waterflow {
         admin: string;
         id: string;
-        money: number;
+        balance: number;
         waterflow_id: string;
         time: string;
         note: string;
+        /**
+         * 0 - 消费
+         * 1 - 充值
+         * -1 - 退款
+         * 
+        */
+        type: number;
     }
 
     export interface tradeInformation {

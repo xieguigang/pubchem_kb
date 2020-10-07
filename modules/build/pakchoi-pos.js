@@ -325,10 +325,10 @@ var pages;
                         var waterflow = _a[_i];
                         tr = $ts("<tr>");
                         tr.appendElement($ts("<td>").display(waterflow.id));
-                        tr.appendElement($ts("<td>").display(Math.abs(waterflow.money)));
+                        tr.appendElement($ts("<td>").display(Math.abs(waterflow.balance)));
                         tr.appendElement($ts("<td>").display(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.waterflow_id));
                         tr.appendElement($ts("<td>").display(waterflow.time));
-                        tr.appendElement($ts("<td>").display(waterflow.money > 0 ? "充值" : "消费"));
+                        tr.appendElement($ts("<td>").display(waterflow.type == 1 ? "充值" : (waterflow.type == 0 ? "消费" : "退款")));
                         tr.appendElement($ts("<td>").display(waterflow.note));
                         table.appendElement(tr);
                     }
