@@ -118,6 +118,13 @@ declare namespace nifty {
     function clearAlert(): void;
 }
 declare namespace pages {
+    class home extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private showTransactions;
+    }
+}
+declare namespace pages {
     class lockscreen extends Bootstrap {
         readonly appName: string;
         protected init(): void;

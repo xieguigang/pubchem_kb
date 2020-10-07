@@ -78,6 +78,7 @@ var app;
         Router.AddAppHandler(new pages.login());
         Router.AddAppHandler(new pages.password_reminder());
         Router.AddAppHandler(new pages.lockscreen());
+        Router.AddAppHandler(new pages.home());
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
@@ -138,6 +139,63 @@ var nifty;
     }
     nifty.clearAlert = clearAlert;
 })(nifty || (nifty = {}));
+var pages;
+(function (pages) {
+    var home = /** @class */ (function (_super) {
+        __extends(home, _super);
+        function home() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(home.prototype, "appName", {
+            get: function () {
+                return "home";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        home.prototype.init = function () {
+            this.showTransactions();
+        };
+        home.prototype.showTransactions = function (page) {
+            if (page === void 0) { page = 1; }
+            var vm = this;
+            $ts.get("@load_trades?page=" + page, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                }
+                else {
+                    var table = $ts("#trades").clear();
+                    var tr = void 0;
+                    var link = void 0;
+                    var type = void 0;
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var trade = _a[_i];
+                        tr = $ts("<tr>");
+                        link = $ts("<a>", {
+                            class: "btn-link",
+                            href: ""
+                        }).display(trade.transaction_id);
+                        if (trade.money > 0) {
+                            type = $ts("<div>", { class: "label label-table label-info" }).display("消费");
+                        }
+                        else {
+                            type = $ts("<div>", { class: "label label-table label-danger" }).display("退款");
+                        }
+                        tr.appendElement($ts("<td>").display(link));
+                        tr.appendElement($ts("<td>").display(trade.vip));
+                        tr.appendElement($ts("<td>").display(trade.time));
+                        tr.appendElement($ts("<td>").display("\uFFE5" + trade.money));
+                        tr.appendElement($ts("<td>", { class: "text-center" }).display(type));
+                        tr.appendElement($ts("<td>", { class: "text-center" }).display(trade.note));
+                        table.appendElement(tr);
+                    }
+                }
+            });
+        };
+        return home;
+    }(Bootstrap));
+    pages.home = home;
+})(pages || (pages = {}));
 var pages;
 (function (pages) {
     var lockscreen = /** @class */ (function (_super) {

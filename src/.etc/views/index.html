@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <meta name="app" content="home" />
+
+    <meta name="load_trades" content="/trade/load" />
+
     ${includes/head.html}
     ${includes/chart.html}
 </head>
@@ -267,15 +271,15 @@
                                         <table class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Invoice</th>
-                                                    <th>User</th>
-                                                    <th>Order date</th>
-                                                    <th>Amount</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Tracking Number</th>
+                                                    <th>交易编号</th>
+                                                    <th>会员名</th>
+                                                    <th>交易时间</th>
+                                                    <th>交易金额</th>
+                                                    <th class="text-center">类型</th>
+                                                    <th class="text-center">备注</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id="trades">
                                                 <tr>
                                                     <td><a href="#" class="btn-link"> Order #53431</a></td>
                                                     <td>Steve N. Horton</td>

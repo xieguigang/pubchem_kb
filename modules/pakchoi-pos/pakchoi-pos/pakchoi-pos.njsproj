@@ -79,6 +79,9 @@
     <TypeScriptCompile Include="pages\pos\POS.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="pages\home.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="Scanner.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
