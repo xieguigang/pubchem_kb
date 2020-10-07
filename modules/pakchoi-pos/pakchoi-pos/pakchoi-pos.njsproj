@@ -59,6 +59,9 @@
     <TypeScriptCompile Include="pages\management\goods.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="pages\management\trade_details.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="pages\management\waterflows.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

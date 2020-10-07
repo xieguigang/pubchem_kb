@@ -54,7 +54,7 @@
                         tr = $ts("<tr>");
                         tr.appendElement($ts("<td>").display(waterflow.id));
                         tr.appendElement($ts("<td>").display(<any>Math.abs(waterflow.balance)));
-                        tr.appendElement($ts("<td>").display(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.transaction_id));
+                        tr.appendElement($ts("<td>").display(VIP_member.trade_link(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.transaction_id)));
                         tr.appendElement($ts("<td>").display(waterflow.time));
                         tr.appendElement($ts("<td>").display(waterflow.type == 1 ? "充值" : (waterflow.type == 0 ? "消费" : "退款")));
                         tr.appendElement($ts("<td>").display(waterflow.note));
@@ -65,6 +65,17 @@
                     nifty.errorMsg(<string>result.info);
                 }
             })
+        }
+
+        private static trade_link(transaction_id) {
+            if (transaction_id == "n/a") {
+                return transaction_id;
+            } else {
+                return $ts("<a>", {
+                    class: "btn-link",
+                    href: `/trade?transaction=${transaction_id}`
+                }).display(transaction_id);
+            }
         }
     }
 }

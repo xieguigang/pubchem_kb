@@ -79,6 +79,7 @@ var app;
         Router.AddAppHandler(new pages.password_reminder());
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.home());
+        Router.AddAppHandler(new pages.trade());
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
@@ -90,10 +91,11 @@ var app;
         Router.RunApp();
     }
     app.start = start;
-    function print() {
-        $("#print").print({
+    function print(id) {
+        if (id === void 0) { id = "#print"; }
+        $(id).print({
             //Use Global styles
-            globalStyles: false,
+            globalStyles: true,
             //Add link with attrbute media=print
             mediaPrint: false,
             //Custom stylesheet
@@ -105,9 +107,9 @@ var app;
             //Add this at top
             prepend: "",
             //Add this on bottom
-            append: "===============<br/>" + new Date().toString(),
+            append: "================================================================================<br/>" + new Date().toString(),
             deferred: $.Deferred().done(function () {
-                alert("????");
+                alert("打印成功！");
             })
         });
     }
@@ -291,24 +293,24 @@ var pages;
                     var link = void 0;
                     var type = void 0;
                     for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var trade = _a[_i];
+                        var trade_1 = _a[_i];
                         tr = $ts("<tr>");
                         link = $ts("<a>", {
                             class: "btn-link",
-                            href: "/trade?transaction=" + trade.transaction_id
-                        }).display(trade.transaction_id);
-                        if (trade.money > 0) {
+                            href: "/trade?transaction=" + trade_1.transaction_id
+                        }).display(trade_1.transaction_id);
+                        if (trade_1.money > 0) {
                             type = $ts("<div>", { class: "label label-table label-info" }).display("消费");
                         }
                         else {
                             type = $ts("<div>", { class: "label label-table label-danger" }).display("退款");
                         }
                         tr.appendElement($ts("<td>").display(link));
-                        tr.appendElement($ts("<td>").display(trade.vip));
-                        tr.appendElement($ts("<td>").display(trade.time));
-                        tr.appendElement($ts("<td>").display("\uFFE5" + trade.money));
+                        tr.appendElement($ts("<td>").display(trade_1.vip));
+                        tr.appendElement($ts("<td>").display(trade_1.time));
+                        tr.appendElement($ts("<td>").display("\uFFE5" + trade_1.money));
                         tr.appendElement($ts("<td>", { class: "text-center" }).display(type));
-                        tr.appendElement($ts("<td>", { class: "text-center" }).display(trade.note));
+                        tr.appendElement($ts("<td>", { class: "text-center" }).display(trade_1.note));
                         table.appendElement(tr);
                     }
                 }
@@ -506,7 +508,7 @@ var pages;
                         tr = $ts("<tr>");
                         tr.appendElement($ts("<td>").display(waterflow.id));
                         tr.appendElement($ts("<td>").display(Math.abs(waterflow.balance)));
-                        tr.appendElement($ts("<td>").display(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.transaction_id));
+                        tr.appendElement($ts("<td>").display(VIP_member.trade_link(waterflow.waterflow_id == "-1" ? "n/a" : waterflow.transaction_id)));
                         tr.appendElement($ts("<td>").display(waterflow.time));
                         tr.appendElement($ts("<td>").display(waterflow.type == 1 ? "充值" : (waterflow.type == 0 ? "消费" : "退款")));
                         tr.appendElement($ts("<td>").display(waterflow.note));
@@ -517,6 +519,17 @@ var pages;
                     nifty.errorMsg(result.info);
                 }
             });
+        };
+        VIP_member.trade_link = function (transaction_id) {
+            if (transaction_id == "n/a") {
+                return transaction_id;
+            }
+            else {
+                return $ts("<a>", {
+                    class: "btn-link",
+                    href: "/trade?transaction=" + transaction_id
+                }).display(transaction_id);
+            }
         };
         return VIP_member;
     }(Bootstrap));
@@ -913,6 +926,30 @@ var pages;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
+    var trade = /** @class */ (function (_super) {
+        __extends(trade, _super);
+        function trade() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(trade.prototype, "appName", {
+            get: function () {
+                return "trade";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        trade.prototype.init = function () {
+        };
+        trade.prototype.print = function () {
+            app.print("#trade-details");
+        };
+        return trade;
+    }(Bootstrap));
+    pages.trade = trade;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
     var vendor = /** @class */ (function (_super) {
         __extends(vendor, _super);
         function vendor() {
@@ -1051,27 +1088,27 @@ var pages;
                     var list = $ts("#list").clear();
                     var tr = void 0;
                     var buttons = void 0;
-                    var _loop_2 = function (trade) {
+                    var _loop_2 = function (trade_2) {
                         tr = $ts("<tr>");
                         buttons = $ts("<button>", {
                             class: ["btn", "btn-primary", "btn-rounded"],
                             onclick: function () {
-                                vm.view_details(trade.transaction_id);
+                                vm.view_details(trade_2.transaction_id);
                             }
                         }).display("查看交易明细");
-                        tr.appendElement($ts("<td>").display(trade.transaction_id));
-                        tr.appendElement($ts("<td>").display(trade.time));
-                        tr.appendElement($ts("<td>").display(trade.money));
-                        tr.appendElement($ts("<td>").display(trade.count));
-                        tr.appendElement($ts("<td>").display(trade.vip));
-                        tr.appendElement($ts("<td>").display(trade.admin));
-                        tr.appendElement($ts("<td>").display(trade.note));
+                        tr.appendElement($ts("<td>").display(trade_2.transaction_id));
+                        tr.appendElement($ts("<td>").display(trade_2.time));
+                        tr.appendElement($ts("<td>").display(trade_2.money));
+                        tr.appendElement($ts("<td>").display(trade_2.count));
+                        tr.appendElement($ts("<td>").display(trade_2.vip));
+                        tr.appendElement($ts("<td>").display(trade_2.admin));
+                        tr.appendElement($ts("<td>").display(trade_2.note));
                         tr.appendElement($ts("<td>").display(buttons));
                         list.appendElement(tr);
                     };
                     for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var trade = _a[_i];
-                        _loop_2(trade);
+                        var trade_2 = _a[_i];
+                        _loop_2(trade_2);
                     }
                 }
             });

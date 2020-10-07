@@ -30,7 +30,7 @@ interface bootboxButton {
 }
 declare namespace app {
     function start(): void;
-    function print(): void;
+    function print(id?: string): void;
 }
 declare namespace nifty {
     function errorMsg(msg: string, callback?: Delegate.Action): void;
@@ -176,6 +176,7 @@ declare namespace pages {
         protected init(): void;
         private loadVIP;
         private loadWaterflow;
+        private static trade_link;
     }
 }
 declare namespace pages {
@@ -215,6 +216,13 @@ declare namespace pages {
          * 商品入库
         */
         save(): void;
+    }
+}
+declare namespace pages {
+    class trade extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        print(): void;
     }
 }
 declare namespace pages {

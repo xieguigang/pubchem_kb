@@ -5,9 +5,6 @@
 
     <meta name="app" content="trade" />
 
-    <meta name="load" content="/vip_members/get" />
-    <meta name="waterflow" content="/vip_members/get_waterflow" />
-
     ${includes/head.html}
     ${includes/datatable.html}
     ${includes/components.html}
@@ -32,13 +29,13 @@
                 <div id="page-title">
                     <h1 class="page-header text-overflow">{$title}</h1>
 
-                    <!--Searchbox-->
-                    <div class="searchbox">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search..">
-                            <span class="input-group-btn">
-                                <button class="text-muted" type="button"><i class="demo-pli-magnifi-glass"></i></button>
-                            </span>
+                    <div class="pad-btm form-inline">
+                        <div class="row">
+                            <div class="col-sm-6 table-toolbar-left">
+                                <button id="print" class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                             
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -52,7 +49,7 @@
                     <div class="row">
                         <div class="col-xs-12">
 
-                            <div class="panel">
+                            <div id="trade-details" class="panel">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">交易信息详单</h3>
                                 </div>
@@ -143,32 +140,7 @@
                                                 <th>供货商</th>      
                                             </tr>
                                         </thead>
-                                        <div class="pad-btm form-inline">
-                                            <div class="row">
-                                                <div class="col-sm-6 text-xs-center">
-                                                    <div class="form-group">
 
-
-                                                        <label class="control-label">显示交易记录</label>
-                                                        <select id="demo-foo-filter-status" class="form-control">
-                                                            <option value="">显示全部交易</option>
-                                                            <option value="充值">充值</option>
-                                                            <option value="消费">消费</option>
-                                                        </select>                                                     
-
-                                                    </div>
-
-
-                                                </div>
-
-                                                <div class="col-sm-6 text-xs-center text-right">
-                                                    <div class="form-group">
-                                                        <input id="demo-foo-search" type="text" placeholder="Search"
-                                                            class="form-control" autocomplete="off">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <tbody id="list">
                                             <foreach @goods>
                                                 <tr>

@@ -1,4 +1,4 @@
-/// <reference path="../../build/linq.d.ts" />
+﻿/// <reference path="../../build/linq.d.ts" />
 
 namespace app {
 
@@ -8,6 +8,7 @@ namespace app {
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.home());
 
+        Router.AddAppHandler(new pages.trade());
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
@@ -21,10 +22,10 @@ namespace app {
         Router.RunApp();
     }
 
-    export function print() {
-        (<any>$("#print")).print({
+    export function print(id: string = "#print") {
+        (<any>$(id)).print({
             //Use Global styles
-            globalStyles: false,
+            globalStyles: true,
             //Add link with attrbute media=print
             mediaPrint: false,
             //Custom stylesheet
@@ -36,9 +37,9 @@ namespace app {
             //Add this at top
             prepend: "",
             //Add this on bottom
-            append: "===============<br/>" + new Date().toString(),
+            append: "================================================================================<br/>" + new Date().toString(),
             deferred: $.Deferred().done(function () {
-                alert("????");
+                alert("打印成功！");
             })
         });
     }
