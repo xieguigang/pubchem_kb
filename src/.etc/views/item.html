@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta name="app" content="goods_item" />
+
+    ${includes/head.html}
+    ${includes/datatable.html}
+    ${includes/components.html}
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+
+        ${includes/top-nav.html}
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+
+                <!--Page Title-->
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <div id="page-title">
+                    <h1 class="page-header text-overflow">{$title}</h1>
+
+                    <div class="pad-btm form-inline">
+                        <div class="row">
+                            <div class="col-sm-6 table-toolbar-left">
+                                <button id="print" class="btn btn-default"><i class="demo-pli-printer"></i></button>
+                             
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                <!--End page title-->
+
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div id="trade-details" class="panel">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">交易信息详单</h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <form class="panel-body form-horizontal form-padding">
+
+                                        <!--Email Input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="card_id">交易号：</label>
+                                            <div class="col-md-6">
+                                                <p id="card_id" class="form-control">{$transaction_id}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="ttime">交易时间：</label>
+                                            <div class="col-md-6">
+                                                <p id="ttime" class="form-control">{$time}</p>
+                                            </div>
+                                        </div>
+
+                                        <!--Email Input-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="name">会员姓名：</label>
+                                            <div class="col-md-6">
+                                                <p id="name" class="form-control">{$vip}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="balance">交易总金额：</label>
+                                            <div class="col-md-6">
+                                                <p id="balance" class="form-control">{$money}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="phone">会员余额支付：</label>
+                                            <div class="col-md-6">
+                                                <p id="phone" class="form-control">{$vip_balance}</p>
+                                            </div>
+                                        </div>
+
+                                        <!--Password-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="address">商品总件数：</label>
+                                            <div class="col-md-6">
+                                                <p id="address" class="form-control">{$count}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="gender">操作员：</label>
+
+                                            <!-- Bootstrap Select : primary -->
+                                            <!--===================================================-->
+                                            <div class="col-md-6">
+                                                <p id="gender" class="form-control">{$admin}</p>
+                                            </div>
+                                        </div>
+
+                                        <!--Textarea-->
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="note">描述：</label>
+                                            <div class="col-md-6">
+
+                                                <p id="note" class="form-control">{$note}</p>
+
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <!-- Foo Table - Filtering -->
+                                <!--===================================================-->
+                                <div class="panel-body">
+                                    <table id="demo-foo-filtering"
+                                        class="table table-bordered table-hover toggle-circle" data-page-size="7">
+                                        <thead>
+                                            <tr>
+                                                <th>商品编号</th>
+                                                <th>商品名称</th>
+                                                <th>单价</th>
+                                                <th>数量</th>
+                                                <th>批次号</th>                           
+                                                <th>供货商</th>      
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="list">
+                                            <foreach @goods>
+                                                <tr>
+                                                    <td>@goods["item_id"]</td>
+                                                    <td>@goods["name"]</td>
+                                                    <td>￥@goods["price"]</td>
+                                                    <td>@goods["count"]</td>
+                                                    <td>@goods["batch"]</td>
+                                                    <td>@goods["vendor"]</td>
+                                                </tr>
+                                            </foreach>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="6">
+                                                    <div class="text-right">
+                                                        <ul class="pagination"></ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <!--===================================================-->
+                                <!-- End Foo Table - Filtering -->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+
+            ${includes/aside.html}
+
+            ${includes/nav.html}
+
+        </div>
+
+
+        ${includes/footer.html}
+
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+
+
+    <!--Default Bootstrap Modal-->
+    <!--===================================================-->
+    <div class="modal fade" id="add-modal" role="dialog" tabindex="-1" aria-labelledby="add-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><i
+                            class="pci-cross pci-circle"></i></button>
+                    <h4 class="modal-title">添加会员信息</h4>
+                </div>
+
+                <!--Modal body-->
+                <div class="modal-body">
+                    <p class="text-semibold text-main">操作说明</p>
+                    <p>请首先使用扫码枪扫描新会员卡上面的条形码或者将会员卡放置于读卡器上，获取卡号信息之后，再填写所需要添加的会员信息。最后点击【新增会员信息】按钮即可。</p>
+                    <br>
+                    <p class="text-semibold text-main">数据填写</p>
+                    <p>
+
+                    <form class="panel-body form-horizontal form-padding">
+
+                        <!--Email Input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="card_id">卡号</label>
+                            <div class="col-md-9">
+                                <input type="text" id="card_id" readonly class="form-control" placeholder="会员卡号">
+                                <small class="help-block">使用扫码枪扫描会员卡或者读卡器读取会员卡卡号信息</small>
+                            </div>
+                        </div>
+
+                        <!--Email Input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">会员姓名</label>
+                            <div class="col-md-9">
+                                <input type="text" id="name" class="form-control" placeholder="会员姓名">
+                                <small class="help-block">填写会员姓名</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="phone">联系电话（可选）</label>
+                            <div class="col-md-9">
+                                <input type="text" id="phone" class="form-control" placeholder="联系电话">
+                                <small class="help-block">填写会员的联系电话</small>
+                            </div>
+                        </div>
+
+                        <!--Password-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="address">联系地址（可选）</label>
+                            <div class="col-md-9">
+                                <input type="text" id="address" class="form-control" placeholder="联系地址">
+                                <small class="help-block">输入当前新增会员的联系地址</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="gender">性别：</label>
+
+                            <!-- Bootstrap Select : primary -->
+                            <!--===================================================-->
+                            <select id="gender" class="selectpicker col-xs-6 col-sm-4 col-md-6 col-lg-4"
+                                data-style="btn-primary">
+                                <option value="-1">不记录</option>
+                                <option value="1">男</option>
+                                <option value="0">女</option>
+                            </select>
+                        </div>
+
+                        <!--Textarea-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="note">描述（可选）</label>
+                            <div class="col-md-9">
+                                <textarea id="note" rows="9" class="form-control"
+                                    placeholder="输入一些简要的信息帮助后续查看"></textarea>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    </p>
+
+
+
+                    <!-- Danger Alert -->
+                    <!--===================================================-->
+                    <div id="alert" class="alert alert-danger" style="display: none;">
+                        <strong>请注意！</strong> <span id="message"></span>
+                    </div>
+
+
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">关闭</button>
+                    <button id="save" class="btn btn-primary">新增会员信息</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

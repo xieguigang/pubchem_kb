@@ -798,7 +798,10 @@ var pages;
                     str = goods_1.name;
                 }
                 tr.appendElement($ts("<td>").display(str));
-                tr.appendElement($ts("<td>").display(goods_1.item_id));
+                tr.appendElement($ts("<td>").display($ts("<a>", {
+                    class: "btn-link",
+                    href: "/item?no=" + goods_1.item_id
+                }).display(goods_1.item_id)));
                 str = goods_1.vendor;
                 if (Strings.Empty(str, true)) {
                     str = "自产商品（无供货商）";
