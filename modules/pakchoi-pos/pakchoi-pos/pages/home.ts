@@ -166,7 +166,7 @@
                         tr = $ts("<tr>");
                         link = $ts("<a>", {
                             class: "btn-link",
-                            href: ""
+                            href: `/trade?transaction=${trade.transaction_id}`
                         }).display(trade.transaction_id);
 
                         if (trade.money > 0) {

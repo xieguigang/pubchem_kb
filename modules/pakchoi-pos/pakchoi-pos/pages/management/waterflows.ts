@@ -26,7 +26,7 @@
                         buttons = $ts("<button>", {
                             class: ["btn", "btn-primary", "btn-rounded"],
                             onclick: function () {
-                                vm.view_details(trade.id);
+                                vm.view_details(trade.transaction_id);
                             }
                         }).display("查看交易明细");
 
@@ -46,7 +46,7 @@
         }
 
         private view_details(trade_id: string) {
-
+            $goto(`/trade?transaction=${trade_id}`);
         }
     }
 }

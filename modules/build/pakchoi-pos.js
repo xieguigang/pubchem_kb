@@ -295,7 +295,7 @@ var pages;
                         tr = $ts("<tr>");
                         link = $ts("<a>", {
                             class: "btn-link",
-                            href: ""
+                            href: "/trade?transaction=" + trade.transaction_id
                         }).display(trade.transaction_id);
                         if (trade.money > 0) {
                             type = $ts("<div>", { class: "label label-table label-info" }).display("消费");
@@ -1056,7 +1056,7 @@ var pages;
                         buttons = $ts("<button>", {
                             class: ["btn", "btn-primary", "btn-rounded"],
                             onclick: function () {
-                                vm.view_details(trade.id);
+                                vm.view_details(trade.transaction_id);
                             }
                         }).display("查看交易明细");
                         tr.appendElement($ts("<td>").display(trade.transaction_id));
@@ -1077,6 +1077,7 @@ var pages;
             });
         };
         waterflows.prototype.view_details = function (trade_id) {
+            $goto("/trade?transaction=" + trade_id);
         };
         return waterflows;
     }(Bootstrap));
