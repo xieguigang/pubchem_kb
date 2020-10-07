@@ -16,6 +16,21 @@
             $(window).on('resizeEnd', function () {
                 vm.inventories_sparkline(vm.inventories);
             });
+
+            $ts.get(`@inventories`, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(<string>result.info);
+                    vm.inventories = <models.inventories_sparkline>{
+                        sales: <any>"n/a",
+                        total: <any>"n/a",
+                        sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    }
+                } else {
+                    vm.inventories = <models.inventories_sparkline>result.info;
+                }
+
+                vm.inventories_sparkline(vm.inventories);
+            });
         }
 
         private inventories_sparkline(data: models.inventories_sparkline) {

@@ -5,6 +5,7 @@ RewriteRule ^logout$ /api.php?app=logout
 RewriteRule ^assets/(.+)$ /proxy.php?app=assets&file=$1
 RewriteRule ^app/(.+)$ /proxy.php?app=script&file=$1
 
+RewriteRule ^chart/(.+)$ /api/chart.php?app=$1
 RewriteRule ^trade/(.+)$ /api/trade.php?app=$1
 RewriteRule ^inventories/([a-zA-Z\_0-9]+)$ /api/inventories.php?app=$1
 RewriteRule ^vendor/([a-zA-Z\_0-9]+)$ /api/vendor.php?app=$1

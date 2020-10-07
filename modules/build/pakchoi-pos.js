@@ -159,6 +159,20 @@ var pages;
             $(window).on('resizeEnd', function () {
                 vm.inventories_sparkline(vm.inventories);
             });
+            $ts.get("@inventories", function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                    vm.inventories = {
+                        sales: "n/a",
+                        total: "n/a",
+                        sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                    };
+                }
+                else {
+                    vm.inventories = result.info;
+                }
+                vm.inventories_sparkline(vm.inventories);
+            });
         };
         home.prototype.inventories_sparkline = function (data) {
             $ts("#inventories-out").display(data.sales);

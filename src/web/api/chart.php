@@ -11,6 +11,7 @@ class App {
     */
     public function inventories() {
 
+        
     }
 
 }
