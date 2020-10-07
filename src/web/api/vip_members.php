@@ -114,10 +114,11 @@ class App {
 
         (new Table("VIP_waterflow"))->add([
             "vip" => $id,
-            "money" => $add,
+            "balance" => $add,
             "waterflow_id" => -1,
             "time" => Utils::Now(),
-            "note" => "会员充值$add元",
+            "type" => 1,
+            "note" => "会员充值{$add}元",
             "operator" => web::login_userId()
         ]);
 
