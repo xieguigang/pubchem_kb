@@ -10,6 +10,10 @@
             this.showTransactions();
         }
 
+        private inventories_sparkline(data: models.inventories_sparkline) {
+
+        }
+
         private showTransactions(page: number = 1) {
             let vm = this;
 
