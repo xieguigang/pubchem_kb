@@ -21,13 +21,18 @@ class web {
 	}
 
 	public static function log($code) {
-		(new Table("page_views"))->add([
-			"page" => Utils::URL(false),
-			"code" => $code,
-			"time" => Utils::Now(),
-			"operator" => self::login_userId(),
-			"user_agent" => $_SERVER['HTTP_USER_AGENT']
-		]);
+		$page_url = Utils::URL(false);
+
+		# ignores css/js/images files
+		if (!(Strings::StartWith($page_url, "/assets") || Strings::StartWith($page_url, "/app"))) {
+			(new Table("page_views"))->add([
+				"page" => $page_url,
+				"code" => $code,
+				"time" => Utils::Now(),
+				"operator" => self::login_userId(),
+				"user_agent" => $_SERVER['HTTP_USER_AGENT']
+			]);
+		}
 
 		if ($code == 200) {
 			return true;
