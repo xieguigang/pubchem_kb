@@ -37,11 +37,17 @@ declare namespace nifty {
     function showAlert(message: string): void;
     function clearAlert(): void;
 }
-declare namespace models {
-    interface inventories_sparkline {
+declare namespace models.charts {
+    interface inventories_sparkline extends sparkline {
         sales: number;
         total: number;
+    }
+    interface sparkline {
         sparkline: number[];
+    }
+    interface sales_sparkline extends sparkline {
+        day: number;
+        total: number;
     }
 }
 declare namespace models {
@@ -128,7 +134,9 @@ declare namespace pages {
     class home extends Bootstrap {
         readonly appName: string;
         private inventories;
+        private sales;
         protected init(): void;
+        private sales_sparkline;
         private inventories_sparkline;
         private showTransactions;
     }

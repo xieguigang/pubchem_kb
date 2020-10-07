@@ -1,8 +1,16 @@
-namespace models {
+namespace models.charts {
 
-    export interface inventories_sparkline {
+    export interface inventories_sparkline extends sparkline {
         sales: number;
         total: number;
+    }
+
+    export interface sparkline {
         sparkline: number[];
+    }
+
+    export interface sales_sparkline extends sparkline {
+        day: number;
+        total: number;
     }
 }

@@ -6,7 +6,16 @@
             return "home";
         }
 
-        private inventories: models.inventories_sparkline;
+        private inventories: models.charts.inventories_sparkline = <models.charts.inventories_sparkline>{
+            sales: <any>"n/a",
+            total: <any>"n/a",
+            sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        };
+        private sales: models.charts.sales_sparkline = <models.charts.sales_sparkline>{
+            day: <any>"n/a",
+            total: <any>"n/a",
+            sparkline: [0, 0, 0, 0, 0, 0, 0]
+        };
 
         protected init(): void {
             let vm = this;
@@ -14,26 +23,69 @@
             this.showTransactions();
 
             $(window).on('resizeEnd', function () {
-                vm.inventories_sparkline(vm.inventories);
+                vm.inventories_sparkline();
+                vm.sales_sparkline();
             });
 
             $ts.get(`@inventories`, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(<string>result.info);
-                    vm.inventories = <models.inventories_sparkline>{
-                        sales: <any>"n/a",
-                        total: <any>"n/a",
-                        sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                    }
                 } else {
-                    vm.inventories = <models.inventories_sparkline>result.info;
+                    vm.inventories = <models.charts.inventories_sparkline>result.info;
                 }
 
-                vm.inventories_sparkline(vm.inventories);
+                vm.inventories_sparkline();
+            });
+
+            $ts.get(`@sales`, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(<string>result.info);
+                } else {
+                    vm.sales = <models.charts.sales_sparkline>result.info;
+                }
+
+                vm.sales_sparkline();
             });
         }
 
-        private inventories_sparkline(data: models.inventories_sparkline) {
+        private sales_sparkline() {
+            let data = this.sales;
+
+            if (isNullOrUndefined(data)) {
+                return;
+            }
+
+            $ts("#sales-in").display(<any>data.day);
+            $ts("#sales-aweek").display(<any>data.total);
+
+            (<any>$("#sales-sparkline-line")).sparkline(data.sparkline, {
+                type: 'line',
+                width: '100%',
+                height: '40',
+                spotRadius: 4,
+                lineWidth: 1,
+                lineColor: '#ffffff',
+                fillColor: false,
+                minSpotColor: false,
+                maxSpotColor: false,
+                highlightLineColor: '#ffffff',
+                highlightSpotColor: '#ffffff',
+                tooltipChartTitle: '销售金额',
+                tooltipPrefix: '￥ ',
+                spotColor: '#ffffff',
+                valueSpots: {
+                    '0:': '#ffffff'
+                }
+            });
+        }
+
+        private inventories_sparkline() {
+            let data: models.charts.inventories_sparkline = this.inventories;
+
+            if (isNullOrUndefined(data)) {
+                return;
+            }
+
             $ts("#inventories-out").display(<any>data.sales);
             $ts("#inventories-all").display(<any>data.total);
 

@@ -144,7 +144,18 @@ var pages;
     var home = /** @class */ (function (_super) {
         __extends(home, _super);
         function home() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this.inventories = {
+                sales: "n/a",
+                total: "n/a",
+                sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            };
+            _this.sales = {
+                day: "n/a",
+                total: "n/a",
+                sparkline: [0, 0, 0, 0, 0, 0, 0]
+            };
+            return _this;
         }
         Object.defineProperty(home.prototype, "appName", {
             get: function () {
@@ -157,24 +168,60 @@ var pages;
             var vm = this;
             this.showTransactions();
             $(window).on('resizeEnd', function () {
-                vm.inventories_sparkline(vm.inventories);
+                vm.inventories_sparkline();
+                vm.sales_sparkline();
             });
             $ts.get("@inventories", function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(result.info);
-                    vm.inventories = {
-                        sales: "n/a",
-                        total: "n/a",
-                        sparkline: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-                    };
                 }
                 else {
                     vm.inventories = result.info;
                 }
-                vm.inventories_sparkline(vm.inventories);
+                vm.inventories_sparkline();
+            });
+            $ts.get("@sales", function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                }
+                else {
+                    vm.sales = result.info;
+                }
+                vm.sales_sparkline();
             });
         };
-        home.prototype.inventories_sparkline = function (data) {
+        home.prototype.sales_sparkline = function () {
+            var data = this.sales;
+            if (isNullOrUndefined(data)) {
+                return;
+            }
+            $ts("#sales-in").display(data.day);
+            $ts("#sales-aweek").display(data.total);
+            $("#sales-sparkline-line").sparkline(data.sparkline, {
+                type: 'line',
+                width: '100%',
+                height: '40',
+                spotRadius: 4,
+                lineWidth: 1,
+                lineColor: '#ffffff',
+                fillColor: false,
+                minSpotColor: false,
+                maxSpotColor: false,
+                highlightLineColor: '#ffffff',
+                highlightSpotColor: '#ffffff',
+                tooltipChartTitle: '销售金额',
+                tooltipPrefix: '￥ ',
+                spotColor: '#ffffff',
+                valueSpots: {
+                    '0:': '#ffffff'
+                }
+            });
+        };
+        home.prototype.inventories_sparkline = function () {
+            var data = this.inventories;
+            if (isNullOrUndefined(data)) {
+                return;
+            }
             $ts("#inventories-out").display(data.sales);
             $ts("#inventories-all").display(data.total);
             $("#inventories-sparkline-area").sparkline(data.sparkline, {
