@@ -18,7 +18,7 @@ class accessController extends controller {
         $access = $this->getAccessLevel();        
 
         if ($this->AccessByEveryOne()) {
-            return true;
+            return web::log(200);          
         } else if ($_SESSION["lockscreen"] && $_SERVER["REDIRECT_URL"] != "/lockscreen" && $_SERVER["REDIRECT_URL"] != "/api/unlock") {            
             redirect("/lockscreen");
             exit(0);
@@ -26,9 +26,17 @@ class accessController extends controller {
         
         if (empty($access)) {
             // 什么也没有填写的时候，默认为登录用户才可以访问
-            return (web::login_userId() > 0) && self::checkOperator();
+            $login = (web::login_userId() > 0) && self::checkOperator();
+
+            if ($login == true) {
+                $login = 200;
+            } else {
+                $login = 403;
+            }
+
+            return web::log($login);
         } else if (!self::checkOperator()) {
-            return false;
+            return web::log(403);
         } else {
             // access现在不为空的了
             $access = explode("|", $access);
@@ -48,13 +56,13 @@ class accessController extends controller {
         foreach ($access as $role) {
             if (array_key_exists($role, $roles)) {
                 if (self::isRole($roles[$role])) {
-                    return true;
+                    return web::log(200);
                 }
             }
         }
         
         // 当前的用户任何权限条件都不满足，则禁止访问当前的这个控制器
-        return false;
+        return web::log(403);
     }
 
     private static function checkOperator() {
@@ -93,8 +101,10 @@ class accessController extends controller {
                 dotnet::AccessDenied("Invalid credentials!");
             }
         } else if ($code == 429) {
+            web::log(429);
             dotnet::TooManyRequests("Too many request!");
         } else {
+            web::log(500);
             dotnet::ThrowException("Unknown server error...");
         }
     }
