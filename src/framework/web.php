@@ -30,7 +30,8 @@ class web {
 				"code" => $code,
 				"time" => Utils::Now(),
 				"operator" => self::login_userId(),
-				"user_agent" => $_SERVER['HTTP_USER_AGENT']
+				"user_agent" => $_SERVER['HTTP_USER_AGENT'],
+				"ip" => Utils::UserIPAddress()
 			]);
 		}
 
