@@ -79,5 +79,7 @@
         count: number;
         discount: number;
         note: string;
+        transaction_id: string;
+        vip_balance: number;
     }
 }

@@ -107,6 +107,8 @@ declare namespace models {
         count: number;
         discount: number;
         note: string;
+        transaction_id: string;
+        vip_balance: number;
     }
 }
 declare namespace nifty {
