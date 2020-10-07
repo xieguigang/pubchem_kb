@@ -32,6 +32,18 @@ declare namespace app {
     function start(): void;
     function print(): void;
 }
+declare namespace nifty {
+    function errorMsg(msg: string, callback?: Delegate.Action): void;
+    function showAlert(message: string): void;
+    function clearAlert(): void;
+}
+declare namespace models {
+    interface inventories_sparkline {
+        sales: number;
+        total: number;
+        sparkline: number[];
+    }
+}
 declare namespace models {
     interface vendor {
         id?: string;
@@ -112,15 +124,12 @@ declare namespace models {
         vip_balance: number;
     }
 }
-declare namespace nifty {
-    function errorMsg(msg: string, callback?: Delegate.Action): void;
-    function showAlert(message: string): void;
-    function clearAlert(): void;
-}
 declare namespace pages {
     class home extends Bootstrap {
         readonly appName: string;
+        private inventories;
         protected init(): void;
+        private inventories_sparkline;
         private showTransactions;
     }
 }

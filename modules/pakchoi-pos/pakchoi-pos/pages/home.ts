@@ -6,12 +6,38 @@
             return "home";
         }
 
+        private inventories: models.inventories_sparkline;
+
         protected init(): void {
+            let vm = this;
+
             this.showTransactions();
+
+            $(window).on('resizeEnd', function () {
+                vm.inventories_sparkline(vm.inventories);
+            });
         }
 
         private inventories_sparkline(data: models.inventories_sparkline) {
+            $ts("#inventories-out").display(<any>data.sales);
+            $ts("#inventories-all").display(<any>data.total);
 
+            (<any>$("#inventories-sparkline-area")).sparkline(data.sparkline, {
+                type: 'line',
+                width: '100%',
+                height: '40',
+                spotRadius: 5,
+                lineWidth: 1.5,
+                lineColor: 'rgba(255,255,255,.85)',
+                fillColor: 'rgba(0,0,0,0.03)',
+                spotColor: 'rgba(255,255,255,.5)',
+                minSpotColor: 'rgba(255,255,255,.5)',
+                maxSpotColor: 'rgba(255,255,255,.5)',
+                highlightLineColor: '#ffffff',
+                highlightSpotColor: '#ffffff',
+                tooltipChartTitle: '库存',
+                tooltipSuffix: ' 件'
+            });
         }
 
         private showTransactions(page: number = 1) {
