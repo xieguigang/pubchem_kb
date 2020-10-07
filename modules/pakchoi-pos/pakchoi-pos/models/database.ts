@@ -29,6 +29,7 @@
     }
 
     export interface inventories {
+        no?: string;
         id?: string;
         batch_id: string;
         inbound_time?: string;

@@ -128,7 +128,12 @@ class App {
             ->on(["waterflow" => "buyer", "VIP_members" => "id"])         
             ->limit($start, $page_size)
             ->order_by("id desc")
-            ->select(["waterflow.*", "admin.realname as admin", "VIP_members.name as vip"]);
+            ->select([
+                "waterflow.*", 
+                "admin.realname as admin", 
+                "VIP_members.name as vip", 
+                "VIP_members.card_id"
+            ]);
 
         if (empty($list) || $list == false || count($list) == 0) {
             controller::error("对不起，无查询结果数据", 1, $waterflow->getLastMySql());

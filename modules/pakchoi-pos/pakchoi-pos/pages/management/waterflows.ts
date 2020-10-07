@@ -34,7 +34,7 @@
                         tr.appendElement($ts("<td>").display(trade.time));
                         tr.appendElement($ts("<td>").display(<any>trade.money));
                         tr.appendElement($ts("<td>").display(<any>trade.count));
-                        tr.appendElement($ts("<td>").display(trade.vip));
+                        tr.appendElement($ts("<td>").display(vm.view_vip(trade.vip, (<any>trade).card_id)));
                         tr.appendElement($ts("<td>").display(trade.admin));
                         tr.appendElement($ts("<td>").display(trade.note));
                         tr.appendElement($ts("<td>").display(buttons));
@@ -43,6 +43,17 @@
                     }
                 }
             })
+        }
+
+        private view_vip(vip: string, card_id: string) {
+            if (Strings.Empty(vip, true)) {
+                return "非会员";
+            } else {
+                return $ts("<a>", {
+                    class: "btn-link",
+                    href: `/VIP?card_id=${card_id}`
+                }).display(vip);
+            }
         }
 
         private view_details(trade_id: string) {

@@ -24,7 +24,7 @@
                     for (let record of <models.inventories[]>result.info) {
                         tr = $ts("<tr>");
 
-                        tr.appendElement($ts("<td>").display((<any>record).name));
+                        tr.appendElement($ts("<td>").display($ts("<a>", { class: "btn-link", href: `/show/item?no=${record.no}` }).display((<any>record).name)));
                         tr.appendElement($ts("<td>").display(record.batch_id));
                         tr.appendElement($ts("<td>").display(record.inbound_time));
                         tr.appendElement($ts("<td>").display(<any>record.count));

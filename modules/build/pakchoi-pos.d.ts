@@ -82,6 +82,7 @@ declare namespace models {
         operator?: string;
     }
     interface inventories {
+        no?: string;
         id?: string;
         batch_id: string;
         inbound_time?: string;
@@ -247,6 +248,7 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private loadWaterflows;
+        private view_vip;
         private view_details;
     }
 }

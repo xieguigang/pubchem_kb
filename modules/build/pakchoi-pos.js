@@ -882,7 +882,7 @@ var pages;
                     for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
                         var record = _a[_i];
                         tr = $ts("<tr>");
-                        tr.appendElement($ts("<td>").display(record.name));
+                        tr.appendElement($ts("<td>").display($ts("<a>", { class: "btn-link", href: "/show/item?no=" + record.no }).display(record.name)));
                         tr.appendElement($ts("<td>").display(record.batch_id));
                         tr.appendElement($ts("<td>").display(record.inbound_time));
                         tr.appendElement($ts("<td>").display(record.count));
@@ -1128,7 +1128,7 @@ var pages;
                         tr.appendElement($ts("<td>").display(trade_2.time));
                         tr.appendElement($ts("<td>").display(trade_2.money));
                         tr.appendElement($ts("<td>").display(trade_2.count));
-                        tr.appendElement($ts("<td>").display(trade_2.vip));
+                        tr.appendElement($ts("<td>").display(vm.view_vip(trade_2.vip, trade_2.card_id)));
                         tr.appendElement($ts("<td>").display(trade_2.admin));
                         tr.appendElement($ts("<td>").display(trade_2.note));
                         tr.appendElement($ts("<td>").display(buttons));
@@ -1140,6 +1140,17 @@ var pages;
                     }
                 }
             });
+        };
+        waterflows.prototype.view_vip = function (vip, card_id) {
+            if (Strings.Empty(vip, true)) {
+                return "非会员";
+            }
+            else {
+                return $ts("<a>", {
+                    class: "btn-link",
+                    href: "/VIP?card_id=" + card_id
+                }).display(vip);
+            }
         };
         waterflows.prototype.view_details = function (trade_id) {
             $goto("/show/trade?transaction=" + trade_id);

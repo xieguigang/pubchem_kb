@@ -57,7 +57,7 @@ class App {
             ->on(["inventories" => "operator", "admin" => "id"])
             ->limit($start, $page_size)
             ->order_by("id desc")
-            ->select(["inventories.*", "`goods`.`name`", "admin.realname as admin"]);
+            ->select(["inventories.*", "`goods`.`name`", "`goods`.`item_id` as no", "admin.realname as admin"]);
 
         if (empty($list) || $list == false || count($list) == 0) {
             controller::error("对不起，无查询结果数据", 1, $inventories->getLastMySql());
