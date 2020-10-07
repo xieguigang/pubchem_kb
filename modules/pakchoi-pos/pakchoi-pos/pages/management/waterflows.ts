@@ -46,7 +46,7 @@
         }
 
         private view_details(trade_id: string) {
-            $goto(`/trade?transaction=${trade_id}`);
+            $goto(`/show/trade?transaction=${trade_id}`);
         }
     }
 }

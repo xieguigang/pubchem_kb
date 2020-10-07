@@ -297,7 +297,7 @@ var pages;
                         tr = $ts("<tr>");
                         link = $ts("<a>", {
                             class: "btn-link",
-                            href: "/trade?transaction=" + trade_1.transaction_id
+                            href: "/show/trade?transaction=" + trade_1.transaction_id
                         }).display(trade_1.transaction_id);
                         if (trade_1.money > 0) {
                             type = $ts("<div>", { class: "label label-table label-info" }).display("消费");
@@ -527,7 +527,7 @@ var pages;
             else {
                 return $ts("<a>", {
                     class: "btn-link",
-                    href: "/trade?transaction=" + transaction_id
+                    href: "/show/trade?transaction=" + transaction_id
                 }).display(transaction_id);
             }
         };
@@ -800,7 +800,7 @@ var pages;
                 tr.appendElement($ts("<td>").display(str));
                 tr.appendElement($ts("<td>").display($ts("<a>", {
                     class: "btn-link",
-                    href: "/item?no=" + goods_1.item_id
+                    href: "/show/item?no=" + goods_1.item_id
                 }).display(goods_1.item_id)));
                 str = goods_1.vendor;
                 if (Strings.Empty(str, true)) {
@@ -1117,7 +1117,7 @@ var pages;
             });
         };
         waterflows.prototype.view_details = function (trade_id) {
-            $goto("/trade?transaction=" + trade_id);
+            $goto("/show/trade?transaction=" + trade_id);
         };
         return waterflows;
     }(Bootstrap));

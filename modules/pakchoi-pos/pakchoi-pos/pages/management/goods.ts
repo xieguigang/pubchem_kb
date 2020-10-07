@@ -58,7 +58,7 @@
                 tr.appendElement($ts("<td>").display(str));
                 tr.appendElement($ts("<td>").display($ts("<a>", {
                     class: "btn-link",
-                    href: `/item?no=${goods.item_id}`
+                    href: `/show/item?no=${goods.item_id}`
                 }).display(goods.item_id)));
 
                 str = (<any>goods).vendor;

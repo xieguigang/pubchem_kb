@@ -73,7 +73,7 @@
             } else {
                 return $ts("<a>", {
                     class: "btn-link",
-                    href: `/trade?transaction=${transaction_id}`
+                    href: `/show/trade?transaction=${transaction_id}`
                 }).display(transaction_id);
             }
         }
