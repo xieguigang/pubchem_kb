@@ -35,11 +35,15 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="models\" />
     <Folder Include="pages\" />
     <Folder Include="pages\management\" />
     <Folder Include="pages\pos\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="models\charts.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="pages\login.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -70,7 +74,7 @@
     <TypeScriptCompile Include="pages\management\vendor.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="models.ts">
+    <TypeScriptCompile Include="models\database.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="pages\pos\billing.ts">
