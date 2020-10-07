@@ -11,7 +11,10 @@ namespace pages {
         }
 
         private loadWaterflows(page: number = 1) {
+            $ts.get(`@load?page=${page}`, function (result) {
 
+
+            })
         }
     }
 }

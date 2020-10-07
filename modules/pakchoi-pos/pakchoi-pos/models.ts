@@ -59,4 +59,18 @@ namespace models {
         time: string;
         note: string;
     }
+
+    export interface tradeInformation {
+        admin: string;
+        vip: string;
+        id: string;
+        goods: string;
+        time: string;
+        money: number;
+        buyer: number;
+        operator: string;
+        count: number;
+        discount: number;
+        note: string;
+    }
 }

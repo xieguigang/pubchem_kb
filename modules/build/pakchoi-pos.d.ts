@@ -88,6 +88,19 @@ declare namespace models {
         time: string;
         note: string;
     }
+    interface tradeInformation {
+        admin: string;
+        vip: string;
+        id: string;
+        goods: string;
+        time: string;
+        money: number;
+        buyer: number;
+        operator: string;
+        count: number;
+        discount: number;
+        note: string;
+    }
 }
 declare namespace nifty {
     function errorMsg(msg: string, callback?: Delegate.Action): void;

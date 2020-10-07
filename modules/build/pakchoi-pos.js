@@ -862,6 +862,8 @@ var pages;
         };
         waterflows.prototype.loadWaterflows = function (page) {
             if (page === void 0) { page = 1; }
+            $ts.get("@load?page=" + page, function (result) {
+            });
         };
         return waterflows;
     }(Bootstrap));
