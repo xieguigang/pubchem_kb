@@ -13,4 +13,9 @@ namespace models.charts {
         day: number;
         total: number;
     }
+
+    export interface inventories_sparkbar extends sparkline {
+        today: number;
+        total: number;
+    }
 }

@@ -155,6 +155,11 @@ var pages;
                 total: "n/a",
                 sparkline: [0, 0, 0, 0, 0, 0, 0]
             };
+            _this.hist = {
+                today: "n/a",
+                total: "n/a",
+                sparkline: [0, 0, 0, 0, 0, 0, 0]
+            };
             return _this;
         }
         Object.defineProperty(home.prototype, "appName", {
@@ -170,6 +175,7 @@ var pages;
             $(window).on('resizeEnd', function () {
                 vm.inventories_sparkline();
                 vm.sales_sparkline();
+                vm.inventories_sparkbar();
             });
             $ts.get("@inventories", function (result) {
                 if (result.code != 0) {
@@ -188,6 +194,37 @@ var pages;
                     vm.sales = result.info;
                 }
                 vm.sales_sparkline();
+            });
+            $ts.get("@inventory_aweek", function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(result.info);
+                }
+                else {
+                    vm.hist = result.info;
+                }
+                vm.inventories_sparkbar();
+            });
+        };
+        home.prototype.inventories_sparkbar = function () {
+            var data = this.hist;
+            if (isNullOrUndefined(data)) {
+                return;
+            }
+            $ts("#inventories-today").display(data.today);
+            $ts("#inventories-aweek").display(data.total);
+            var barEl = $("#inventories-sparkline-bar");
+            var barValues = data.sparkline;
+            var barValueCount = barValues.length;
+            var barSpacing = 1;
+            barEl.sparkline(barValues, {
+                type: 'bar',
+                height: 55,
+                barWidth: Math.round((barEl.parent().width() - (barValueCount - 1) * barSpacing) / barValueCount),
+                barSpacing: barSpacing,
+                zeroAxis: false,
+                tooltipChartTitle: '日销售',
+                tooltipSuffix: ' 售出',
+                barColor: 'rgba(255,255,255,.7)'
             });
         };
         home.prototype.sales_sparkline = function () {

@@ -49,6 +49,10 @@ declare namespace models.charts {
         day: number;
         total: number;
     }
+    interface inventories_sparkbar extends sparkline {
+        today: number;
+        total: number;
+    }
 }
 declare namespace models {
     interface vendor {
@@ -135,7 +139,9 @@ declare namespace pages {
         readonly appName: string;
         private inventories;
         private sales;
+        private hist;
         protected init(): void;
+        private inventories_sparkbar;
         private sales_sparkline;
         private inventories_sparkline;
         private showTransactions;

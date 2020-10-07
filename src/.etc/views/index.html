@@ -8,6 +8,7 @@
 
     <meta name="inventories" content="/chart/inventories" />
     <meta name="sales" content="/chart/sales" />
+    <meta name="inventory_aweek" content="/chart/inventories_hist" />
 
     ${includes/head.html}
     ${includes/chart.html}
@@ -171,18 +172,18 @@
                                             <p class="text-lg text-semibold"><i class="demo-pli-bag-coins icon-fw"></i>
                                                 销售数量直方图</p>
                                             <p class="mar-no">
-                                                <span class="pull-right text-bold">$764</span>
+                                                <span id="inventories-today" class="pull-right text-bold">$764</span>
                                                 今日售出
                                             </p>
                                             <p class="mar-no">
-                                                <span class="pull-right text-bold">$1,332</span>
+                                                <span id="inventories-aweek" class="pull-right text-bold">$1,332</span>
                                                 过去一周
                                             </p>
                                         </div>
                                         <div class="pad-all text-center">
 
                                             <!--Placeholder-->
-                                            <div id="demo-sparkline-bar" class="box-inline"></div>
+                                            <div id="inventories-sparkline-bar" class="box-inline"></div>
 
                                         </div>
                                     </div>

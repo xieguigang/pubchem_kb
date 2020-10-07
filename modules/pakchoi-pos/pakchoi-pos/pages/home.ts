@@ -16,6 +16,11 @@
             total: <any>"n/a",
             sparkline: [0, 0, 0, 0, 0, 0, 0]
         };
+        private hist: models.charts.inventories_sparkbar = <models.charts.inventories_sparkbar>{
+            today: <any>"n/a",
+            total: <any>"n/a",
+            sparkline: [0, 0, 0, 0, 0, 0, 0]
+        }
 
         protected init(): void {
             let vm = this;
@@ -25,6 +30,7 @@
             $(window).on('resizeEnd', function () {
                 vm.inventories_sparkline();
                 vm.sales_sparkline();
+                vm.inventories_sparkbar();
             });
 
             $ts.get(`@inventories`, function (result) {
@@ -45,6 +51,43 @@
                 }
 
                 vm.sales_sparkline();
+            });
+
+            $ts.get(`@inventory_aweek`, function (result) {
+                if (result.code != 0) {
+                    nifty.errorMsg(<string>result.info);
+                } else {
+                    vm.hist = <models.charts.inventories_sparkbar>result.info;
+                }
+
+                vm.inventories_sparkbar();
+            });
+        }
+
+        private inventories_sparkbar() {
+            let data = this.hist;
+
+            if (isNullOrUndefined(data)) {
+                return;
+            }
+
+            $ts("#inventories-today").display(<any>data.today);
+            $ts("#inventories-aweek").display(<any>data.total);
+
+            var barEl = $("#inventories-sparkline-bar");
+            var barValues = data.sparkline;
+            var barValueCount = barValues.length;
+            var barSpacing = 1;
+
+            (<any>barEl).sparkline(barValues, {
+                type: 'bar',
+                height: 55,
+                barWidth: Math.round((barEl.parent().width() - (barValueCount - 1) * barSpacing) / barValueCount),
+                barSpacing: barSpacing,
+                zeroAxis: false,
+                tooltipChartTitle: '日销售',
+                tooltipSuffix: ' 售出',
+                barColor: 'rgba(255,255,255,.7)'
             });
         }
 
