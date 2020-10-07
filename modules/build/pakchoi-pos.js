@@ -862,6 +862,7 @@ var pages;
         };
         waterflows.prototype.loadWaterflows = function (page) {
             if (page === void 0) { page = 1; }
+            var vm = this;
             $ts.get("@load?page=" + page, function (result) {
                 if (result.code != 0) {
                     nifty.errorMsg(result.info);
@@ -869,9 +870,15 @@ var pages;
                 else {
                     var list = $ts("#list").clear();
                     var tr = void 0;
-                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
-                        var trade = _a[_i];
+                    var buttons = void 0;
+                    var _loop_2 = function (trade) {
                         tr = $ts("<tr>");
+                        buttons = $ts("<button>", {
+                            class: ["btn", "btn-primary", "btn-rounded"],
+                            onclick: function () {
+                                vm.view_details(trade.id);
+                            }
+                        }).display("查看交易明细");
                         tr.appendElement($ts("<td>").display(trade.transaction_id));
                         tr.appendElement($ts("<td>").display(trade.time));
                         tr.appendElement($ts("<td>").display(trade.money));
@@ -879,10 +886,17 @@ var pages;
                         tr.appendElement($ts("<td>").display(trade.vip));
                         tr.appendElement($ts("<td>").display(trade.admin));
                         tr.appendElement($ts("<td>").display(trade.note));
+                        tr.appendElement($ts("<td>").display(buttons));
                         list.appendElement(tr);
+                    };
+                    for (var _i = 0, _a = result.info; _i < _a.length; _i++) {
+                        var trade = _a[_i];
+                        _loop_2(trade);
                     }
                 }
             });
+        };
+        waterflows.prototype.view_details = function (trade_id) {
         };
         return waterflows;
     }(Bootstrap));

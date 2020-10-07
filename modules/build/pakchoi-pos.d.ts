@@ -201,6 +201,7 @@ declare namespace pages {
         readonly appName: string;
         protected init(): void;
         private loadWaterflows;
+        private view_details;
     }
 }
 declare namespace pages {
