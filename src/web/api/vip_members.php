@@ -139,9 +139,11 @@ class App {
         $list = $waterflows
             ->left_join("admin")
             ->on(["VIP_waterflow" => "operator", "admin" => "id"])
+            ->left_join("waterflow")
+            ->on(["VIP_waterflow" => "waterflow_id", "waterflow" => "id"])
             ->where(["vip" => $card_id])
             ->limit($start, $page_size)
-            ->select(["admin.realname as admin", "VIP_waterflow.*"]);
+            ->select(["admin.realname as admin", "VIP_waterflow.*", "waterflow.transaction_id"]);
 
         if (empty($list) || $list == false || count($list) == 0) {
             controller::error("对不起，无查询结果数据", 1, $waterflows->getLastMySql());

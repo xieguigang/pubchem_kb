@@ -63,17 +63,11 @@ class App {
             controller::error(ERR_MYSQL_INSERT_FAILURE);
         } else {
             $details = new Table("trade_items");
-            $inventories = new Tabel("inventories");
+            $inventories = new Table("inventories");
 
             # 添加详细售卖信息
             foreach($items as $goodItem) {
                 $counts = $goods[$goodItem["id"]];
-                $details->add([
-                    "item_id" => $goodItem["id"],
-                    "count" => $counts,
-                    "batch_id" => -1,
-                    "waterflow" => $trade
-                ]);
 
                 # 库存变化
                 # 选择出一个剩余库存数量大于counts的批次
@@ -86,6 +80,12 @@ class App {
                 }
 
                 $inventories->where(["id" => $batch["id"]])->save(["remnant" => "~`remnant` - $counts"]);
+                $details->add([
+                    "item_id" => $goodItem["id"],
+                    "count" => $counts,
+                    "batch_id" => $batch["id"],
+                    "waterflow" => $trade
+                ]);
             }
 
             if ($vip > 0) {

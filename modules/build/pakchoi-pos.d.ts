@@ -85,6 +85,7 @@ declare namespace models {
         id: string;
         balance: number;
         waterflow_id: string;
+        transaction_id: string;
         time: string;
         note: string;
         /**
