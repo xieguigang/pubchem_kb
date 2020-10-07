@@ -80,6 +80,7 @@ var app;
         Router.AddAppHandler(new pages.lockscreen());
         Router.AddAppHandler(new pages.home());
         Router.AddAppHandler(new pages.trade());
+        Router.AddAppHandler(new pages.item());
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());
@@ -929,6 +930,30 @@ var pages;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {
+    var item = /** @class */ (function (_super) {
+        __extends(item, _super);
+        function item() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(item.prototype, "appName", {
+            get: function () {
+                return "goods_item";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        item.prototype.init = function () {
+        };
+        item.prototype.print = function () {
+            app.print("#item-details");
+        };
+        return item;
+    }(Bootstrap));
+    pages.item = item;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
     var trade = /** @class */ (function (_super) {
         __extends(trade, _super);
         function trade() {
@@ -1230,9 +1255,9 @@ var pages;
             var table = $ts("#invoice-table").clear();
             var total = 0;
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
-                var item = _a[_i];
-                table.appendElement(this.addGoodsItem(item.item, item.count));
-                total += item.item.price * item.count;
+                var item_1 = _a[_i];
+                table.appendElement(this.addGoodsItem(item_1.item, item_1.count));
+                total += item_1.item.price * item_1.count;
             }
             table.appendElement(this.total(total));
         };
@@ -1281,8 +1306,8 @@ var pages;
                 transaction: $ts("@transaction")
             };
             for (var _i = 0, _a = this.goods.Values.ToArray(); _i < _a.length; _i++) {
-                var item = _a[_i];
-                data.goods[item.item.id] = item.count;
+                var item_2 = _a[_i];
+                data.goods[item_2.item.id] = item_2.count;
             }
             $ts("#settlement").display("结算中").classList.add("disabled");
             $ts.post('@trade', data, function (result) {

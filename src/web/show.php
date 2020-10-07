@@ -10,7 +10,56 @@ class App {
      * @uses view
     */
     public function item($no) {
-        View::Display();
+        $info = (new Table("goods"));
+        $goods = $info
+            ->left_join("admin")
+            ->on(["admin" => "id", "goods" => "operator"])
+            ->left_join("vendor")
+            ->on(["goods" => "vendor_id", "vendor" => "id"])
+            ->where(["item_id" => $no])
+            ->find([
+                "goods.*",
+                "`admin`.`realname` as admin",
+                "vendor.name as vendor",
+                "vendor.tel",
+                "vendor.url",
+                "vendor.address"
+            ]);
+        
+        if (Utils::isDbNull($goods)) {
+            dotnet::PageNotFound("the given goods item is not exists!");
+        }
+
+        if (Strings::Empty($goods["vendor"])) {
+            $goods["vendor"] = "无供应商";
+        }
+
+        if ($goods["gender"] == -1) {
+            $goods["gender"] = "未指定或者适用于所有";
+        } else if ($goods["gender"] == 0) {
+            $goods["gender"] = "女";
+        } else {
+            $goods["gender"] = "男";
+        }
+
+        foreach(["tel", "url", "address", "note"] as $key) {
+            if (Strings::Empty($goods[$key])) {
+                $goods[$key] = "未填写";
+            }
+        }
+
+        $inventories = (new Table("inventories"))
+            ->left_join("admin")
+            ->on(["inventories" => "operator", "admin" => "id"])
+            ->where(["item_id" => $goods["id"]])
+            ->select([
+                "`inventories`.*",
+                "`admin`.`realname` as admin"
+            ]);
+
+        $goods["batch"] = $inventories;
+
+        View::Display($goods);
     }
 
     /**

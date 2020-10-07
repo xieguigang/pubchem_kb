@@ -219,6 +219,13 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class item extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        print(): void;
+    }
+}
+declare namespace pages {
     class trade extends Bootstrap {
         readonly appName: string;
         protected init(): void;

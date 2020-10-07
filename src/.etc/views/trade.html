@@ -144,7 +144,7 @@
                                         <tbody id="list">
                                             <foreach @goods>
                                                 <tr>
-                                                    <td>@goods["item_id"]</td>
+                                                    <td><a class="btn-link" href='/show/item?no=@goods["item_id"]'>@goods["item_id"]</a></td>
                                                     <td>@goods["name"]</td>
                                                     <td>￥@goods["price"]</td>
                                                     <td>@goods["count"]</td>

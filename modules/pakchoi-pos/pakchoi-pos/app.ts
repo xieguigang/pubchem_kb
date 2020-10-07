@@ -9,6 +9,8 @@ namespace app {
         Router.AddAppHandler(new pages.home());
 
         Router.AddAppHandler(new pages.trade());
+        Router.AddAppHandler(new pages.item());
+
         Router.AddAppHandler(new pages.inventories());
         Router.AddAppHandler(new pages.goods());
         Router.AddAppHandler(new pages.vendor());

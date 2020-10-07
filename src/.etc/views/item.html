@@ -49,9 +49,9 @@
                     <div class="row">
                         <div class="col-xs-12">
 
-                            <div id="trade-details" class="panel">
+                            <div id="item-details" class="panel">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">交易信息详单</h3>
+                                    <h3 class="panel-title">商品详细信息</h3>
                                 </div>
 
                                 <div class="panel-body">
@@ -59,46 +59,69 @@
 
                                         <!--Email Input-->
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="card_id">交易号：</label>
+                                            <label class="col-md-3 control-label" for="card_id">商品编号：</label>
                                             <div class="col-md-6">
-                                                <p id="card_id" class="form-control">{$transaction_id}</p>
+                                                <p id="card_id" class="form-control">{$item_id}</p>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="ttime">交易时间：</label>
+                                            <label class="col-md-3 control-label" for="name">商品名：</label>
                                             <div class="col-md-6">
-                                                <p id="ttime" class="form-control">{$time}</p>
+                                                <p id="name" class="form-control">{$name}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="ttime">添加时间：</label>
+                                            <div class="col-md-6">
+                                                <p id="ttime" class="form-control">{$add_time}</p>
                                             </div>
                                         </div>
 
                                         <!--Email Input-->
+                                        
+
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="name">会员姓名：</label>
+                                            <label class="col-md-3 control-label" for="balance">商品单价：</label>
                                             <div class="col-md-6">
-                                                <p id="name" class="form-control">{$vip}</p>
+                                                <p id="balance" class="form-control">￥{$price}</p>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="balance">交易总金额：</label>
+                                            <label class="col-md-3 control-label" for="phone">适用性别：</label>
                                             <div class="col-md-6">
-                                                <p id="balance" class="form-control">{$money}</p>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-md-3 control-label" for="phone">会员余额支付：</label>
-                                            <div class="col-md-6">
-                                                <p id="phone" class="form-control">{$vip_balance}</p>
+                                                <p id="phone" class="form-control">{$gender}</p>
                                             </div>
                                         </div>
 
                                         <!--Password-->
                                         <div class="form-group">
-                                            <label class="col-md-3 control-label" for="address">商品总件数：</label>
+                                            <label class="col-md-3 control-label" for="address">供应商：</label>
                                             <div class="col-md-6">
-                                                <p id="address" class="form-control">{$count}</p>
+                                                <p id="address" class="form-control">{$vendor}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="address">供应商联系电话：</label>
+                                            <div class="col-md-6">
+                                                <p id="address" class="form-control">{$tel}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="address">供应商网站：</label>
+                                            <div class="col-md-6">
+                                                <p id="address" class="form-control">{$url}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-md-3 control-label" for="address">供应商地址：</label>
+                                            <div class="col-md-6">
+                                                <p id="address" class="form-control">{$address}</p>
                                             </div>
                                         </div>
 
@@ -132,24 +155,24 @@
                                         class="table table-bordered table-hover toggle-circle" data-page-size="7">
                                         <thead>
                                             <tr>
-                                                <th>商品编号</th>
-                                                <th>商品名称</th>
-                                                <th>单价</th>
+                                                <th>入库批次号</th>
+                                                <th>入库时间</th>                                              
                                                 <th>数量</th>
-                                                <th>批次号</th>                           
-                                                <th>供货商</th>      
+                                                <th>剩余库存</th>                           
+                                                <th>操作员</th>      
+                                                <th>备注</th>      
                                             </tr>
                                         </thead>
 
                                         <tbody id="list">
-                                            <foreach @goods>
+                                            <foreach @batch>
                                                 <tr>
-                                                    <td>@goods["item_id"]</td>
-                                                    <td>@goods["name"]</td>
-                                                    <td>￥@goods["price"]</td>
-                                                    <td>@goods["count"]</td>
-                                                    <td>@goods["batch"]</td>
-                                                    <td>@goods["vendor"]</td>
+                                                    <td>@batch["batch_id"]</td>
+                                                    <td>@batch["inbound_time"]</td>
+                                                    <td>@batch["count"]</td>
+                                                    <td>@batch["remnant"]</td>
+                                                    <td>@batch["admin"]</td>
+                                                    <td>@batch["note"]</td>
                                                 </tr>
                                             </foreach>
                                         </tbody>
