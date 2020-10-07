@@ -175,6 +175,13 @@ declare namespace pages {
     }
 }
 declare namespace pages {
+    class waterflows extends Bootstrap {
+        readonly appName: string;
+        protected init(): void;
+        private loadWaterflows;
+    }
+}
+declare namespace pages {
     const firstItemKey: string;
     class POS extends Bootstrap {
         private scanner;

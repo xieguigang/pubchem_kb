@@ -83,6 +83,7 @@ var app;
         Router.AddAppHandler(new pages.vendor());
         Router.AddAppHandler(new pages.VIP_members());
         Router.AddAppHandler(new pages.VIP_member());
+        Router.AddAppHandler(new pages.waterflows());
         Router.AddAppHandler(new pages.billing());
         Router.AddAppHandler(new pages.POS());
         Router.RunApp();
@@ -841,6 +842,30 @@ var pages;
         return vendor;
     }(Bootstrap));
     pages.vendor = vendor;
+})(pages || (pages = {}));
+var pages;
+(function (pages) {
+    var waterflows = /** @class */ (function (_super) {
+        __extends(waterflows, _super);
+        function waterflows() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        Object.defineProperty(waterflows.prototype, "appName", {
+            get: function () {
+                return "waterflows";
+            },
+            enumerable: true,
+            configurable: true
+        });
+        waterflows.prototype.init = function () {
+            this.loadWaterflows();
+        };
+        waterflows.prototype.loadWaterflows = function (page) {
+            if (page === void 0) { page = 1; }
+        };
+        return waterflows;
+    }(Bootstrap));
+    pages.waterflows = waterflows;
 })(pages || (pages = {}));
 var pages;
 (function (pages) {

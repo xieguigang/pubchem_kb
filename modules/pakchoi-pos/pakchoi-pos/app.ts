@@ -12,6 +12,7 @@ namespace app {
         Router.AddAppHandler(new pages.vendor());
         Router.AddAppHandler(new pages.VIP_members());
         Router.AddAppHandler(new pages.VIP_member());
+        Router.AddAppHandler(new pages.waterflows());
 
         Router.AddAppHandler(new pages.billing());
         Router.AddAppHandler(new pages.POS());
