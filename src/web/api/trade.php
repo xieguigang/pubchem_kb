@@ -37,6 +37,8 @@ class App {
             $left = $money - $vip_info["balance"];
             # 这计算得到通过会员余额支付的金额部分
             $balance_pay = $left <= 0 ? $money : $vip_info["balance"];
+        } else {
+            $balance_pay = 0;
         }
 
         # 添加商品交易信息
@@ -47,11 +49,14 @@ class App {
                 "time" => Utils::Now(),
                 # 交易的金额是总的
                 "money" => $money,
+                # 通过会员账户余额支付的部分                
+                "vip_balance" => $balance_pay,
                 "buyer" => $vip,
                 "operator" => web::login_userId(),
                 "count" => $counts,
                 "discount" => $discount,
-                "note" => ""
+                "note" => "",
+                "transaction_id" => $transaction
             ]);
 
         if (empty($trade) || $trade == false) {
@@ -68,6 +73,9 @@ class App {
                     "batch_id" => -1,
                     "waterflow" => $trade
                 ]);
+
+                # 库存变化
+                
             }
 
             if ($vip > 0) {
