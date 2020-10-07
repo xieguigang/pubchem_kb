@@ -95,4 +95,26 @@ class App {
 
         controller::error($items);
     }
+
+    /**
+     * 加载交易流水信息
+    */
+    public function load($page = 1, $page_size = 100) {
+        $start = ($page - 1) * $page_size;
+        $waterflow = new Table("waterflow");
+        $list = $waterflow
+            ->left_join("admin")
+            ->on(["waterflow" => "operator", "admin" => "id"])   
+            ->left_join("VIP_members")
+            ->on(["waterflow" => "buyer", "VIP_members" => "id"])         
+            ->limit($start, $page_size)
+            ->order_by("id desc")
+            ->select(["waterflow.*", "admin.realname as admin", "VIP_members.name as vip"]);
+
+        if (empty($list) || $list == false || count($list) == 0) {
+            controller::error("对不起，无查询结果数据", 1, $waterflow->getLastMySql());
+        } else {
+            controller::success($list);
+        }
+    }
 }
