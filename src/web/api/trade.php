@@ -63,6 +63,7 @@ class App {
             controller::error(ERR_MYSQL_INSERT_FAILURE);
         } else {
             $details = new Table("trade_items");
+            $inventories = new Tabel("inventories");
 
             # 添加详细售卖信息
             foreach($items as $goodItem) {
@@ -75,7 +76,16 @@ class App {
                 ]);
 
                 # 库存变化
-                
+                # 选择出一个剩余库存数量大于counts的批次
+                $batch = $inventories
+                    ->where(["item_id" => $goodItem["id"], "remnant" => gt_eq($counts)])
+                    ->find();
+
+                if (Utils::isDbNull($batch)) {
+                    controller::error("商品信息错误");
+                }
+
+                $inventories->where(["id" => $batch["id"]])->save(["remnant" => "~`remnant` - $counts"]);
             }
 
             if ($vip > 0) {
