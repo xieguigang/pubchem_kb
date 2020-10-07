@@ -84,8 +84,9 @@ class App {
                     "item_id" => $goodItem["id"],
                     "count" => $counts,
                     "batch_id" => $batch["id"],
-                    "waterflow" => $trade
-                ]);
+                    "waterflow" => $trade,
+                    "time" => Utils::Now()
+                ]);               
             }
 
             if ($vip > 0) {
