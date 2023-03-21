@@ -8,8 +8,10 @@
     ".NETCoreApp,Version=v6.0": {
       "pubchem/1.0.0": {
         "dependencies": {
+          "Microsoft.VisualBasic.MIME.application.rdf_xml": "1.0.0",
           "Microsoft.VisualBasic.Runtime": "5.0.1.2389",
           "REnv": "5.1.3.5558",
+          "Microsoft.VisualBasic.MIME.application.rdf_xml.Reference": "1.0.0.0",
           "Microsoft.VisualBasic.Runtime.Reference": "5.33.69.2558",
           "REnv.Reference": "2.33.856.6961"
         },
@@ -685,6 +687,14 @@
           "System.Runtime": "4.3.1"
         }
       },
+      "Microsoft.VisualBasic.MIME.application.rdf_xml/1.0.0": {
+        "dependencies": {
+          "Microsoft.VisualBasic.Runtime": "5.0.1.2389"
+        },
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.application.rdf_xml.dll": {}
+        }
+      },
       "Microsoft.VisualBasic.Runtime/5.0.1.2389": {
         "dependencies": {
           "System.ComponentModel.Annotations": "6.0.0-preview.4.21253.7",
@@ -718,6 +728,14 @@
         },
         "runtime": {
           "REnv.dll": {}
+        }
+      },
+      "Microsoft.VisualBasic.MIME.application.rdf_xml.Reference/1.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualBasic.MIME.application.rdf_xml.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
         }
       },
       "Microsoft.VisualBasic.Runtime.Reference/5.33.69.2558": {
@@ -1297,6 +1315,11 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
+    "Microsoft.VisualBasic.MIME.application.rdf_xml/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "Microsoft.VisualBasic.Runtime/5.0.1.2389": {
       "type": "project",
       "serviceable": false,
@@ -1304,6 +1327,11 @@
     },
     "REnv/5.1.3.5558": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.VisualBasic.MIME.application.rdf_xml.Reference/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
