@@ -1,3 +1,8 @@
-Public Class Rscript
 
-End Class
+Imports Microsoft.VisualBasic.Scripting.MetaData
+
+<Package("rdf_tools")>
+Public Module Rscript
+
+
+End Module
