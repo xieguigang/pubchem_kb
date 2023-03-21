@@ -1,3 +1,5 @@
+imports "rdf_tools" from "pubchem";
+
 # Hello, world!
 #
 # This is an example function named 'hello' 
