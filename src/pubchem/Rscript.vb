@@ -1,4 +1,5 @@
 Imports System.IO
+Imports System.Runtime.CompilerServices
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml.Turtle
@@ -52,18 +53,37 @@ Public Module Rscript
                                      Optional lazy As Boolean = False,
                                      Optional env As Environment = Nothing) As Object
 
+        Return env.extractData(file, lazy, ttl_filter:=AddressOf Utils.FilterCid)
+    End Function
+
+    <Extension>
+    Private Function extractData(env As Environment,
+                                 file As Object,
+                                 lazy As Boolean,
+                                 ttl_filter As Func(Of ttl_property, ttl_property)) As Object
+
         Dim buf = SMRUCC.Rsharp.GetFileStream(file, FileAccess.Read, env)
 
         If buf Like GetType(Message) Then
             Return buf.TryCast(Of Message)
         End If
 
-        Dim stream = ttl_property.LoadTuples(buf.TryCast(Of Stream)).Select(AddressOf Utils.FilterCid)
+        Dim stream = ttl_property.LoadTuples(buf.TryCast(Of Stream)).Select(ttl_filter)
 
         If lazy Then
             Return pipeline.CreateFromPopulator(stream)
         Else
             Return stream.ToArray
         End If
+    End Function
+
+    <ExportAPI("get_hash_tupleData")>
+    <RApiReturn(GetType(ttl_property))>
+    Public Function getCompoundsData2(<RRawVectorArgument>
+                                      file As Object,
+                                      Optional lazy As Boolean = False,
+                                      Optional env As Environment = Nothing) As Object
+
+        Return env.extractData(file, lazy, ttl_filter:=AddressOf Utils.FilterHashData)
     End Function
 End Module
