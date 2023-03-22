@@ -261,3 +261,4 @@ pubchem_0.1.0.tar.gz
 assembly/net6.0/Microsoft.VisualBasic.Runtime.xml
 assembly/net6.0/REnv.xml
 *.xml
+test/pc_descr_canSMILES_value_000001.csv
