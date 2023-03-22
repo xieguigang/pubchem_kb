@@ -31,16 +31,15 @@ Public Module Rscript
             Return rdf_ttl.getError
         End If
 
-        Dim rdf As RDFEntity() = rdf_ttl _
+        Dim rdf As IEnumerable(Of RDFEntity) = rdf_ttl _
             .populates(Of Triple)(env) _
-            .PopulateObjects _
-            .ToArray
-        Dim pubchem_ttl As TtlObject() = New TtlObject(rdf.Length - 1) {}
+            .PopulateObjects
+        Dim pubchem_ttl As New List(Of TtlObject)
 
-        For i As Integer = 0 To pubchem_ttl.Length - 1
-            pubchem_ttl(i) = TtlObject.CreateObject(rdf(i), ttl_type)
+        For Each obj As RDFEntity In rdf
+            Call pubchem_ttl.Add(TtlObject.CreateObject(obj, ttl_type))
         Next
 
-        Return pubchem_ttl
+        Return pubchem_ttl.ToArray
     End Function
 End Module

@@ -18,6 +18,10 @@ Public Class TtlObject : Implements INamedValue
     <Field("skos:altLabel")> Public Property altLabel As String()
     <Field("skos:closeMatch")> Public Property closeMatch As String()
 
+    Public Overrides Function ToString() As String
+        Return subject
+    End Function
+
     Private Shared Function getTtlSchema(type As Type) As Dictionary(Of BindProperty(Of DataFrameColumnAttribute))
         Static fields As New Dictionary(Of Type, Dictionary(Of BindProperty(Of DataFrameColumnAttribute)))
 
@@ -72,5 +76,7 @@ End Class
 Public Class pc_gene : Inherits TtlObject
 
     <Field("sio:SIO_000300")> Public Property SIO_000300 As String()
+    <Field("owl:sameAs")> Public Property sameAs As String()
+    <Field("cito:isDiscussedBy")> Public Property isDiscussedBy As String()
 
 End Class
