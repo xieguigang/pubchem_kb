@@ -1,8 +1,10 @@
+Imports System.IO
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml.Turtle
 Imports Microsoft.VisualBasic.Scripting.MetaData
 Imports SMRUCC.Rsharp.Runtime
+Imports SMRUCC.Rsharp.Runtime.Components
 Imports SMRUCC.Rsharp.Runtime.Internal.[Object]
 Imports SMRUCC.Rsharp.Runtime.Interop
 
@@ -41,5 +43,27 @@ Public Module Rscript
         Next
 
         Return pubchem_ttl.ToArray
+    End Function
+
+    <ExportAPI("get_cid_tupleData")>
+    <RApiReturn(GetType(ttl_property))>
+    Public Function getCompoundsData(<RRawVectorArgument>
+                                     file As Object,
+                                     Optional lazy As Boolean = False,
+                                     Optional env As Environment = Nothing) As Object
+
+        Dim buf = SMRUCC.Rsharp.GetFileStream(file, FileAccess.Read, env)
+
+        If buf Like GetType(Message) Then
+            Return buf.TryCast(Of Message)
+        End If
+
+        Dim stream = ttl_property.LoadTuples(buf.TryCast(Of Stream)).Select(AddressOf Utils.FilterCid)
+
+        If lazy Then
+            Return pipeline.CreateFromPopulator(stream)
+        Else
+            Return stream.ToArray
+        End If
     End Function
 End Module
