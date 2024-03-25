@@ -5,6 +5,11 @@ Imports Microsoft.VisualBasic.MIME.application.rdf_xml
 
 Module CLRWriter
 
+    ''' <summary>
+    ''' Parse the clr schema for write data to .net object
+    ''' </summary>
+    ''' <param name="type"></param>
+    ''' <returns></returns>
     Private Function getTtlSchema(type As Type) As Dictionary(Of BindProperty(Of DataFrameColumnAttribute))
         Static fields As New Dictionary(Of Type, Dictionary(Of BindProperty(Of DataFrameColumnAttribute)))
 
@@ -20,6 +25,12 @@ Module CLRWriter
         Return fields(type)
     End Function
 
+    ''' <summary>
+    ''' write ttl text data to a specific clr object
+    ''' </summary>
+    ''' <param name="ttlObj">the target clr object to write ttl text data</param>
+    ''' <param name="rdf">the ttl text data source</param>
+    ''' <returns></returns>
     Friend Function WriteObject(ttlObj As TtlObject, rdf As RDFEntity) As TtlObject
         Dim fields = getTtlSchema(ttlObj.GetType)
         Dim prop As PropertyInfo
@@ -27,9 +38,9 @@ Module CLRWriter
         Dim bind As BindProperty(Of DataFrameColumnAttribute)
         Dim data_scalar As Boolean
 
-        ttlObj.subject = rdf.RDFId
+        ttlObj.id = rdf.RDFId
 
-        For Each propertyData In rdf.Properties
+        For Each propertyData As KeyValuePair(Of String, RDFEntity) In rdf.Properties
             bind = fields.TryGetValue(propertyData.Key)
             data_scalar = propertyData.Value.Properties.Count <= 1
 

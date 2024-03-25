@@ -8,7 +8,11 @@ Imports Microsoft.VisualBasic.MIME.application.rdf_xml
 ''' </summary>
 Public Class TtlObject : Implements INamedValue
 
-    Public Property subject As String Implements INamedValue.Key
+    ''' <summary>
+    ''' the rdf id
+    ''' </summary>
+    ''' <returns></returns>
+    Public Property id As String Implements INamedValue.Key
 
     <Field("skos:prefLabel")> Public Property prefLabel As String()
     <Field("skos:relatedMatch")> Public Property relatedMatch As String()
@@ -17,7 +21,7 @@ Public Class TtlObject : Implements INamedValue
     <Field("skos:closeMatch")> Public Property closeMatch As String()
 
     Public Overrides Function ToString() As String
-        Return subject
+        Return id
     End Function
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
@@ -27,7 +31,7 @@ Public Class TtlObject : Implements INamedValue
 
     <MethodImpl(MethodImplOptions.AggressiveInlining)>
     Public Shared Function CreateObject(Of T As {New, TtlObject})(rdf As RDFEntity) As T
-        Return WriteObject(ttlObj:=New T With {.subject = rdf.RDFId}, rdf)
+        Return WriteObject(ttlObj:=New T With {.id = rdf.RDFId}, rdf)
     End Function
 End Class
 

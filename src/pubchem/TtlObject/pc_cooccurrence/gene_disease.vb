@@ -7,5 +7,6 @@ Imports Microsoft.VisualBasic.ComponentModel.DataSourceModel.SchemaMaps
 Public Class pc_gene_disease : Inherits TtlObject
 
     <Field("rdf:object")> Public Property [object] As String
+    <Field("rdf:subject")> Public Property subject As String
 
 End Class
