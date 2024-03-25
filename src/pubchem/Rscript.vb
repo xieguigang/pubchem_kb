@@ -14,6 +14,7 @@ Imports SMRUCC.Rsharp.Runtime.Interop
 ''' </summary>
 <Package("rdf_tools")>
 <RTypeExport("pc_gene", GetType(pc_gene))>
+<RTypeExport("pc_concept", GetType(pc_concept))>
 Public Module Rscript
 
     <ExportAPI("to_ttlobject")>
