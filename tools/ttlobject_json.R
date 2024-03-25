@@ -1,6 +1,8 @@
 require(pubchem);
 require(JSON);
 
+options(memory.load = "max");
+
 const ttl_file as string    = ?"--ttl"    || stop("no ttl source data file was provided!");
 const json_export as string = ?"--export" || `${dirname(ttl_file)}/${basename(ttl_file)}.json`;
 const what as string = ?"--what" || NULL;

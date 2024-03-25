@@ -8,5 +8,9 @@ Public Class pc_gene : Inherits TtlObject
     <Field("cito:isDiscussedBy")> Public Property isDiscussedBy As String()
     <Field("up:organism")> Public Property organism As String
     <Field("obo:RO_0000056")> Public Property RO_0000056 As String()
+    <Field("obo:RO_0000085")> Public Property RO_0000085 As String()
+    <Field("obo:RO_0001025")> Public Property RO_0001025 As String()
+    <Field("bao:BAO_0002870")> Public Property BAO_0002870 As String
+    <Field("sio:SIO_000558")> Public Property SIO_000558 As String()
 
 End Class
