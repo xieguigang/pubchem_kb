@@ -42,9 +42,9 @@ Module CLRWriter
 
             If prop.PropertyType Is GetType(String) Then
                 If strs.Length > 1 Then
-                    Throw New InvalidCastException
+                    Throw New InvalidCastException($"an string array from '{propertyData.Key}' could not be set to the '{ttlObj.GetType.Name}::{bind.member.Name}' scalar string value!")
                 Else
-                    prop.SetValue(ttlObj, strs(0))
+                    Call prop.SetValue(ttlObj, strs(0))
                 End If
             Else
                 Call prop.SetValue(ttlObj, strs)
