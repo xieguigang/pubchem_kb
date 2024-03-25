@@ -25,14 +25,16 @@ Module CLRWriter
         Dim prop As PropertyInfo
         Dim strs As String()
         Dim bind As BindProperty(Of DataFrameColumnAttribute)
+        Dim data_scalar As Boolean
 
         ttlObj.subject = rdf.RDFId
 
         For Each propertyData In rdf.Properties
             bind = fields.TryGetValue(propertyData.Key)
+            data_scalar = propertyData.Value.Properties.Count <= 1
 
             If bind Is Nothing OrElse bind.member Is Nothing Then
-                Throw New MissingMemberException($"missing rdf ttl member({propertyData.Key}) mapping in clr object({ttlObj.GetType.Name})!")
+                Throw New MissingMemberException($"missing rdf ttl member({propertyData.Key}{If(data_scalar, ", probably scalar string", "")}) mapping in clr object({ttlObj.GetType.Name})!")
             End If
 
             prop = bind.member
