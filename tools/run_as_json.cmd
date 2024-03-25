@@ -8,4 +8,6 @@ SET src="E:\pubchem_kb"
 REM run imports via cli
 
 REM CALL %R_ENV% %script_r% --attach %src% --ttl E:\pubchem_kb\test\pc_concept.ttl --what pc_concept 
-CALL %R_ENV% %script_r% --attach %src% --ttl E:\pubchem_kb\test\pc_concept.ttl --what pc_concept 
+CALL %R_ENV% %script_r% --attach %src% --ttl "C:\Users\Administrator\Downloads\pc_gene.ttl" --what pc_gene
+
+pause

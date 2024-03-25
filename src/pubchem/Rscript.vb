@@ -1,5 +1,6 @@
 Imports System.IO
 Imports System.Runtime.CompilerServices
+Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml
 Imports Microsoft.VisualBasic.MIME.application.rdf_xml.Turtle
@@ -43,7 +44,7 @@ Public Module Rscript
             .PopulateObjects
         Dim pubchem_ttl As New List(Of TtlObject)
 
-        For Each obj As RDFEntity In rdf
+        For Each obj As RDFEntity In Tqdm.Wrap(rdf.ToArray)
             Call pubchem_ttl.Add(TtlObject.CreateObject(obj, ttl_type))
         Next
 
