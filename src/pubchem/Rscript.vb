@@ -18,6 +18,7 @@ Imports SMRUCC.Rsharp.Runtime.Interop
 <RTypeExport("pc_concept", GetType(pc_concept))>
 <RTypeExport("pc_gene_disease", GetType(pc_gene_disease))>
 <RTypeExport("pc_source", GetType(pc_source))>
+<RTypeExport("pc_pathway", GetType(pc_pathway))>
 Public Module Rscript
 
     <ExportAPI("to_ttlobject")>
