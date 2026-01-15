@@ -1,4 +1,3 @@
-Imports System
 Imports DocumentEngine
 Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI
@@ -7,7 +6,7 @@ Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 Module Program
     Sub Main(args As String())
         Call buildDb()
-        ' Call queryTest()
+        Call queryTest()
 
         Pause()
     End Sub
