@@ -33,6 +33,7 @@
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\sciBASIC#\Microsoft.VisualBasic.Core\src\Core.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\sciBASIC#\mime\application%json\JSON-netcore5.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\workbench\modules\Knowledge_base\ncbi_kb\ncbi_kb.vbproj" />
+    <ProjectReference Include="..\..\..\LLMs\src\Ollama\Ollama.vbproj" />
   </ItemGroup>
 
 </Project>

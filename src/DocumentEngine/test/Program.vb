@@ -5,15 +5,26 @@ Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
 Module Program
     Sub Main(args As String())
+        Call researchtest()
+
         ' Call buildDb()
-        Call queryTest()
+        ' Call queryTest()
+
+        Pause()
+    End Sub
+
+    Private Sub researchtest()
+        Dim db As New DocumentDb(App.HOME & "/test_pubmed", [readonly]:=True, in_memory:=True)
+        Dim ollama As New Ollama.Ollama("qwen3:30b")
+        Dim researcher As New Researcher(ollama, db)
+        Dim result = researcher.Ask("introduce Yersinia pestis to me").GetAwaiter.GetResult
 
         Pause()
     End Sub
 
     Private Sub queryTest()
         Dim db As New DocumentDb(App.HOME & "/test_pubmed", [readonly]:=True, in_memory:=True)
-        Dim result = db.QueryTable("SARS-CoV-2").ToArray
+        Dim result = db.QueryTable("Yersinia pestis ").ToArray
 
         Pause()
     End Sub

@@ -81,7 +81,8 @@ Public Class DocumentDb : Implements IDisposable
                             .articlejourname = a.GetJournal,
                             .doi = a.GetArticleDoi,
                             .articleauth = a.GetAuthors.JoinBy("; "),
-                            .meshheadings = a.GetMeshTerms.Keys
+                            .meshheadings = a.GetMeshTerms.Keys,
+                            .articlepubdate = a.GetPublishYear
                         }
                     End Function) _
             .ToArray

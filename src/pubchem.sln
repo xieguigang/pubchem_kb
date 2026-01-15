@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "gcmodeller", "gcmodeller", 
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "test", "DocumentEngine\test\test.vbproj", "{C9952421-4D3D-468B-879E-2F4A987906A0}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Ollama", "..\..\LLMs\src\Ollama\Ollama.vbproj", "{65D3564D-F186-7A81-3B80-2E8603B4C97B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -994,6 +996,60 @@ Global
 		{C9952421-4D3D-468B-879E-2F4A987906A0}.Rsharp_app_release|x64.Build.0 = Release|x64
 		{C9952421-4D3D-468B-879E-2F4A987906A0}.Rsharp_app_release|x86.ActiveCfg = Release|Any CPU
 		{C9952421-4D3D-468B-879E-2F4A987906A0}.Rsharp_app_release|x86.Build.0 = Release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|x64.ActiveCfg = Debug|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|x64.Build.0 = Debug|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Debug|x86.Build.0 = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.gcmodeller_desktop|x86.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.LipidSearch|x86.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit_win32|x86.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|Any CPU.ActiveCfg = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|Any CPU.Build.0 = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|x64.ActiveCfg = Debug|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|x64.Build.0 = Debug|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|x86.ActiveCfg = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.mzkit|x86.Build.0 = Debug|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.NPSearch|x86.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.PlantMAT|x86.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|x64.ActiveCfg = Release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|x64.Build.0 = Release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|x86.ActiveCfg = Release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Release|x86.Build.0 = Release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|Any CPU.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|Any CPU.Build.0 = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|x64.ActiveCfg = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|x64.Build.0 = Rsharp_app_release|x64
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|x86.ActiveCfg = Rsharp_app_release|Any CPU
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B}.Rsharp_app_release|x86.Build.0 = Rsharp_app_release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1013,6 +1069,7 @@ Global
 		{A83DF657-E619-40C7-837C-FA0DAEE9E796} = {20AB2D67-E4E6-42CB-82E4-7822390A163E}
 		{3F6BDB7D-C034-FC0B-8F7C-B02154CB7A08} = {274E0F7C-C6C6-42B5-B29B-8DC905A2624B}
 		{5B8ACC99-FB8D-1CB5-190E-59FE7B06DB4D} = {274E0F7C-C6C6-42B5-B29B-8DC905A2624B}
+		{65D3564D-F186-7A81-3B80-2E8603B4C97B} = {BE3D7F27-BA43-4D28-BD69-6A5FEC2630A0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E84BBFF6-157A-4BE3-8EDD-CA660ED74C91}
