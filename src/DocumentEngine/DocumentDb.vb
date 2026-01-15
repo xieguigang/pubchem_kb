@@ -13,7 +13,7 @@ Imports LINQ
 Imports Microsoft.VisualBasic.ComponentModel.Collection
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
-Public Class DocumentEngine
+Public Class DocumentDb
 
     Dim documentDb As Buckets
     Dim fts As InvertedIndex
