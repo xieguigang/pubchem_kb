@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="test\**" />
+    <EmbeddedResource Remove="test\**" />
+    <None Remove="test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\Darwinism\src\data\BucketDb\BucketDb.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\Darwinism\src\data\FullTextBuffer\FullTextBuffer.vbproj" />
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\Darwinism\src\data\LINQ\LINQ\LINQ.vbproj" />
