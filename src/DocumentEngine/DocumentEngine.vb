@@ -10,6 +10,7 @@
 Imports System.IO
 Imports Darwinism.Repository.BucketDb
 Imports LINQ
+Imports Microsoft.VisualBasic.ComponentModel.Collection
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
 Public Class DocumentEngine
@@ -43,12 +44,12 @@ Public Class DocumentEngine
     Public Sub Add(article As PubmedArticle)
         Dim abstract As String = article.GetAbstractText
         Dim title As String = article.GetTitle
-        Dim id As Integer = CInt(article.PMID)
+        Dim id As Integer = CLng(article.PMID) + Integer.MinValue
 
         Call fts.Add(title, id)
         Call fts.Add(abstract, id)
 
-        Call documentDb.Put(id, article.GetXml)
+        Call documentDb.Put(article.PMID, article.GetXml)
     End Sub
 
     Public Iterator Function Query(term As String) As IEnumerable(Of PubmedArticle)
@@ -59,12 +60,31 @@ Public Class DocumentEngine
         End If
 
         For Each pmid As Integer In q
-            Dim key_str As String = pmid.ToString
+            Dim key_str As String = (CLng(pmid) - Integer.MinValue).ToString
             Dim xml As String = documentDb.GetString(key_str)
             Dim article As PubmedArticle = xml.LoadFromXml(Of PubmedArticle)
 
             Yield article
         Next
+    End Function
+
+    Public Function QueryTable(term As String) As PubMedTextTable()
+        Dim list As PubmedArticle() = Query(term).ToArray
+        Dim table As PubMedTextTable() = list _
+            .Select(Function(a)
+                        Return New PubMedTextTable With {
+                            .pmid = a.PMID,
+                            .articleabstract = a.GetAbstractText,
+                            .articletitle = a.GetTitle,
+                            .articlejourname = a.GetJournal,
+                            .doi = a.GetArticleDoi,
+                            .articleauth = a.GetAuthors.JoinBy("; "),
+                            .meshheadings = a.GetMeshTerms.Keys
+                        }
+                    End Function) _
+            .ToArray
+
+        Return table
     End Function
 
     Public Function Save() As Boolean
