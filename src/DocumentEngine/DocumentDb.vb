@@ -27,9 +27,9 @@ Public Class DocumentDb : Implements IDisposable
         End Get
     End Property
 
-    Sub New(db As String)
+    Sub New(db As String, Optional [readonly] As Boolean = False, Optional in_memory As Boolean = False)
         dir = db
-        documentDb = New Buckets(db)
+        documentDb = New Buckets(db, [readonly]:=[readonly], in_memory:=in_memory)
         fts = LoadIndex()
     End Sub
 

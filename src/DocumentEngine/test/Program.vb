@@ -5,8 +5,8 @@ Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
 Module Program
     Sub Main(args As String())
-        Call buildDb()
-        ' Call queryTest()
+        ' Call buildDb()
+        Call queryTest()
 
         Pause()
     End Sub
