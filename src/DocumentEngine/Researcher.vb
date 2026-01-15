@@ -16,24 +16,20 @@ Public Class Researcher
     End Sub
 
     Public Async Function Ask(question As String) As Task(Of DeepSeekResponse)
-        Dim prompt As String = $"你需要根据知识库中真实存在的知识信息来组织对我给出的问题进行回答，并且需要你在回答中附带上从知识库中得到的知识引用信息在你的答案末尾，以方便我来进行来源信息的查证。
-你对我的问题所做出来的回答应该是按照下面的格式进行组织的，以方便后面可能进行的自动化脚本解析工作：
+        Dim prompt As String = $"
+你需要通过query函数做知识库中真实存在的知识信息查询，然后根据查询结果来对我给出的问题"“{question}”"进行回答，并且需要你在回答中附带上从知识库中得到的知识引用信息在你的答案末尾，以方便我来进行来源信息的查证。
+你对我的问题所做出来的回答应该是严格按照下面的json格式进行组织的，以方便后续的自动化脚本解析工作：
 
------------------------------
-
-<回答内容的文本>
-
-## 引用文献
-
-1. 文献1标题, 文献1杂志名称, 发表年份, doi:文献1的doi编号 [PMID:文献1的pubmed_id]
-2. 文献2标题, 文献2杂志名称, 发表年份, doi:文献2的doi编号 [PMID:文献2的pubmed_id]
-3. 文献3标题, 文献3杂志名称, 发表年份, doi:文献3的doi编号 [PMID:文献3的pubmed_id]
-...
-
------------------------------
-
-下面为你需要进行回答的问题：{question}
-"
+" &
+"{
+    text: 'your answer text',
+    source: [
+        {title:'title-placeholder',journal:'journal name-placeholder',year:'year-placeholder',doi:'doi-placeholder',pubmed_id:'pubmed_id placeholder'},
+        {title:'title-placeholder',journal:'journal name-placeholder',year:'year-placeholder',doi:'doi-placeholder',pubmed_id:'pubmed_id placeholder'},
+        {title:'title-placeholder',journal:'journal name-placeholder',year:'year-placeholder',doi:'doi-placeholder',pubmed_id:'pubmed_id placeholder'},
+        ...
+    ]
+}"
         Return Await ollama.Clear.Chat(prompt)
     End Function
 
