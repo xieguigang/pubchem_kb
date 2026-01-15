@@ -12,7 +12,7 @@ Module Program
     End Sub
 
     Private Sub queryTest()
-        Dim db As New DocumentDb(App.HOME & "/test_pubmed")
+        Dim db As New DocumentDb(App.HOME & "/test_pubmed", [readonly]:=True, in_memory:=True)
         Dim result = db.QueryTable("SARS-CoV-2").ToArray
 
         Pause()
