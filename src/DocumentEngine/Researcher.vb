@@ -16,10 +16,21 @@ Public Class Researcher
     End Sub
 
     Public Async Function Ask(question As String) As Task(Of DeepSeekResponse)
-        Call ollama.Clear()
-        Call ollama.AddSystemPrompt("你需要根据知识库中真实存在的知识信息来组织对用户问题的回答，并附带上从知识库中得到的知识引用信息在你的答案中，以方便用户进行来源信息的查证。")
+        Dim prompt As String = $"你需要根据知识库中真实存在的知识信息来组织对用户问题的回答，并附带上从知识库中得到的知识引用信息在你的答案中，以方便用户进行来源信息的查证。你对用户的问题所做出来的回答应该是按照下面的格式进行组织的：
 
-        Return Await ollama.Chat(question)
+<回答内容的文本>
+
+## 引用文献
+
+1. 文献1标题, 文献1杂志名称, 发表年份, doi:文献1的doi编号 [PMID:文献1的pubmed_id]
+2. 文献2标题, 文献2杂志名称, 发表年份, doi:文献2的doi编号 [PMID:文献2的pubmed_id]
+3. 文献3标题, 文献3杂志名称, 发表年份, doi:文献3的doi编号 [PMID:文献3的pubmed_id]
+...
+
+
+下面为你需要进行回答的问题：{question}
+"
+        Return Await ollama.Clear.Chat(prompt)
     End Function
 
     <Description("使用这个函数进行知识词条的查询，当你遇到知识库中不存在的问题的时候，应该尽量使用这个函数进行查询。这个函数会以json列表的形式返回目前的文献库中的一些结论知识供你做参考。请注意这个函数仅能够用于做给定的一个名词做知识查询，这个函数不能够以自然语言的方式进行查询输入。")>
