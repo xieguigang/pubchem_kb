@@ -44,4 +44,20 @@ Public Class DocumentEngine
         Call documentDb.Put(id, article.GetXml)
     End Sub
 
+    Public Iterator Function Query(term As String) As IEnumerable(Of PubmedArticle)
+        Dim q = index.Search(term)
+
+        If q Is Nothing Then
+            Return
+        End If
+
+        For Each pmid As Integer In q
+            Dim key_str As String = pmid.ToString
+            Dim xml As String = documentDb.GetString(key_str)
+            Dim article As PubmedArticle = xml.LoadFromXml(Of PubmedArticle)
+
+            Yield article
+        Next
+    End Function
+
 End Class
