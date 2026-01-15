@@ -1,14 +1,15 @@
 
-' pubmed - {title, abstract, doi}
+' pubmed - {title, abstract, pmid}
 
 '           key -> value  
 ' bucketdb: doi -> pubmed
 '
-' fulltext: abstract -> doi
-'
+' fulltext: abstract -> pmid
+'           title -> pmid
 
 Imports Darwinism.Repository.BucketDb
 Imports LINQ
+Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
 Public Class DocumentEngine
 
@@ -32,8 +33,15 @@ Public Class DocumentEngine
         End If
     End Function
 
-    Public Sub Add()
+    Public Sub Add(article As PubmedArticle)
+        Dim abstract As String = article.GetAbstractText
+        Dim title As String = article.GetTitle
+        Dim id As Integer = CInt(article.PMID)
 
+        Call index.Add(title, id)
+        Call index.Add(abstract, id)
+
+        Call documentDb.Put(id, article.GetXml)
     End Sub
 
 End Class
