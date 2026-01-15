@@ -7,6 +7,7 @@
 ' fulltext: abstract -> pmid
 '           title -> pmid
 
+Imports System.IO
 Imports Darwinism.Repository.BucketDb
 Imports LINQ
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
@@ -17,6 +18,12 @@ Public Class DocumentEngine
     Dim index As InvertedIndex
     Dim dir As String
 
+    Private ReadOnly Property indexfile As String
+        Get
+            Return $"{dir}/fulltext.dat"
+        End Get
+    End Property
+
     Sub New(db As String)
         dir = db
         documentDb = New Buckets(db)
@@ -24,7 +31,7 @@ Public Class DocumentEngine
     End Sub
 
     Private Function LoadIndex() As InvertedIndex
-        Dim indexfile As String = $"{dir}/fulltext.dat"
+        Dim indexfile As String = Me.indexfile
 
         If indexfile.FileLength > 0 Then
             Return FullTextBuffer.ReadIndex(indexfile.OpenReadonly, Nothing)
@@ -58,6 +65,15 @@ Public Class DocumentEngine
 
             Yield article
         Next
+    End Function
+
+    Public Function Save() As Boolean
+        Using s As Stream = indexfile.Open(FileMode.OpenOrCreate, doClear:=True, [readOnly]:=False)
+            Call documentDb.Flush()
+            Call FullTextBuffer.WriteIndex(index, {}, s)
+        End Using
+
+        Return Nothing
     End Function
 
 End Class
