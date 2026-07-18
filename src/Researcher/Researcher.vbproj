@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>Researcher</RootNamespace>
-    <TargetFrameworks>net10.0-windows;net10.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <AssemblyTitle>LLMs researcher agent</AssemblyTitle>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Platforms>AnyCPU;x64</Platforms>
@@ -14,7 +14,7 @@
     <ProjectReference Include="..\..\..\GCModeller\src\runtime\sciBASIC#\mime\text%markdown\markdown.NET5.vbproj" />
     <ProjectReference Include="..\..\..\graphQL\src\mysqli\LibMySQL\LibMySQL.vbproj" />
     <ProjectReference Include="..\..\..\graphQL\src\pubmed\pubmed.vbproj" />
-    <ProjectReference Include="..\Ollama\Ollama.vbproj" />
+    <ProjectReference Include="..\..\..\LLMs\src\Ollama\Ollama.vbproj" />
   </ItemGroup>
 
 </Project>

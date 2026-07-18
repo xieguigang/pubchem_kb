@@ -50,7 +50,7 @@ Module CLRWriter
 
             prop = bind.member
             strs = propertyData.Value.Properties.Values _
-                .Select(Function(si) si.value) _
+                .SelectMany(Function(si) si.value) _
                 .ToArray
 
             If prop.PropertyType Is GetType(String) Then

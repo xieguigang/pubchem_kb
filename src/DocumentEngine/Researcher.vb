@@ -15,7 +15,7 @@ Public Class Researcher
         Me.ollama.AddFunction(Me, NameOf(query))
     End Sub
 
-    Public Async Function Ask(question As String) As Task(Of DeepSeekResponse)
+    Public Async Function Ask(question As String) As Task(Of OllamaResponse)
         Dim prompt As String = $"
 你需要通过query函数做知识库中真实存在的知识信息查询，然后根据查询结果来对我给出的问题"“{question}”"进行回答，并且需要你在回答中附带上从知识库中得到的知识引用信息在你的答案末尾，以方便我来进行来源信息的查证。
 你对我的问题所做出来的回答应该是严格按照下面的json格式进行组织的，以方便后续的自动化脚本解析工作：
