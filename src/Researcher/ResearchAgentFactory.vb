@@ -3,6 +3,8 @@
 ' 工厂类 - 简化Agent实例的创建
 ' ============================================================================
 
+Imports Ollama
+
 ''' <summary>
 ''' 科研文献调研Agent工厂类，提供便捷的Agent创建方法
 ''' </summary>
@@ -15,7 +17,7 @@ Public Module ResearchAgentFactory
     ''' <returns>已初始化的ResearchAgent实例</returns>
     Public Function CreateAgent(config As ResearchAgentConfig) As ResearchAgent
         ' 创建Ollama客户端实例
-        Dim ollama As New Ollama.Ollama(config.ModelName, config.OllamaEndpoint)
+        Dim ollama As New LLMClient(New OllamaProvider(config.OllamaEndpoint), config.ModelName)
 
         ' 创建ResearchAgent实例
         Dim agent As New ResearchAgent(

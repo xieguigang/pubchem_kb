@@ -1,5 +1,7 @@
 ﻿
 
+Imports Ollama
+
 ''' <summary>
 ''' 科研文献调研Agent使用示例
 ''' </summary>
@@ -65,7 +67,7 @@ Public Class Program
     Public Shared Async Sub AdvancedExample()
 
         ' 创建Ollama客户端
-        Dim ollama As New Ollama.Ollama("llama")
+        Dim ollama As New LLMClient(New OllamaProvider, "llama")
 
         ' 创建自定义的PubMed查询工具（可自定义SQL查询逻辑）
         Dim pubmedTool As New PubMedQueryTool(

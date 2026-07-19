@@ -1,5 +1,6 @@
 Imports DocumentEngine
 Imports Microsoft.VisualBasic.ApplicationServices.Terminal.ProgressBar.Tqdm
+Imports Ollama
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI
 Imports SMRUCC.genomics.GCModeller.Workbench.Knowledge_base.NCBI.PubMed
 
@@ -15,7 +16,7 @@ Module Program
 
     Private Sub researchtest()
         Dim db As New DocumentDb(App.HOME & "/test_pubmed", [readonly]:=True, in_memory:=True)
-        Dim ollama As New Ollama.Ollama("qwen3:30b")
+        Dim ollama As New LLMClient(New OllamaProvider(), "qwen3:30b")
         Dim researcher As New Researcher(ollama, db)
         Dim result = researcher.Ask("introduce Yersinia pestis to me").GetAwaiter.GetResult
 

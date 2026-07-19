@@ -12,6 +12,7 @@
 Imports System.IO
 Imports System.Text
 Imports System.Text.RegularExpressions
+Imports Ollama
 
 ' ============================================================================
 ' 核心Agent类 - 科研文献调研Agent
@@ -168,7 +169,7 @@ Public Class ResearchAgent : Implements IDisposable
 
     ' ---- 成员变量 ----
 
-    Private ReadOnly _ollama As Ollama.Ollama
+    Private ReadOnly _ollama As LLMClient
     Private ReadOnly _pubmedTool As PubMedQueryTool
     Private ReadOnly _converterTool As DocumentConverterTool
     Private ReadOnly _outputDir As String
@@ -197,7 +198,7 @@ Public Class ResearchAgent : Implements IDisposable
     ''' <param name="outputDir">输出文件目录路径</param>
     ''' <param name="maxRounds">最大迭代调研轮次（默认5轮）</param>
     ''' <param name="papersPerQuery">每次查询返回的最大文献数（默认20篇）</param>
-    Public Sub New(ollama As Ollama.Ollama,
+    Public Sub New(ollama As LLMClient,
                    dbConnectionString As String,
                    outputDir As String,
                    Optional maxRounds As Integer = 5,
