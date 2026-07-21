@@ -5,6 +5,7 @@ Imports System.ComponentModel
 Imports System.Text
 Imports Microsoft.VisualBasic.CommandLine.Reflection
 Imports MySql.Data.MySqlClient
+Imports Oracle.LinuxCompatibility.MySQL.Scripting
 
 ' ============================================================================ 
 ' 函数工具类 - 注册到Ollama供LLM调用的工具 
@@ -60,7 +61,7 @@ Public Class PubMedQueryTool
     ) As String
         Try
             If String.IsNullOrWhiteSpace(keywords) Then
-                Return "{""error"": ""Keywords parameter cannot be empty.""}"
+                Return error_json($"Keywords parameter cannot be empty.")
             End If
 
             ' 限制最大返回数量 
@@ -73,7 +74,7 @@ Public Class PubMedQueryTool
                 ToList()
 
             If keywordList.Count = 0 Then
-                Return "{""error"": ""No valid keywords provided.""}"
+                Return error_json($"No valid keywords provided.")
             End If
 
             ' ---------------------------------------------------------------- 
@@ -106,13 +107,14 @@ Public Class PubMedQueryTool
             ' 构建全文搜索条件：每个关键词需匹配 标题 / 摘要 / 全文 / MeSH词 中的任意一个 
             Dim conditions As New List(Of String)()
             For Each kw In keywordList
-                Dim cond = $"(LOWER(a.title) LIKE '%{EscapeSql(kw)}%' " &
-                           $"OR LOWER(f.abstract) LIKE '%{EscapeSql(kw)}%' " &
-                           $"OR LOWER(f.`fulltext`) LIKE '%{EscapeSql(kw)}%' " &
+                Dim kw_escape As String = kw.MySqlEscaping
+                Dim cond = $"(LOWER(a.title) LIKE '%{kw_escape}%' " &
+                           $"OR LOWER(f.abstract) LIKE '%{kw_escape}%' " &
+                           $"OR LOWER(f.`fulltext`) LIKE '%{kw_escape}%' " &
                            $"OR EXISTS (SELECT 1 FROM metadata md2 " &
                            $"           JOIN mesh m2 ON md2.mesh_id = m2.id " &
                            $"           WHERE md2.pubmed_id = a.id " &
-                           $"           AND LOWER(m2.term) LIKE '%{EscapeSql(kw)}%'))"
+                           $"           AND LOWER(m2.term) LIKE '%{kw_escape}%'))"
                 conditions.Add(cond)
             Next
 
@@ -157,7 +159,7 @@ Public Class PubMedQueryTool
                 End Using
             End Using
         Catch ex As Exception
-            Return $"{{""error"": ""Database query failed: {EscapeJson(ex.Message)}""}}"
+            Return error_json($"Database query failed: {EscapeJson(ex.Message)}")
         End Try
     End Function
 
@@ -176,7 +178,7 @@ Public Class PubMedQueryTool
     ) As String
         Try
             If String.IsNullOrWhiteSpace(pmid) Then
-                Return "{""error"": ""PMID parameter cannot be empty.""}"
+                Return error_json($"PMID parameter cannot be empty.")
             End If
 
             ' ---------------------------------------------------------------- 
@@ -212,13 +214,13 @@ Public Class PubMedQueryTool
                             Dim results As New List(Of Dictionary(Of String, String))() From {result}
                             Return SerializeToJson(results, sql)
                         Else
-                            Return $"{{""error"": ""No paper found with PMID: {EscapeJson(pmid)}""}}"
+                            Return error_json($"No paper found with PMID: {EscapeJson(pmid)}")
                         End If
                     End Using
                 End Using
             End Using
         Catch ex As Exception
-            Return $"{{""error"": ""Failed to retrieve full text: {EscapeJson(ex.Message)}""}}"
+            Return error_json($"Failed to retrieve full text: {EscapeJson(ex.Message)}")
         End Try
     End Function
 
@@ -250,13 +252,14 @@ Public Class PubMedQueryTool
 
                 Dim conditions As New List(Of String)()
                 For Each kw In keywordList
-                    Dim cond = $"(LOWER(a.title) LIKE '%{EscapeSql(kw)}%' " &
-                               $"OR LOWER(f.abstract) LIKE '%{EscapeSql(kw)}%' " &
-                               $"OR LOWER(f.`fulltext`) LIKE '%{EscapeSql(kw)}%' " &
+                    Dim kw_escape As String = kw.MySqlEscaping
+                    Dim cond = $"(LOWER(a.title) LIKE '%{kw_escape}%' " &
+                               $"OR LOWER(f.abstract) LIKE '%{kw_escape}%' " &
+                               $"OR LOWER(f.`fulltext`) LIKE '%{kw_escape}%' " &
                                $"OR EXISTS (SELECT 1 FROM metadata md2 " &
                                $"           JOIN mesh m2 ON md2.mesh_id = m2.id " &
                                $"           WHERE md2.pubmed_id = a.id " &
-                               $"           AND LOWER(m2.term) LIKE '%{EscapeSql(kw)}%'))"
+                               $"           AND LOWER(m2.term) LIKE '%{kw_escape}%'))"
                     conditions.Add(cond)
                 Next
 
@@ -294,7 +297,7 @@ Public Class PubMedQueryTool
                 End Using
             End Using
         Catch ex As Exception
-            Return $"{{""error"": ""Failed to get database stats: {EscapeJson(ex.Message)}""}}"
+            Return error_json($"Failed to get database stats: {EscapeJson(ex.Message)}")
         End Try
     End Function
 
@@ -302,12 +305,8 @@ Public Class PubMedQueryTool
     ' 辅助方法 
     ' ======================================================================== 
 
-    ''' <summary> 
-    ''' 转义SQL字符串中的特殊字符，防止SQL注入 
-    ''' </summary> 
-    Private Function EscapeSql(input As String) As String
-        If String.IsNullOrEmpty(input) Then Return ""
-        Return input.Replace("'", "''").Replace("\", "\\").Replace(";", "").Replace("--", "")
+    Private Shared Function error_json(msg As String) As String
+        Return $"{{""error"": ""{msg}""}}"
     End Function
 
     ''' <summary> 
