@@ -32,7 +32,8 @@ Imports Oracle.LinuxCompatibility.MySQL.Scripting
 ''' 4. 年份字段名由 pub_year 改为 year 
 ''' </remarks> 
 Public Class PubMedQueryTool
-    Private ReadOnly _connectionString As String
+
+    ReadOnly _connectionString As String
 
     ''' <summary> 
     ''' 创建PubMed查询工具实例 
