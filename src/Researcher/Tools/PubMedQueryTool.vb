@@ -225,8 +225,13 @@ Public Class PubMedQueryTool
                             {"doi", If(reader("doi")?.ToString(), "")},
                             {"mesh_terms", If(reader("mesh_terms")?.ToString(), "")}
                         }
-                        Dim results As New List(Of Dictionary(Of String, String))() From {result}
-                        Return SerializeToJson(results, sql)
+                        Dim results As New QueryResult With {
+                            .count = 1,
+                            .query_sql = sql,
+                            .papers = {result}
+                        }
+
+                        Return results.GetJson
                     Else
                         Return error_json($"No paper found with PMID: {EscapeJson(pmid)}")
                     End If
@@ -334,17 +339,11 @@ Public Class PubMedQueryTool
         Return input.Replace("\", "\\").Replace("""", "\""").Replace(vbCr, "\r").Replace(vbLf, "\n").Replace(vbTab, "\t")
     End Function
 
-    ''' <summary> 
-    ''' 将查询结果字典列表序列化为JSON字符串 
-    ''' </summary> 
-    Private Function SerializeToJson(results As List(Of Dictionary(Of String, String)), querySQL As String) As String
-        Dim sb As New StringBuilder()
-        Dim resultsList As String = results.ToArray.GetJson
-        sb.Append("{")
-        sb.Append($"""count"": {results.Count}, ")
-        sb.Append($"""query_sql"": ""{EscapeJson(querySQL)}"", ")
-        sb.Append($"""papers"": {resultsList}")
-        sb.Append("}")
-        Return sb.ToString()
-    End Function
+    Private Class QueryResult
+
+        Public Property count As Integer
+        Public Property query_sql As String
+        Public Property papers As Dictionary(Of String, String)()
+
+    End Class
 End Class
