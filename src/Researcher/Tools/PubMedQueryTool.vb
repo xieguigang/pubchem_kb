@@ -164,7 +164,14 @@ Public Class PubMedQueryTool
                         }
                         results.Add(record)
                     End While
-                    Return SerializeToJson(results, queryStr)
+
+                    Dim json As New QueryResult With {
+                        .count = results.Count,
+                        .papers = results.ToArray,
+                        .query_sql = queryStr
+                    }
+
+                    Return json.GetJson
                 End Using
             End Using
         End Using
