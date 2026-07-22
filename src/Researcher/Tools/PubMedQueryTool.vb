@@ -329,7 +329,7 @@ Public Class PubMedQueryTool
     ''' <summary> 
     ''' 转义JSON字符串中的特殊字符 
     ''' </summary> 
-    Private Function EscapeJson(input As String) As String
+    Public Shared Function EscapeJson(input As String) As String
         If String.IsNullOrEmpty(input) Then Return ""
         Return input.Replace("\", "\\").Replace("""", "\""").Replace(vbCr, "\r").Replace(vbLf, "\n").Replace(vbTab, "\t")
     End Function
