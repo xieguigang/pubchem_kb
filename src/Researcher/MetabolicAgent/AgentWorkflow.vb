@@ -22,6 +22,7 @@
 '   MetabolicAgent.exe --topic "青蒿素生物合成途径及相关酶" --model "qwen2.5:14b" --max-papers 30
 ' ============================================================================
 Imports System.Threading
+Imports Microsoft.VisualBasic.ApplicationServices.Terminal.Utility
 Imports Ollama
 Imports Researcher.MetabolicAgent
 
@@ -31,39 +32,26 @@ Module AgentWorkflow
     ''' 异步执行agent主流程
     ''' </summary>
     Public Async Function RunAgentAsync(topic As String, config As ResearchAgentConfig) As Task(Of Integer)
-        ' 创建CancellationTokenSource，支持Ctrl+C取消
-        Using cts As New CancellationTokenSource()
-            ' 注册Ctrl+C处理
-            AddHandler Console.CancelKeyPress, Sub(sender, e)
-                                                   e.Cancel = True
-                                                   cts.Cancel()
-                                                   Console.WriteLine(vbCrLf & "正在取消任务，请稍候...")
-                                               End Sub
+        ' 初始化LLM客户端
+        Console.WriteLine($"正在初始化LLM客户端...")
+        Console.WriteLine($"  模型: {config.ModelName}")
+        Console.WriteLine($"  端点: {config.OllamaEndpoint}")
+        Console.WriteLine()
 
-            ' 初始化LLM客户端
-            Console.WriteLine($"正在初始化LLM客户端...")
-            Console.WriteLine($"  模型: {config.ModelName}")
-            Console.WriteLine($"  端点: {config.OllamaEndpoint}")
-            Console.WriteLine()
-
-            ' 注意：LLMClient的构造函数签名请根据您的实际Ollama模块进行调整
-            ' 这里假设构造函数接受模型名称和端点URL
-            Using llmClient As LLMClient = New LLMClient(LLMUrl.Create(config.OllamaEndpoint), config.ModelName, maxRound:=config.MaxRounds)
-                ' 创建并运行agent
-                Using agent As New MetabolicLLMAgent(
+        ' 注意：LLMClient的构造函数签名请根据您的实际Ollama模块进行调整
+        ' 这里假设构造函数接受模型名称和端点URL
+        Using llmClient As LLMClient = New LLMClient(LLMUrl.Create(config.OllamaEndpoint), config.ModelName, maxRound:=config.MaxRounds)
+            ' 创建并运行agent
+            Using agent As New MetabolicLLMAgent(
                     llmClient,
                     config.DatabaseConnectionString,
                     config.OutputDirectory)
 
-                    Await agent.RunAsync(
-                        topic,
-                        config.PapersPerQuery,
-                        cts.Token)
-                End Using
+                Await agent.RunAsync(topic, config.PapersPerQuery, UserTaskCancelAction.GetConsoleCancellationToken)
             End Using
-
-            Return 0
         End Using
+
+        Return 0
     End Function
 
 End Module
