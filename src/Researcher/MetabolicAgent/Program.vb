@@ -25,6 +25,7 @@ Imports System.Collections.Generic
 Imports System.IO
 Imports System.Threading
 Imports MetabolicAgent
+Imports Ollama
 
 Module Program
 
@@ -83,10 +84,10 @@ Module Program
         Using cts As New CancellationTokenSource()
             ' 注册Ctrl+C处理
             AddHandler Console.CancelKeyPress, Sub(sender, e)
-                                                    e.Cancel = True
-                                                    cts.Cancel()
-                                                    Console.WriteLine(vbCrLf & "正在取消任务，请稍候...")
-                                                End Sub
+                                                   e.Cancel = True
+                                                   cts.Cancel()
+                                                   Console.WriteLine(vbCrLf & "正在取消任务，请稍候...")
+                                               End Sub
 
             ' 初始化LLM客户端
             Console.WriteLine($"正在初始化LLM客户端...")
@@ -96,7 +97,7 @@ Module Program
 
             ' 注意：LLMClient的构造函数签名请根据您的实际Ollama模块进行调整
             ' 这里假设构造函数接受模型名称和端点URL
-            Using llmClient As New LLMClient(config.model, config.endpoint)
+            Using llmClient As LLMClient = New LLMClient(LLMUrl.Create(config.endpoint))
                 ' 创建并运行agent
                 Using agent As New MetabolicAgent(
                     llmClient,

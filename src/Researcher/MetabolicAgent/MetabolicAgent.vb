@@ -21,6 +21,8 @@ Imports System.Text.Json
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports MetabolicAgent.Models
+Imports Ollama
+Imports Researcher.MetabolicAgent.Models
 
 Namespace MetabolicAgent
 
@@ -309,7 +311,7 @@ Namespace MetabolicAgent
                 If String.IsNullOrWhiteSpace(result.abstract) Then result.abstract = paper.abstract
             End If
 
-            Log($"    全文长度: {result.full_text?.Length ?? 0} 字符")
+            Log($"    全文长度: {result.full_text?.Length} 字符")
             Return result
         End Function
 
