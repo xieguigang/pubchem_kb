@@ -12,7 +12,7 @@ Public Class ResearchAgentConfig
     ''' Ollama服务端点URL（默认：http://localhost:11434）
     ''' </summary>
     Public Property OllamaEndpoint As String = "http://localhost:11434"
-
+    Public Property ApiKey As String
     ''' <summary>
     ''' 使用的大语言模型名称（默认：llama3）
     ''' </summary>

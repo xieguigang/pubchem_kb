@@ -17,8 +17,7 @@ Public Module ResearchAgentFactory
     ''' <returns>已初始化的ResearchAgent实例</returns>
     Public Function CreateAgent(config As ResearchAgentConfig) As ResearchAgent
         ' 创建Ollama客户端实例
-        Dim ollama As New LLMClient(New OllamaProvider(config.OllamaEndpoint), config.ModelName)
-
+        Dim ollama As LLMClient = New LLMClient(LLMUrl.Create(config.OllamaEndpoint, config.ApiKey), config.ModelName)
         ' 创建ResearchAgent实例
         Dim agent As New ResearchAgent(
             ollama,
