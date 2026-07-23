@@ -15,12 +15,10 @@
 '   6. 每篇文献提取的代谢反应数组保存为独立的JSON文件
 ' ============================================================================
 Imports System.IO
-Imports System.Linq
 Imports System.Text
 Imports System.Text.Json
 Imports System.Text.RegularExpressions
 Imports System.Threading
-Imports MetabolicAgent.Models
 Imports Ollama
 Imports Researcher.MetabolicAgent.Models
 
@@ -33,7 +31,7 @@ Namespace MetabolicAgent
     ''' 该Agent利用本地Ollama LLM服务，结合PubMed本地镜像MySQL数据库，
     ''' 自动从文献中提取天然产物代谢反应信息，构建结构化的代谢知识库。
     ''' </remarks>
-    Public Class MetabolicAgent
+    Public Class MetabolicLLMAgent
         Implements IDisposable
 
         ' LLM客户端实例，用于与Ollama服务通信

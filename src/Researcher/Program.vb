@@ -5,7 +5,7 @@ Imports Ollama
 ''' <summary>
 ''' 科研文献调研Agent使用示例
 ''' </summary>
-Public Class Program
+Public Class ResearcherProgram
 
     ''' <summary>
     ''' 主程序入口 - 演示如何使用ResearchAgent进行文献调研

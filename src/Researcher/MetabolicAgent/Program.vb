@@ -21,11 +21,9 @@
 ' 示例：
 '   MetabolicAgent.exe --topic "青蒿素生物合成途径及相关酶" --model "qwen2.5:14b" --max-papers 30
 ' ============================================================================
-Imports System.Collections.Generic
-Imports System.IO
 Imports System.Threading
-Imports MetabolicAgent
 Imports Ollama
+Imports Researcher.MetabolicAgent
 
 Module Program
 
@@ -97,9 +95,9 @@ Module Program
 
             ' 注意：LLMClient的构造函数签名请根据您的实际Ollama模块进行调整
             ' 这里假设构造函数接受模型名称和端点URL
-            Using llmClient As LLMClient = New LLMClient(LLMUrl.Create(config.endpoint))
+            Using llmClient As LLMClient = New LLMClient(LLMUrl.Create(config.endpoint), config.model)
                 ' 创建并运行agent
-                Using agent As New MetabolicAgent(
+                Using agent As New MetabolicLLMAgent(
                     llmClient,
                     config.mysqlConnectionString,
                     config.outputDir)
