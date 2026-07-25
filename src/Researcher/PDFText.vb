@@ -186,6 +186,10 @@ Public Module PDFText
         Dim sb As New StringBuilder()
         sb.AppendLine("你是一个科技文献元数据提取助手。请从以下 PDF 全文文本中提取文献的元数据信息。")
         sb.AppendLine()
+        sb.AppendLine("========== PDF 全文文本开始 ==========")
+        sb.AppendLine(rawText)
+        sb.AppendLine("========== PDF 全文文本结束 ==========")
+        sb.AppendLine()
         sb.AppendLine("需要提取的字段：")
         sb.AppendLine("- title：文献的完整标题")
         sb.AppendLine("- doi：文献的 DOI（如果没有则填空字符串 """"）")
@@ -196,9 +200,6 @@ Public Module PDFText
         sb.AppendLine("请仅返回一个 JSON 对象，不要包含任何其他文字、解释或 markdown 代码块标记。格式如下：")
         sb.AppendLine("{""title"":""..."",""doi"":""..."",""year"":""..."",""journal"":""..."",""keywords"":[""..."",""...""]}")
         sb.AppendLine()
-        sb.AppendLine("========== PDF 全文文本开始 ==========")
-        sb.AppendLine(rawText)
-        sb.AppendLine("========== PDF 全文文本结束 ==========")
         Return sb.ToString()
     End Function
 
@@ -206,6 +207,9 @@ Public Module PDFText
         Dim sb As New StringBuilder()
         sb.AppendLine("你是一个科技文献参考文献提取助手。请从以下 PDF 全文文本中找到参考文献列表（References / 参考文献），并提取每一条参考文献的信息。")
         sb.AppendLine()
+        sb.AppendLine("========== PDF 全文文本开始 ==========")
+        sb.AppendLine(rawText)
+        sb.AppendLine("========== PDF 全文文本结束 ==========")
         sb.AppendLine("需要提取的字段（每条参考文献）：")
         sb.AppendLine("- title：参考文献的标题")
         sb.AppendLine("- doi：DOI（如果没有则填空字符串 """"）")
@@ -217,15 +221,16 @@ Public Module PDFText
         sb.AppendLine()
         sb.AppendLine("如果没有找到任何参考文献，请返回空数组 []。")
         sb.AppendLine()
-        sb.AppendLine("========== PDF 全文文本开始 ==========")
-        sb.AppendLine(rawText)
-        sb.AppendLine("========== PDF 全文文本结束 ==========")
         Return sb.ToString()
     End Function
 
     Private Function BuildFullTextPrompt(rawText As String) As String
         Dim sb As New StringBuilder()
         sb.AppendLine("你是一个科技文献全文清理与格式化助手。请对以下从 PDF 提取的原始文本进行清理和格式化，生成干净清爽的 Markdown 格式全文。")
+        sb.AppendLine()
+        sb.AppendLine("========== PDF 原始文本开始 ==========")
+        sb.AppendLine(rawText)
+        sb.AppendLine("========== PDF 原始文本结束 ==========")
         sb.AppendLine()
         sb.AppendLine("清理与格式化要求：")
         sb.AppendLine("1. 去除乱码、OCR 错误字符、PDF 提取产生的特殊符号和乱码")
@@ -238,10 +243,6 @@ Public Module PDFText
         sb.AppendLine("8. 输出纯 Markdown 文本，不要包含任何解释性文字或元信息")
         sb.AppendLine()
         sb.AppendLine("请直接输出清理后的 Markdown 全文，不要使用代码块标记包裹。")
-        sb.AppendLine()
-        sb.AppendLine("========== PDF 原始文本开始 ==========")
-        sb.AppendLine(rawText)
-        sb.AppendLine("========== PDF 原始文本结束 ==========")
         Return sb.ToString()
     End Function
 
