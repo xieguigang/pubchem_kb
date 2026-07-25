@@ -1,9 +1,9 @@
 Imports System.IO
 Imports System.Text
-Imports System.Text.Encodings.Web
-Imports System.Text.Json
 Imports System.Threading
-Imports Microsoft.VisualBasic.ApplicationServices.Terminal.Utility
+Imports Microsoft.VisualBasic.MIME.application.json
+Imports Microsoft.VisualBasic.MIME.application.json.Javascript
+Imports Microsoft.VisualBasic.MIME.application.json.LenientJson
 Imports Microsoft.VisualBasic.MIME.application.pdf
 Imports Ollama
 
@@ -27,12 +27,6 @@ Imports Ollama
 '''   第 5 行起: 经格式化、清理乱码后的文献全文 markdown 文本内容
 ''' </summary>
 Public Module PDFText
-
-    ' JSON 序列化选项：不转义非 ASCII 字符（如中文），不缩进（单行输出）
-    ReadOnly JsonOpts As New JsonSerializerOptions With {
-        .Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        .WriteIndented = False
-    }
 
     Public Async Function ExtractCleanText(pdfstream As Stream, llm As LLMClient, ct As CancellationToken) As Task(Of String)
         Dim rawText As String = PDF.GetText(pdfstream).JoinBy(vbCrLf & vbCrLf)
@@ -100,34 +94,28 @@ Public Module PDFText
         End If
 
         ' 解析 LLM 返回的 JSON
-        Using doc As JsonDocument = JsonDocument.Parse(jsonStr)
-            Dim root = doc.RootElement
-            Dim title As String = GetStringProperty(root, "title")
-            Dim doi As String = GetStringProperty(root, "doi")
-            Dim year As String = GetStringProperty(root, "year")
-            Dim journal As String = GetStringProperty(root, "journal")
+        Dim doc As JsonObject = LenientJsonParser.ParseJSON(jsonStr)
+        Dim title As String = doc!title.AsString(True)
+        Dim doi As String = doc!doi.AsString(True)
+        Dim year As String = doc!year.AsString(True)
+        Dim journal As String = doc!journal.AsString(True)
 
-            Dim keywords As New List(Of String)()
-            Dim kwEl As JsonElement
-            If root.TryGetProperty("keywords", kwEl) AndAlso kwEl.ValueKind = JsonValueKind.Array Then
-                For Each kw In kwEl.EnumerateArray()
-                    If kw.ValueKind = JsonValueKind.String Then
-                        keywords.Add(kw.GetString())
-                    End If
-                Next
-            End If
+        Dim keywords As New List(Of String)()
+        Dim kwEl As JsonArray = doc!keywords
+        For Each kw In kwEl
+            keywords.Add(kw.AsString(True))
+        Next
 
-            ' 构建不含 title 的元数据 JSON（符合输出格式第 2 行要求）
-            Dim metaDict As New Dictionary(Of String, Object) From {
-                {"doi", doi},
-                {"year", year},
-                {"journal", journal},
-                {"keywords", keywords}
-            }
-            Dim metadataJson As String = JsonSerializer.Serialize(metaDict, JsonOpts)
+        ' 构建不含 title 的元数据 JSON（符合输出格式第 2 行要求）
+        Dim metaDict As New Dictionary(Of String, Object) From {
+            {"doi", doi},
+            {"year", year},
+            {"journal", journal},
+            {"keywords", keywords.ToArray}
+        }
+        Dim metadataJson As String = metaDict.GetJson
 
-            Return (title, metadataJson)
-        End Using
+        Return (title, metadataJson)
     End Function
 
     ''' <summary>
@@ -149,26 +137,23 @@ Public Module PDFText
         End If
 
         ' 解析并规范化参考文献 JSON
-        Try
-            Using doc As JsonDocument = JsonDocument.Parse(jsonStr)
-                Dim refs As New List(Of Object)()
-                If doc.RootElement.ValueKind = JsonValueKind.Array Then
-                    For Each refEl In doc.RootElement.EnumerateArray()
-                        Dim refDict As New Dictionary(Of String, String) From {
-                            {"title", GetStringProperty(refEl, "title")},
-                            {"doi", GetStringProperty(refEl, "doi")},
-                            {"year", GetStringProperty(refEl, "year")},
-                            {"journal", GetStringProperty(refEl, "journal")}
-                        }
-                        refs.Add(refDict)
-                    Next
-                End If
-                Return JsonSerializer.Serialize(refs, JsonOpts)
-            End Using
-        Catch ex As Exception
-            Console.Error.WriteLine($"[WARN] 参考文献 JSON 解析失败: {ex.Message}")
-            Return "[]"
-        End Try
+
+        Dim doc As JsonElement = LenientJsonParser.ParseJSON(jsonStr)
+        Dim refs As New List(Of Dictionary(Of String, String))()
+
+        If TypeOf doc Is JsonArray Then
+            For Each refEl As JsonObject In DirectCast(doc, JsonArray)
+                Dim refDict As New Dictionary(Of String, String) From {
+                        {"title", refEl!title.AsString(True)},
+                        {"doi", refEl!doi.AsString(True)},
+                        {"year", refEl!year.AsString(True)},
+                        {"journal", refEl!journal.AsString(True)}
+                    }
+                refs.Add(refDict)
+            Next
+        End If
+
+        Return refs.ToArray.GetJson
     End Function
 
     ''' <summary>
@@ -301,31 +286,4 @@ Public Module PDFText
 
         Return sb.ToString
     End Function
-
-    ' =========================================================================
-    '  辅助方法
-    ' =========================================================================
-
-    ''' <summary>
-    ''' 从 JsonElement 中安全地获取字符串属性，处理字符串、数字等类型。
-    ''' </summary>
-    Private Function GetStringProperty(root As JsonElement, name As String) As String
-        Dim el As JsonElement
-        If root.TryGetProperty(name, el) Then
-            Select Case el.ValueKind
-                Case JsonValueKind.String
-                    Return el.GetString()
-                Case JsonValueKind.Number
-                    Return el.GetRawText()
-                Case JsonValueKind.True
-                    Return "true"
-                Case JsonValueKind.False
-                    Return "false"
-                Case Else
-                    Return ""
-            End Select
-        End If
-        Return ""
-    End Function
-
 End Module
