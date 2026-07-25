@@ -1,11 +1,11 @@
-Imports System
-Imports System.Collections.Generic
 Imports System.IO
 Imports System.Text
-Imports System.Text.Json
 Imports System.Text.Encodings.Web
+Imports System.Text.Json
 Imports System.Threading
-Imports System.Threading.Tasks
+Imports Microsoft.VisualBasic.ApplicationServices.Terminal.Utility
+Imports Microsoft.VisualBasic.MIME.application.pdf
+Imports Ollama
 
 ' ============================================================================
 ' 注意：请根据你的项目实际情况，取消下面两行 Imports 的注释并填入正确的命名空间。
@@ -26,122 +26,55 @@ Imports System.Threading.Tasks
 '''   第 4 行  : 空白行
 '''   第 5 行起: 经格式化、清理乱码后的文献全文 markdown 文本内容
 ''' </summary>
-Module Program
+Public Module PDFText
 
     ' JSON 序列化选项：不转义非 ASCII 字符（如中文），不缩进（单行输出）
-    Private ReadOnly JsonOpts As New JsonSerializerOptions With {
+    ReadOnly JsonOpts As New JsonSerializerOptions With {
         .Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         .WriteIndented = False
     }
 
-    ' 全局取消令牌（支持 Ctrl+C 取消）
-    Private _cts As New CancellationTokenSource()
-
-    ' =========================================================================
-    '  入口
-    ' =========================================================================
-
-    Function Main(args As String()) As Integer
-        ' 处理 Ctrl+C 取消
-        AddHandler Console.CancelKeyPress, Sub(s, e)
-                                               e.Cancel = True
-                                               _cts.Cancel()
-                                           End Sub
-
-        Try
-            Return MainAsync(args, _cts.Token).GetAwaiter().GetResult()
-        Catch ex As OperationCanceledException
-            Console.Error.WriteLine("[CANCELLED] 操作已被用户取消。")
-            Return -2
-        Catch ex As Exception
-            Console.Error.WriteLine($"[FATAL] {ex.Message}")
-            Console.Error.WriteLine(ex.StackTrace)
-            Return -1
-        End Try
-    End Function
-
-    Private Async Function MainAsync(args As String(), ct As CancellationToken) As Task(Of Integer)
-        ' ========== 解析命令行参数 ==========
-        If args.Length < 1 Then
-            PrintUsage()
-            Return -1
-        End If
-
-        Dim pdfPath As String = args(0)
-        Dim outPath As String = If(args.Length >= 2,
-                                   args(1),
-                                   Path.ChangeExtension(pdfPath, ".txt"))
-
-        If Not File.Exists(pdfPath) Then
-            Console.Error.WriteLine($"[ERROR] PDF 文件不存在: {pdfPath}")
-            Return -1
-        End If
-
-        Console.WriteLine($"[INFO] 输入 PDF : {pdfPath}")
-        Console.WriteLine($"[INFO] 输出文件 : {outPath}")
-        Console.WriteLine()
-
-        ' ========== Step 1: 从 PDF 提取全文 ==========
-        Console.WriteLine("[STEP 1] 正在从 PDF 提取全文文本...")
-        Dim rawText As String
-        Using fs As New FileStream(pdfPath, FileMode.Open, FileAccess.Read, FileShare.Read)
-            rawText = PDF.GetText(fs)
-        End Using
+    Public Async Function ExtractCleanText(pdfstream As Stream, llm As LLMClient, ct As CancellationToken) As Task(Of String)
+        Dim rawText As String = PDF.GetText(pdfstream).JoinBy(vbCrLf & vbCrLf)
 
         If String.IsNullOrWhiteSpace(rawText) Then
             Console.Error.WriteLine("[ERROR] PDF 中未提取到任何文本。")
-            Return -1
+            Return Nothing
         End If
         Console.WriteLine($"[INFO] 已提取 {rawText.Length} 个字符。")
         Console.WriteLine()
 
         ' ========== Step 2~4: 使用 LLM 提取信息 ==========
-        Using llm As New LLMClient()
 
-            ' --- Step 2: 提取元数据 ---
-            Console.WriteLine("[STEP 2] 正在请求 LLM 提取文献元数据（标题、DOI、年份、期刊、关键词）...")
-            Dim title As String = ""
-            Dim metadataJson As String = "{}"
-            Try
-                Dim metaResult = Await ExtractMetadataAsync(llm, rawText, ct)
-                title = metaResult.Title
-                metadataJson = metaResult.MetadataJson
-                Console.WriteLine($"[INFO] 标题  : {title}")
-                Console.WriteLine($"[INFO] 元数据: {metadataJson}")
-            Catch ex As Exception
-                Console.Error.WriteLine($"[WARN] 元数据提取失败: {ex.Message}")
-            End Try
-            Console.WriteLine()
+        ' --- Step 2: 提取元数据 ---
+        Console.WriteLine("[STEP 2] 正在请求 LLM 提取文献元数据（标题、DOI、年份、期刊、关键词）...")
+        Dim title As String = ""
+        Dim metadataJson As String = "{}"
 
-            ' --- Step 3: 提取参考文献 ---
-            Console.WriteLine("[STEP 3] 正在请求 LLM 提取参考文献列表...")
-            Dim referencesJson As String = "[]"
-            Try
-                referencesJson = Await ExtractReferencesAsync(llm, rawText, ct)
-                Console.WriteLine($"[INFO] 参考文献已提取。")
-            Catch ex As Exception
-                Console.Error.WriteLine($"[WARN] 参考文献提取失败: {ex.Message}")
-            End Try
-            Console.WriteLine()
+        Dim metaResult = Await ExtractMetadataAsync(llm, rawText, ct)
+        title = metaResult.Title
+        metadataJson = metaResult.MetadataJson
+        Console.WriteLine($"[INFO] 标题  : {title}")
+        Console.WriteLine($"[INFO] 元数据: {metadataJson}")
+        Console.WriteLine()
 
-            ' --- Step 4: 清理全文为 Markdown ---
-            Console.WriteLine("[STEP 4] 正在请求 LLM 清理全文并格式化为 Markdown...")
-            Dim markdown As String = rawText
-            Try
-                markdown = Await CleanFullTextAsync(llm, rawText, ct)
-                Console.WriteLine($"[INFO] Markdown 全文已生成。")
-            Catch ex As Exception
-                Console.Error.WriteLine($"[WARN] 全文清理失败，将使用原始文本: {ex.Message}")
-            End Try
-            Console.WriteLine()
+        ' --- Step 3: 提取参考文献 ---
+        Console.WriteLine("[STEP 3] 正在请求 LLM 提取参考文献列表...")
+        Dim referencesJson As String = "[]"
+        referencesJson = Await ExtractReferencesAsync(llm, rawText, ct)
+        Console.WriteLine($"[INFO] 参考文献已提取。")
 
-            ' ========== Step 5: 写入输出文件 ==========
-            Console.WriteLine("[STEP 5] 正在写入输出文件...")
-            WriteOutputFile(outPath, title, metadataJson, referencesJson, markdown)
-            Console.WriteLine($"[DONE] 输出已写入: {outPath}")
-        End Using
+        Console.WriteLine()
 
-        Return 0
+        ' --- Step 4: 清理全文为 Markdown ---
+        Console.WriteLine("[STEP 4] 正在请求 LLM 清理全文并格式化为 Markdown...")
+        Dim markdown As String = rawText
+        markdown = Await CleanFullTextAsync(llm, rawText, ct)
+        Console.WriteLine($"[INFO] Markdown 全文已生成。")
+        ' ========== Step 5: 写入输出文件 ==========
+        Console.WriteLine("[STEP 5] 正在写入输出文件...")
+
+        Return WriteOutputFile(title, metadataJson, referencesJson, markdown)
     End Function
 
     ' =========================================================================
@@ -334,13 +267,12 @@ Module Program
     ''' <summary>
     ''' 将提取结果写入固定格式的 .txt 文件。
     ''' </summary>
-    Private Sub WriteOutputFile(
-        outPath As String,
+    Private Function WriteOutputFile(
         title As String,
         metadataJson As String,
         referencesJson As String,
         markdown As String
-    )
+    ) As String
         ' 确保标题为单行（替换所有换行符为空格）
         title = If(title, "").Replace(vbCrLf, " ").Replace(vbCr, " ").Replace(vbLf, " ").Trim()
 
@@ -351,14 +283,11 @@ Module Program
         ' 确保 Markdown 不以空白行开头（保证第 5 行即正文起始）
         markdown = If(markdown, "").Replace(vbCrLf, vbLf).Replace(vbCr, vbLf).TrimStart()
 
-        ' 确保输出目录存在
-        Dim dir As String = Path.GetDirectoryName(outPath)
-        If Not String.IsNullOrEmpty(dir) AndAlso Not Directory.Exists(dir) Then
-            Directory.CreateDirectory(dir)
-        End If
 
         ' 写入文件（UTF-8 无 BOM）
-        Using writer As New StreamWriter(outPath, False, New UTF8Encoding(False))
+        Dim sb As New StringBuilder
+
+        Using writer As New StringWriter(sb)
             writer.WriteLine(title)            ' 第 1 行：标题
             writer.WriteLine(metadataJson)     ' 第 2 行：元数据 JSON
             writer.WriteLine(referencesJson)   ' 第 3 行：参考文献 JSON
@@ -369,7 +298,9 @@ Module Program
                 writer.WriteLine()
             End If
         End Using
-    End Sub
+
+        Return sb.ToString
+    End Function
 
     ' =========================================================================
     '  辅助方法
@@ -396,23 +327,5 @@ Module Program
         End If
         Return ""
     End Function
-
-    Private Sub PrintUsage()
-        Console.WriteLine("PDF 文献提取工具")
-        Console.WriteLine()
-        Console.WriteLine("用法:")
-        Console.WriteLine("  PdfExtractor <输入PDF路径> [输出TXT路径]")
-        Console.WriteLine()
-        Console.WriteLine("参数:")
-        Console.WriteLine("  输入PDF路径  要处理的 PDF 文件路径")
-        Console.WriteLine("  输出TXT路径  输出的 .txt 文件路径（可选，默认与 PDF 同名 .txt）")
-        Console.WriteLine()
-        Console.WriteLine("输出 .txt 格式:")
-        Console.WriteLine("  第 1 行  : title（文献标题）")
-        Console.WriteLine("  第 2 行  : 元数据 JSON {""doi"":..,""year"":..,""journal"":..,""keywords"":[..]}")
-        Console.WriteLine("  第 3 行  : 参考文献数组 JSON [{""title"":..,""doi"":..,""year"":..,""journal"":..}, ...]")
-        Console.WriteLine("  第 4 行  : 空白行")
-        Console.WriteLine("  第 5 行起: 经格式化、清理乱码后的文献全文 markdown 文本内容")
-    End Sub
 
 End Module
