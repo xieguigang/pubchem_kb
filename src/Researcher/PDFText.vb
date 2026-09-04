@@ -34,16 +34,26 @@ Public Module PDFText
         If String.IsNullOrWhiteSpace(rawText) Then
             Console.Error.WriteLine("[ERROR] PDF 中未提取到任何文本。")
             Return Nothing
+        Else
+            Return Await ExtractCleanText(rawText, llm, ct)
         End If
-        Console.WriteLine($"[INFO] 已提取 {rawText.Length} 个字符。")
-        Console.WriteLine()
+    End Function
 
-        ' ========== Step 2~4: 使用 LLM 提取信息 ==========
-
+    ''' <summary>
+    ''' ========== Step 2~4: 使用 LLM 提取信息 ==========
+    ''' </summary>
+    ''' <param name="rawText"></param>
+    ''' <param name="llm"></param>
+    ''' <param name="ct"></param>
+    ''' <returns></returns>
+    Public Async Function ExtractCleanText(rawText As String, llm As LLMClient, ct As CancellationToken) As Task(Of String)
         ' --- Step 2: 提取元数据 ---
-        Console.WriteLine("[STEP 2] 正在请求 LLM 提取文献元数据（标题、DOI、年份、期刊、关键词）...")
         Dim title As String = ""
         Dim metadataJson As String = "{}"
+
+        Console.WriteLine($"[INFO] 已提取 {rawText.Length} 个字符。")
+        Console.WriteLine()
+        Console.WriteLine("[STEP 2] 正在请求 LLM 提取文献元数据（标题、DOI、年份、期刊、关键词）...")
 
         Dim metaResult = Await ExtractMetadataAsync(llm, rawText, ct)
         title = metaResult.Title
